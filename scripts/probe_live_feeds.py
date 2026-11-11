@@ -48,7 +48,16 @@ def describe(value):
                         rows = d[key]
                         break
         row_keys = sorted(str(k) for k in rows[0].keys()) if rows and isinstance(rows[0], dict) else []
+        field_diagnostics = {}
+        if rows:
+            sample = rows[:min(len(rows), 100)]
+            for field in ("plannedTime", "estimatedTime", "planned_ts", "estimated_ts", "delayMinutes", "delay_s", "trainCode", "train_number", "trip_id", "tripId", "timestamp", "launchingDate", "line", "product", "nucleo", "stale"):
+                values = [row.get(field) for row in sample if isinstance(row, dict)]
+                non_null = [v for v in values if v is not None]
+                if values:
+                    field_diagnostics[field] = {"present": len(non_null), "null": len(values)-len(non_null), "types": sorted(set(type(v).__name__ for v in non_null))}
         return {"root_type": "object", "root_keys": keys[:80],
+                "field_diagnostics": field_diagnostics,
                 "array_counts": arrays, "first_row_keys": row_keys[:80]}
     if isinstance(value, list):
         return {"root_type": "array", "length": len(value),
@@ -63,6 +72,7 @@ def fetch(name, url, station=None):
     request = urllib.request.Request(url, headers={
         "User-Agent": "MiRodalies-R4/diagnostics (+https://github.com/arl338/mi-rodalies-r4)",
         "Accept": "application/json",
+        "Origin": "https://arl338.github.io",
     })
     start = time.monotonic()
     try:
