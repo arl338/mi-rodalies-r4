@@ -55,8 +55,8 @@ assert.equal(E.enrichJourney(journeys[0],matched([raw('11111',dep,180,{trainCode
 const collision=E.direct([...trains,{...trains[0],id:'other'}],from,to,dep-60,dep+900);
 assert.equal(E.enrichJourney(collision[0],E.correlateTimetableBoards(collision,boards),[],[],now).estimated,null,
  'Two scheduled services with the same departure time cannot share a board ETA');
-assert.equal(E.normalizeBoard({generatedAt:new Date((now-15)*1000).toISOString(),departures:[raw('11111',dep,180,{timestamp:undefined,updatedAt:undefined})]},'Radar',now,from)[0].age,0,
- 'Real row timestamp takes priority over generatedAt');
+assert.equal(E.normalizeBoard({generatedAt:new Date((now-15)*1000).toISOString(),departures:[raw('11111',dep,180,{timestamp:undefined,updatedAt:undefined})]},'Radar',now,from)[0].age,15,
+ 'generatedAt is valid as a fallback when individual row timestamps are absent');
 const parentStale=E.normalizeBoard({stale:true,updatedAt:now*1000,departures:[raw('11111',dep)]},'Radar',now,from);
 assert.equal(parentStale[0].stale,true,'Parent stale flag must propagate');
 assert.equal(E.enrichJourney(journeys[0],E.correlateTimetableBoards(journeys,parentStale),[],[],now).estimated,null);
