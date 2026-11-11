@@ -173,9 +173,10 @@ function sourceJobs(station){return [
   {name:'Estado de feeds',detail:'Antigüedad publicada por origen',url:`${CONFIG.val}/status`},
   {name:'RadarDeTrenes · avisos de estación',detail:'Incidencias vinculadas al origen',url:`${CONFIG.radar}/stations/${station}/alerts`}
  ];}
-function renderSourceSummary(res,jobs,mode,cat){const content=$('source-details');content.replaceChildren();
+function renderSourceSummary(res,jobs,mode,cat,timetable){const content=$('source-details');content.replaceChildren();
  const catalogRow=sourceRow('Horario oficial GTFS','Cercanías / MD con línea Rodalies explícita',true,`${cat.stations.length} estaciones · ${cat.lines.filter(x=>x.present).length}/${cat.lines.length} líneas`);content.append(catalogRow);
- if(mode!=='live'){content.append(el('p','subtle','Para fechas futuras se utiliza el horario oficial; las observaciones de ahora no predicen la circulación futura.'));return;}
+ if(timetable?.queried){content.append(sourceRow('Trenalia · horarios complementarios','Servicios por fecha, línea y estaciones; no implican circulación',timetable.available,timetable.available?String(timetable.records)+' horarios candidatos':'Sin respuesta; permanecen los horarios GTFS'));}
+ if(mode!=='live'){content.append(el('p','subtle','Para fechas futuras se utilizan GTFS y, si están disponibles, horarios alternativos de Trenalia. No son observaciones de circulación.'));return;}
  res.forEach((r,i)=>{
  const ok=r.status==='fulfilled';const data=ok?r.value:null;const count=ok?E.rows(data).length:0;
  content.append(sourceRow(jobs[i].name,jobs[i].detail,ok,ok?`${count} registros`:`No accesible: ${String(r.reason?.message||'Error').slice(0,42)}`));
@@ -283,7 +284,7 @@ async function search(){if(!catalog){showToast('El catálogo todavía no está d
   let scheduled=buildWindow(trips,range);
   // The optional timetable fallback has no reliable train number or individual
   // intermediate stop times. It MUST NOT replace an available GTFS itinerary.
-  let fallback=[];
+  let fallback=[],fallbackAvailable=false,fallbackError=null;
   if(selection.line&&selection.line!=='ALL'&&
      /^\d{5}$/.test(selection.from)&&/^\d{5}$/.test(selection.to)){
    const params=new URLSearchParams({from:selection.from,to:selection.to,
@@ -292,12 +293,13 @@ async function search(){if(!catalog){showToast('El catálogo todavía no está d
     const thirdParty=await loadJson('https://trenalia.org/api/v1/timetable?'+params,
       signal,CONFIG.timeoutMs);
     if(signal.aborted||id!==requestId)return;
+    fallbackAvailable=true;
     fallback=E.normalizeTrenaliaTimetable(thirdParty,selection.from,
       selection.to,range.day,selection.line);
     const supplemental=E.direct(fallback,selection.from,selection.to,
       range.start,range.end);
     scheduled=E.mergeSupplementalJourneys(scheduled,supplemental);
-   }catch(err){if(signal.aborted||id!==requestId)return;}
+   }catch(err){if(signal.aborted||id!==requestId)return;fallbackError=err;}
   }
   if(!scheduled.length&&daily.every(x=>x.trains.length===0))showToast('Sin horarios oficiales para esa fecha');
   $('status').textContent=`${scheduled.length} opciones programadas. Contrastando datos…`;
@@ -319,10 +321,12 @@ async function search(){if(!catalog){showToast('El catálogo todavía no está d
     ...E.alertsForLines(data(7),lines,true).map(a=>({...a,source:'RadarDeTrenes'}))]:[];
   const uniqueAlerts=new Map();for(const a of alerts){const key=E.norm(a.text);if(!uniqueAlerts.has(key))uniqueAlerts.set(key,a);}
   renderAlerts([...uniqueAlerts.values()],live);
-  renderSourceSummary(res,jobs,live?'live':'future',catalog);
+  renderSourceSummary(res,jobs,live?'live':'future',catalog,{queried:selection.line!=='ALL'&&/^\d{5}$/.test(selection.from)&&/^\d{5}$/.test(selection.to),available:fallbackAvailable,records:fallback.length,error:fallbackError});
   const failures=res.filter(x=>x.status==='rejected').length;
-  setHealth(fallback.length||(!live&&failures)?'partial':!live?'good':failures?'partial':'good',
-    fallback.length?'Horario orientativo':!live?'Horario oficial':failures?'Datos parciales':'Datos consultados');
+  const operationalLinked=results.some(j=>j.estimated!==null&&!j.conflict&&!j.cancelled);
+  const failedAllLive=live&&res.length>0&&res.every(x=>x.status==='rejected');
+  setHealth(failedAllLive?'partial':operationalLinked?'good':fallback.length?'partial':!live?'good':failures?'partial':'partial',
+    failedAllLive?'Sin datos actuales':operationalLinked?'ETA contrastada':fallback.length?'Horario orientativo':!live?'Horario programado':failures?'Datos parciales':'Sin ETA vinculada');
   $('search-feedback').textContent='';
  }catch(err){if(!signal.aborted&&id===requestId){const st=$('status');st.className='notice bad';st.textContent='No se ha podido consultar el horario: '+err.message;setHealth('bad','Sin horario');}}
  finally{if(id===requestId)markBusy(false);}
