@@ -1,0 +1,33 @@
+name: Contraste PDFs horarios oficiales · solo auditoría
+
+on:
+  push:
+    branches: [feature/complete-station-catalog-v2-1]
+    paths:
+      - 'scripts/audit_official_pdfs.py'
+      - 'data/reference/generalitat_lines.json'
+      - 'data/reference/network_stations.json'
+      - '.github/workflows/audit-official-pdfs.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  official-pdf:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Preparar extractor PDF textual
+        run: python -m pip install 'pymupdf>=1.24,<1.28'
+      - name: Contrastar las 19 líneas y 200 nombres
+        run: python scripts/audit_official_pdfs.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: official-pdf-stations
+          path: official-pdf-station-audit.json
+          retention-days: 5
