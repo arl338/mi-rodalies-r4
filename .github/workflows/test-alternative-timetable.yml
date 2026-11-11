@@ -10,6 +10,7 @@ on:
       - 'tests/test_trenalia_alignment.cjs'
       - 'tests/test_timetable_live_correlation.cjs'
       - 'tests/test_position_delay_fallback.cjs'
+      - 'tests/test_live_anonymous_eta.cjs'
       - '.github/workflows/test-alternative-timetable.yml'
   workflow_dispatch:
 permissions:
@@ -37,3 +38,4 @@ jobs:
         run: |
           node tests/test_trenalia_live.cjs
           node tests/test_trenalia_alignment.cjs
+          node tests/test_live_anonymous_eta.cjs
