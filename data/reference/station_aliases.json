@@ -1,0 +1,123 @@
+{
+  "schema": 1,
+  "purpose": "Canonical display names verified against ADIF/BOE. No fuzzy station merger. Each entry is applicable only to its exact ADIF code.",
+  "legal_source": "https://www.boe.es/buscar/doc.php?id=BOE-A-2023-4789",
+  "stations": [
+    {
+      "adif_code": "78700",
+      "display_name": "Terrassa Estació del Nord",
+      "aliases": [
+        "Terrassa"
+      ],
+      "sources": [
+        "https://www.adif.es/w/78700-terrassa-est.-nord",
+        "https://boe.es/diario_boe/txt.php?id=BOE-A-2023-4789"
+      ]
+    },
+    {
+      "adif_code": "78710",
+      "display_name": "Terrassa Est",
+      "aliases": [],
+      "sources": [
+        "https://www.adif.es/w/78710-terrassa-est"
+      ]
+    },
+    {
+      "adif_code": "72209",
+      "display_name": "Martorell Central",
+      "aliases": [
+        "Martorell"
+      ],
+      "sources": [
+        "https://www.adif.es/w/72209-martorell-central",
+        "https://boe.es/diario_boe/txt.php?id=BOE-A-2023-4789"
+      ]
+    },
+    {
+      "adif_code": "78802",
+      "display_name": "Barcelona-Fabra i Puig",
+      "aliases": [
+        "Sant Andreu Arenal",
+        "Fabra i Puig"
+      ],
+      "sources": [
+        "https://boe.es/diario_boe/txt.php?id=BOE-A-2023-4789"
+      ]
+    },
+    {
+      "adif_code": "78801",
+      "display_name": "Barcelona Torre Baró-Vallbona",
+      "aliases": [
+        "Torre Baró"
+      ],
+      "sources": [
+        "https://www.adif.es/w/78801-bcn-torre-bar%C3%B3-vallb",
+        "https://boe.es/diario_boe/txt.php?id=BOE-A-2023-4789"
+      ]
+    },
+    {
+      "adif_code": "78805",
+      "display_name": "Barcelona-Plaça de Catalunya",
+      "aliases": [
+        "Plaça de Catalunya",
+        "Barcelona Plaça Catalunya"
+      ],
+      "sources": [
+        "https://data.renfe.com/files/estaciones/FichaEstacion78805.pdf"
+      ]
+    },
+    {
+      "adif_code": "71801",
+      "display_name": "Barcelona-Sants",
+      "aliases": [
+        "Barcelona Sants",
+        "Sants"
+      ],
+      "sources": [
+        "https://www.adif.es/w/71801-barcelona-sants"
+      ]
+    },
+    {
+      "adif_code": "79400",
+      "display_name": "Barcelona-Estació de França",
+      "aliases": [
+        "Barcelona Estació de França",
+        "Estació de França"
+      ],
+      "sources": [
+        "https://www.adif.es/w/79400-barcelona-e.fran%C3%A7a"
+      ]
+    },
+    {
+      "adif_code": "72503",
+      "display_name": "Cerdanyola Universitat",
+      "aliases": [
+        "Cerdanyola-Universitat"
+      ],
+      "sources": [
+        "https://www.adif.es/w/72503-cerdanyola-univ."
+      ]
+    },
+    {
+      "adif_code": "65411",
+      "display_name": "Salou - Port Aventura",
+      "aliases": [
+        "Salou-Port Aventura",
+        "Salou-PortAventura"
+      ],
+      "sources": [
+        "https://www.adif.es/w/65411-salou-p.-aventura"
+      ]
+    },
+    {
+      "adif_code": "78400",
+      "display_name": "Lleida-Pirineus",
+      "aliases": [
+        "Lleida Pirineus"
+      ],
+      "sources": [
+        "https://www.adif.es/w/78400-lleida-pirineus"
+      ]
+    }
+  ]
+}

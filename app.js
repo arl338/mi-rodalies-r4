@@ -1,236 +1,269 @@
 'use strict';
-/* Mi Rodalies v1.5: GTFS como catálogo, evidencias operativas solo tras correlación estricta. */
-const CONFIG = Object.freeze({
+const E=window.RodaliesEngine;
+const CONFIG={
   val:'https://trenes.valfiguer.com/api/v1',radar:'https://radardetrenes.com/api/v1',
-  official:'./data/schedule-r4.json',refreshMs:60000,maxLiveAge:150,maxBoardAge:180
-});
-const STOP = Object.freeze({est:'78710',placa:'78805',sants:'71801'});
-const ROUTES = Object.freeze({
-  ida:{from:STOP.est,to:STOP.placa,fromName:'Terrassa Est',toName:'Barcelona-Plaça de Catalunya',label:'Ida'},
-  vuelta:{from:STOP.sants,to:STOP.est,fromName:'Barcelona-Sants',toName:'Terrassa Est',label:'Vuelta'}
-});
+  refreshMs:60000,timeoutMs:9000,nearDays:14,
+  dataRoot:(window.__MIRODALIES_DATA_ROOT__||((location.hostname.endsWith('.github.io')&&location.pathname.split('/').filter(Boolean).length)
+    ?`https://raw.githubusercontent.com/${location.hostname.split('.')[0]}/${location.pathname.split('/').filter(Boolean)[0]}/main/data/v2/`
+    :'./data/v2/'))
+};
 const $=id=>document.getElementById(id);
-const fmt=new Intl.DateTimeFormat('es-ES',{hour:'2-digit',minute:'2-digit',hour12:false,timeZone:'Europe/Madrid'});
-const dayFmt=new Intl.DateTimeFormat('en-GB',{year:'numeric',month:'2-digit',day:'2-digit',timeZone:'Europe/Madrid'});
-const parts=d=>Object.fromEntries(dayFmt.formatToParts(d).map(x=>[x.type,x.value]));
-const dayOf=d=>d instanceof Date&&Number.isFinite(+d)?(()=>{const p=parts(d);return `${p.year}-${p.month}-${p.day}`;})():'';
-const today=()=>dayOf(new Date());
-const hm=d=>d instanceof Date&&Number.isFinite(+d)?fmt.format(d):'—';
-const norm=s=>String(s??'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]/g,'');
-const first=(...v)=>v.find(x=>x!==undefined&&x!==null&&x!=='');
-const number=v=>String(v??'').trim().replace(/^0+(?=\d)/,'');
-const num=v=>{if(v===undefined||v===null||v==='')return null;const n=Number(v);return Number.isFinite(n)?n:null;};
-const pad=n=>String(n).padStart(2,'0');
-function clock(s){const m=/^(\d{1,2}):(\d{2})$/.exec(String(s??''));if(!m||+m[1]>23||+m[2]>59)return NaN;return +m[1]*60+ +m[2];}
-const clockLabel=m=>`${pad(Math.floor(m/60))}:${pad(m%60)}`;
-const minute=d=>clock(hm(d));
-const esc=s=>/\d{4}-\d{2}-\d{2}/.test(s);
-function time(value){
-  if(value===null||value===undefined||value==='')return null;
-  if(value instanceof Date)return Number.isFinite(+value)?value:null;
-  if(typeof value==='object')return time(first(value.ts,value.timestamp,value.iso));
-  if(typeof value==='number'||/^\d{10,13}$/.test(String(value))){const n=Number(value);const d=new Date(n<1e11?n*1000:n);return Number.isFinite(+d)?d:null;}
-  // Sin una fecha completa se descarta: no se presupone que un horario HH:MM sea de hoy.
-  if(/^\d{1,2}:\d{2}(:\d{2})?$/.test(String(value)))return null;
-  const d=new Date(value);return Number.isFinite(+d)?d:null;
+const fmt=new Intl.DateTimeFormat('es-ES',{timeZone:'Europe/Madrid',hour:'2-digit',minute:'2-digit',hourCycle:'h23'});
+const partsFmt=new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Madrid',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hourCycle:'h23'});
+const tzFmt=new Intl.DateTimeFormat('en-US',{timeZone:'Europe/Madrid',timeZoneName:'shortOffset'});
+let catalog=null,stationMap=new Map(),selection={from:'78710',to:'78805'},requestId=0,controller=null,results=[],visible=12,quickValue=null,latestSearch=null,loadedDay=new Map(),isBusy=false;
+function madridParts(ms){const obj={};for(const v of partsFmt.formatToParts(new Date(ms)))if(v.type!=='literal')obj[v.type]=v.value;return obj;}
+function madridDate(ms=Date.now()){const p=madridParts(ms);return `${p.year}-${p.month}-${p.day}`;}
+function fmtTime(ts){return fmt.format(new Date(ts*1000));}
+function tzOffset(utc){const text=tzFmt.formatToParts(new Date(utc)).find(x=>x.type==='timeZoneName')?.value||'GMT+1';const m=text.match(/GMT([+-])(\d{1,2})(?::(\d{2}))?/);return m?(m[1]==='-'?-1:1)*(Number(m[2])*60+Number(m[3]||0)):60;}
+function madridEpoch(day,hm){
+ const [y,m,d]=day.split('-').map(Number),[h,min]=hm.split(':').map(Number);
+ const naive=Date.UTC(y,m-1,d,h,min);let u=naive-tzOffset(naive)*60000;u=naive-tzOffset(u)*60000;
+ const requested=day+' '+hm;
+ const toLocal=v=>{const x=madridParts(v);return `${x.year}-${x.month}-${x.day} ${x.hour}:${x.minute}`;};
+ if(toLocal(u)!==requested)throw new Error(`La hora ${hm} no existe ese día por el cambio horario.`);
+ if(toLocal(u-3600000)===requested||toLocal(u+3600000)===requested)
+  throw new Error(`La hora ${hm} aparece dos veces ese día por el cambio horario; selecciona otra franja.`);
+ return Math.round(u/1000);
 }
-function item(tag,cls='',txt){const x=document.createElement(tag);x.className=cls;if(txt!==undefined)x.textContent=String(txt);return x;}
-const textAge=seconds=>seconds===null||!Number.isFinite(seconds)?'no indicada':seconds<60?`${Math.round(seconds)} s`:`${Math.round(seconds/60)} min`;
-let routeId='ida',runId=0,activeController=null,officialCache=null,view=null,toastTimer=null;
-const route=()=>ROUTES[routeId];
-function toast(s){const x=$('toast');x.textContent=s;x.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>x.classList.remove('show'),1800);}
-function connection(kind,s){const x=$('connection');x.className=`connection ${kind}`;x.lastChild.textContent=s;}
-function busy(v){for(const id of ['refresh','apply']){$(id).disabled=v;$(id).classList.toggle('loading',v);$(id).setAttribute('aria-busy',String(v));} $('refresh-label').textContent=v?'Consultando…':'Actualizar';$('fetch-progress').classList.toggle('running',v);}
-function validRange(){const a=clock($('from-time').value),b=clock($('to-time').value);if(!Number.isFinite(a)||!Number.isFinite(b)||b<=a)throw Error('La hora final debe ser posterior a la inicial y del mismo día.');return {start:a,end:b};}
-function inside(d,r){return d instanceof Date&&dayOf(d)===today()&&minute(d)>=r.start&&minute(d)<=r.end;}
-function saveRange(){try{localStorage.setItem('mirodalies-range-'+routeId,JSON.stringify({day:today(),from:$('from-time').value,to:$('to-time').value}));}catch{}}
-function readSaved(){try{return JSON.parse(localStorage.getItem('mirodalies-range-'+routeId)||'null');}catch{return null;}}
-function setQuick(n){document.querySelectorAll('[data-range]').forEach(b=>{const ok=n===Number(b.dataset.range);b.classList.toggle('chosen',ok);b.setAttribute('aria-pressed',String(ok));});}
-function loadRange(){const saved=readSaved();const now=minute(new Date());const from=Math.min(1438,Math.floor(now/15)*15);const to=Math.min(1439,from+120);
-  $('from-time').value=saved?.day===today()&&Number.isFinite(clock(saved.from))?saved.from:clockLabel(from);
-  $('to-time').value=saved?.day===today()&&Number.isFinite(clock(saved.to))?saved.to:clockLabel(to);
-  setQuick(null);$('range-info').textContent='Se muestran salidas programadas dentro de la franja. El horario no confirma circulación.';}
-function quick(hours){const a=Math.min(1438,Math.floor(minute(new Date())/15)*15),b=Math.min(1439,a+hours*60);
-  $('from-time').value=clockLabel(a);$('to-time').value=clockLabel(b);saveRange();
-  setQuick(b-a===hours*60?hours:null);
-  $('range-info').textContent=b-a<hours*60?'La franja termina a las 23:59: no llega a cubrir todas las horas seleccionadas.':'Se muestran salidas programadas dentro de la franja. El horario no confirma circulación.';
-  toast('Franja seleccionada');void refresh();}
-function changeRoute(next){if(!ROUTES[next]||next===routeId){toast('Trayecto ya seleccionado');return;}routeId=next;try{localStorage.setItem('mirodalies-route',next);}catch{};
-  for(const r of Object.keys(ROUTES)){const b=$('tab-'+r);const on=r===next;b.classList.toggle('selected',on);b.setAttribute('aria-pressed',String(on));}
-  $('origin').textContent=route().fromName;$('destination').textContent=route().toName;loadRange();toast(`Trayecto: ${route().label}`);void refresh();}
-async function getJson(url,signal,timeout=7000){const c=new AbortController();const onAbort=()=>c.abort();const timer=setTimeout(()=>c.abort(),timeout);signal?.addEventListener('abort',onAbort,{once:true});
- try{const r=await fetch(url,{signal:c.signal,cache:'no-store',credentials:'omit',headers:{Accept:'application/json'}});if(!r.ok)throw Error('HTTP '+r.status);const obj=await r.json();if(!obj||typeof obj!=='object')throw Error('JSON inesperado');return obj;}
- finally{clearTimeout(timer);signal?.removeEventListener('abort',onAbort);}}
-async function official(signal){if(officialCache&&Date.now()-officialCache.time<5*60000)return officialCache.value;
- const host=location.hostname,owner=host.endsWith('.github.io')?host.slice(0,-'.github.io'.length):'arl338';const repo=location.pathname.split('/').filter(Boolean)[0]||'mi-rodalies-r4';
- for(const url of [`https://raw.githubusercontent.com/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}/main/data/schedule-r4.json`,CONFIG.official]){
-   try{const x=await getJson(url,signal,7000);if(x.schema===1&&Array.isArray(x.trains)){officialCache={time:Date.now(),value:x};return x;}}catch(e){if(signal?.aborted)throw e;}
- }return null;
+function datePlus(day,offset){const [y,m,d]=day.split('-').map(Number);return new Date(Date.UTC(y,m-1,d+offset)).toISOString().slice(0,10);}
+function timeInput(ms){const p=madridParts(ms);return `${p.hour}:${p.minute}`;}
+function showToast(s){const n=$('toast');n.textContent=s;n.classList.add('show');clearTimeout(showToast.timer);showToast.timer=setTimeout(()=>n.classList.remove('show'),2400);}
+function el(tag,cl,text){const n=document.createElement(tag);if(cl)n.className=cl;if(text!==undefined)n.textContent=text;return n;}
+function setHealth(status,text){const x=$('health');x.className='health '+status;x.querySelector('span').textContent=text;}
+function markBusy(on){isBusy=on;$('search').disabled=on;$('refresh').disabled=on;$('search').classList.toggle('loading',on);$('refresh').classList.toggle('loading',on);$('search-label').textContent=on?'Consultando…':'Consultar trenes';$('search-feedback').textContent=on?'Actualizando datos':'';}
+
+function invalidateResults(){
+  requestId++;controller?.abort();markBusy(false);results=[];visible=12;latestSearch=null;
+  $('source-details').replaceChildren(el('p','subtle','Selección modificada: los diagnósticos anteriores ya no son aplicables.'));
+  $('alerts').replaceChildren(el('p','subtle','Selecciona «Consultar trenes» para actualizar las incidencias de este trayecto.'));
+  setHealth('pending','Consulta pendiente');
+  $('results').replaceChildren();$('load-more').hidden=true;
+  $('results-title').textContent='Próximos trenes';$('results-subtitle').textContent='Selección modificada; realiza una nueva consulta.';
+  $('results-total').textContent='—';$('status').className='notice neutral';
+  $('status').textContent='El trayecto o la franja han cambiado. Pulsa «Consultar trenes» para obtener resultados actualizados.';
+  $('updated').textContent='';
 }
-function officialState(o){const generated=time(o?.generated_at),ok=o?.schema===1&&/Renfe/.test(o?.source||'')&&Array.isArray(o?.trains)&&o.coverage_start<=today()&&o.coverage_end>=today()&&generated&&+generated<=Date.now()+300000;
- const days=generated?(Date.now()- +generated)/86400000:Infinity;
- return {usable:!!ok&&days<=7,stale:!!ok&&days>2,ageDays:days};}
-function getArray(data,keys=['trains','departures','salidas','entries','services','rows','items']){
- if(Array.isArray(data))return data;
- if(!data||typeof data!=='object')return [];
- for(const k of keys)if(Array.isArray(data[k]))return data[k];
- for(const k of ['board','data','result']){if(data[k]&&typeof data[k]==='object'){const a=getArray(data[k],keys);if(a.length)return a;}}
- return [];
+function savePair(){try{localStorage.setItem('mirodalies-v2-pair',JSON.stringify(selection));}catch{}}
+function applyPair(from,to,searchNow=false){
+  if(!stationMap.has(from)||!stationMap.has(to))return;
+  invalidateResults();selection={from,to};$('origin-input').value=stationMap.get(from).name;$('dest-input').value=stationMap.get(to).name;
+  syncFavorites();savePair();closeSuggest();if(searchNow)void search();
 }
-function parseTrain(raw,source){const x=raw?.properties||raw||{};
- const planned=time(first(x.planned_ts,x.scheduled_departure_ts,x.planned_departure_ts,x.scheduledDeparture,x.scheduledDepartureTime,x.departureTime,x.departure?.planned_ts,x.departure?.scheduled,x.scheduledTime,x.planned));
- const estimated=time(first(x.estimated_ts,x.estimated_departure_ts,x.estimatedDeparture,x.estimatedDepartureTime,x.departure?.estimated_ts,x.predicted_departure_ts));
- const n=number(first(x.train_number,x.trainCode,x.trainNumber,x.numero,x.number,x.serviceNumber,''));
- const line=[x.product,x.productName,x.line,x.lineName,x.linea,x.routeName,x.route].filter(y=>typeof y==='string'&&y.trim()).join(' | ').trim();
- const category=String(first(x.category,x.service_category,x.type,'')).trim();
- const stamp=time(first(x.reported_at,x.timestamp,x.updatedAt,x.position_timestamp,x.source_timestamp));
- const advertisedAge=num(first(x.age_s,x.position_age_s));const age=stamp?Math.max(0,(Date.now()-+stamp)/1000):advertisedAge;
- const delaySeconds=num(first(x.delay_s,x.delay_seconds,x.departure?.delay_s));const delayMinutes=num(first(x.delayMinutes,x.delay_minutes));
- const delay=delaySeconds!==null?delaySeconds:delayMinutes!==null?delayMinutes*60:null;
- const status=String(first(x.status,x.state,x.trip_status,'')).toLowerCase();
- const destination=String(first(x.destinationName,x.destination_name,x.destination?.name,typeof x.destination==='string'?x.destination:'',x.headsign,'')).trim();
- const coords=raw?.geometry?.coordinates;const lat=num(first(coords?.[1],x.latitude,x.lat));const lon=num(first(coords?.[0],x.longitude,x.lon));
- return {source,number:n,tripId:String(first(x.trip_id,x.tripId,'')||''),line,category,planned,estimated,delay,stamp,age,
-   stale:x.stale===true,cancelled:x.cancelled===true||x.canceled===true||/cancel|suprim/.test(status),
-   destination,platform:String(first(x.platform,x.platformName,x.track,x.via,'')||''),lat,lon,raw:x};
-}
-function isR4(x){const cat=norm(x.category);if(['ld','md','longdistance','regional','largadistancia','mediadistancia','ave','avant','alvia','euromed'].includes(cat))return false;
- const lines=x.line.match(/(?:^|[^a-z0-9])r(?:[1-9]|1[0-7])(?:$|[^a-z0-9])/gi)||[];
- const codes=lines.map(y=>(y.match(/r(?:[1-9]|1[0-7])/i)||[])[0]?.toUpperCase()).filter(Boolean);
- if(codes.some(y=>y!=='R4'))return false;
- return codes.includes('R4')||/^r4(?:nord|sud)$/.test(norm(x.line));}
-function isRecent(x,limit){return x.stamp&&x.age!==null&&!x.stale&&x.age>=0&&x.age<=limit&&Math.abs(Date.now()-+x.stamp)<=limit*1000;}
-function scheduleRows(o,selected,interval){if(!officialState(o).usable)return [];
- const used=new Set(),out=[];
- for(const t of o.trains){if(t.route!==selected.id||t.service_day!==today()||t.from_code!==selected.from||t.to_code!==selected.to)continue;
-  const planned=time(t.planned_ts),arrival=time(t.arrival_ts);if(!planned||!arrival||arrival<=planned||!inside(planned,interval))continue;
-  const n=number(t.train_number),trip=String(t.trip_id||'');const key=`${+planned}|${n}|${+arrival}`;if(used.has(key))continue;used.add(key);
-  out.push({key,number:n,tripId:trip,aliasIds:[trip,...(Array.isArray(t.alternative_trip_ids)?t.alternative_trip_ids:[])],planned,arrival,
-    route:selected.id,destination:String(t.destination||'').trim(),sources:['GTFS oficial Renfe'],board:[],position:null,cancelled:false,conflict:false,validated:true});
+function syncFavorites(){for(const [id,fr,to] of [['fav-ida','78710','78805'],['fav-vuelta','71801','78710']]){
+ const btn=$(id),is=selection.from===fr&&selection.to===to;btn.classList.toggle('selected',is);btn.setAttribute('aria-pressed',String(is));}}
+function closeSuggest(){for(const id of ['origin','dest']){$(id+'-options').hidden=true;$(id+'-input').setAttribute('aria-expanded','false');}}
+function wirePicker(prefix,which){
+ const input=$(prefix+'-input'),list=$(prefix+'-options');let active=-1,shown=[];
+ function render(){const term=E.norm(input.value);shown=catalog.stations.filter(st=>{
+   const names=[st.name,st.gtfs_name,...(st.aliases||[])];return !term||names.some(v=>E.norm(v).includes(term))||st.id.includes(term);
+ }).sort((a,b)=>{const a0=[a.name,...(a.aliases||[])].some(v=>E.norm(v).startsWith(term))?0:1,b0=[b.name,...(b.aliases||[])].some(v=>E.norm(v).startsWith(term))?0:1;return a0-b0||a.name.localeCompare(b.name,'es');}).slice(0,10);
+  list.replaceChildren();active=-1;
+  if(!shown.length){list.append(el('div','suggest-empty','No se encuentra esa estación en el GTFS disponible.'));}
+  for(let k=0;k<shown.length;k++){
+   const st=shown[k],btn=el('button','suggest-option');btn.type='button';btn.setAttribute('role','option');btn.setAttribute('aria-selected','false');btn.append(el('strong','',st.name),el('small','',`ADIF ${st.id} · ${(st.lines||[]).join(' · ')}${st.gtfs_name&&st.gtfs_name!==st.name?' · GTFS: '+st.gtfs_name:''}`));
+   btn.addEventListener('pointerdown',e=>e.preventDefault());btn.addEventListener('click',()=>choose(st));list.append(btn);
+  }
+  list.hidden=false;input.setAttribute('aria-expanded','true');
  }
- return out.sort((a,b)=>+a.planned-+b.planned);
+ function choose(st){invalidateResults();selection[which]=st.id;input.value=st.name;savePair();syncFavorites();closeSuggest();showToast('Estación seleccionada: '+st.name);}
+ input.addEventListener('focus',()=>{if(catalog)render();});
+ input.addEventListener('input',()=>{invalidateResults();selection[which]='';syncFavorites();savePair();if(catalog)render();});
+ input.addEventListener('keydown',e=>{
+  if(e.key==='Escape'){closeSuggest();return;}
+  if(e.key==='ArrowDown'||e.key==='ArrowUp'){if(list.hidden)render();e.preventDefault();active=Math.max(0,Math.min(shown.length-1,active+(e.key==='ArrowDown'?1:-1)));[...list.children].forEach((x,i)=>{x.classList.toggle('active',i===active);x.setAttribute('aria-selected',String(i===active));});}
+  if(e.key==='Enter'&&!list.hidden&&shown.length){e.preventDefault();choose(shown[Math.max(0,active)]);}
+ });
+ input.addEventListener('blur',()=>setTimeout(()=>{if(input.value&&!selection[which]&&catalog){const exact=catalog.stations.find(x=>E.norm(x.name)===E.norm(input.value));if(exact)choose(exact);}closeSuggest();},140));
+ $(prefix+'-clear').addEventListener('click',()=>{invalidateResults();input.value='';selection[which]='';savePair();syncFavorites();input.focus();});
 }
-function matchRow(train,rows){if(!train.number)return null;
- const matches=rows.filter(x=>isR4(x)&&x.number===train.number&&x.planned&&dayOf(x.planned)===today()&&Math.abs(+x.planned- +train.planned)<=120000);
- if(matches.length!==1)return null;
- const found=matches[0];if(found.tripId&&train.aliasIds.includes(found.tripId)===false&&train.tripId&&/R4$/i.test(found.tripId)&&/R4$/i.test(train.tripId))return null;
- return found;
+function selectQuick(hours){if(catalog)invalidateResults();const next=Math.ceil((Date.now()+180000)/300000)*300000;const end=next+hours*3600000;const beginning=madridParts(next);
+ $('trip-date').value=madridDate(next);$('from-time').value=`${beginning.hour}:${beginning.minute}`;$('to-time').value=timeInput(end);quickValue=hours;
+ document.querySelectorAll('[data-hours]').forEach(b=>{b.classList.toggle('selected',Number(b.dataset.hours)===hours);b.setAttribute('aria-pressed',String(Number(b.dataset.hours)===hours));});
+ $('search-feedback').textContent=madridDate(next)!==madridDate(end)?'La franja termina mañana':'';
 }
-function matchPosition(train,position){if(!train.number||position.number!==train.number||!isR4(position)||!isRecent(position,CONFIG.maxLiveAge))return false;
- const cat=norm(position.category);if(cat&&cat!=='cercanias'&&cat!=='commuter')return false;
- if(position.tripId&&train.aliasIds.length&&train.aliasIds.includes(position.tripId)===false&&/R4$/i.test(position.tripId)&&/R4$/i.test(train.tripId))return false;
- // No interpretar un tren del mismo número en otra jornada como posición vigente para esta salida.
- return Date.now()>=+train.planned-75*60000&&Date.now()<=+train.arrival+35*60000;
-}
-function isCancelled(t,records){return records.some(x=>{
- if(!x.number||x.number!==t.number||!isR4(x))return false;
- if(x.tripId&&t.aliasIds.length){if(t.aliasIds.includes(x.tripId))return true;return false;}
- return x.planned&&dayOf(x.planned)===today()&&Math.abs(+x.planned-+t.planned)<=120000;
-});}
-function enrich(train,boardVal,boardRadar,positions,cancel){
- const found=[matchRow(train,boardVal),matchRow(train,boardRadar)].filter(Boolean);
- train.board=found;
- let explicitCancel=found.some(x=>x.cancelled)||isCancelled(train,cancel);
- const live=positions.filter(x=>matchPosition(train,x)).sort((a,b)=>(a.age??999)-(b.age??999))[0]||null;
- train.position=live;train.cancelled=explicitCancel;
- const current=found.filter(x=>x.estimated&&isRecent(x,CONFIG.maxBoardAge));
- // Un tablero sin sello temporal no se considera estimación vigente.
- current.sort((a,b)=>a.age-b.age);
- const diff=current.length>1&&Math.abs(+current[0].estimated- +current[1].estimated)>300000;
- train.conflict=diff||(explicitCancel&&!!live);
- train.estimate=current.length&&!train.conflict&&!explicitCancel?current[0].estimated:null;
- train.delay=live?.delay??current[0]?.delay??null;
- train.platform=found.find(x=>x.platform)?.platform||'';
- train.state=train.conflict?'conflict':explicitCancel?'cancelled':live?'live':'scheduled';
- return train;
-}
-function alertRows(data){return getArray(data,['alerts','incidents','items','rows']);}
-function alertsForR4(data){const arr=alertRows(data),out=[],seen=new Set();for(const v of arr){const a=v.properties||v;const names=Array.isArray(a.lines)?a.lines.map(x=>typeof x==='string'?x:String(first(x.line,x.name,'')||'')):[];
- const txt=String(first(a.text,a.message,a.description,a.title,a.summary,'')||'').trim();if(!txt||!names.some(x=>norm(x)==='r4')&&!/\bR4\b/i.test(txt))continue;
- const key=norm(txt);if(!seen.has(key)){seen.add(key);out.push(txt);}if(out.length>=6)break;}return out;}
-function renderAlerts(a){$('alerts').replaceChildren(...a.map(s=>{const e=item('div','alert-card',s);e.append(item('small','','Fuente: Renfe vía Valfiguer'));return e;}));if(!a.length)$('alerts').append(item('p','muted','No se han recibido avisos específicos de la R4; no significa que no existan incidencias.'));}
-function renderHistory(data){const days=Array.isArray(data?.days)?data.days:[];let total=0,ontime=0;
- for(const d of days)for(const g of (Array.isArray(d.groups)?d.groups:[])){if(norm(g.label)==='r4'&&(!g.nucleo||/barcelona|catalunya/i.test(g.nucleo))){total+=Number(g.trips)||0;ontime+=Number(g.on_time)||0;}}
- $('history').replaceChildren();if(!total){$('history').append(item('p','muted','No hay datos históricos R4 suficientes. No se calcula puntualidad.'));return;}
- const box=item('div','history-stats');for(const [v,label] of [[total.toLocaleString('es-ES'),'Viajes registrados'],[(100*ontime/total).toFixed(1).replace('.',',')+' %','Puntualidad publicada']]){const el=item('div','history-stat');el.append(item('strong','',v),item('span','',label));box.append(el);}
- $('history').append(box,item('p','help-text','Dato agregado de R4; no mide el paso real por Terrassa Est ni predice un tren concreto.'));}
-function rowInfo(label,subtitle,ok,value){const r=item('div','source-row'),l=item('div');l.append(item('strong','',label),item('small','',subtitle));r.append(l,item('span',ok?'ok':'fail',value));return r;}
-function renderSources(jobs,results,official,officialStats,entries){const list=[];
- list.push(rowInfo('GTFS oficial Renfe','Horario de los dos trayectos',officialStats.usable,!officialStats.usable?'No disponible/vigente':`${official.trains.length.toLocaleString('es-ES')} registros · ${officialStats.stale?'antigüedad > 2 días':'actualizado'}`));
- for(let i=0;i<jobs.length;i++){const result=results[i];if(result.status==='rejected'){list.push(rowInfo(jobs[i].label,jobs[i].info,false,'No accesible: '+String(result.reason?.message||'error').slice(0,40)));continue;}
- let count=0;const obj=result.value;if(i===2)count=Array.isArray(obj?.features)?obj.features.length:0;else if(i===3)count=Array.isArray(obj?.trains)?obj.trains.length:0;else if(i===7)count=Array.isArray(obj?.feeds)?obj.feeds.length:0;else count=getArray(obj).length;
- list.push(rowInfo(jobs[i].label,jobs[i].info,true,`${count} registros${i===0||i===1?' (todas las líneas)':''}`));}
- for(const f of (entries?.feeds||[]).filter(x=>/renfe_cer_(positions|updates)|renfe.*alerts/i.test(x.id||'')))list.push(rowInfo('Origen '+f.id,'Antigüedad del feed de origen',!!f.ok&&!f.stale,textAge(num(f.data_age_s))));
- $('sources').replaceChildren(...list,item('p','help-text','Las fuentes que redistribuyen Renfe/ADIF no constituyen observaciones independientes. Un registro no demuestra que el tren llegue a la estación.'));
-}
-function badge(s){return {scheduled:'Solo horario',live:'Posición reciente',cancelled:'Cancelado',conflict:'Datos contradictorios'}[s]||'Sin confirmar';}
-function renderTrains(trains,officialStats,errors,selection){const trainBox=$('trains');trainBox.replaceChildren();let live=0,cancel=0,conflicts=0;
- for(const t of trains){const e=item('article','train '+t.state),h=item('div','train-main'),a=item('div','train-times'),b=item('div','train-state');
- const shown=t.estimate||t.planned;
- a.append(item('div','train-time',hm(shown)),item('div','time-kind',t.estimate?'Salida estimada':'Salida programada'));
- if(t.estimate)a.append(item('div','time-kind','Programada: '+hm(t.planned)));
- b.append(item('span','pill '+t.state,t.state==='scheduled'?'Horario oficial':badge(t.state)));
- if(Number.isFinite(t.delay)&&t.delay!==0&&t.position)b.append(item('div','delay',`${t.delay>0?'+':''}${Math.round(t.delay/60)} min · informado`));
- h.append(a,b);e.append(h,item('div','train-name',`R4${t.number?' · Tren '+t.number:''} · ${route().fromName} → ${route().toName}`));
- if(t.platform)e.append(item('div','platform','Vía publicada: '+t.platform));
- const notes=['Recorrido acreditado en GTFS oficial Renfe','Horario ≠ circulación confirmada'];
- if(t.position){notes.push('Posición publicada hace '+textAge(t.position.age));live++;}
- else notes.push('Sin posición asociada');
- if(t.board.length)notes.push('Tablero: '+[...new Set(t.board.map(x=>x.source==='val'?'Valfiguer':'RadarDeTrenes'))].join(' / '));
- if(t.estimate)notes.push('Estimación del tablero, con fecha reciente');
- if(t.state==='cancelled'){cancel++;notes.push('Cancelación publicada para este servicio');}
- if(t.conflict){conflicts++;notes.push('Evidencias contradictorias; consultar estación');}
- e.append(item('div','train-evidence',notes.join(' · ')));trainBox.append(e);
+function manualChanged(){if(catalog)invalidateResults();quickValue=null;for(const b of document.querySelectorAll('[data-hours]')){b.classList.remove('selected');b.setAttribute('aria-pressed','false');}}
+function validateRange(){const day=$('trip-date').value,from=$('from-time').value,to=$('to-time').value;
+ if(!catalog)throw new Error('Todavía no se ha cargado el catálogo oficial de estaciones.');
+ if(!stationMap.has(selection.from)||!stationMap.has(selection.to))throw new Error('Selecciona dos estaciones del listado.');
+ if(selection.from===selection.to)throw new Error('Origen y destino deben ser diferentes.');
+ if(!/^\d{4}-\d\d-\d\d$/.test(day)||!/^\d\d:\d\d$/.test(from)||!/^\d\d:\d\d$/.test(to))throw new Error('Revisa la fecha y las horas seleccionadas.');
+ if(day<catalog.coverage_start||day>catalog.coverage_end)throw new Error(`El GTFS está disponible del ${catalog.coverage_start} al ${catalog.coverage_end}.`);
+ let start=madridEpoch(day,from),end=madridEpoch(day,to),extra=false;
+ if(end<=start){
+   if(datePlus(day,1)>catalog.coverage_end)throw new Error('La franja cruza a un día que aún no está cubierto por el GTFS oficial.');
+   end=madridEpoch(datePlus(day,1),to);extra=true;
  }
- const msg=$('status');if(!trains.length){msg.className='notice warn';msg.textContent=officialStats.usable?'No hay servicios programados en el horario oficial para esta franja; podrían existir servicios especiales no publicados.':'No disponemos de un horario oficial vigente para enumerar los trenes. Las posiciones generales no permiten reconstruir el recorrido.';}
- else{msg.className='notice '+(conflicts?'bad':live?'good':'warn');msg.textContent=`${trains.length} servicios programados · ${live} con posición reciente · ${cancel} cancelados${conflicts?' · '+conflicts+' discrepancias':''}. Datos orientativos.`;}
- $('result-count').textContent=`${trains.length} servicios para este recorrido · ${live} observaciones recientes`;
- $('updated').textContent=`Consulta ${hm(new Date())} · ${today()} · franja ${$('from-time').value}–${$('to-time').value} · ${errors} fuentes inaccesibles`;
+ if(end<=start||end-start>8*3600)throw new Error('Selecciona una franja superior a 0 y de 8 horas como máximo.');
+ return {day,from,to,start,end,extra};
 }
-async function refresh(){let range;try{range=validRange();}catch(e){toast('Corrige la franja horaria');$('status').className='notice bad';$('status').textContent=e.message;return;}
- saveRange();const id=++runId;if(activeController)activeController.abort();activeController=new AbortController();const signal=activeController.signal;const r={...route(),id:routeId};busy(true);connection('waiting','Consultando');
- $('status').className='notice neutral';$('status').textContent='Consultando horarios y fuentes…';$('result-count').textContent='Consulta en curso';
- const jobs=[
-  {label:'Valfiguer · estación',info:'Panel de origen (2 horas)',url:`${CONFIG.val}/stations/${r.from}`},
-  {label:'RadarDeTrenes · ADIF',info:'Panel de origen (todas las líneas)',url:`${CONFIG.radar}/stations/${r.from}/board-renfe`},
-  {label:'Renfe · posiciones',info:'Red completa · vía Valfiguer',url:`${CONFIG.val}/trains`},
-  {label:'Renfe/ADIF · posiciones',info:'Red completa · vía RadarDeTrenes',url:`${CONFIG.radar}/fleet?type=commuter`},
-  {label:'Renfe · cancelaciones',info:'Red completa · vía Valfiguer',url:`${CONFIG.val}/cancellations`},
-  {label:'Renfe · avisos',info:'Por Valfiguer',url:`${CONFIG.val}/alerts`},
-  {label:'R4 · puntualidad',info:'Histórico publicado',url:`${CONFIG.val}/puntualidad?dias=7`},
-  {label:'Estado feeds',info:'Antigüedad de origen',url:`${CONFIG.val}/status`}
- ];
+async function loadJson(url,signal,timeout=CONFIG.timeoutMs){const c=new AbortController(),timer=setTimeout(()=>c.abort(),timeout),abort=()=>c.abort();signal?.addEventListener('abort',abort,{once:true});try{
+ const r=await fetch(url,{signal:c.signal,cache:'no-store',headers:{'Accept':'application/json'}});
+ if(!r.ok)throw new Error('HTTP '+r.status);
+ return await r.json();
+}finally{clearTimeout(timer);signal?.removeEventListener('abort',abort);}}
+async function loadCatalog(signal){const root=CONFIG.dataRoot;const data=await loadJson(root+'catalog.json?ts='+Date.now(),signal,16000);
+ if(data?.schema!==2||!Array.isArray(data.stations)||!Array.isArray(data.lines))throw new Error('El catálogo oficial no tiene el formato V2 requerido.');
+ return data;
+}
+async function dayData(day,signal){
+ const cached=loadedDay.get(day);if(cached&&Date.now()-cached.loadedAt<5*60000)return cached.data;
+ const data=await loadJson(CONFIG.dataRoot+day+'.json?ts='+Date.now(),signal,16000);
+ if(data.schema!==2||data.day!==day||!Array.isArray(data.trains))throw new Error('Horario diario incorrecto para '+day);
+ loadedDay.set(day,{loadedAt:Date.now(),data});if(loadedDay.size>4)loadedDay.delete(loadedDay.keys().next().value);return data;
+}
+function sourceJobs(station){return [
+  {name:'Valfiguer · panel',detail:'Salidas del origen; 2 horas',url:`${CONFIG.val}/stations/${station}`},
+  {name:'RadarDeTrenes · ADIF',detail:'Panel de la estación de origen',url:`${CONFIG.radar}/stations/${station}/board-renfe`},
+  {name:'Renfe · posiciones',detail:'Red redistribuida por Valfiguer',url:`${CONFIG.val}/trains`},
+  {name:'Renfe/ADIF · flota',detail:'Red redistribuida por RadarDeTrenes',url:`${CONFIG.radar}/fleet?type=commuter`},
+  {name:'Renfe · cancelaciones',detail:'Redistribuidas por Valfiguer',url:`${CONFIG.val}/cancellations`},
+  {name:'Renfe · avisos',detail:'Redistribuidos por Valfiguer',url:`${CONFIG.val}/alerts`},
+  {name:'Estado de feeds',detail:'Antigüedad publicada por origen',url:`${CONFIG.val}/status`}
+ ];}
+function renderSourceSummary(res,jobs,mode,cat){const content=$('source-details');content.replaceChildren();
+ const catalogRow=sourceRow('Horario oficial GTFS','Cercanías / MD con línea Rodalies explícita',true,`${cat.stations.length} estaciones · ${cat.lines.filter(x=>x.present).length}/${cat.lines.length} líneas`);content.append(catalogRow);
+ if(mode!=='live'){content.append(el('p','subtle','Para fechas futuras se utiliza el horario oficial; las observaciones de ahora no predicen la circulación futura.'));return;}
+ res.forEach((r,i)=>{
+ const ok=r.status==='fulfilled';const data=ok?r.value:null;const count=ok?E.rows(data).length:0;
+ content.append(sourceRow(jobs[i].name,jobs[i].detail,ok,ok?`${count} registros`:`No accesible: ${String(r.reason?.message||'Error').slice(0,42)}`));
+ });
+ const stats=res[6]?.status==='fulfilled'?res[6].value:null;
+ for(const f of (Array.isArray(stats?.feeds)?stats.feeds:[]).filter(x=>/renfe_cer_(positions|updates)|renfe.*alerts|renfe_ld_positions/i.test(x.id||''))){
+ content.append(sourceRow(f.id,'Antigüedad del feed original',!!f.ok&&!f.stale,Number.isFinite(Number(f.data_age_s))?`${f.data_age_s} s`: 'Sin dato'));
+ }
+ content.append(el('p','subtle','Los recuentos de las APIs son generales; no equivalen a trenes de este trayecto. Distintos proveedores pueden redistribuir las mismas observaciones de Renfe.'));
+}
+function renderOfficialAudit(cat){
+ const intro=$('catalog-audit-intro'),root=$('catalog-audit-lines');root.replaceChildren();
+ const audit=cat.official_reference;
+ if(!audit||!Array.isArray(audit.lines)){
+  intro.textContent='Este catálogo todavía no incorpora el contraste con la Generalitat. Ejecuta la tarea V2.0.1 de GitHub Actions.';
+  return;
+ }
+ const total=audit.lines.length,scheduled=audit.lines.filter(l=>l.status!=='sin_horarios_publicados').length;
+ const full=audit.lines.filter(l=>l.status==='controles_localizados').length;
+ const partial=audit.lines.filter(l=>l.status==='pendiente_contraste').length;
+ intro.textContent=`${total} líneas en la referencia de la Generalitat · ${scheduled} con horarios GTFS · ${full} con puntos de control localizados · ${partial} pendientes de contraste. La comparación no certifica todas las estaciones.`;
+ for(const l of audit.lines){
+  const row=el('div','catalog-line-row'),left=el('div','catalog-line-name'),right=el('div','catalog-line-status');
+  const a=el('a','',l.id);a.href=l.url;a.target='_blank';a.rel='noopener noreferrer';left.append(a);
+  left.append(el('small','',l.corridor));
+  let state='Sin horarios GTFS',type='warn';
+  if(l.status==='controles_localizados'){state=`${l.gtfs_station_count} estaciones GTFS · comprobaciones principales localizadas`;type='good';}
+  else if(l.status==='pendiente_contraste'){state=`${l.gtfs_station_count} estaciones GTFS · ${l.not_found_in_gtfs.length} puntos sin cotejar`;type='warn';}
+  right.append(el('span',type,state));
+  if(l.not_found_in_gtfs?.length && l.status==='pendiente_contraste'){
+   right.append(el('small','','Sin cotejar: '+l.not_found_in_gtfs.join(', ')));
+  }
+  const suggested=l.unverified_name_suggestions||{};for(const [name,sug] of Object.entries(suggested)) { if(sug.length)right.append(el('small','',`Posible alias de «${name}» (NO validado): ${sug.map(v=>v.name+' ['+v.id+']').join(' / ')}`)); }
+  row.append(left,right);root.append(row);
+ }
+}
+function sourceRow(title,description,ok,value){const r=el('div','source-row'),l=el('div');l.append(el('strong','',title),el('small','',description));r.append(l,el('span',ok?'good':'bad',value));return r;}
+function renderAlerts(list,live){const elmt=$('alerts');elmt.replaceChildren();if(!live){elmt.append(el('p','subtle','Para esa fecha todavía no hay avisos futuros contrastados. Consulta el estado del servicio el mismo día.'));return;}
+ if(!list.length){elmt.append(el('p','subtle','No se han recuperado avisos específicos. Esto no garantiza que el servicio funcione normalmente.'));return;}
+ for(const obj of list){const x=el('div','alert',obj.text);if(obj.lines.length)x.append(el('div','subtle','Líneas: '+obj.lines.join(', ')));elmt.append(x);}}
+function buildWindow(dayTrains,range){const good=dayTrains.filter(t=>E.LINES.has(t.l)&&Array.isArray(t.s)&&t.s.length>=2).map(t=>({...t,day:t.day||''}));
+ const direct=E.direct(good,selection.from,selection.to,range.start,range.end);
+ const trans=E.transfers(good,selection.from,selection.to,range.start,range.end);
+ const keys=new Set(direct.map(x=>x.key));return [...direct,...trans.filter(x=>!keys.has(x.key))].sort((a,b)=>a.depart-b.depart||a.arrive-b.arrive);
+}
+function timeFor(t){return fmtTime(t);}
+function duration(start,end){const min=Math.round((end-start)/60);return min>=60?`${Math.floor(min/60)} h ${String(min%60).padStart(2,'0')} min`:`${min} min`;}
+function stateName(st){return {scheduled:'Solo horario',live:'Posición reciente',cancelled:'Cancelado',conflict:'Datos contradictorios',transfer:'1 transbordo'}[st]||'Sin verificar';}
+function stationName(id){return stationMap.get(id)?.name||id;}
+function renderResultList(){const root=$('results');root.replaceChildren();for(const j of results.slice(0,visible)){
+ const panel=el('article','train-card '+j.state),top=el('div','train-top'),time=el('div'),right=el('span','train-status '+j.state,stateName(j.state));
+ const selected=(j.cancelled||j.conflict)?j.depart:(j.estimated??j.depart);
+ time.append(el('div','train-time',timeFor(selected)),el('div','train-time-label',(j.estimated&&!j.cancelled&&!j.conflict)?'Salida estimada · programada '+timeFor(j.depart):'Salida programada'));
+ time.append(el('div','train-end','Llegada '+timeFor(j.arrive)+' · '+duration(j.depart,j.arrive)));top.append(time,right);panel.append(top);
+ if(j.kind==='direct'){
+  const leg=j.legs[0],lineRow=el('div','train-line'),tag=el('span','line-pill '+(/^(R1[34567]|R11)/.test(leg.t.l)?'regional':''),leg.t.l);lineRow.append(tag,document.createTextNode('Tren '+(leg.t.n||'sin número')+' · '+stationName(leg.to)));panel.append(lineRow);
+  panel.append(el('div','train-subline','Origen: '+stationName(leg.from)+' · destino: '+stationName(leg.to)));
+ }else{
+  panel.append(el('div','train-line','Conexión programada en '+stationName(j.transferAt)));
+  const legs=el('div','trip-legs');for(const l of j.legs){const d=el('div','leg');d.append(el('span','small-line',l.t.l),el('span','',timeFor(l.depart)+' '+stationName(l.from)+' → '+timeFor(l.arrive)+' '+stationName(l.to)));legs.append(d);}panel.append(legs);
+ }
+ const proof=el('div','train-evidence');let notes=['Origen: Renfe GTFS oficial'];
+ for(const l of j.legs){if(l.proof.length)notes.push(l.proof.join('; '));if(l.platform)notes.push('Vía publicada: '+l.platform);}
+ if(j.kind==='transfer')notes.push('Conexión teórica; enlace no confirmado');
+ // Dynamic nodes instead of innerHTML from external providers (XSS-safe).
+ proof.append(el('b','', 'Evidencias: '),document.createTextNode(notes.join(' · ')));panel.append(proof);root.append(panel);
+ }
+ $('load-more').hidden=results.length<=visible;
+ $('load-more').textContent=`Mostrar más (${Math.max(0,results.length-visible)} restantes)`;
+}
+function updateSummary(range,scheduleCount,live){const direct=results.filter(x=>x.kind==='direct').length,transfer=results.filter(x=>x.kind==='transfer').length,cancel=results.filter(x=>x.cancelled).length,pos=results.filter(x=>x.live).length;
+ $('results-title').textContent=stationName(selection.from)+' → '+stationName(selection.to);
+ $('results-subtitle').textContent=range.day+' · '+range.from+'–'+range.to+(range.extra?' (hasta mañana)':'');
+ $('results-total').textContent=results.length+' '+(results.length===1?'opción':'opciones');
+ const st=$('status');if(!results.length){st.className='notice warn';st.textContent=scheduleCount?'No se han encontrado servicios directos ni conexiones de un transbordo en esta franja. No implica que el servicio esté suspendido.':'El horario oficial disponible no contiene servicios del recorrido. Comprueba la cobertura de líneas y la fecha.';}
+ else{st.className='notice '+(cancel?'warn':pos?'good':'neutral');st.textContent=`${direct} directos · ${transfer} con un transbordo · ${pos} con posición reciente · ${cancel} cancelados. Las horas programadas no confirman circulación.`;}
+ $('updated').textContent=`Consulta ${fmtTime(Date.now()/1000)} · Datos operativos: ${live?'consultados en este momento':'solo horarios oficiales para fecha futura'}. Esta aplicación es orientativa.`;
+}
+async function search(){if(!catalog){showToast('El catálogo todavía no está disponible');return;}
+ let range;try{range=validateRange();}catch(err){const st=$('status');st.className='notice bad';st.textContent=err.message;showToast(err.message);return;}
+ const id=++requestId;controller?.abort();controller=new AbortController();const signal=controller.signal;markBusy(true);setHealth('pending','Consultando');$('status').className='notice neutral';$('status').textContent='Buscando recorridos en el horario oficial…';$('results-total').textContent='…';
  try{
-   const [offResult,...res]=await Promise.allSettled([official(signal),...jobs.map(x=>getJson(x.url,signal))]);
-   if(signal.aborted||id!==runId)return;
-   const off=offResult.status==='fulfilled'?offResult.value:null,st=officialState(off),rawOff=st.usable?off:null;
-   const count=st.usable?off.trains.filter(x=>x.route===r.id&&x.service_day===today()).length:0;
-   $('schedule-status').textContent=st.usable?`GTFS oficial: ${count} circulaciones programadas para ${r.label.toLowerCase()} hoy${st.stale?' (horario antiguo, comprobar cambios)':''}. No confirma circulación.`:'Horario oficial no disponible o desactualizado. Sin listado verificado no se muestran trenes de otros servicios.';
-   const val=i=>res[i]?.status==='fulfilled'?res[i].value:null;
-   const boardVal=getArray(val(0)).map(x=>parseTrain(x,'val')).filter(isR4);
-   const boardRadar=getArray(val(1)).map(x=>parseTrain(x,'radar')).filter(isR4);
-   const posVal=Array.isArray(val(2)?.features)?val(2).features.map(x=>parseTrain(x,'val')).filter(isR4):[];
-   const posRadar=getArray(val(3)).map(x=>parseTrain(x,'radar')).filter(isR4);
-   const cancel=getArray(val(4)).map(x=>parseTrain(x,'val')).filter(isR4);
-   const list=scheduleRows(rawOff,r,range).map(t=>enrich(t,boardVal,boardRadar,[...posVal,...posRadar],cancel));
-   if(signal.aborted||id!==runId)return;
-   view={list,route:r,range};renderTrains(list,st,res.filter(x=>x.status==='rejected').length+(offResult.status==='rejected'?1:0),r);
-   renderSources(jobs,res,off,st,val(7));renderAlerts(alertsForR4(val(5)));renderHistory(val(6));
-   const accessible=res.filter(x=>x.status==='fulfilled').length;
-   connection(!accessible&&!st.usable?'offline':accessible===jobs.length&&st.usable?'online':'partial',!accessible&&!st.usable?'Sin información':accessible===jobs.length&&st.usable?'Fuentes accesibles':'Datos parciales');
- }catch(e){if(!signal.aborted&&id===runId){connection('offline','Error');$('status').className='notice bad';$('status').textContent='Error de procesamiento: '+String(e.message).slice(0,90);}}
- finally{if(id===runId)busy(false);}
+  const days=[range.day];
+  // GTFS 24:xx departures can belong to the preceding service day.
+  if(range.from<'06:00')days.unshift(datePlus(range.day,-1));
+  if(range.extra)days.push(datePlus(range.day,1));
+  const daily=await Promise.all(days.map(d=>dayData(d,signal)));
+  if(signal.aborted||id!==requestId)return;
+  const trips=daily.flatMap(x=>x.trains.map(t=>({...t,day:x.day})));
+  const scheduled=buildWindow(trips,range);
+  if(!scheduled.length&&daily.every(x=>x.trains.length===0))showToast('Sin horarios oficiales para esa fecha');
+  $('status').textContent=`${scheduled.length} opciones programadas. Contrastando datos…`;
+  const today=madridDate(),live=range.day===today, jobs=live?sourceJobs(selection.from):[];
+  const res=live?await Promise.allSettled(jobs.map(j=>loadJson(j.url,signal))):[];
+  if(signal.aborted||id!==requestId)return;
+  const now=Math.floor(Date.now()/1000);
+  const data=i=>res[i]?.status==='fulfilled'?res[i].value:null;
+  const board=live?[...E.normalizeBoard(data(0),'Valfiguer',now).map(x=>({...x,boardStop:selection.from})),...E.normalizeBoard(data(1),'ADIF/RadarDeTrenes',now).map(x=>({...x,boardStop:selection.from}))]:[];
+  const positions=live?[...E.normalizePositions(data(2),'Renfe/Valfiguer',now),...E.normalizePositions(data(3),'Renfe/ADIF',now)]:[];
+  const cancellations=live?E.normalizeCancels(data(4)):[];
+  results=scheduled.map(j=>E.enrichJourney(j,board,positions,cancellations,now));visible=12;latestSearch={range};
+  renderResultList();updateSummary(range,trips.length,live);
+  const lines=new Set(results.flatMap(j=>j.legs.map(l=>l.t.l)));
+  renderAlerts(live?E.alertsForLines(data(5),lines):[],live);
+  renderSourceSummary(res,jobs,live?'live':'future',catalog);
+  const failures=res.filter(x=>x.status==='rejected').length;
+  setHealth(!live?'good':failures?'partial':'good',!live?'Horario oficial':failures?'Datos parciales':'Datos consultados');
+  $('search-feedback').textContent='';
+ }catch(err){if(!signal.aborted&&id===requestId){const st=$('status');st.className='notice bad';st.textContent='No se ha podido consultar el horario: '+err.message;setHealth('bad','Sin horario');}}
+ finally{if(id===requestId)markBusy(false);}
 }
-function init(){try{const saved=localStorage.getItem('mirodalies-route');if(ROUTES[saved])routeId=saved;}catch{}
- const p=parts(new Date());$('today-label').textContent=`${p.day}/${p.month}`;
- for(const k of Object.keys(ROUTES)){$('tab-'+k).classList.toggle('selected',k===routeId);$('tab-'+k).setAttribute('aria-pressed',String(k===routeId));$('tab-'+k).addEventListener('click',()=>changeRoute(k));}
- $('origin').textContent=route().fromName;$('destination').textContent=route().toName;loadRange();
- for(const b of document.querySelectorAll('[data-range]'))b.addEventListener('click',()=>quick(Number(b.dataset.range)));
- for(const id of ['from-time','to-time'])$(id).addEventListener('change',()=>{setQuick(null);saveRange();toast('Hora cambiada: pulsa «Ver trenes»');});
- $('apply').addEventListener('click',()=>void refresh());$('refresh').addEventListener('click',()=>void refresh());
- document.addEventListener('visibilitychange',()=>{if(!document.hidden)void refresh();});
- setInterval(()=>{if(!document.hidden)void refresh();},CONFIG.refreshMs);
+async function init(){const d=madridDate();$('trip-date').value=d;$('trip-date').min=d;$('trip-date').max=datePlus(d,CONFIG.nearDays-1);
+ for(const b of document.querySelectorAll('[data-hours]'))b.addEventListener('click',()=>selectQuick(Number(b.dataset.hours)));
+ for(const id of ['trip-date','from-time','to-time'])$(id).addEventListener('change',manualChanged);
+ $('search').addEventListener('click',()=>void search());$('refresh').addEventListener('click',()=>void search());
+ $('load-more').addEventListener('click',()=>{visible+=12;renderResultList();});
+ $('swap').addEventListener('click',()=>{if(stationMap.has(selection.from)&&stationMap.has(selection.to))applyPair(selection.to,selection.from,true);else showToast('Elige dos estaciones primero');});
+ $('fav-ida').addEventListener('click',()=>applyPair('78710','78805',true));
+ $('fav-vuelta').addEventListener('click',()=>applyPair('71801','78710',true));
+ selectQuick(2);
+ try{const response=await loadCatalog(null);catalog=response;stationMap=new Map(response.stations.map(s=>[s.id,s]));wirePicker('origin','from');wirePicker('dest','to');
+  const available=response.lines.filter(x=>x.present);$('network-tag').textContent=`${available.length} líneas · ${response.stations.length} estaciones`;
+  renderOfficialAudit(response);
+  const absent=response.lines.filter(x=>!x.present).map(x=>x.id);
+  const unchecked=response.official_reference?.lines?.filter(x=>x.status==='pendiente_contraste').length||0;
+  const generated=Date.parse(response.generated_at||'');
+  const staleGTFS=!Number.isFinite(generated)||Date.now()-generated>48*3600*1000;
+  const coverageText=absent.length?`Cobertura GTFS parcial: sin horarios identificados de ${absent.join(', ')}.`:`${unchecked} líneas con puntos de referencia pendientes de cotejar.`;
+  $('catalog-message').textContent=(staleGTFS?'ATENCIÓN: el horario GTFS lleva más de 48 h sin actualizarse. ':'GTFS actualizado '+String(response.generated_at||'desconocido').slice(0,10)+'. ')+coverageText+' Consulta «Catálogo oficial».';
+  let pair=null;try{pair=JSON.parse(localStorage.getItem('mirodalies-v2-pair')||'null');}catch{}
+  if(pair&&stationMap.has(pair.from)&&stationMap.has(pair.to))applyPair(pair.from,pair.to);
+  else if(stationMap.has('78710')&&stationMap.has('78805'))applyPair('78710','78805');
+  else {selection={from:'',to:''};$('origin-input').value='';$('dest-input').value='';}
+  setHealth(staleGTFS||absent.length?'partial':'good',staleGTFS?'Horario desactualizado':absent.length?'Cobertura parcial':'Red disponible');
+  if(selection.from&&selection.to)await search();
+ }catch(e){$('catalog-message').textContent='No se ha podido cargar la red oficial V2. Ejecuta la tarea GTFS en GitHub Actions.';setHealth('bad','Sin catálogo');
+  $('status').className='notice bad';$('status').textContent='Falta data/v2/catalog.json o no es accesible. La V2 no mostrará trenes de otras líneas como sustitutos.';
+  $('network-tag').textContent='Red no disponible';}
+ document.addEventListener('visibilitychange',()=>{if(!document.hidden&&catalog&&selection.from&&selection.to)void search();});
+ setInterval(()=>{if(!document.hidden&&catalog&&selection.from&&selection.to&&!isBusy&&madridDate()===$('trip-date').value)void search();},CONFIG.refreshMs);
  if('serviceWorker'in navigator&&location.protocol==='https:')navigator.serviceWorker.register('./sw.js').catch(()=>{});
- void refresh();
 }
 init();

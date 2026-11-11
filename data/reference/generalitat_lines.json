@@ -1,0 +1,491 @@
+{
+  "schema": 1,
+  "reference": "Generalitat de Catalunya · Rodalies de Catalunya · dades de les línies",
+  "source_index": "https://rodalies.gencat.cat/es/linies_estacions_i_trens/index.html",
+  "source_barcelona": "https://rodalies.gencat.cat/es/sobre-rodalies/linies-i-estacions/servei_rodalia_barcelona/",
+  "source_regionals": "https://rodalies.gencat.cat/es/sobre-rodalies/linies-i-estacions/servei_regionals/",
+  "note": "Los puntos de control NO son un listado exhaustivo de estaciones ni un patrón obligatorio de cada tren. Pueden existir variaciones por obras o servicios parciales. No se utilizan para añadir trenes. Estaciones con código ADIF verificado se contrastan por código en primer lugar; los alias se usan para búsqueda y auditoría, nunca para fusionar estaciones distintas.",
+  "lines": [
+    {
+      "id": "R1",
+      "area": "Barcelona",
+      "corridor": "Molins de Rei – Maçanet-Massanes",
+      "url": "https://rodalies.gencat.cat/es/sobre-rodalies/linies-i-estacions/servei_rodalia_barcelona/r1/",
+      "checkpoints": [
+        {
+          "name": "Molins de Rei",
+          "aliases": []
+        },
+        {
+          "name": "Mataró",
+          "aliases": []
+        },
+        {
+          "name": "Maçanet-Massanes",
+          "aliases": [
+            "Maçanet Massanes",
+            "Maçanet-Massanes"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R2",
+      "area": "Barcelona",
+      "corridor": "Castelldefels – Granollers Centre",
+      "url": "https://rodalies.gencat.cat/es/sobre-rodalies/linies-i-estacions/servei_rodalia_barcelona/r2/",
+      "checkpoints": [
+        {
+          "name": "Castelldefels",
+          "aliases": []
+        },
+        {
+          "name": "Granollers Centre",
+          "aliases": []
+        }
+      ]
+    },
+    {
+      "id": "R2N",
+      "area": "Barcelona",
+      "corridor": "Aeroport – Maçanet-Massanes",
+      "url": "https://rodalies.gencat.cat/es/sobre-rodalies/linies-i-estacions/servei_rodalia_barcelona/r2n/",
+      "checkpoints": [
+        {
+          "name": "Aeroport",
+          "aliases": [
+            "Aeroport",
+            "Aeroport T2",
+            "Aeroport de Barcelona"
+          ]
+        },
+        {
+          "name": "Granollers Centre",
+          "aliases": []
+        },
+        {
+          "name": "Maçanet-Massanes",
+          "aliases": [
+            "Maçanet Massanes",
+            "Maçanet-Massanes"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R2S",
+      "area": "Barcelona",
+      "corridor": "Barcelona-Estació de França – Sant Vicenç de Calders",
+      "url": "https://rodalies.gencat.cat/es/sobre-rodalies/linies-i-estacions/servei_rodalia_barcelona/r2s/",
+      "checkpoints": [
+        {
+          "name": "Barcelona-Estació de França",
+          "aliases": [
+            "Barcelona Estació de França",
+            "Estació de França",
+            "Barcelona Estacio de Francia"
+          ],
+          "adif_code": "79400"
+        },
+        {
+          "name": "Vilanova i la Geltrú",
+          "aliases": []
+        },
+        {
+          "name": "Sant Vicenç de Calders",
+          "aliases": [
+            "Sant Vicenç de Calders",
+            "St. Vicenç de Calders"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R3",
+      "area": "Barcelona",
+      "corridor": "L’Hospitalet de Llobregat – Puigcerdà",
+      "url": "https://rodalies.gencat.cat/es/sobre-rodalies/linies-i-estacions/servei_rodalia_barcelona/r3/",
+      "checkpoints": [
+        {
+          "name": "L'Hospitalet de Llobregat",
+          "aliases": [
+            "L Hospitalet de Llobregat",
+            "Hospitalet de Llobregat"
+          ]
+        },
+        {
+          "name": "Vic",
+          "aliases": []
+        },
+        {
+          "name": "Puigcerdà",
+          "aliases": []
+        }
+      ]
+    },
+    {
+      "id": "R4",
+      "area": "Barcelona",
+      "corridor": "Sant Vicenç de Calders – Manresa",
+      "url": "https://rodalies.gencat.cat/es/sobre-rodalies/linies-i-estacions/servei_rodalia_barcelona/r4/",
+      "checkpoints": [
+        {
+          "name": "Manresa",
+          "aliases": []
+        },
+        {
+          "name": "Terrassa Est",
+          "aliases": [],
+          "adif_code": "78710"
+        },
+        {
+          "name": "Barcelona-Plaça de Catalunya",
+          "aliases": [
+            "Barcelona Plaça Catalunya",
+            "Barcelona Pl. Catalunya",
+            "Plaça de Catalunya",
+            "Barcelona-Pl. Catalunya"
+          ],
+          "adif_code": "78805"
+        },
+        {
+          "name": "Barcelona-Sants",
+          "aliases": [
+            "Barcelona Sants",
+            "Sants"
+          ],
+          "adif_code": "71801"
+        },
+        {
+          "name": "Vilafranca del Penedès",
+          "aliases": []
+        },
+        {
+          "name": "Sant Vicenç de Calders",
+          "aliases": [
+            "Sant Vicenç de Calders",
+            "St. Vicenç de Calders"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R7",
+      "area": "Barcelona",
+      "corridor": "Barcelona-Fabra i Puig – Cerdanyola Universitat",
+      "url": "https://rodalies.gencat.cat/es/sobre-rodalies/linies-i-estacions/servei_rodalia_barcelona/r7/",
+      "checkpoints": [
+        {
+          "name": "Barcelona-Fabra i Puig",
+          "aliases": [
+            "Sant Andreu Arenal",
+            "Fabra i Puig"
+          ],
+          "adif_code": "78802"
+        },
+        {
+          "name": "Cerdanyola Universitat",
+          "aliases": [],
+          "adif_code": "72503"
+        }
+      ]
+    },
+    {
+      "id": "R8",
+      "area": "Barcelona",
+      "corridor": "Martorell – Granollers Centre",
+      "url": "https://rodalies.gencat.cat/es/sobre-rodalies/linies-i-estacions/servei_rodalia_barcelona/r8/",
+      "checkpoints": [
+        {
+          "name": "Martorell Central",
+          "aliases": [
+            "Martorell",
+            "Martorell Central"
+          ],
+          "adif_code": "72209"
+        },
+        {
+          "name": "Cerdanyola Universitat",
+          "aliases": [],
+          "adif_code": "72503"
+        },
+        {
+          "name": "Granollers Centre",
+          "aliases": []
+        }
+      ]
+    },
+    {
+      "id": "RG1",
+      "area": "Girona",
+      "corridor": "L’Hospitalet de Llobregat – Figueres/Portbou",
+      "url": "https://rodalies.gencat.cat/es/sobre-rodalies/linies-i-estacions/servei_regionals/rg1/",
+      "checkpoints": [
+        {
+          "name": "L'Hospitalet de Llobregat",
+          "aliases": [
+            "L Hospitalet de Llobregat",
+            "Hospitalet de Llobregat"
+          ]
+        },
+        {
+          "name": "Mataró",
+          "aliases": []
+        },
+        {
+          "name": "Girona",
+          "aliases": []
+        },
+        {
+          "name": "Figueres",
+          "aliases": []
+        }
+      ]
+    },
+    {
+      "id": "RT1",
+      "area": "Camp de Tarragona",
+      "corridor": "Tarragona – Reus",
+      "url": "https://rodalies.gencat.cat/es/sobre-rodalies/linies-i-estacions/servei_regionals/rt1/",
+      "checkpoints": [
+        {
+          "name": "Tarragona",
+          "aliases": []
+        },
+        {
+          "name": "Reus",
+          "aliases": []
+        }
+      ]
+    },
+    {
+      "id": "RT2",
+      "area": "Camp de Tarragona",
+      "corridor": "L’Arboç – L’Hospitalet de l’Infant",
+      "url": "https://rodalies.gencat.cat/es/sobre-rodalies/linies-i-estacions/servei_regionals/rt2/",
+      "checkpoints": [
+        {
+          "name": "L'Arboç",
+          "aliases": [
+            "Arboç",
+            "L’Arboç"
+          ]
+        },
+        {
+          "name": "L'Hospitalet de l'Infant",
+          "aliases": []
+        }
+      ]
+    },
+    {
+      "id": "RL3",
+      "area": "Lleida",
+      "corridor": "Lleida-Pirineus – Cervera",
+      "url": "https://rodalies.gencat.cat/es/sobre-rodalies/linies-i-estacions/servei_regionals/linia-rl3/",
+      "checkpoints": [
+        {
+          "name": "Lleida-Pirineus",
+          "aliases": [
+            "Lleida Pirineus",
+            "Lleida"
+          ],
+          "adif_code": "78400"
+        },
+        {
+          "name": "Cervera",
+          "aliases": []
+        }
+      ]
+    },
+    {
+      "id": "RL4",
+      "area": "Lleida",
+      "corridor": "Lleida-Pirineus – Terrassa Estació del Nord",
+      "url": "https://rodalies.gencat.cat/es/sobre-rodalies/linies-i-estacions/servei_regionals/linea-rl4/",
+      "checkpoints": [
+        {
+          "name": "Lleida-Pirineus",
+          "aliases": [
+            "Lleida Pirineus",
+            "Lleida"
+          ],
+          "adif_code": "78400"
+        },
+        {
+          "name": "Terrassa Estació del Nord",
+          "aliases": [
+            "Terrassa Estació del Nord",
+            "Terrassa Nord"
+          ],
+          "adif_code": "78700"
+        }
+      ]
+    },
+    {
+      "id": "R11",
+      "area": "Regionals",
+      "corridor": "Barcelona-Sants – Portbou",
+      "url": "https://rodalies.gencat.cat/es/sobre-rodalies/linies-i-estacions/servei_regionals/r11/",
+      "checkpoints": [
+        {
+          "name": "Barcelona-Sants",
+          "aliases": [
+            "Barcelona Sants",
+            "Sants"
+          ],
+          "adif_code": "71801"
+        },
+        {
+          "name": "Girona",
+          "aliases": []
+        },
+        {
+          "name": "Portbou",
+          "aliases": []
+        }
+      ]
+    },
+    {
+      "id": "R13",
+      "area": "Regionals",
+      "corridor": "Barcelona-Estació de França – Lleida por Valls",
+      "url": "https://rodalies.gencat.cat/es/sobre-rodalies/linies-i-estacions/servei_regionals/r13/",
+      "checkpoints": [
+        {
+          "name": "Barcelona-Estació de França",
+          "aliases": [
+            "Barcelona Estació de França",
+            "Estació de França",
+            "Barcelona Estacio de Francia"
+          ],
+          "adif_code": "79400"
+        },
+        {
+          "name": "Valls",
+          "aliases": []
+        },
+        {
+          "name": "Lleida-Pirineus",
+          "aliases": [
+            "Lleida Pirineus",
+            "Lleida"
+          ],
+          "adif_code": "78400"
+        }
+      ]
+    },
+    {
+      "id": "R14",
+      "area": "Regionals",
+      "corridor": "Barcelona-Estació de França – Lleida por Tarragona y Reus",
+      "url": "https://rodalies.gencat.cat/es/sobre-rodalies/linies-i-estacions/servei_regionals/r14/",
+      "checkpoints": [
+        {
+          "name": "Barcelona-Estació de França",
+          "aliases": [
+            "Barcelona Estació de França",
+            "Estació de França",
+            "Barcelona Estacio de Francia"
+          ],
+          "adif_code": "79400"
+        },
+        {
+          "name": "Tarragona",
+          "aliases": []
+        },
+        {
+          "name": "Reus",
+          "aliases": []
+        },
+        {
+          "name": "Lleida-Pirineus",
+          "aliases": [
+            "Lleida Pirineus",
+            "Lleida"
+          ],
+          "adif_code": "78400"
+        }
+      ]
+    },
+    {
+      "id": "R15",
+      "area": "Regionals",
+      "corridor": "Barcelona-Estació de França – Riba-roja d’Ebre",
+      "url": "https://rodalies.gencat.cat/es/sobre-rodalies/linies-i-estacions/servei_regionals/r15/",
+      "checkpoints": [
+        {
+          "name": "Barcelona-Estació de França",
+          "aliases": [
+            "Barcelona Estació de França",
+            "Estació de França",
+            "Barcelona Estacio de Francia"
+          ],
+          "adif_code": "79400"
+        },
+        {
+          "name": "Reus",
+          "aliases": []
+        },
+        {
+          "name": "Riba-roja d’Ebre",
+          "aliases": [
+            "Riba-roja d'Ebre",
+            "Riba-roja de Ebro"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R16",
+      "area": "Regionals",
+      "corridor": "Barcelona-Estació de França – Tortosa/Ulldecona",
+      "url": "https://rodalies.gencat.cat/es/sobre-rodalies/linies-i-estacions/servei_regionals/r16/",
+      "checkpoints": [
+        {
+          "name": "Barcelona-Estació de França",
+          "aliases": [
+            "Barcelona Estació de França",
+            "Estació de França",
+            "Barcelona Estacio de Francia"
+          ],
+          "adif_code": "79400"
+        },
+        {
+          "name": "Tarragona",
+          "aliases": []
+        },
+        {
+          "name": "Tortosa",
+          "aliases": []
+        }
+      ]
+    },
+    {
+      "id": "R17",
+      "area": "Regionals",
+      "corridor": "Barcelona-Estació de França – Salou-Port Aventura",
+      "url": "https://rodalies.gencat.cat/es/sobre-rodalies/linies-i-estacions/servei_regionals/linia-r17/",
+      "checkpoints": [
+        {
+          "name": "Barcelona-Estació de França",
+          "aliases": [
+            "Barcelona Estació de França",
+            "Estació de França",
+            "Barcelona Estacio de Francia"
+          ],
+          "adif_code": "79400"
+        },
+        {
+          "name": "Salou-Port Aventura",
+          "aliases": [
+            "Salou - Port Aventura",
+            "Salou-PortAventura",
+            "Port Aventura"
+          ],
+          "adif_code": "65411"
+        }
+      ]
+    }
+  ],
+  "station_name_reference": "https://boe.es/diario_boe/txt.php?id=BOE-A-2023-4789"
+}

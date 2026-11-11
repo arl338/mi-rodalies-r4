@@ -1,36 +1,74 @@
-# Mi Rodalies R4 · V1.5 auditada
+# Mi Rodalies · Versión 2.0.3 (auditada)
 
-## Ámbito
+PWA HTML5 de coste cero para consultar **trenes de Rodalies Renfe en Catalunya** por estación de origen/destino y fecha. No incluye AVE, Avant ni larga distancia. Mantiene dos favoritos: Terrassa Est → Barcelona-Plaça de Catalunya y Barcelona-Sants → Terrassa Est.
 
-- Ida: Terrassa Est (78710) → Barcelona-Plaça de Catalunya (78805).
-- Vuelta: Barcelona-Sants (71801) → Terrassa Est (78710).
-- Solo servicios con ambas paradas acreditadas en el GTFS de Renfe; los paneles generales no añaden trenes ajenos.
-- Consultas de hoy, intervalo «Desde/Hasta» (mismo día), botones 2/4/8 h.
+## Alcance y precisión
 
-## Fuentes y criterio de evidencia
+- Incluye las 19 líneas publicadas en el catálogo de Rodalies de Catalunya: R1, R2, R2 Nord, R2 Sud, R3, R4, R7, R8, RG1, RT1, RT2, RL3, RL4, R11, R13, R14, R15, R16 y R17.
+- Las **líneas visibles con horarios** dependen de que las fuentes oficiales GTFS las identifiquen explícitamente. `catalog.json` declara `present:false` para las no cubiertas: nunca se inventan trenes ni se incluyen LD/AVE como sustitución.
+- Se buscan servicios directos o con **un único transbordo**. Los transbordos disponen de al menos ocho minutos de margen teórico; no se confirma que la conexión vaya a realizarse.
+- Datos base: Renfe GTFS Cercanías y, únicamente para líneas explícitamente identificadas, GTFS de Media Distancia; programación actualizada a diario mediante GitHub Actions.
+- Contraste: posición del tren, tablero del origen, cancelaciones y avisos publicados mediante Valfiguer y RadarDeTrenes. Las fuentes dependientes de Renfe no son observaciones independientes. Si se identifican solo por el mismo número sin itinerario/trip_id no se presentan como confirmación de circulación.
+- Para fechas futuras se muestran **solo horarios programados**. El servicio no se garantiza hasta que haya evidencia operativa; la información oficial del andén prevalece.
+- El catálogo se construye con las estaciones de los GTFS que pertenecen a rutas Rodalies identificables; algunas estaciones pueden aparecer sin servicios programados para una fecha concreta. El catálogo y los servicios se validan por separado.
+- La cobertura estrictamente catalana se basa en coordenadas del GTFS (ámbito geográfico aproximado) y exclusión explícita de estaciones fronterizas francesas identificadas. No sustituye a un censo geográfico oficial de límites administrativos.
 
-1. **Renfe GTFS estático (principal):** catálogo de salidas *programadas* del día. Lo procesa `scripts/build_gtfs.py`; el archivo resultante `data/schedule-r4.json` NO se incluye en esta actualización para conservar la descarga automática de GitHub.
-2. **Valfiguer (complementaria):** tablero de la estación de origen, posiciones, cancelaciones, incidencias, estado de feeds y puntualidad agregada.
-3. **RadarDeTrenes (complementaria):** tablero ADIF/Renfe de origen y posiciones distribuidas.
+## Instalación desde el repositorio existente
 
-**Reglas:** ningún tren entra en la lista solo por aparecer en Sants u otro tablero; se exige itinerario GTFS origen → destino. Los tableros solo se correlacionan si línea R4, mismo número de tren y salida programada de origen con diferencia ≤2 min. Las posiciones recientes requieren R4, identificación y ventana temporal plausible. Las estimaciones sin sello temporal reciente no reemplazan la hora programada. No se suman proveedores que redistribuyen la misma fuente como confirmaciones independientes.
+1. Descarga el ZIP y descomprímelo. Sube a la raíz de `arl338/mi-rodalies-r4`: `index.html`, `app.js`, `engine.js`, `styles.css`, `sw.js`, `manifest.webmanifest`, los dos iconos y `README.md`.
+2. Sube a `scripts/` el archivo nuevo `build_network.py` (mantener `build_gtfs.py` si quieres conservar el histórico).
+3. Sustituye el contenido de `.github/workflows/horario-renfe.yml` por el archivo del ZIP. **No subas la carpeta como `.github` a otra subcarpeta.**
+4. En GitHub → **Actions** → **Actualizar red Rodalies · GTFS + validación Generalitat V2.0.3** → **Run workflow** (rama `main`). Comprueba que aparezcan los archivos `data/v2/catalog.json` y `data/v2/AAAA-MM-DD.json`. El trabajo publica un catálogo nuevo cada día.
+5. GitHub Pages sigue apuntando a `main` / `(root)` y conserva la dirección `https://arl338.github.io/mi-rodalies-r4/`. Abre la aplicación y verifica la etiqueta **2.0**. Actualiza Chrome si sigue apareciendo la caché de la V1.5.
 
-La lista puede estar incompleta si el GTFS no incorpora servicios extraordinarios; no se inventan recorridos. Una cancelación publicada por Renfe puede carecer de identificadores compatibles con GTFS y, por prudencia, no se atribuye a otro tren.
+## Limitaciones
 
-## Publicación en GitHub (sin cambiar Pages ni la automatización)
+Sin hardware ni servicios de pago; GitHub Pages y Actions sujetos a sus límites gratuitos. No se han probado desde esta máquina los endpoints reales con Chrome Android ni la descarga completa de ambos ZIP oficiales (entorno sin salida de red); se aportan pruebas sintéticas y registro de cobertura, **no garantía de compatibilidad con las 19 líneas hasta ejecutar el workflow en GitHub**. Las estaciones y los horarios están disponibles en el catálogo solo cuando el GTFS oficial los suministra. Las incidencias graves pueden no quedar reflejadas a tiempo en las fuentes.
 
-El ZIP contiene los 8 archivos de la raíz y `scripts/build_gtfs.py`. **No borres las carpetas** `.github` ni `data`, ni el archivo `data/schedule-r4.json` generado por la automatización.
+## Pruebas locales
 
-1. Descomprime el ZIP en el ordenador.
-2. En tu repositorio `arl338/mi-rodalies-r4` pulsa **Add file → Upload files**; sube a la raíz `index.html`, `app.js`, `styles.css`, `sw.js`, `manifest.webmanifest`, `icon-192.png`, `icon-512.png` y `README.md`. Confirma el reemplazo.
-3. En GitHub entra en la carpeta **scripts** → **Add file → Upload files** y sube `scripts/build_gtfs.py` desde la carpeta descomprimida (sin duplicar la carpeta `scripts`).
-4. Ejecuta una vez **Actions → Actualizar horario oficial Renfe GTFS → Run workflow**. Comprueba que crea `data/schedule-r4.json` y no falla.
-5. Comprueba que la web muestra **v1.5**; si persiste una versión anterior, actualiza Chrome y vuelve a abrir la PWA.
+`python -m unittest discover -s tests -v` y `node tests/test_engine.cjs` desde la raíz. Las pruebas de interfaz requieren Playwright y un servidor HTTP local. El historial de pruebas se documenta en `INFORME_VALIDACION_V2.md`.
 
-La PWA continúa disponible en https://arl338.github.io/mi-rodalies-r4/
+Datos: Renfe Data, CC BY 4.0; información redistribuida por Valfiguer y RadarDeTrenes. Proyecto no afiliado a Renfe ni Generalitat.
 
-## Auditoría y límites
 
-Las pruebas reproducibles están documentadas en el informe `Informe_auditoria_Mi_Rodalies_V1_5.md` entregado por separado. Se han ejecutado pruebas de interfaz móvil simulada (390, 360, 320 y 768 px), nueve escenarios de integración con respuestas ficticias, procesador GTFS con fichero de prueba y lectura del JSON aportado por el usuario.
+## Validación adicional con Rodalies de la Generalitat (V2.0.1)
 
-**No se ha validado aún la exactitud del paso real de trenes en estaciones ni el acceso real de todos los endpoints desde Android.** Es necesario comparar varias jornadas con monitores físicos. Las fuentes externas pueden fallar, cambiar su estructura o publicar datos incompletos.
+El archivo `data/reference/generalitat_lines.json` contiene las **19 líneas**
+referenciadas por Rodalies de Catalunya, sus enlaces oficiales y **54 puntos
+de control** de estaciones principales o terminales. Esta lista de control
+**no constituye un censo exhaustivo de paradas**.
+
+`build_network.py` verifica que las 19 etiquetas están definidas, contrasta
+los puntos de control de cada línea con los códigos y nombres GTFS de Renfe
+y guarda en `data/v2/catalog.json` la sección `official_reference`:
+
+- `controles_localizados`: puntos seleccionados presentes; no prueba la totalidad
+  de estaciones ni el servicio real de cada tren.
+- `pendiente_contraste`: hay controles sin coincidencia de nombre o cobertura;
+  puede deberse a variantes de denominación, obras o servicios parciales.
+- `sin_horarios_publicados`: el GTFS procesado no contiene servicios etiquetados
+  explícitamente con la línea para el periodo. No implica que la línea haya
+  dejado de existir ni que esté suspendida.
+
+Las referencias de la Generalitat no crean trenes nuevos ni eliminan paradas
+GTFS: **solo auditan** lo declarado por Renfe. El recorrido real de cada
+servicio sigue exigiendo coincidencia de origen y destino dentro de sus
+`stop_times` GTFS y aplicación posterior de evidencias operativas.
+
+Ejecución: `python scripts/build_network.py --days 14 --out data/v2`,
+o mediante el workflow de GitHub Actions incluido.
+
+## 2.0.2 — normalización de nombres y metodología visible
+
+Se incorpora data/reference/station_aliases.json (códigos verificados ADIF/BOE), validación por código y sugerencias no automáticas. Panel «Cómo calculamos tus horarios» en la PWA. La fuente principal de horarios sigue siendo Renfe GTFS y los feeds operativos solo corroboran servicios identificados.
+
+## 2.0.3 — auditoría de código y usabilidad
+
+- Normalización completa de tableros y posiciones documentados por Valfiguer/RadarDeTrenes, incluidas marcas Unix en milisegundos.
+- Coincidencia estricta con el tren GTFS y control de estimaciones contradictorias o desactualizadas.
+- Estado de consultas invalidado cuando cambia la selección; no se arrastran avisos del trayecto anterior.
+- Validación de franjas de madrugada y cambio horario en Europe/Madrid; caché de horarios renovada cada cinco minutos.
+- Fecha a ancho completo y horas más legibles en Android; controles táctiles ampliados.
+- La automatización comprueba el JavaScript y sus tests antes de descargar el GTFS. **Es imprescindible subir también `tests/` para que el workflow funcione.**
+- Informe reproducible: `INFORME_AUDITORIA_V2_0_3.md`.

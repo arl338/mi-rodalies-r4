@@ -1,0 +1,37 @@
+const assert=require('node:assert/strict');
+const E=require('../engine.js');
+function t(id,l,n,stops,day='2026-11-12'){return {id,l,n,day,s:stops.map(([code,a,d])=>[code,a,d])};}
+const start=1794459000; // synthetic UNIX seconds
+const r4=t('5115J77512R4','R4','77512',[['78710',start,start],['78700',start+300,start+300],['78805',start+2400,start+2400]]);
+const r2=t('X88888R2N','R2N','88888',[['71801',start+2900,start+2900],['78805',start+3500,start+3500]]);
+const other=t('AVE9999','AVE','9999',[['78710',start,start],['78805',start+500,start+500]]);
+const rail=t('M123R11','R11','11111',[['71801',start+2800,start+2800],['79101',start+6600,start+6600]]);
+assert.equal(E.direct([r4,r2,other],'78710','78805',start-1,start+7000).length,1);
+assert.equal(E.direct([r4,r2,other],'71801','78805',start,start+7000).length,1);
+assert.equal(E.direct([r4,r2,other],'78710','71801',start,start+7000).length,0);
+assert.equal(E.direct([r4,r2,other],'78710','78805',start+1,start+7000).length,0);
+const x=E.direct([r4],'78710','78805',start-1,start+600)[0];
+const sched=E.enrichJourney(x,[],[],[],start-400);assert.equal(sched.state,'scheduled');
+const badpos=E.normalizePositions({features:[{properties:{train_number:'77512',product:'R4',age_s:12}}]},'test',start);
+assert.equal(E.enrichJourney(x,[],badpos,[],start).state,'scheduled','Train number alone cannot certify a position');
+const livepos=E.normalizePositions({features:[{properties:{runs:[{trip_id:r4.id,day:r4.day,product:'R4',age_s:20}]}}]},'test',start);
+assert.equal(E.enrichJourney(x,[],livepos,[],start).state,'live');
+const stale=E.normalizePositions({features:[{properties:{runs:[{trip_id:r4.id,day:r4.day,age_s:900}]}}]},'test',start);
+assert.equal(E.enrichJourney(x,[],stale,[],start).state,'scheduled');
+const othercancel=[{trip:'OTHER',cancelled:true}];assert.equal(E.enrichJourney(x,[],[],othercancel,start).state,'scheduled');
+const exactcancel=[{trip:r4.id,day:r4.day,cancelled:true}];assert.equal(E.enrichJourney(x,[],[],exactcancel,start).state,'cancelled');
+assert.equal(E.enrichJourney(x,[],livepos,exactcancel,start).state,'conflict');
+const board=E.normalizeBoard({generated_ts:start, trains:[{trip_id:r4.id,train_number:'77512',planned_ts:start,estimated_ts:start+180,product:'R4'}]},'Val',start);
+assert.equal(E.enrichJourney(x,board,[],[],start).estimated,start+180);
+const oldBoard=E.normalizeBoard({generated_ts:start-999,trains:[{trip_id:r4.id,train_number:'77512',planned_ts:start,estimated_ts:start+180,product:'R4'}]},'Val',start);
+assert.equal(E.enrichJourney(x,oldBoard,[],[],start).estimated,null);
+const wrongBoard=E.normalizeBoard({generated_ts:start,trains:[{trip_id:'another',train_number:'77512',planned_ts:start+600,estimated_ts:start+680,product:'R4'}]},'Val',start);
+assert.equal(E.enrichJourney(x,wrongBoard,[],[],start).estimated,null);
+assert.equal(E.alertsForLines({alerts:[{text:'Incidencia R4',lines:[{line:'R4'}]},{text:'R1 aviso',lines:[{line:'R1'}]},{text:'AVE aviso'}]},new Set(['R4'])).length,1);
+const ta=t('T001','R4','77701',[['78710',start,start],['71801',start+1800,start+1800]]);
+const tb=t('T002','R2','77702',[['71801',start+2400,start+2400],['79999',start+3000,start+3000]]);
+const conn=E.transfers([ta,tb], '78710','79999',start-10,start+1800);
+assert.equal(conn.length,1);assert.equal(conn[0].wait,600);
+const tbBad=t('T003','R2','77703',[['71801',start+2000,start+2000],['79999',start+2900,start+2900]]);
+assert.equal(E.transfers([ta,tbBad], '78710','79999',start-10,start+1800).length,0);
+console.log('OK: 17 grupos de aserciones del motor (filtrado, transbordos, cancelaciones, posiciones y horarios)');

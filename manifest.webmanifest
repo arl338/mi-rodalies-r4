@@ -1,16 +1,1 @@
-{
-  "id": "./",
-  "name": "Mi Rodalies R4 · Monitor",
-  "short_name": "Mi Rodalies",
-  "description": "Monitor personal de Rodalies, con horarios, posiciones y contraste multifuente",
-  "start_url": "./",
-  "scope": "./",
-  "display": "standalone",
-  "background_color": "#f5f7fa",
-  "theme_color": "#f6f8fa",
-  "lang": "es",
-  "icons": [
-    {"src":"./icon-192.png","sizes":"192x192","type":"image/png","purpose":"any maskable"},
-    {"src":"./icon-512.png","sizes":"512x512","type":"image/png","purpose":"any maskable"}
-  ]
-}
+{"id":"./","name":"Mi Rodalies · Catalunya","short_name":"Mi Rodalies","description":"Horarios oficiales y comprobación multifuente de Rodalies de Catalunya","start_url":"./","scope":"./","display":"standalone","theme_color":"#f7f8fb","background_color":"#f7f8fb","lang":"es","icons":[{"src":"./icon-192.png","sizes":"192x192","type":"image/png","purpose":"any"},{"src":"./icon-512.png","sizes":"512x512","type":"image/png","purpose":"any"}]}
