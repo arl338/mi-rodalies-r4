@@ -8,7 +8,7 @@ Python 3.12+ standard library only. The output is static and publicly reusable
 under Renfe Data CC BY 4.0 with attribution.
 """
 from __future__ import annotations
-import argparse, csv, hashlib, io, json, re, sys, unicodedata, urllib.request, zipfile
+import argparse, csv, hashlib, io, json, re, sys, unicodedata, urllib.request, zipfile, traceback
 from collections import defaultdict, Counter
 from datetime import date, datetime, timedelta, time
 from pathlib import Path
@@ -43,18 +43,44 @@ def line_id(s):
     return s if s in LINES else None
 
 def infer_line(trip, route):
-    # Most Renfe commuter trip IDs have the route suffix: ...77512R4.
-    tid = str(trip.get('trip_id') or '')
-    designation=norm(' '.join([str(route.get('route_short_name') or ''),str(route.get('route_long_name') or '')]))
-    if re.search(r'\b(ave|avant|alvia|euromed|intercity|larga distancia|ld)\b',designation):return None
+    """Map public Rodalies line identifiers conservatively.
+
+    Renfe may publish the legacy C-designation inside the GTFS for Catalunya.
+    Those labels are accepted ONLY when route_id belongs to Catalunya's GTFS
+    nucleus 51. Otherwise C4 could mean Cercanias Madrid, Bilbao, etc.
+    """
+    tid = str(trip.get('trip_id') or '').strip()
+    rid = str(route.get('route_id') or trip.get('route_id') or '').strip()
+    short = str(route.get('route_short_name') or '').strip()
+    designation = norm(' '.join((short, str(route.get('route_long_name') or ''))))
+    if re.search(r'\b(ave|avant|alvia|euromed|intercity|larga distancia|ld)\b', designation):
+        return None
+    # Explicit public Rodalies label has priority. A numeric route id by itself
+    # is not a commercial line identifier and must never be interpreted as one.
+    explicit = line_id(short)
+    if explicit:
+        return explicit
+    # Public GTFS may contain "R4 Manresa - St Vicenc" in a descriptive field.
+    # Accept only an isolated initial line token, not R4 embedded in free text.
+    for value in (str(route.get('route_long_name') or ''),):
+        match = re.match(r'^\s*(R2\s*(?:NORD|SUD)|R(?:G1|T1|T2|L3|L4|1[134567]|[123478]))\b', value, flags=re.I)
+        if match and (label := line_id(match.group(1))):
+            return label
+    # The old Cercanias GTFS sometimes puts the public R4 label in trip_id.
     suffix = re.search(r'(R2N|R2S|RG1|RT1|RT2|RL3|RL4|R1[134567]|R[123478])$', tid, flags=re.I)
-    explicit = line_id(route.get('route_short_name'))
-    if explicit: return explicit
-    if suffix: return line_id(suffix.group(1))
-    # Route long_name only if it is precisely an identifiable line, not free text
-    # such as "Servicio regional a Barcelona". No inference from MD alone.
-    for value in (route.get('route_id'),trip.get('route_id')):
-        if (candidate:=line_id(value)): return candidate
+    if suffix:
+        return line_id(suffix.group(1))
+    for value in (rid, str(trip.get('route_id') or '')):
+        if (candidate := line_id(value)):
+            return candidate
+    # Legacy C-series labels can be ambiguous across Spain. GTFS nucleus 51
+    # identifies Rodalies Catalunya, confirmed independently via route_id.
+    if re.match(r'^51\d', rid):
+        legacy = norm(short).upper().replace(' ', '')
+        # C2 branches cannot safely be assigned to R2 Nord/Sud without a
+        # verified official line mapping, so leave branch-specific ambiguity.
+        legacy_map = {'C1':'R1', 'C2':'R2', 'C3':'R3', 'C4':'R4', 'C7':'R7', 'C8':'R8'}
+        return legacy_map.get(legacy)
     return None
 
 def txt(z,name):
@@ -208,14 +234,26 @@ def parse_archive(raw,source,dates):
     with zipfile.ZipFile(io.BytesIO(raw)) as z:
         routes={r.get('route_id'):r for r in load(z,'routes.txt')}
         trips=load(z,'trips.txt')
-        services=service_days(load_optional(z,'calendar.txt'),load_optional(z,'calendar_dates.txt'),dates)
+        calendar=load_optional(z,'calendar.txt')
+        exceptions=load_optional(z,'calendar_dates.txt')
+        services=service_days(calendar,exceptions,dates)
         selected={}; all_recognized={}
+        route_preview=[]
+        for rid,r in list(routes.items())[:7]:
+            route_preview.append(f"{rid!r}:{r.get('route_short_name','')!r}")
+        print(f"DIAGNOSTICO {source}: {len(routes)} rutas, {len(trips)} viajes, "
+              f"{len(calendar)} filas calendar, {len(exceptions)} excepciones, "
+              f"{sum(bool(v) for v in services.values())} service_id activos. "
+              f"Ejemplos de rutas: {route_preview}", flush=True)
         for t in trips:
             label=infer_line(t,routes.get(t.get('route_id'),{}))
             if label:
                 all_recognized[t['trip_id']]=label
                 if services.get(t.get('service_id')):
                     selected[t['trip_id']]=(t,label,services[t['service_id']])
+        print(f"DIAGNOSTICO {source}: {len(all_recognized)} viajes con línea identificada, "
+              f"{len(selected)} viajes activos en las fechas solicitadas, "
+              f"ejemplos de trip_id: {[t['trip_id'] for t in trips[:3]]}", flush=True)
         stops_raw=load(z,'stops.txt')
         stop_index={str(r.get('stop_id')):r for r in stops_raw if r.get('stop_id')}
         # Resolve platform -> parent station when the parent is present; avoid
@@ -245,6 +283,8 @@ def parse_archive(raw,source,dates):
                 try:seq=int(r.get('stop_sequence',0))
                 except ValueError:continue
                 by_trip[tid].append((seq,code,stop,a,d))
+        print(f"DIAGNOSTICO {source}: {len(by_trip)} viajes activos con paradas procesables, "
+              f"{len(catalog_candidates)} paradas candidatas", flush=True)
         for tid,stops in by_trip.items():
             if len(stops)<2:continue
             trip,label,days=selected[tid]
@@ -264,6 +304,7 @@ def parse_archive(raw,source,dates):
                                 'src':source,'day':day.isoformat(),'s':ss,
                                 'stations':{code:{'name':stop.get('stop_name','').strip(),
                                     'lat':stop.get('stop_lat',''),'lon':stop.get('stop_lon','')} for code,stop,_,_ in clean}})
+    print(f"DIAGNOSTICO {source}: {len(records)} instancias de tren generadas", flush=True)
     return records,catalog_candidates
 
 def dedupe(records):
@@ -291,8 +332,16 @@ def build(cer,md,output,days,base=None):
             for code,stop in candidates.items():
                 if code not in static_catalog:static_catalog[code]=stop
                 else:static_catalog[code]['lines'].update(stop['lines'])
-        except Exception as ex: errors.append(f'{source}: {ex}')
-    if not results:raise ValueError('No se han identificado servicios Rodalies con etiquetas explícitas; no publicar datos.')
+        except Exception as ex:
+            errors.append(f'{source}: {type(ex).__name__}: {ex}')
+            print(f"ERROR DE PARSEO {source}: {type(ex).__name__}: {ex}",file=sys.stderr,flush=True)
+            traceback.print_exc(file=sys.stderr)
+    if not results:
+        raise ValueError('No se han generado recorridos Rodalies. ' +
+                         ' ; '.join(errors) +
+                         '. Revisar las líneas DIAGNOSTICO del job: rutas, '
+                         'viajes reconocidos, calendario, paradas y errores de parseo. ' +
+                         'No se publican datos ficticios.')
     rows=dedupe(results)
     stations={};by_day=defaultdict(list);by_line=Counter()
     for code,stop in static_catalog.items():
