@@ -130,6 +130,44 @@ function transfers(trains,from,to,start,end,limit=32){
  return [...best.values()].sort((a,b)=>a.depart-b.depart||a.arrive-b.arrive).slice(0,limit);
 }
 
+
+/**
+ * Source-labelled schedule-only fallback. Trenalia reuses official Renfe data
+ * but is an independent aggregator, NOT a separately verified train identity.
+ * Its timetable endpoint supplies origin/destination times and commercial
+ * line, but may omit the train number and intermediate stops.
+ */
+function normalizeTrenaliaTimetable(payload,from,to,day,requestedLine){
+ if(!payload||payload.date!==day||!Array.isArray(payload.trains))return [];
+ if(!/^[0-9]{5}$/.test(String(from))||!/^[0-9]{5}$/.test(String(to))||from===to)return [];
+ const total=payload.total;
+ if(total!==undefined&&(!Number.isInteger(total)||total<payload.trains.length))return [];
+ const chosen=String(requestedLine||'');
+ const out=[],seen=new Set();
+ for(const r of payload.trains){
+  if(!r||typeof r!=='object')continue;
+  if(r.feed!=='cercanias'||r.operator!=='Renfe Cercanías'||r.train!==null)continue;
+  const label=String(r.product||'');
+  const match=/^Cercan[ií]as\s+(R2N|R2S|RG1|RT1|RT2|RL3|RL4|R1[134567]|R[123478])$/i.exec(label);
+  if(!match)continue;
+  const lid=line(match[1]);if(!lid||chosen!=='ALL'&&lid!==chosen)continue;
+  const startMs=n(r.depMs),endMs=n(r.arrMs);
+  if(startMs===null||endMs===null||!Number.isSafeInteger(startMs)||!Number.isSafeInteger(endMs))continue;
+  const dep=Math.floor(startMs/1000),arr=Math.floor(endMs/1000);
+  if(dep<=0||arr<=dep||arr-dep>6*3600)continue;
+  if(typeof r.stops!=='number'||!Number.isInteger(r.stops)||r.stops<2)continue;
+  // Reject a departure whose local service day differs from the requested day.
+  const d=new Date(startMs);
+  const parts=new Intl.DateTimeFormat('en-CA',{timeZone:'Europe/Madrid',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(d);
+  const values=Object.fromEntries(parts.map(x=>[x.type,x.value]));
+  if(values.year+'-'+values.month+'-'+values.day!==day)continue;
+  const id='trenalia:'+lid+':'+from+':'+to+':'+day+':'+dep;
+  if(seen.has(id))continue;seen.add(id);
+  out.push({id,n:'',l:lid,day,src:'trenalia-schedule-only',
+    dest:to,s:[[from,dep,dep],[to,arr,arr]],intermediate_stop_count:r.stops-2});
+ }
+ return out.sort((a,b)=>a.s[0][2]-b.s[0][2]);
+}
 function serviceIds(t){return [t.id,...(t.alternative_trip_ids||[])].filter(Boolean).map(String);}
 function matchExact(leg,item){
  const t=leg.t;
@@ -218,5 +256,5 @@ function alertsForLines(obj,lines,stationScoped=false){
  return found.slice(0,12);
 }
 
-return {LINES,norm,line,scopedLine,catalanNucleus,n,ts,rows,normalizeBoard,normalizePositions,normalizeCancels,direct,transfers,matchExact,matchPosition,enrichLeg,enrichJourney,alertsForLines};
+return {LINES,norm,line,scopedLine,catalanNucleus,n,ts,rows,normalizeBoard,normalizePositions,normalizeCancels,direct,transfers,normalizeTrenaliaTimetable,matchExact,matchPosition,enrichLeg,enrichJourney,alertsForLines};
 });
