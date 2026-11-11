@@ -1,9 +1,88 @@
-<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#c00000"><meta name="description" content="R4 con horarios por franja y contraste transparente de fuentes abiertas."><link rel="manifest" href="./manifest.webmanifest"><link rel="icon" type="image/png" href="./icon-192.png"><link rel="stylesheet" href="./styles.css"><title>Mi Rodalies · R4</title></head><body><main class="shell"><header class="head"><div class="brand"><div class="logo">R4</div><div><h1>Mi Rodalies</h1><p>Trayectos · V1.1 contraste</p></div></div><div class="live" id="connection">Iniciando…</div></header>
-<nav class="tabs" aria-label="Trayecto"><button id="tab-ida" class="selected" aria-pressed="true">↘ Ida</button><button id="tab-vuelta" aria-pressed="false">↖ Vuelta</button></nav>
-<section class="route"><div><small>ORIGEN</small><strong id="origin">Terrassa Est</strong></div><div class="arrow">↓</div><div><small>DESTINO</small><strong id="destination">Barcelona-Plaça de Catalunya</strong></div></section>
-<section class="panel"><div class="sectionhead"><h2>Franja horaria de hoy</h2><span class="tag">Hora de salida</span></div><div class="time-filter"><label>Desde <input id="from-time" type="time" step="900"></label><label>Hasta <input id="to-time" type="time" step="900"></label></div><div class="shortcuts"><button data-range="2">Próx. 2 h</button><button data-range="4">Próx. 4 h</button><button data-range="8">Próx. 8 h</button></div><p class="hint">Se filtra por hora programada de salida. La API podría no ofrecer todas las circulaciones de la franja, especialmente las lejanas.</p></section>
-<section class="panel"><div class="sectionhead"><h2>Trenes en la franja</h2><button id="refresh" class="refresh">↻ Actualizar</button></div><div id="status" role="status" class="notice">Consultando…</div><div id="trains" class="trainlist" aria-live="polite"></div><p class="updated" id="updated">Sin actualizaciones todavía</p></section>
-<section class="panel"><div class="sectionhead"><h2>Contraste de fuentes</h2><span class="tag">Transparencia</span></div><div id="sources" class="sources">Consultando las fuentes…</div><p class="hint">Coincidir entre dos servicios que reutilizan Renfe NO constituye una segunda observación independiente. Un dato sin posición reciente no se considera confirmado.</p></section>
-<section class="panel"><div class="sectionhead"><h2>Incidencias R4</h2><span class="tag">Avisos contrastados</span></div><div id="alerts" class="muted">Cargando avisos…</div></section>
-<section class="panel small"><h2>Cómo leer los estados</h2><div class="legend"><span class="dot green"></span><span><b>Posición reciente:</b> se ha identificado telemetría reciente del tren. No garantiza la hora de paso.</span></div><div class="legend"><span class="dot amber"></span><span><b>Horario / sin confirmar:</b> tren planificado sin observación reciente suficiente.</span></div><div class="legend"><span class="dot red"></span><span><b>Cancelado o discrepancia:</b> hay una cancelación declarada o datos incompatibles que requieren comprobación.</span></div><div class="legend"><span class="dot grey"></span><span><b>Sin información:</b> la ausencia de datos no implica supresión.</span></div></section>
-<footer><p>Fuentes: <a href="https://trenes.valfiguer.com/desarrolladores" target="_blank" rel="noopener">Valfiguer</a>, <a href="https://mobilitatpenedes.cat/dades" target="_blank" rel="noopener">Mobilitat Penedès</a> y Renfe Data (CC BY 4.0). El acceso a las fuentes complementarias puede fallar por CORS o por cobertura. No es un servicio oficial.</p><p>Actualización automática: 30 s, solo con la página visible. Esta versión no usa servidor propio.</p></footer></main><script src="./app.js" defer></script></body></html>
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f6f8fa">
+  <meta name="description" content="Mi Rodalies: consulta multifuente de trenes en la R4, horarios, retrasos e incidencias.">
+  <meta name="color-scheme" content="light">
+  <link rel="icon" href="./icon-192.png">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="stylesheet" href="./styles.css?v=13">
+  <title>Mi Rodalies · R4</title>
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-symbol" aria-hidden="true">R4</div>
+        <div>
+          <h1>Mi Rodalies</h1>
+          <p class="version">Monitor personal <span class="version-number">v1.3</span></p>
+        </div>
+      </div>
+      <span id="connection" class="connection waiting" aria-live="polite"><span class="status-dot"></span>Sin consultar</span>
+    </header>
+
+    <nav class="journeys" aria-label="Trayecto habitual">
+      <button class="journey-btn" type="button" id="tab-ida" aria-pressed="true"><span class="journey-arrow" aria-hidden="true">↗</span><span>Ida</span><small>A Barcelona</small></button>
+      <button class="journey-btn" type="button" id="tab-vuelta" aria-pressed="false"><span class="journey-arrow" aria-hidden="true">↙</span><span>Vuelta</span><small>A Terrassa</small></button>
+    </nav>
+
+    <section class="journey-card" aria-label="Recorrido seleccionado">
+      <div class="journey-stop"><span class="stop-marker start" aria-hidden="true"></span><div><span class="eyebrow">ORIGEN</span><strong id="origin">Terrassa Est</strong></div></div>
+      <div class="journey-connector" aria-hidden="true"></div>
+      <div class="journey-stop"><span class="stop-marker finish" aria-hidden="true"></span><div><span class="eyebrow">DESTINO</span><strong id="destination">Barcelona-Plaça de Catalunya</strong></div></div>
+    </section>
+
+    <section class="panel search-panel" aria-labelledby="search-heading">
+      <div class="section-top"><h2 id="search-heading">¿Cuándo quieres viajar?</h2><span class="today-tag">HOY <span id="today-label"></span></span></div>
+      <div class="time-fields">
+        <label class="time-field" for="from-time"><span>Desde</span><input id="from-time" type="time" required step="300"></label>
+        <label class="time-field" for="to-time"><span>Hasta</span><input id="to-time" type="time" required step="300"></label>
+      </div>
+      <div class="range-options" aria-label="Franja rápida">
+        <button class="range-btn" data-range="2" type="button" aria-pressed="false">2 horas</button>
+        <button class="range-btn" data-range="4" type="button" aria-pressed="false">4 horas</button>
+        <button class="range-btn" data-range="8" type="button" aria-pressed="false">8 horas</button>
+      </div>
+      <button id="apply" type="button" class="primary-btn"><span aria-hidden="true">⌕</span> Ver trenes de esta franja</button>
+      <p class="help-text" id="range-info">Las franjas largas requieren horario de día completo. El horario programado no confirma circulación.</p><p id="schedule-status" class="schedule-status" role="status">Comprobando la vigencia del horario oficial de Renfe…</p>
+    </section>
+
+    <section class="panel results-panel" aria-labelledby="results-heading">
+      <div class="section-top results-header"><div><h2 id="results-heading">Próximos trenes</h2><p id="result-count" class="subtitle-line">Sin consultar</p></div>
+        <button id="refresh" type="button" class="refresh-btn"><span class="refresh-icon" aria-hidden="true">↻</span><span id="refresh-label">Actualizar</span></button></div>
+      <div class="fetch-progress" id="fetch-progress" aria-hidden="true"><span></span></div>
+      <div id="status" class="notice neutral" role="status" aria-live="polite">Consultando las fuentes disponibles…</div>
+      <div id="trains" class="train-list" aria-live="polite"></div>
+      <details id="unverified-panel" class="unverified-group" hidden><summary><span id="unverified-count">Posibles trenes</span><small>Destino sin verificar</small></summary><div id="unverified-trains" class="train-list tentative-list"></div></details>
+      <p id="updated" class="updated">Sin datos consultados todavía.</p>
+    </section>
+
+    <details class="panel source-panel" id="sources-panel"><summary>Estado de las fuentes <span class="summary-desc">Diagnóstico</span></summary>
+      <div id="sources" class="source-list"><p class="help-text">Sin consultas todavía.</p></div>
+      <p class="help-text">Dos webs que reutilizan datos de Renfe no equivalen a dos observaciones independientes. Una posición aproximada tampoco confirma el paso por un andén.</p>
+    </details>
+
+    <section class="panel" aria-labelledby="alerts-heading"><div class="section-top"><h2 id="alerts-heading">Incidencias de la R4</h2><span class="small-tag">Avisos</span></div><div id="alerts" class="alert-list"><p class="muted">Sin consultar</p></div></section>
+
+    <section class="panel" aria-labelledby="history-heading"><div class="section-top"><h2 id="history-heading">Contexto histórico</h2><span class="small-tag">Orientativo</span></div><div id="history" class="history-content"><p class="muted">Sin consultar</p></div></section>
+
+    <details class="panel tips-panel"><summary>Cómo interpretar los resultados <span class="summary-desc">Guía</span></summary>
+      <div class="legend-item"><span class="legend-dot green"></span><p><strong>Posición reciente:</strong> se ha podido vincular una observación del tren al itinerario indicado. No garantiza la llegada puntual.</p></div>
+      <div class="legend-item"><span class="legend-dot amber"></span><p><strong>Solo horario:</strong> recorrido comprobado, pero sin posición reciente asociada.</p></div>
+      <div class="legend-item"><span class="legend-dot red"></span><p><strong>Cancelación / discrepancia:</strong> información publicada de supresión o conflicto de fuentes.</p></div>
+      <div class="legend-item"><span class="legend-dot grey"></span><p><strong>Posible:</strong> la estación anuncia un tren, pero no hemos podido comprobar que pare en tu destino.</p></div>
+      <p class="help-text">Esta aplicación es un apoyo. Para decidir un viaje, comprueba también los paneles y avisos en la estación.</p>
+    </details>
+
+    <footer>
+      <p>Horario programado: <a href="https://data.renfe.com/es/dataset/horarios-cercanias" target="_blank" rel="noopener noreferrer">Renfe Data · GTFS oficial (CC BY 4.0)</a>. Datos operativos orientativos: <a href="https://trenes.valfiguer.com/desarrolladores" target="_blank" rel="noopener noreferrer">Renfe Data vía Valfiguer (CC BY 4.0)</a>, <a href="https://radardetrenes.com/docs" target="_blank" rel="noopener noreferrer">Renfe/ADIF vía RadarDeTrenes</a> y <a href="https://trenalia.org/api" target="_blank" rel="noopener noreferrer">Trenalia</a>. Actualización aproximada cada 60 s mientras está abierta.</p>
+      <p>Proyecto personal no oficial · Sin publicidad · Sin cuenta · Sin servidor propio.</p>
+    </footer>
+  </main>
+  <div id="toast" class="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+  <script src="./app.js?v=13" defer></script>
+</body>
+</html>

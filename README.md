@@ -1,31 +1,56 @@
-# Mi Rodalies · V1.1 (contraste transparente)
+# Mi Rodalies R4 · PWA V1.3
 
-PWA estática para dos trayectos R4: Terrassa Est → Barcelona-Plaça de Catalunya y Barcelona-Sants → Terrassa Est.
+Visor ligero para Android, sin backend propio ni costes obligatorios. Actualmente prioriza:
 
-## Cambios
-- Franja horaria configurable de **hoy**, con accesos rápidos para las próximas 2, 4 u 8 horas. Se filtra por **hora programada de salida** y se ordena cronológicamente.
-- Consulta principal del trayecto completo en Valfiguer; consultas complementarias del panel de estación de Valfiguer y de las salidas de Mobilitat Penedès (si existe acceso CORS, cobertura y formato compatible).
-- Contraste de número de tren/hora y detección de discrepancias de cancelaciones o horarios entre fuentes. No suma coincidencias como si fueran evidencia independiente: todas estas plataformas reutilizan información de Renfe.
-- Estado de **posición reciente** solo si un proveedor facilita explícitamente un tren en movimiento o una posición no obsoleta; «solo horario» no confirma circulación.
-- Panel con fuentes consultadas, errores y avisos etiquetados por procedencia.
-- Si una fuente falla, se explica sin inventar horarios ni cancelar trenes.
+- Ida: Terrassa Est → Barcelona-Plaça de Catalunya.
+- Vuelta: Barcelona-Sants → Terrassa Est.
 
-## Limitaciones importantes
-- **Integración aún no validada con respuestas reales desde un móvil.** Se ha comprobado la sintaxis JavaScript y la estructura de archivos, no la compatibilidad completa de los esquemas de las APIs.
-- La API de trayectos puede no cubrir franjas largas ni todas las circulaciones. La ausencia de un tren no demuestra supresión.
-- El panel de estación de Valfiguer solo cubre las próximas 2 horas. Mobilitat Penedès puede no ofrecer datos o impedir acceso directo por CORS.
-- La coincidencia entre Valfiguer y Mobilitat Penedès NO acredita dos observaciones independientes: ambos pueden apoyarse en el mismo GTFS/GTFS-RT de Renfe.
-- Se consultan los datos mientras la PWA está abierta; no hay monitorización en segundo plano.
-- Los horarios se muestran en zona Europe/Madrid. Franjas que atraviesen medianoche no están incluidas en esta versión.
-- Hay que contrastar empíricamente la precisión con los monitores de las estaciones antes de confiar en las estimaciones.
+La arquitectura de consulta está separada de los recorridos, de cara a extenderla a todas las líneas de Rodalies.
 
-## Actualizar el repositorio
-En GitHub, abre `mi-rodalies-r4` → `Add file` → `Upload files`. Sube **el contenido** de esta carpeta, no la carpeta ni el ZIP. Confirma sustitución de los archivos existentes y pulsa `Commit changes`. Pages publicará la actualización de la rama `main`.
+## Contenido
 
-## Fuentes documentadas
-- https://trenes.valfiguer.com/desarrolladores
-- https://mobilitatpenedes.cat/dades
-- https://mobilitatpenedes.cat/dades/fonts
-- https://trenes.valfiguer.com/datos
+- `index.html`, `styles.css`, `app.js`, `manifest.webmanifest`, `sw.js` e iconos: PWA.
+- `scripts/build_gtfs.py`: transforma el **GTFS estático oficial de Cercanías/Rodalies** a JSON ligero para estos dos trayectos.
+- `.github/workflows/horario-renfe.yml`: intenta actualizar el JSON oficial una vez al día, gratuitamente con GitHub Actions, y permite ejecución manual.
+- `data/README.md`: documentación del horario. `data/schedule-r4.json` aparece solo si se descarga y procesa el GTFS con éxito.
 
-Datos: Renfe Data y otras fuentes originales (CC BY 4.0), normalizados por Valfiguer y Mobilitat Penedès.
+## Publicar o actualizar en tu repositorio GitHub
+
+1. Entra en `https://github.com/arl338/mi-rodalies-r4`.
+2. `Add file` → `Upload files`.
+3. **Descomprime el ZIP**. Abre la carpeta que contiene `index.html`. Arrastra desde dentro su contenido completo, incluidas las carpetas `.github`, `data` y `scripts`, y los ocho archivos de la PWA. No arrastres la carpeta contenedora.
+4. Comprueba que `index.html` quede en la raíz y que el workflow aparezca como `.github/workflows/horario-renfe.yml`.
+5. Pulsa `Commit changes`. La web se seguirá abriendo en `https://arl338.github.io/mi-rodalies-r4/`.
+6. Si no ves el nuevo diseño, actualiza Chrome y vuelve a abrir la PWA. El service worker utiliza una caché de versión diferente.
+
+## Activar el horario oficial automáticamente
+
+Desde GitHub → **Actions** → **Actualizar horario oficial Renfe GTFS** → **Run workflow** → rama `main` → **Run workflow**. Tras la primera ejecución correcta, el JSON de horarios aparecerá en `data/schedule-r4.json`. La tarea también está programada para ejecutarse diariamente.
+
+Si GitHub solicita activar Actions en el repositorio, hazlo. Si el trabajo falla por permisos de escritura, consulta Settings → Actions → General → Workflow permissions y autoriza Read and write permissions solo para este repositorio, si te parece adecuado.
+
+**Importante:** el ZIP inicial **no contiene un horario inventado**. El primer horario oficial directo debe generarse mediante la tarea. Mientras no esté disponible, la interfaz seguirá consultando horarios GTFS redistribuidos por Valfiguer y Trenalia y mostrará el aviso de que el archivo oficial aún no está disponible. Si el servidor oficial rechaza la descarga (por ejemplo por certificado TLS), el flujo dará error y no se publicará un horario falso.
+
+El JSON se consulta preferentemente desde la rama pública de GitHub (`raw.githubusercontent.com`), con un respaldo servido desde Pages. Esto evita depender de una nueva publicación de Pages para cada actualización de Actions (los commits hechos con `GITHUB_TOKEN` no disparan una reconstrucción de Pages).
+
+## Fuentes y estado
+
+- **Referencia del día normal:** GTFS estático oficial de Renfe, publicado en https://data.renfe.com/es/dataset/horarios-cercanias (licencia CC BY 4.0).
+- **Horarios GTFS redistribuidos y recorrido:** https://trenes.valfiguer.com/desarrolladores y https://trenalia.org/api
+- **Tableros de estación y posiciones:** https://radardetrenes.com/docs
+- **Alertas, cancelaciones y puntualidad publicada:** endpoints citados en la interfaz.
+
+Las fuentes de terceros pueden tener una raíz común: *dos servicios que reutilizan el mismo dato Renfe no equivalen a dos observaciones independientes*. La PWA separa `Horario oficial` de `Posición reciente`, y jamás debe mostrar horario programado como circulación confirmada. Cancelaciones y datos de telemetría se superponen al horario sin modificar los datos originales.
+
+La posición de Cercanías puede ser aproximada. Las predicciones no sustituyen los paneles físicos ni los avisos oficiales en la estación.
+
+## Controles móviles
+
+- Botones de **Ida/Vuelta** con estado persistente, guardado localmente y aviso de pulsación.
+- Botones de **2/4/8 horas** con selección persistente; campos manuales `Desde`/`Hasta` y botón de aplicar.
+- **Actualizar** indica actividad, se deshabilita durante la consulta y las fuentes se vuelven a consultar cada 60 s mientras está abierta.
+- Diseño claro con contraste alto, objetivos táctiles más grandes y adaptación a pantallas estrechas.
+
+## Validación
+
+Pruebas locales: sintaxis JavaScript; generación de una muestra GTFS **ficticia exclusivamente de prueba**, sin incluirla en el ZIP; navegador móvil Chromium con respuestas simuladas (fuente oficial disponible, fuente oficial ausente, cambios de trayecto, botones de franja y un tren observado). No se ha hecho una verificación de extremo a extremo de los endpoints reales desde la red donde se ha generado esta versión. El funcionamiento y cobertura reales deben comprobarse desde el Android.
