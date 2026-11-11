@@ -13,6 +13,7 @@ from collections import defaultdict, Counter
 from datetime import date, datetime, timedelta, time, timezone
 from pathlib import Path
 from zoneinfo import ZoneInfo
+from reference_stations import apply_reference
 
 TZ = ZoneInfo('Europe/Madrid')
 REFERENCE_FILE = Path(__file__).resolve().parents[1] / 'data' / 'reference' / 'generalitat_lines.json'
@@ -415,11 +416,30 @@ def build(cer,md,output,days,base=None):
     base=base or datetime.now(TZ).date()
     # Include the previous service day for GTFS trips with 24:xx–29:xx times.
     dates=[base-timedelta(days=1)]+[base+timedelta(days=i) for i in range(days)]
-    results=[]; errors=[]; static_catalog={}
+    results=[]; errors=[]; static_catalog={}; all_stop_candidates={}
     batch_id=hashlib.sha256(cer+(md or b'')+str(base).encode()).hexdigest()[:20]
     for source,raw in [('cer',cer),('md',md)]:
         if raw is None:errors.append(f'{source}: fuente no disponible');continue
         try:
+            # All stops in the published GTFS are potential *station IDs*, not
+            # evidence of active timetables on any particular line.
+            with zipfile.ZipFile(io.BytesIO(raw)) as z:
+                all_rows=load(z,'stops.txt')
+                raw_stops={str(st.get('stop_id')):st for st in all_rows}
+                for raw_stop in all_rows:
+                    parent=raw_stops.get(str(raw_stop.get('parent_station')))
+                    st=parent or raw_stop
+                    code=stop_key(st.get('stop_id'))
+                    if not re.fullmatch(r'\\d{5}',code) or not in_catalonia(st):
+                        continue
+                    if code not in all_stop_candidates:
+                        try:
+                            lat=float(st.get('stop_lat')) if st.get('stop_lat') else None
+                            lon=float(st.get('stop_lon')) if st.get('stop_lon') else None
+                        except (ValueError,TypeError):
+                            lat=lon=None
+                        all_stop_candidates[code]={'name':st.get('stop_name','').strip(),
+                                                    'lat':lat,'lon':lon}
             found,candidates=parse_archive(raw,source,dates)
             results.extend(found)
             for code,stop in candidates.items():
@@ -447,9 +467,11 @@ def build(cer,md,output,days,base=None):
             st['gtfs_name']=st['name'];st['name']=official['display_name']
             st['aliases']=sorted(set([*official.get('aliases',[]),st['gtfs_name']]))
             st['name_source']='ADIF/BOE';st['name_sources']=official.get('sources',[])
+    schedule_station_lines=defaultdict(set)
     for row in rows:
         by_line[row['l']]+=1
         for code,stop in row.pop('stations').items():
+            schedule_station_lines[code].add(row['l'])
             if code not in stations or (not stations[code]['name'] and stop['name']):
                 lat=stop['lat'];lon=stop['lon']
                 stations[code]={'id':code,'name':stop['name'] or code,'lat':float(lat) if lat else None,'lon':float(lon) if lon else None,'lines':set()}
@@ -460,6 +482,8 @@ def build(cer,md,output,days,base=None):
             official=canonical_names[code];st['gtfs_name']=st['name'];st['name']=official['display_name']
             st['aliases']=sorted(set([*official.get('aliases',[]),st['gtfs_name']]))
             st['name_source']='ADIF/BOE';st['name_sources']=official.get('sources',[])
+    reference_inventory=apply_reference(stations,all_stop_candidates,
+                                         schedule_station_lines,canonical_names,LINES)
     out=Path(output);out.mkdir(parents=True,exist_ok=True)
     for existing in out.glob('20??-??-??.json'):existing.unlink()
     for d in dates:
@@ -480,15 +504,18 @@ def build(cer,md,output,days,base=None):
         except (ValueError,TypeError,KeyError) as exc:
             errors.append('Informe de auditoría de origen no válido: '+str(exc))
     reference=official_reference()
-    audit=validate_official_reference(reference,[dict(st,lines=list(st['lines'])) for st in stations.values()],
+    # Compare Generalitat checkpoints against GTFS services, never against
+    # the expanded static inventory (which may have no train times).
+    audit=validate_official_reference(reference,[dict(st,lines=list(st['schedule_lines'])) for st in stations.values()],
                                      [{'id':line,'present':by_line[line]>0,'scheduled_trips_in_period':by_line[line]} for line in LINES])
     catalog={
        'schema':2,'batch_id':batch_id,'generated_at':datetime.now(TZ).isoformat(),
        'coverage_start':base.isoformat(),'coverage_end':dates[-1].isoformat(),
        'source':'Renfe Data GTFS oficial (Cercanías; MD solo con línea Rodalies explícita)',
-       'station_names':'ADIF/BOE verified code crosswalk; GTFS as fallback; exact match only',
+       'station_names':'ADIF/BOE exact code > GTFS stop ID > isolated reference placeholder; no inferred timetable',
        'source_urls':{'cer':CERCANIAS,'md':MEDIA_DISTANCIA},'license':'CC BY 4.0',
        'official_reference':audit,'source_quality':source_quality,
+       'network_reference':reference_inventory,
        'lines':[{'id':line,'name':LINE_NAMES.get(line,line),'present':by_line[line]>0,
                  'scheduled_trips_in_period':by_line[line]} for line in LINES],
        'stations':sorted([dict(r,lines=sorted(r['lines'],key=lambda x:LINES.index(x))) for r in stations.values()],key=lambda x:norm(x['name'])),
