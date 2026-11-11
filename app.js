@@ -277,7 +277,7 @@ async function search(){if(!catalog){showToast('El catálogo todavía no está d
   // The optional timetable fallback has no reliable train number or individual
   // intermediate stop times. It MUST NOT replace an available GTFS itinerary.
   let fallback=[];
-  if(!scheduled.length&&selection.line&&selection.line!=='ALL'&&
+  if(selection.line&&selection.line!=='ALL'&&
      /^\d{5}$/.test(selection.from)&&/^\d{5}$/.test(selection.to)){
    const params=new URLSearchParams({from:selection.from,to:selection.to,
      date:range.day,limit:'400'});
@@ -287,8 +287,9 @@ async function search(){if(!catalog){showToast('El catálogo todavía no está d
     if(signal.aborted||id!==requestId)return;
     fallback=E.normalizeTrenaliaTimetable(thirdParty,selection.from,
       selection.to,range.day,selection.line);
-    scheduled=E.direct(fallback,selection.from,selection.to,
+    const supplemental=E.direct(fallback,selection.from,selection.to,
       range.start,range.end);
+    scheduled=E.mergeSupplementalJourneys(scheduled,supplemental);
    }catch(err){if(signal.aborted||id!==requestId)return;}
   }
   if(!scheduled.length&&daily.every(x=>x.trains.length===0))showToast('Sin horarios oficiales para esa fecha');
