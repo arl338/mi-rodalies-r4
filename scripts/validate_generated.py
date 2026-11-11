@@ -19,6 +19,7 @@ def validate(out,days=14,min_stations=10):
     c=json.loads((path/'catalog.json').read_text(encoding='utf8'))
     assert c['schema']==2 and isinstance(c.get('batch_id'),str) and len(c['batch_id'])>=12
     assert c.get('source') and len(c['lines'])==19
+    assert isinstance(c.get('source_quality'),dict) and c['source_quality'].get('source_sha256'), 'El catálogo no está contrastado con el mismo GTFS original que la auditoría; se bloquea la publicación'
     assert len(set(x['id'] for x in c['lines']))==19
     assert all(isinstance(x['present'],bool) for x in c['lines'])
     stations={s['id']:s for s in c['stations']}

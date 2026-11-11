@@ -39,5 +39,6 @@ class QualityGate(unittest.TestCase):
             c=b.build(make_zip(),None,path,1,base=date(2026,11,12))
             self.assertIsNone(c['source_quality'])
             self.assertTrue(any('otro ZIP' in w for w in c['warnings']))
+            with self.assertRaises(AssertionError):validate(path,1,min_stations=1)
 
 if __name__=='__main__':unittest.main()
