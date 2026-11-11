@@ -44,10 +44,21 @@ jobs:
           node tests/test_feed_schemas.cjs
           node tests/test_precision.cjs
           python -m unittest discover -s tests -p 'test_*.py' -q
+      - name: Descargar fuente GTFS Cercanías verificable
+        run: |
+          python - <<'PY'
+          import sys
+          from pathlib import Path
+          sys.path.insert(0, 'scripts')
+          from build_network import download, CERCANIAS
+          raw = download(CERCANIAS)
+          Path('/tmp/rodalies-cer.zip').write_bytes(raw)
+          print('Fuente GTFS Cercanías descargada una única vez:', len(raw), 'bytes')
+          PY
       - name: Auditar paradas originales GTFS Renfe
-        run: python scripts/audit_gtfs.py --days 14 --out data/v2/source_audit.json
+        run: python scripts/audit_gtfs.py --zip /tmp/rodalies-cer.zip --days 14 --out data/v2/source_audit.json
       - name: Obtener GTFS Renfe y contrastar líneas con Generalitat
-        run: python scripts/build_network.py --days 14 --out data/v2
+        run: python scripts/build_network.py --cer-zip /tmp/rodalies-cer.zip --days 14 --out data/v2
       - name: Validar integridad temporal, lotes y paradas por línea
         run: python scripts/validate_generated.py --out data/v2 --days 14
       - name: Validar JSON generado y servicios
