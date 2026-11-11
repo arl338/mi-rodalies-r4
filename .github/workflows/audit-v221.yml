@@ -50,3 +50,17 @@ jobs:
           python -m playwright install --with-deps chromium
       - name: Probar interfaz móvil y escritorio sin red ferroviaria
         run: python tests/test_ui_v221.py
+
+  live-contracts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verificar disponibilidad y estructura de los horarios y ETA en fuentes reales
+        run: |
+          node tests/test_trenalia_live.cjs
+          node tests/test_trenalia_alignment.cjs
+          node tests/test_live_anonymous_eta.cjs
