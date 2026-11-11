@@ -302,7 +302,8 @@ async function search(){if(!catalog){showToast('El catálogo todavía no está d
   const board=live?[...E.normalizeBoard(data(0),'Valfiguer',now,selection.from).map(x=>({...x,boardStop:selection.from})),...E.normalizeBoard(data(1),'ADIF/RadarDeTrenes',now,selection.from).map(x=>({...x,boardStop:selection.from}))]:[];
   const positions=live?[...E.normalizePositions(data(2),'Renfe/Valfiguer',now),...E.normalizePositions(data(3),'Renfe/ADIF',now)]:[];
   const cancellations=live?E.normalizeCancels(data(4)):[];
-  results=scheduled.map(j=>E.enrichJourney(j,board,positions,cancellations,now));visible=12;latestSearch={range};
+  const correlatedBoard=E.correlateTimetableBoards(scheduled,board);
+  results=scheduled.map(j=>E.enrichJourney(j,correlatedBoard,positions,cancellations,now));visible=12;latestSearch={range};
   renderResultList();updateSummary(range,trips.length+fallback.length,live);
   const lines=selection.line==='ALL'?new Set(E.LINES):new Set([selection.line]);
   // An incident can explain why no trips were found; do not use results to filter it.
