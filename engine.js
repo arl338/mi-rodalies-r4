@@ -101,6 +101,25 @@ function direct(trains,from,to,start,end){const found=[];
  const unique=new Map();for(const r of found)if(!unique.has(r.key))unique.set(r.key,r);
  return [...unique.values()].sort((a,b)=>a.depart-b.depart||a.arrive-b.arrive);
 }
+/**
+ * Fill timetable gaps without changing or duplicating the official GTFS.
+ * Only direct services from explicitly named alternative lines are eligible.
+ * Times within 90s of an existing GTFS departure on the same line/corridor
+ * are treated as the same service; source with explicit stop_times wins.
+ */
+function mergeSupplementalJourneys(official,alternative){
+ const merged=[...official];
+ for(const journey of alternative){
+  if(journey.kind!=='direct'||journey.legs.length!==1||
+     journey.legs[0].t.src!=='trenalia-schedule-only')continue;
+  const leg=journey.legs[0];
+  const duplicate=merged.some(j=>j.kind==='direct'&&j.legs.length===1&&
+   j.legs[0].t.l===leg.t.l&&j.legs[0].from===leg.from&&j.legs[0].to===leg.to&&
+   Math.abs(j.depart-journey.depart)<=90);
+  if(!duplicate)merged.push(journey);
+ }
+ return merged.sort((a,b)=>a.depart-b.depart||a.arrive-b.arrive);
+}
 function transfers(trains,from,to,start,end,limit=32){
  const byStation=new Map();
  for(const t of trains){if(!LINES.has(t.l)||!Array.isArray(t.s))continue;
@@ -316,5 +335,5 @@ function alertsForLines(obj,lines,stationScoped=false){
  return found.slice(0,12);
 }
 
-return {LINES,norm,line,scopedLine,catalanNucleus,n,ts,rows,normalizeBoard,normalizePositions,normalizeCancels,direct,transfers,normalizeTrenaliaTimetable,correlateTimetableBoards,matchExact,matchPosition,enrichLeg,enrichJourney,alertsForLines};
+return {LINES,norm,line,scopedLine,catalanNucleus,n,ts,rows,normalizeBoard,normalizePositions,normalizeCancels,direct,transfers,mergeSupplementalJourneys,normalizeTrenaliaTimetable,correlateTimetableBoards,matchExact,matchPosition,enrichLeg,enrichJourney,alertsForLines};
 });
