@@ -79,8 +79,12 @@ function normalizePositions(obj,source,now){const out=[];
    const nucleus=run.nucleo??p.nucleo??run.core??p.core??'';
    if(foreignNucleus(nucleus))continue;
    const ln=scopedLine(run.line,nucleus)||scopedLine(p.line,nucleus)||scopedLine(run.product,nucleus)||scopedLine(p.product,nucleus)||scopedLine(run.route,nucleus);
+   const seconds=n(run.delay_s??p.delay_s??run.delaySeconds??p.delaySeconds);
+   const minutes=n(run.delayMinutes??p.delayMinutes??run.delay_minutes??p.delay_minutes);
+   const delaySeconds=seconds!==null?seconds:minutes!==null?minutes*60:null;
    out.push({source,trip,number:num,line:ln,day:String(run.day??run.service_day??p.service_day??''),age,
-    stale:truth(run.stale)||truth(p.stale),cancelled:truth(run.cancelled),reported,category});
+    stale:truth(run.stale)||truth(p.stale),cancelled:truth(run.cancelled),reported,category,
+    delaySeconds:delaySeconds!==null&&delaySeconds>=-600&&delaySeconds<=7200?delaySeconds:null});
   }
  }return out;
 }
@@ -251,7 +255,19 @@ function enrichLeg(leg,board,positions,cancels,now){
   }
  }
  const pos=positions.filter(p=>matchPosition(leg,p)).sort((a,b)=>a.age-b.age)[0];
- if(pos){current.position=pos;current.state='live';current.proof.push(`Posición identificada hace ${Math.round(pos.age)} s (${pos.source})`);}
+ if(pos){
+  current.position=pos;current.state='live';
+  current.proof.push(`Posición identificada hace ${Math.round(pos.age)} s (${pos.source})`);
+  // A train-level delay is a secondary estimate, not a measured station
+  // passage. Never override an attributable station-board ETA with it.
+  if(!current.conflict&&current.estimated===null&&pos.delaySeconds!==null){
+   const eta=leg.depart+pos.delaySeconds;
+   if(eta>=now-300&&eta>=leg.depart-1200&&eta<leg.depart+4*3600){
+    current.estimated=eta;current.delay=pos.delaySeconds;
+    current.proof.push(`Hora orientativa: horario + retraso del tren observado (${pos.source}); sin paso confirmado en esta estación`);
+   }
+  }
+ }
  const officialCancelled=cancels.some(x=>x.trip&&serviceIds(leg.t).includes(String(x.trip))&&(!x.day||x.day===leg.t.day)&&(!x.line||x.line===leg.t.l));
  const boardCancelled=freshBoard.some(x=>x.cancelled);
  if(officialCancelled||boardCancelled){current.cancelled=true;current.conflict=!!current.position||current.conflict;current.proof.push('Cancelación atribuida al servicio');}
