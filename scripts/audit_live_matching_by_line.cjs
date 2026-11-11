@@ -28,6 +28,7 @@ const candidate={
 };
 function stationId(s){const found=catalog.stations.filter(x=>x.name===s&&/^\d{5}$/.test(x.id));return found.length===1?found[0].id:null;}
 const output=[];
+async function main(){
 for(const line of lines){
  const row={line,gtfs_records:trains.filter(t=>t.l===line).length,
   matched_boards:{Valfiguer:0,RadarDeTrenes:0},
@@ -69,3 +70,6 @@ for(const x of output)console.log(JSON.stringify({line:x.line,gtfs:x.gtfs_record
  matched_val:x.matched_boards.Valfiguer,eta_val:x.fresh_estimates_applied.Valfiguer,
  matched_radar:x.matched_boards.RadarDeTrenes,eta_radar:x.fresh_estimates_applied.RadarDeTrenes,
  stations_checked:x.samples.map(s=>s.name)}));
+
+}
+main().catch(e=>{console.error('Correlation failed:',e.message);process.exitCode=1;});
