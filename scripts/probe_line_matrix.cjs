@@ -59,11 +59,11 @@ async function pool(actions,n=5){
   const i=next++;try{results[i]=await actions[i]();}catch(e){results[i]={error:e.name==='AbortError'?'timeout':String(e.message).slice(0,55)};}
  }}));return results;
 }
-function products(obj,lid){
+function products(obj,lid,from,to,day){
  const rows=Array.isArray(obj?.trains)?obj.trains:[];
  const own=rows.filter(x=>String(x.product||'').toLowerCase()==='cercanías '+lid.toLowerCase()).length;
  const kinds={};for(const x of rows){const k=String(x.product||'Unknown');kinds[k]=(kinds[k]||0)+1;}
- return {raw:rows.length,explicit_line:own,products:kinds,missing_operator_count:(obj.missingOperators||[]).length};
+ return {raw:rows.length,explicit_line:own,accepted_by_engine:E.normalizeTrenaliaTimetable(obj,from,to,day,lid).length,products:kinds,missing_operator_count:(obj.missingOperators||[]).length};
 }
 async function main(){
  try{registerRadar(await getJson('https://radardetrenes.com/api/v1/stations'));}
@@ -93,7 +93,7 @@ async function main(){
    tasks.push({run:async()=>{
       const params=new URLSearchParams({from:trial.from,to:trial.to,date:day,limit:'400'});
       const response=await getJson('https://trenalia.org/api/v1/timetable?'+params);
-      return products(response,x.line);
+      return products(response,x.line,trial.from,trial.to,day);
     },into:v=>p.days.push({date:day,...v})});
   }
   if(!active.has(trial.from))active.set(trial.from,{from:trial.from,lines:new Set()});
@@ -147,7 +147,7 @@ async function main(){
   lines:contexts};
  fs.writeFileSync('line-source-matrix.json',JSON.stringify(out,null,2)+'\n');
  for(const x of contexts){
-  const samples=x.probes.map(p=>p.name+':'+(p.days||[]).map(d=>d.error?'ERR':d.explicit_line).join('/')).join('; ');
+  const samples=x.probes.map(p=>p.name+':'+(p.days||[]).map(d=>d.error?'ERR':(d.explicit_line+'/'+d.accepted_by_engine)).join('/')).join('; ');
   console.log(JSON.stringify({l:x.line,gtfs:x.gtfs_trips,stations:x.stations,gtfs_stations:x.stations_with_gtfs,
    trenalia:samples,radar_board:x.live_board.RadarDeTrenes.matching_line,
    radar_eta:x.live_board.RadarDeTrenes.fresh_etas,val_board:x.live_board.Valfiguer.matching_line,
