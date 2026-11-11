@@ -39,4 +39,7 @@ assert.equal(E.scopedLine('C4','Madrid'),'');
 assert.equal(E.scopedLine('C4','Catalunya'),'R4');
 assert.equal(E.scopedLine('C2','Catalunya'),'R2');
 assert.equal(E.scopedLine('C4',''),'');
+assert.equal(E.alertsForLines({alerts:[{text:'Incidencia R3',line:'R3'}]},new Set(['R4']),true).length,0);
+assert.equal(E.alertsForLines({alerts:[{text:'Incidencia C4',line:'C4'}]},new Set(['R4']),true).length,1);
+
 console.log('OK: 19 controles de precisión: C4/R4, ámbitos, delay_s, transbordos y avisos');

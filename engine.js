@@ -190,7 +190,10 @@ function alertsForLines(obj,lines,stationScoped=false){
   if(!r||typeof r!=='object')continue;
   const description=String(r.text??r.description??r.message??r.header_text??'').trim();
   if(!description)continue;
-  const entries=Array.isArray(r.lines)?r.lines:[];
+  // Some station-scoped providers return one 'line' rather than 'lines'.
+  // A declared non-matching line must never become a generic alert.
+  const entries=Array.isArray(r.lines)?r.lines:
+    (r.line!=null?[r.line]:(r.product!=null?[r.product]:[]));
   const nucleus=r.nucleo??r.nucleus??r.core??'';
   if(foreignNucleus(nucleus))continue;
   const labels=[];
