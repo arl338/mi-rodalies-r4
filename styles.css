@@ -101,3 +101,9 @@ footer{font-size:11px;color:#718095;line-height:1.7;padding:1px 6px}footer p{mar
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 
 .schedule-status{padding:10px 12px;background:#eef3f8;border:1px solid #dbe5ef;border-radius:10px;color:#36556e;font-size:11px;line-height:1.5;margin:10px 0 0;}
+/* Accesibilidad visual y confirmación de selección */
+button:focus-visible,summary:focus-visible{outline:3px solid #174f9c;outline-offset:3px}
+button:not(:disabled){touch-action:manipulation}
+button:disabled{opacity:.65;cursor:wait}
+.range-btn[aria-pressed="true"]{background:#fff0f1;border:2px solid #b91f32;color:#941322}
+.journey-btn[aria-pressed="true"]{box-shadow:0 2px 10px rgba(192,0,0,.14)}

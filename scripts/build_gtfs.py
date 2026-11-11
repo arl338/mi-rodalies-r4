@@ -179,7 +179,14 @@ def main():
         target_list.sort(key=lambda x: x[0])
         route_data = route_by_id.get(trip.get('route_id'), {})
         designation = simplify(' '.join(str(route_data.get(x) or '') for x in ('route_short_name','route_long_name')))
-        if re.search(r'\br\s*[1235789]\b',designation) and not re.search(r'\br\s*4\b',designation):
+        # No asumir que cualquier tren que pase por ambas estaciones sea R4.
+        # La línea debe estar identificada por la ruta GTFS o por un trip_id terminado en R4.
+        designated_r4 = bool(re.search(r'\br\s*4\b', designation))
+        trip_named_r4 = bool(re.search(r'R4$', tid, re.IGNORECASE))
+        if not (designated_r4 or trip_named_r4):
+            continue
+        # Rechazar rutas etiquetadas exclusivamente como otra línea.
+        if re.search(r'\br\s*(?:1|2|3|5|6|7|8|9|10|11|12|13|14|15|16|17)\b', designation) and not designated_r4:
             continue
         for label, (from_code,to_code) in ROUTES.items():
             for i, (seq,code,departure_row) in enumerate(target_list):

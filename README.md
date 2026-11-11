@@ -1,56 +1,36 @@
-# Mi Rodalies R4 · PWA V1.3
+# Mi Rodalies R4 · V1.5 auditada
 
-Visor ligero para Android, sin backend propio ni costes obligatorios. Actualmente prioriza:
+## Ámbito
 
-- Ida: Terrassa Est → Barcelona-Plaça de Catalunya.
-- Vuelta: Barcelona-Sants → Terrassa Est.
+- Ida: Terrassa Est (78710) → Barcelona-Plaça de Catalunya (78805).
+- Vuelta: Barcelona-Sants (71801) → Terrassa Est (78710).
+- Solo servicios con ambas paradas acreditadas en el GTFS de Renfe; los paneles generales no añaden trenes ajenos.
+- Consultas de hoy, intervalo «Desde/Hasta» (mismo día), botones 2/4/8 h.
 
-La arquitectura de consulta está separada de los recorridos, de cara a extenderla a todas las líneas de Rodalies.
+## Fuentes y criterio de evidencia
 
-## Contenido
+1. **Renfe GTFS estático (principal):** catálogo de salidas *programadas* del día. Lo procesa `scripts/build_gtfs.py`; el archivo resultante `data/schedule-r4.json` NO se incluye en esta actualización para conservar la descarga automática de GitHub.
+2. **Valfiguer (complementaria):** tablero de la estación de origen, posiciones, cancelaciones, incidencias, estado de feeds y puntualidad agregada.
+3. **RadarDeTrenes (complementaria):** tablero ADIF/Renfe de origen y posiciones distribuidas.
 
-- `index.html`, `styles.css`, `app.js`, `manifest.webmanifest`, `sw.js` e iconos: PWA.
-- `scripts/build_gtfs.py`: transforma el **GTFS estático oficial de Cercanías/Rodalies** a JSON ligero para estos dos trayectos.
-- `.github/workflows/horario-renfe.yml`: intenta actualizar el JSON oficial una vez al día, gratuitamente con GitHub Actions, y permite ejecución manual.
-- `data/README.md`: documentación del horario. `data/schedule-r4.json` aparece solo si se descarga y procesa el GTFS con éxito.
+**Reglas:** ningún tren entra en la lista solo por aparecer en Sants u otro tablero; se exige itinerario GTFS origen → destino. Los tableros solo se correlacionan si línea R4, mismo número de tren y salida programada de origen con diferencia ≤2 min. Las posiciones recientes requieren R4, identificación y ventana temporal plausible. Las estimaciones sin sello temporal reciente no reemplazan la hora programada. No se suman proveedores que redistribuyen la misma fuente como confirmaciones independientes.
 
-## Publicar o actualizar en tu repositorio GitHub
+La lista puede estar incompleta si el GTFS no incorpora servicios extraordinarios; no se inventan recorridos. Una cancelación publicada por Renfe puede carecer de identificadores compatibles con GTFS y, por prudencia, no se atribuye a otro tren.
 
-1. Entra en `https://github.com/arl338/mi-rodalies-r4`.
-2. `Add file` → `Upload files`.
-3. **Descomprime el ZIP**. Abre la carpeta que contiene `index.html`. Arrastra desde dentro su contenido completo, incluidas las carpetas `.github`, `data` y `scripts`, y los ocho archivos de la PWA. No arrastres la carpeta contenedora.
-4. Comprueba que `index.html` quede en la raíz y que el workflow aparezca como `.github/workflows/horario-renfe.yml`.
-5. Pulsa `Commit changes`. La web se seguirá abriendo en `https://arl338.github.io/mi-rodalies-r4/`.
-6. Si no ves el nuevo diseño, actualiza Chrome y vuelve a abrir la PWA. El service worker utiliza una caché de versión diferente.
+## Publicación en GitHub (sin cambiar Pages ni la automatización)
 
-## Activar el horario oficial automáticamente
+El ZIP contiene los 8 archivos de la raíz y `scripts/build_gtfs.py`. **No borres las carpetas** `.github` ni `data`, ni el archivo `data/schedule-r4.json` generado por la automatización.
 
-Desde GitHub → **Actions** → **Actualizar horario oficial Renfe GTFS** → **Run workflow** → rama `main` → **Run workflow**. Tras la primera ejecución correcta, el JSON de horarios aparecerá en `data/schedule-r4.json`. La tarea también está programada para ejecutarse diariamente.
+1. Descomprime el ZIP en el ordenador.
+2. En tu repositorio `arl338/mi-rodalies-r4` pulsa **Add file → Upload files**; sube a la raíz `index.html`, `app.js`, `styles.css`, `sw.js`, `manifest.webmanifest`, `icon-192.png`, `icon-512.png` y `README.md`. Confirma el reemplazo.
+3. En GitHub entra en la carpeta **scripts** → **Add file → Upload files** y sube `scripts/build_gtfs.py` desde la carpeta descomprimida (sin duplicar la carpeta `scripts`).
+4. Ejecuta una vez **Actions → Actualizar horario oficial Renfe GTFS → Run workflow**. Comprueba que crea `data/schedule-r4.json` y no falla.
+5. Comprueba que la web muestra **v1.5**; si persiste una versión anterior, actualiza Chrome y vuelve a abrir la PWA.
 
-Si GitHub solicita activar Actions en el repositorio, hazlo. Si el trabajo falla por permisos de escritura, consulta Settings → Actions → General → Workflow permissions y autoriza Read and write permissions solo para este repositorio, si te parece adecuado.
+La PWA continúa disponible en https://arl338.github.io/mi-rodalies-r4/
 
-**Importante:** el ZIP inicial **no contiene un horario inventado**. El primer horario oficial directo debe generarse mediante la tarea. Mientras no esté disponible, la interfaz seguirá consultando horarios GTFS redistribuidos por Valfiguer y Trenalia y mostrará el aviso de que el archivo oficial aún no está disponible. Si el servidor oficial rechaza la descarga (por ejemplo por certificado TLS), el flujo dará error y no se publicará un horario falso.
+## Auditoría y límites
 
-El JSON se consulta preferentemente desde la rama pública de GitHub (`raw.githubusercontent.com`), con un respaldo servido desde Pages. Esto evita depender de una nueva publicación de Pages para cada actualización de Actions (los commits hechos con `GITHUB_TOKEN` no disparan una reconstrucción de Pages).
+Las pruebas reproducibles están documentadas en el informe `Informe_auditoria_Mi_Rodalies_V1_5.md` entregado por separado. Se han ejecutado pruebas de interfaz móvil simulada (390, 360, 320 y 768 px), nueve escenarios de integración con respuestas ficticias, procesador GTFS con fichero de prueba y lectura del JSON aportado por el usuario.
 
-## Fuentes y estado
-
-- **Referencia del día normal:** GTFS estático oficial de Renfe, publicado en https://data.renfe.com/es/dataset/horarios-cercanias (licencia CC BY 4.0).
-- **Horarios GTFS redistribuidos y recorrido:** https://trenes.valfiguer.com/desarrolladores y https://trenalia.org/api
-- **Tableros de estación y posiciones:** https://radardetrenes.com/docs
-- **Alertas, cancelaciones y puntualidad publicada:** endpoints citados en la interfaz.
-
-Las fuentes de terceros pueden tener una raíz común: *dos servicios que reutilizan el mismo dato Renfe no equivalen a dos observaciones independientes*. La PWA separa `Horario oficial` de `Posición reciente`, y jamás debe mostrar horario programado como circulación confirmada. Cancelaciones y datos de telemetría se superponen al horario sin modificar los datos originales.
-
-La posición de Cercanías puede ser aproximada. Las predicciones no sustituyen los paneles físicos ni los avisos oficiales en la estación.
-
-## Controles móviles
-
-- Botones de **Ida/Vuelta** con estado persistente, guardado localmente y aviso de pulsación.
-- Botones de **2/4/8 horas** con selección persistente; campos manuales `Desde`/`Hasta` y botón de aplicar.
-- **Actualizar** indica actividad, se deshabilita durante la consulta y las fuentes se vuelven a consultar cada 60 s mientras está abierta.
-- Diseño claro con contraste alto, objetivos táctiles más grandes y adaptación a pantallas estrechas.
-
-## Validación
-
-Pruebas locales: sintaxis JavaScript; generación de una muestra GTFS **ficticia exclusivamente de prueba**, sin incluirla en el ZIP; navegador móvil Chromium con respuestas simuladas (fuente oficial disponible, fuente oficial ausente, cambios de trayecto, botones de franja y un tren observado). No se ha hecho una verificación de extremo a extremo de los endpoints reales desde la red donde se ha generado esta versión. El funcionamiento y cobertura reales deben comprobarse desde el Android.
+**No se ha validado aún la exactitud del paso real de trenes en estaciones ni el acceso real de todos los endpoints desde Android.** Es necesario comparar varias jornadas con monitores físicos. Las fuentes externas pueden fallar, cambiar su estructura o publicar datos incompletos.

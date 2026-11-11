@@ -8,7 +8,7 @@
   <meta name="color-scheme" content="light">
   <link rel="icon" href="./icon-192.png">
   <link rel="manifest" href="./manifest.webmanifest">
-  <link rel="stylesheet" href="./styles.css?v=13">
+  <link rel="stylesheet" href="./styles.css?v=15">
   <title>Mi Rodalies · R4</title>
 </head>
 <body>
@@ -18,7 +18,7 @@
         <div class="brand-symbol" aria-hidden="true">R4</div>
         <div>
           <h1>Mi Rodalies</h1>
-          <p class="version">Monitor personal <span class="version-number">v1.3</span></p>
+          <p class="version">Monitor personal <span class="version-number">v1.5</span></p>
         </div>
       </div>
       <span id="connection" class="connection waiting" aria-live="polite"><span class="status-dot"></span>Sin consultar</span>
@@ -47,7 +47,7 @@
         <button class="range-btn" data-range="8" type="button" aria-pressed="false">8 horas</button>
       </div>
       <button id="apply" type="button" class="primary-btn"><span aria-hidden="true">⌕</span> Ver trenes de esta franja</button>
-      <p class="help-text" id="range-info">Las franjas largas requieren horario de día completo. El horario programado no confirma circulación.</p><p id="schedule-status" class="schedule-status" role="status">Comprobando la vigencia del horario oficial de Renfe…</p>
+      <p class="help-text" id="range-info">El listado muestra únicamente servicios con las dos paradas comprobadas. El horario oficial no confirma circulación.</p><p id="schedule-status" class="schedule-status" role="status">Comprobando la vigencia del horario oficial de Renfe…</p>
     </section>
 
     <section class="panel results-panel" aria-labelledby="results-heading">
@@ -56,7 +56,6 @@
       <div class="fetch-progress" id="fetch-progress" aria-hidden="true"><span></span></div>
       <div id="status" class="notice neutral" role="status" aria-live="polite">Consultando las fuentes disponibles…</div>
       <div id="trains" class="train-list" aria-live="polite"></div>
-      <details id="unverified-panel" class="unverified-group" hidden><summary><span id="unverified-count">Posibles trenes</span><small>Destino sin verificar</small></summary><div id="unverified-trains" class="train-list tentative-list"></div></details>
       <p id="updated" class="updated">Sin datos consultados todavía.</p>
     </section>
 
@@ -73,16 +72,16 @@
       <div class="legend-item"><span class="legend-dot green"></span><p><strong>Posición reciente:</strong> se ha podido vincular una observación del tren al itinerario indicado. No garantiza la llegada puntual.</p></div>
       <div class="legend-item"><span class="legend-dot amber"></span><p><strong>Solo horario:</strong> recorrido comprobado, pero sin posición reciente asociada.</p></div>
       <div class="legend-item"><span class="legend-dot red"></span><p><strong>Cancelación / discrepancia:</strong> información publicada de supresión o conflicto de fuentes.</p></div>
-      <div class="legend-item"><span class="legend-dot grey"></span><p><strong>Posible:</strong> la estación anuncia un tren, pero no hemos podido comprobar que pare en tu destino.</p></div>
+      <p class="help-text">Por precisión, se omiten los trenes de paneles generales cuyo recorrido no se puede comprobar. No se interpretan como servicios de la R4.</p>
       <p class="help-text">Esta aplicación es un apoyo. Para decidir un viaje, comprueba también los paneles y avisos en la estación.</p>
     </details>
 
     <footer>
-      <p>Horario programado: <a href="https://data.renfe.com/es/dataset/horarios-cercanias" target="_blank" rel="noopener noreferrer">Renfe Data · GTFS oficial (CC BY 4.0)</a>. Datos operativos orientativos: <a href="https://trenes.valfiguer.com/desarrolladores" target="_blank" rel="noopener noreferrer">Renfe Data vía Valfiguer (CC BY 4.0)</a>, <a href="https://radardetrenes.com/docs" target="_blank" rel="noopener noreferrer">Renfe/ADIF vía RadarDeTrenes</a> y <a href="https://trenalia.org/api" target="_blank" rel="noopener noreferrer">Trenalia</a>. Actualización aproximada cada 60 s mientras está abierta.</p>
+      <p>Horario programado: <a href="https://data.renfe.com/es/dataset/horarios-cercanias" target="_blank" rel="noopener noreferrer">Renfe Data · GTFS oficial (CC BY 4.0)</a>. Datos operativos orientativos: <a href="https://trenes.valfiguer.com/desarrolladores" target="_blank" rel="noopener noreferrer">Renfe Data vía Valfiguer (CC BY 4.0)</a>, <a href="https://radardetrenes.com/docs" target="_blank" rel="noopener noreferrer">Renfe/ADIF vía RadarDeTrenes</a>. Actualización aproximada cada 60 s mientras está abierta.</p>
       <p>Proyecto personal no oficial · Sin publicidad · Sin cuenta · Sin servidor propio.</p>
     </footer>
   </main>
   <div id="toast" class="toast" role="status" aria-live="polite" aria-atomic="true"></div>
-  <script src="./app.js?v=13" defer></script>
+  <script src="./app.js?v=15" defer></script>
 </body>
 </html>
