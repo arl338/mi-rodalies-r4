@@ -105,21 +105,94 @@ def hms(s):
 def as_ts(d,secs):
     return int((datetime.combine(d,time.min,tzinfo=TZ)+timedelta(seconds=secs)).timestamp())
 
-def service_days(calendar,exceptions,dates):
-    days=defaultdict(set); dset=set(dates)
+
+def parse_gtfs_date(value):
+    """Accept GTFS YYYYMMDD or ISO date with explicit validity."""
+    raw = str(value or '').strip()
+    if not raw:
+        return None
+    try:
+        if re.fullmatch(r'\d{8}', raw):
+            return datetime.strptime(raw, '%Y%m%d').date()
+        if re.fullmatch(r'\d{4}-\d{2}-\d{2}', raw):
+            return date.fromisoformat(raw)
+    except ValueError:
+        return None
+    return None
+
+
+def service_days(calendar, exceptions, dates):
+    """Apply dated weekly calendars followed by explicit additions/removals.
+
+    Missing or malformed bounds never imply unrestricted service validity.
+    """
+    days = defaultdict(set)
+    requested = set(dates)
+    week = ('monday','tuesday','wednesday','thursday','friday','saturday','sunday')
     for r in calendar:
-        weekdays=[r.get(w)=='1' for w in ('monday','tuesday','wednesday','thursday','friday','saturday','sunday')]
-        sid=r.get('service_id')
-        if not sid: continue
+        sid = str(r.get('service_id') or '').strip()
+        start = parse_gtfs_date(r.get('start_date'))
+        end = parse_gtfs_date(r.get('end_date'))
+        if not sid or start is None or end is None or end < start:
+            continue
+        enabled = [str(r.get(w) or '').strip() == '1' for w in week]
         for d in dates:
-            if r.get('start_date','99999999')<=d.strftime('%Y%m%d')<=r.get('end_date','00000000') and weekdays[d.weekday()]:days[sid].add(d)
+            if start <= d <= end and enabled[d.weekday()]:
+                days[sid].add(d)
     for r in exceptions:
-        try:d=datetime.strptime(r['date'],'%Y%m%d').date()
-        except (ValueError,KeyError):continue
-        if d not in dset:continue
-        if r.get('exception_type')=='1':days[r.get('service_id')].add(d)
-        elif r.get('exception_type')=='2':days[r.get('service_id')].discard(d)
+        sid = str(r.get('service_id') or '').strip()
+        d = parse_gtfs_date(r.get('date'))
+        if not sid or d not in requested:
+            continue
+        kind = str(r.get('exception_type') or '').strip()
+        if kind == '1':
+            days[sid].add(d)
+        elif kind == '2':
+            days[sid].discard(d)
     return days
+
+
+def calendar_diagnostic(calendar, exceptions, trips, dates, source):
+    """Report actual GTFS calendar columns, ranges and service coverage."""
+    starts, ends = [], []
+    missing, invalid, overlaps = 0, 0, 0
+    for r in calendar:
+        raw_start = str(r.get('start_date') or '').strip()
+        raw_end = str(r.get('end_date') or '').strip()
+        if not raw_start or not raw_end:
+            missing += 1
+            continue
+        a, b = parse_gtfs_date(raw_start), parse_gtfs_date(raw_end)
+        if a is None or b is None or b < a:
+            invalid += 1
+            continue
+        starts.append(a)
+        ends.append(b)
+        if a <= dates[-1] and b >= dates[0]:
+            overlaps += 1
+    exception_dates = [d for r in exceptions if (d := parse_gtfs_date(r.get('date'))) is not None]
+    declared_ids = {str(r.get('service_id') or '').strip() for r in calendar + exceptions}
+    trip_ids = {str(t.get('service_id') or '').strip() for t in trips}
+    samples = [{k: r.get(k) for k in ('service_id','start_date','end_date',
+                                      'monday','wednesday','sunday')} for r in calendar[:2]]
+    print('DIAGNOSTICO CALENDARIO', source,
+          'ventana='+str(dates[0])+'..'+str(dates[-1]),
+          'campos='+repr(list(calendar[0].keys()) if calendar else []),
+          'filas='+str(len(calendar)),
+          'sin_fechas='+str(missing),
+          'fechas_invalidas='+str(invalid),
+          'periodos_solapados='+str(overlaps),
+          'rango_inicio='+str(min(starts) if starts else None)+'..'+str(max(starts) if starts else None),
+          'rango_fin='+str(min(ends) if ends else None)+'..'+str(max(ends) if ends else None),
+          'excepciones='+str(len(exceptions)),
+          'rango_excepciones='+str(min(exception_dates) if exception_dates else None)+'..'+str(max(exception_dates) if exception_dates else None),
+          'service_ids_en_trips='+str(len(declared_ids & trip_ids)),
+          'muestra='+repr(samples),flush=True)
+    if not overlaps and not any(d in set(dates) for d in exception_dates):
+        print('ALERTA CALENDARIO',source,
+              'No se han encontrado calendarios que cubran las fechas solicitadas; '
+              'no se presuponen circulaciones.',flush=True)
+
 
 def stop_key(s):
     """Prefer 5-digit ADIF codes; retain other numeric GTFS ids when legitimate."""
@@ -236,6 +309,7 @@ def parse_archive(raw,source,dates):
         trips=load(z,'trips.txt')
         calendar=load_optional(z,'calendar.txt')
         exceptions=load_optional(z,'calendar_dates.txt')
+        calendar_diagnostic(calendar,exceptions,trips,dates,source)
         services=service_days(calendar,exceptions,dates)
         selected={}; all_recognized={}
         route_preview=[]
