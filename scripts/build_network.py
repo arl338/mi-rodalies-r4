@@ -301,7 +301,7 @@ def validate_official_reference(reference, stations, lines):
         elif unmatched:status='pendiente_contraste'
         else:status='controles_localizados'
         checks.append({'id':line,'area':entry['area'],'corridor':entry['corridor'],
-                       'url':entry['url'],'status':status,
+                       'url':entry['url'],'timetable_pdf':entry.get('timetable_pdf'), 'status':status,
                        'scheduled_trips':live[line]['scheduled_trips_in_period'],
                        'gtfs_station_count':len(stops),
                        'reference_checkpoints':len(entry.get('checkpoints',[])),
