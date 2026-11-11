@@ -236,7 +236,7 @@ function renderResultList(){const root=$('results');root.replaceChildren();for(c
  const selected=(j.cancelled||j.conflict)?j.depart:(j.estimated??j.depart);
  const hasEstimate=j.estimated!==null&&!j.cancelled&&!j.conflict;
  time.append(el('div','train-time',timeFor(selected)),el('div','train-time-label',hasEstimate?'Salida prevista · horario '+timeFor(j.depart):'Salida programada'));
- if(hasEstimate&&j.estimated!==j.depart){const delta=Math.round((j.estimated-j.depart)/60);time.append(el('div','train-delta',delta>=0?'Retraso estimado: +'+delta+' min':'Adelanto estimado: '+Math.abs(delta)+' min'));}
+ if(hasEstimate&&Math.abs(j.estimated-j.depart)>=30){const delta=Math.round((j.estimated-j.depart)/60);time.append(el('div','train-delta',delta>=0?'Retraso estimado: +'+delta+' min':'Adelanto estimado: '+Math.abs(delta)+' min'));}
  time.append(el('div','train-end','Llegada programada '+timeFor(j.arrive)+' · Duración programada '+duration(j.depart,j.arrive)));top.append(time,right);panel.append(top);
  if(j.kind==='direct'){
   const leg=j.legs[0],lineRow=el('div','train-line'),tag=el('span','line-pill '+(/^(R1[34567]|R11)/.test(leg.t.l)?'regional':''),leg.t.l);lineRow.append(tag,document.createTextNode((leg.t.n?'Tren '+leg.t.n:'Servicio sin número publicado')+' · '+stationName(leg.to)));panel.append(lineRow);
