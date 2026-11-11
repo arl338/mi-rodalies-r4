@@ -44,3 +44,19 @@ button:active:not(:disabled){transform:scale(.97);filter:brightness(.92)}
 @media(max-width:370px){.line-field select,.station-field select{font-size:16px}}
 
 .train-card.at-risk{border-left-color:#c47b10}.train-status.at-risk{background:#fff0cf;color:#905616}
+
+/* V2.2.1 — Separate an attributable ETA from timetable-only information. */
+.train-card.estimated{border-left-color:#2870a8}
+.train-status.estimated{background:#e9f2fb;color:#174d7a}
+.train-delta{font-size:12px;font-weight:750;color:#a24710;margin-top:5px;font-variant-numeric:tabular-nums}
+.train-card:focus-within{outline:2px solid #1b5e96;outline-offset:2px}
+#results .train-time{font-variant-numeric:tabular-nums}
+#results .train-time-label{line-height:1.45}
+#results .train-evidence a{color:#174e7a;text-underline-offset:3px}
+#results .train-evidence a:focus-visible,#results a:focus-visible{outline:2px solid #0f568d;outline-offset:3px}
+@media(max-width:370px){
+ .train-time{font-size:24px}
+ .train-card{padding:12px}
+ .train-top{gap:7px}
+ .train-status{padding:6px 7px;font-size:10px}
+}
