@@ -7,13 +7,13 @@
   <meta name="description" content="Consulta horarios y evidencias de circulación de Rodalies de Catalunya. Datos oficiales y contraste multifuente.">
   <link rel="manifest" href="./manifest.webmanifest">
   <link rel="icon" href="./icon-192.png">
-  <link rel="stylesheet" href="./styles.css?v=205">
+  <link rel="stylesheet" href="./styles.css?v=210">
   <title>Mi Rodalies · Horarios y estado de trenes</title>
 </head>
 <body>
   <div class="shell">
     <header class="topbar">
-      <div class="brand"><div class="logo" aria-hidden="true">R</div><div><h1>Mi Rodalies <span class="version">2.0.5</span></h1><p>Horarios y circulación · Catalunya</p></div></div>
+      <div class="brand"><div class="logo" aria-hidden="true">R</div><div><h1>Mi Rodalies <span class="version">2.1.0</span></h1><p>Horarios y circulación · Catalunya</p></div></div>
       <div id="health" class="health pending" role="status"><i></i><span>Conectando</span></div>
     </header>
     <main>
@@ -46,7 +46,7 @@
         <button id="load-more" class="show-more" type="button" hidden>Mostrar más resultados</button>
         <p id="updated" class="last-updated"></p>
       </section>
-      <details class="info-card" id="catalog-audit-panel"><summary><span>Catálogo oficial de líneas y estaciones</span><span class="summary-right">Cobertura verificada <b aria-hidden="true">⌄</b></span></summary><div class="source-list"><p class="subtle" id="catalog-audit-intro">Comprobando la red de Rodalies con la referencia de la Generalitat.</p><div id="catalog-audit-lines" class="catalog-lines"></div><p class="subtle">La Generalitat identifica líneas y estaciones principales; los nombres con código ADIF verificado se contrastan con ADIF/BOE. Renfe GTFS aporta las paradas y los horarios programados. Las comprobaciones de referencia no son una lista exhaustiva ni acreditan que cada tren pare en todas ellas.</p><p class="subtle"><a href="https://rodalies.gencat.cat/es/linies_estacions_i_trens/index.html" target="_blank" rel="noopener">Consultar catálogo oficial de la Generalitat</a></p></div></details>
+      <details class="info-card" id="catalog-audit-panel"><summary><span>Catálogo oficial de líneas y estaciones</span><span class="summary-right">Cobertura verificada <b aria-hidden="true">⌄</b></span></summary><div class="source-list"><p class="subtle" id="catalog-audit-intro">Comprobando la red de Rodalies con la referencia de la Generalitat.</p><div id="catalog-audit-lines" class="catalog-lines"></div><p class="subtle">El inventario de estaciones es una referencia de red y NO acredita que todos los servicios estén disponibles. Los cuadros PDF oficiales tienen fechas y modificaciones por obras o situaciones extraordinarias. La Generalitat identifica líneas y estaciones principales; los nombres con código ADIF verificado se contrastan con ADIF/BOE. Renfe GTFS aporta las paradas y los horarios programados. Las comprobaciones de referencia no son una lista exhaustiva ni acreditan que cada tren pare en todas ellas.</p><p class="subtle"><a href="https://rodalies.gencat.cat/es/linies_estacions_i_trens/index.html" target="_blank" rel="noopener">Consultar catálogo oficial de la Generalitat</a></p></div></details>
       <details class="info-card" id="algorithm-panel"><summary><span>Cómo calculamos tus horarios · Algoritmo y fuentes</span><span class="summary-right">Metodología auditable <b aria-hidden="true">⌄</b></span></summary>
         <div class="explain algorithm-explain">
           <p><b>0. Identificación de la estación.</b> Código ADIF/GTFS, nombre oficial (incluidas denominaciones nuevas del BOE de 2023), y alias verificados. Los nombres parecidos nunca fusionan estaciones distintas. Google Maps/OpenStreetMap se reservan para investigación de nombres, no para validar recorridos automáticamente.</p>
@@ -64,9 +64,9 @@
       <details class="info-card" id="alerts-panel" open><summary><span>Incidencias que pueden afectarte</span><span class="summary-right"><b aria-hidden="true">⌄</b></span></summary><div id="alerts" class="alert-list"><p class="subtle">Las incidencias aparecerán al consultar un trayecto.</p></div></details>
       <details class="info-card" id="guide-panel"><summary><span>Cómo interpretar las estimaciones</span><span class="summary-right"><b aria-hidden="true">⌄</b></span></summary><div class="explain"><p><b>Horario oficial:</b> servicio programado según GTFS. No demuestra circulación.</p><p><b>Posición reciente:</b> tren identificado con datos operativos recientes; no equivale a un paso confirmado por el andén.</p><p><b>Salida estimada:</b> solo se presenta cuando existe una observación actualizada, atribuible al tren y a esta estación.</p><p><b>Cancelado / contradicción:</b> requiere revisar los avisos y la estación. Dos webs que reutilizan Renfe no constituyen confirmaciones independientes.</p><p><b>Transbordo:</b> conexión teórica entre dos trenes. Se ofrece únicamente un transbordo, con un margen mínimo de ocho minutos; no asegura el enlace durante incidencias.</p><p>La información de esta app es orientativa. Contrasta siempre con las indicaciones oficiales de la estación.</p></div></details>
     </main>
-    <footer><p><strong>Mi Rodalies 2.0.5</strong> · Proyecto independiente, sin publicidad y sin cuentas.</p><p>Líneas: <a href="https://rodalies.gencat.cat/es/linies_estacions_i_trens/index.html" target="_blank" rel="noopener">Generalitat de Catalunya</a>. Horarios: <a href="https://data.renfe.com/dataset/horarios-cercanias" target="_blank" rel="noopener">Renfe Data GTFS</a> (CC BY 4.0). Datos operativos: Renfe Data mediante <a href="https://trenes.valfiguer.com/desarrolladores" target="_blank" rel="noopener">Valfiguer</a> y paneles de <a href="https://radardetrenes.com/docs" target="_blank" rel="noopener">RadarDeTrenes</a>. Uso de información sujeto a disponibilidad y atribución.</p></footer>
+    <footer><p><strong>Mi Rodalies 2.1.0</strong> · Proyecto independiente, sin publicidad y sin cuentas.</p><p>Líneas: <a href="https://rodalies.gencat.cat/es/linies_estacions_i_trens/index.html" target="_blank" rel="noopener">Generalitat de Catalunya</a>. Horarios: <a href="https://data.renfe.com/dataset/horarios-cercanias" target="_blank" rel="noopener">Renfe Data GTFS</a> (CC BY 4.0). Datos operativos: Renfe Data mediante <a href="https://trenes.valfiguer.com/desarrolladores" target="_blank" rel="noopener">Valfiguer</a> y paneles de <a href="https://radardetrenes.com/docs" target="_blank" rel="noopener">RadarDeTrenes</a>. Uso de información sujeto a disponibilidad y atribución.</p></footer>
   </div>
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
-  <script src="./engine.js?v=205" defer></script>
-  <script src="./app.js?v=205" defer></script>
+  <script src="./engine.js?v=210" defer></script>
+  <script src="./app.js?v=210" defer></script>
 </body></html>
