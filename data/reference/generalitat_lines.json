@@ -4,7 +4,7 @@
   "source_index": "https://rodalies.gencat.cat/es/linies_estacions_i_trens/index.html",
   "source_barcelona": "https://rodalies.gencat.cat/es/sobre-rodalies/linies-i-estacions/servei_rodalia_barcelona/",
   "source_regionals": "https://rodalies.gencat.cat/es/sobre-rodalies/linies-i-estacions/servei_regionals/",
-  "note": "Los puntos de control NO son un listado exhaustivo de estaciones ni un patrón obligatorio de cada tren. Pueden existir variaciones por obras o servicios parciales. No se utilizan para añadir trenes. Estaciones con código ADIF verificado se contrastan por código en primer lugar; los alias se usan para búsqueda y auditoría, nunca para fusionar estaciones distintas.",
+  "note": "Los puntos de control NO son un listado exhaustivo de estaciones ni un patrón obligatorio de cada tren. Pueden existir variaciones por obras o servicios parciales. No se utilizan para añadir trenes. Estaciones con código ADIF verificado se contrastan por código en primer lugar; los alias se usan para búsqueda y auditoría, nunca para fusionar estaciones distintas. Los PDF se enlazan como referencia informativa; pueden tener calendarios y modificaciones especiales y NO se convierten en GTFS automáticamente.",
   "lines": [
     {
       "id": "R1",
@@ -27,7 +27,8 @@
             "Maçanet-Massanes"
           ]
         }
-      ]
+      ],
+      "timetable_pdf": "https://rodalies.gencat.cat/web/.content/02_Horaris/horaris/R1.pdf"
     },
     {
       "id": "R2",
@@ -43,7 +44,8 @@
           "name": "Granollers Centre",
           "aliases": []
         }
-      ]
+      ],
+      "timetable_pdf": "https://rodalies.gencat.cat/web/.content/02_Horaris/horaris/R2.pdf"
     },
     {
       "id": "R2N",
@@ -70,7 +72,8 @@
             "Maçanet-Massanes"
           ]
         }
-      ]
+      ],
+      "timetable_pdf": "https://rodalies.gencat.cat/web/.content/02_Horaris/horaris/R2.pdf"
     },
     {
       "id": "R2S",
@@ -98,7 +101,8 @@
             "St. Vicenç de Calders"
           ]
         }
-      ]
+      ],
+      "timetable_pdf": "https://rodalies.gencat.cat/web/.content/02_Horaris/horaris/R2.pdf"
     },
     {
       "id": "R3",
@@ -121,7 +125,8 @@
           "name": "Puigcerdà",
           "aliases": []
         }
-      ]
+      ],
+      "timetable_pdf": "https://rodalies.gencat.cat/web/.content/02_Horaris/horaris/R3.pdf"
     },
     {
       "id": "R4",
@@ -167,7 +172,8 @@
             "St. Vicenç de Calders"
           ]
         }
-      ]
+      ],
+      "timetable_pdf": "https://rodalies.gencat.cat/web/.content/02_Horaris/horaris/R4.pdf"
     },
     {
       "id": "R7",
@@ -188,7 +194,8 @@
           "aliases": [],
           "adif_code": "72503"
         }
-      ]
+      ],
+      "timetable_pdf": "https://rodalies.gencat.cat/web/.content/02_Horaris/horaris/R7.pdf"
     },
     {
       "id": "R8",
@@ -213,7 +220,8 @@
           "name": "Granollers Centre",
           "aliases": []
         }
-      ]
+      ],
+      "timetable_pdf": "https://rodalies.gencat.cat/web/.content/02_Horaris/horaris/R8.pdf"
     },
     {
       "id": "RG1",
@@ -240,7 +248,8 @@
           "name": "Figueres",
           "aliases": []
         }
-      ]
+      ],
+      "timetable_pdf": "https://rodalies.gencat.cat/web/.content/02_Horaris/horaris/RG1.pdf"
     },
     {
       "id": "RT1",
@@ -256,7 +265,8 @@
           "name": "Reus",
           "aliases": []
         }
-      ]
+      ],
+      "timetable_pdf": "https://rodalies.gencat.cat/web/.content/02_Horaris/horaris/RT1RT2.pdf"
     },
     {
       "id": "RT2",
@@ -275,7 +285,8 @@
           "name": "L'Hospitalet de l'Infant",
           "aliases": []
         }
-      ]
+      ],
+      "timetable_pdf": "https://rodalies.gencat.cat/web/.content/02_Horaris/horaris/RT1RT2.pdf"
     },
     {
       "id": "RL3",
@@ -295,7 +306,8 @@
           "name": "Cervera",
           "aliases": []
         }
-      ]
+      ],
+      "timetable_pdf": "https://rodalies.gencat.cat/web/.content/02_Horaris/horaris/RL3RL4.pdf"
     },
     {
       "id": "RL4",
@@ -319,7 +331,8 @@
           ],
           "adif_code": "78700"
         }
-      ]
+      ],
+      "timetable_pdf": "https://rodalies.gencat.cat/web/.content/02_Horaris/horaris/RL3RL4.pdf"
     },
     {
       "id": "R11",
@@ -343,7 +356,8 @@
           "name": "Portbou",
           "aliases": []
         }
-      ]
+      ],
+      "timetable_pdf": "https://rodalies.gencat.cat/web/.content/02_Horaris/horaris/R11.pdf"
     },
     {
       "id": "R13",
@@ -372,7 +386,8 @@
           ],
           "adif_code": "78400"
         }
-      ]
+      ],
+      "timetable_pdf": "https://rodalies.gencat.cat/web/.content/02_Horaris/horaris/R13R14.pdf"
     },
     {
       "id": "R14",
@@ -405,7 +420,8 @@
           ],
           "adif_code": "78400"
         }
-      ]
+      ],
+      "timetable_pdf": "https://rodalies.gencat.cat/web/.content/02_Horaris/horaris/R13R14.pdf"
     },
     {
       "id": "R15",
@@ -433,7 +449,8 @@
             "Riba-roja de Ebro"
           ]
         }
-      ]
+      ],
+      "timetable_pdf": "https://rodalies.gencat.cat/web/.content/02_Horaris/horaris/R15.pdf"
     },
     {
       "id": "R16",
@@ -458,7 +475,8 @@
           "name": "Tortosa",
           "aliases": []
         }
-      ]
+      ],
+      "timetable_pdf": "https://rodalies.gencat.cat/web/.content/02_Horaris/horaris/R16.pdf"
     },
     {
       "id": "R17",
@@ -484,7 +502,8 @@
           ],
           "adif_code": "65411"
         }
-      ]
+      ],
+      "timetable_pdf": "https://rodalies.gencat.cat/web/.content/02_Horaris/horaris/R17RT2.pdf"
     }
   ],
   "station_name_reference": "https://boe.es/diario_boe/txt.php?id=BOE-A-2023-4789"
