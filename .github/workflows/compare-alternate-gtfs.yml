@@ -1,0 +1,26 @@
+name: Comparar fuentes GTFS alternativas · solo auditoría
+on:
+  push:
+    branches: [audit/official-stations-live-correlation-20261111]
+    paths:
+      - 'scripts/compare_alternate_gtfs.py'
+      - '.github/workflows/compare-alternate-gtfs.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Auditar copias del GTFS Renfe
+        run: python scripts/compare_alternate_gtfs.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: alternate-gtfs-coverage
+          path: alternate-gtfs-coverage.json
+          retention-days: 7
