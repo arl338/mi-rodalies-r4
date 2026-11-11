@@ -1,0 +1,70 @@
+name: Validar nueva cobertura de estaciones · sin despliegue
+
+on:
+  push:
+    branches:
+      - 'feature/complete-station-catalog-v2-1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  catalogo:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Sintaxis y pruebas
+        run: |
+          python -m py_compile scripts/*.py
+          node --check app.js
+          node --check engine.js
+          node tests/test_engine.cjs
+          node tests/test_feed_schemas.cjs
+          node tests/test_precision.cjs
+          python -m unittest discover -s tests -p 'test_[!u]*.py' -q
+      - name: Descargar GTFS original una vez
+        run: |
+          python - <<'PY'
+          import sys
+          from pathlib import Path
+          sys.path.insert(0,'scripts')
+          from build_network import download,CERCANIAS
+          Path('/tmp/rodalies-cer.zip').write_bytes(download(CERCANIAS))
+          PY
+      - name: Auditar y regenerar
+        run: |
+          python scripts/audit_gtfs.py --zip /tmp/rodalies-cer.zip --days 14 --out data/v2/source_audit.json
+          python scripts/build_network.py --cer-zip /tmp/rodalies-cer.zip --days 14 --out data/v2
+          python scripts/validate_generated.py --out data/v2 --days 14
+      - name: Validación de inventario completo y tiempos reales
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('data/v2')
+          c=json.loads((p/'catalog.json').read_text(encoding='utf-8'))
+          assert c['network_reference']['reference_station_count']==200
+          assert len(c['lines'])==19
+          assert len(c['stations'])>=200
+          assert all(sum(line['id'] in st['lines'] for st in c['stations'])>=2 for line in c['lines'])
+          for st in c['stations']:
+            assert set(st['schedule_lines']).issubset(set(st['lines']))
+            if st['reference_only']:assert not st['schedule_lines']
+          print('ESTACIONES:',len(c['stations']),'LÍNEAS:',len(c['lines']))
+          print('SOLO INVENTARIO:',sum(s['reference_only'] for s in c['stations']))
+          print('SIN HORARIOS POR LÍNEA:',[x['id'] for x in c['lines'] if not x['present']])
+          PY
+      - name: Guardar catálogo de prueba sin publicarlo
+        uses: actions/upload-artifact@v4
+        with:
+          name: new-station-catalog
+          path: data/v2/
+          retention-days: 3
