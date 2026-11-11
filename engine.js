@@ -49,6 +49,12 @@ function normalizeBoard(obj,source,now,requestedStation=''){const overallAge=sou
   // A malformed or future row timestamp cannot be rescued by a fresh response header.
   const age=rowStamp!==null&&rowStamp!==undefined?rowAge:(rawAge!==null&&rawAge>=0?rawAge:overallAge);
   const state=String(r.circulationState??r.state??r.status??'');
+  // Some station APIs include estimated_ts even for trains that have only
+  // a planned schedule. A scheduled-only record with no measured delay
+  // is NOT an operational ETA, even when its estimated_ts is populated.
+  const scheduledOnly=/^(scheduled|timetabled|planificado|programado)$/i.test(state.trim());
+  const explicitDelay=(ds!==null||dm!==null);
+  if(scheduledOnly&&!explicitDelay)estimated=null;
   const station=String(r.stationCode??r.station_code??r.stop_id??obj?.station?.code??requestedStation??'');
   if(requestedStation&&station&&station!==String(requestedStation))continue;
   const nucleus=r.nucleo??r.nucleus??r.core??obj?.station?.nucleo??'';
