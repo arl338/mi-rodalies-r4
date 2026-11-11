@@ -1,0 +1,33 @@
+name: Sondeo API fuentes R4 · solo metadatos
+
+on:
+  push:
+    branches:
+      - 'audit/**'
+    paths:
+      - 'scripts/probe_live_feeds.py'
+      - '.github/workflows/sondeo-fuentes-r4.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  sondeo:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Comprobar sintaxis
+        run: python -m py_compile scripts/probe_live_feeds.py
+      - name: Consultar metadatos de fuentes sin retener payloads
+        run: python scripts/probe_live_feeds.py
+      - name: Conservar resumen de estructura y disponibilidad
+        uses: actions/upload-artifact@v4
+        with:
+          name: r4-feed-probe
+          path: feed-probe-report.json
+          retention-days: 7
