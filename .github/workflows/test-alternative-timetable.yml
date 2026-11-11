@@ -8,6 +8,7 @@ on:
       - 'tests/test_trenalia_fallback.cjs'
       - 'tests/test_trenalia_live.cjs'
       - 'tests/test_trenalia_alignment.cjs'
+      - 'tests/test_timetable_live_correlation.cjs'
       - '.github/workflows/test-alternative-timetable.yml'
   workflow_dispatch:
 permissions:
@@ -29,6 +30,7 @@ jobs:
           node tests/test_feed_schemas.cjs
           node tests/test_precision.cjs
           node tests/test_trenalia_fallback.cjs
+          node tests/test_timetable_live_correlation.cjs
       - name: Validación con respuestas reales sin guardarlas
         run: |
           node tests/test_trenalia_live.cjs
