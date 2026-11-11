@@ -1,0 +1,19 @@
+name: Probe additional R4 per-train stop ETAs
+on:
+  push:
+    branches: [audit/final-precision-proof-20261111]
+    paths:
+      - scripts/probe_r4_train_stops.cjs
+      - .github/workflows/probe-r4-train-stops.yml
+permissions: {contents: read}
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - run: |
+          node --check scripts/probe_r4_train_stops.cjs
+          node scripts/probe_r4_train_stops.cjs
