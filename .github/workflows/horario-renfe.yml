@@ -43,7 +43,8 @@ jobs:
           node tests/test_engine.cjs
           node tests/test_feed_schemas.cjs
           node tests/test_precision.cjs
-          python -m unittest discover -s tests -p 'test_*.py' -q
+          # Testes unitarios del generador; los test_ui*.py usan Playwright y se ejecutan en navegador aparte.
+          python -m unittest discover -s tests -p 'test_[!u]*.py' -q
       - name: Descargar fuente GTFS Cercanías verificable
         run: |
           python - <<'PY'
