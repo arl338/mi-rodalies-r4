@@ -1,0 +1,28 @@
+name: Correlación real GTFS y ETA por línea · sin despliegue
+on:
+  push:
+    branches: [audit/official-stations-live-correlation-20261111]
+    paths:
+      - 'scripts/audit_live_matching_by_line.cjs'
+      - '.github/workflows/audit-live-matching-by-line.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  correlate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Comprobar sintaxis
+        run: node --check scripts/audit_live_matching_by_line.cjs
+      - name: Correlacionar viajes reales sin guardar identificadores
+        run: node scripts/audit_live_matching_by_line.cjs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: matched-live-by-line
+          path: matched-live-by-line.json
+          retention-days: 7
