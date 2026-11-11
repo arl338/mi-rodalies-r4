@@ -130,37 +130,6 @@ function transfers(trains,from,to,start,end,limit=32){
  return [...best.values()].sort((a,b)=>a.depart-b.depart||a.arrive-b.arrive).slice(0,limit);
 }
 
-/**
- * Emergency fallback for a missing GTFS journey, valid ONLY for today's
- * observed boards. Both endpoint calls must independently refer to the
- * same train and commercial line. No interpolation of intermediate stops.
- */
-function boardOnlyDirect(from,to,fromRows,toRows,start,end,now){
- if(!/^[0-9]{5}$/.test(String(from))||!/^[0-9]{5}$/.test(String(to))||from===to)return [];
- const fresh=x=>!x.stale&&x.age!==null&&x.age>=0&&x.age<=180&&
-  x.planned!==null&&Number.isFinite(x.planned);
- const valid=(x,station)=>fresh(x)&&x.station===station&&x.line&&LINES.has(x.line)&&x.number;
- const result=new Map();
- for(const o of fromRows){
-  if(!valid(o,from)||o.planned<start||o.planned>end||o.planned<now-300)continue;
-  for(const d of toRows){
-   if(!valid(d,to)||d.line!==o.line||d.number!==o.number)continue;
-   if(o.trip&&d.trip&&o.trip!==d.trip)continue;
-   if(d.planned<=o.planned||d.planned-o.planned>6*3600)continue;
-   const id=o.trip||d.trip||('board:'+o.line+':'+o.number+':'+o.planned);
-   const key=o.line+'|'+o.number+'|'+o.planned+'|'+d.planned;
-   const candidate={id,n:o.number,l:o.line,src:'operational-board',
-     dest:String(d.raw?.destinationName??d.raw?.destination??to),
-     s:[[from,o.planned,o.planned],[to,d.planned,d.planned]],
-     alternative_trip_ids:[...new Set([o.trip,d.trip].filter(Boolean))],
-     board_sources:[o.source,d.source]};
-   const old=result.get(key);
-   if(!old||candidate.alternative_trip_ids.length>old.alternative_trip_ids.length)result.set(key,candidate);
-  }
- }
- return [...result.values()];
-}
-
 function serviceIds(t){return [t.id,...(t.alternative_trip_ids||[])].filter(Boolean).map(String);}
 function matchExact(leg,item){
  const t=leg.t;
@@ -249,5 +218,5 @@ function alertsForLines(obj,lines,stationScoped=false){
  return found.slice(0,12);
 }
 
-return {LINES,norm,line,scopedLine,catalanNucleus,n,ts,rows,normalizeBoard,normalizePositions,normalizeCancels,direct,transfers,boardOnlyDirect,matchExact,matchPosition,enrichLeg,enrichJourney,alertsForLines};
+return {LINES,norm,line,scopedLine,catalanNucleus,n,ts,rows,normalizeBoard,normalizePositions,normalizeCancels,direct,transfers,matchExact,matchPosition,enrichLeg,enrichJourney,alertsForLines};
 });
