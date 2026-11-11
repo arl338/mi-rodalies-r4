@@ -278,6 +278,18 @@ async function search(){if(!catalog){showToast('El catálogo todavía no está d
   if(range.extra)days.push(datePlus(range.day,1));
   // A valid first service day has no preceding publication file.
   const availableDays=days.filter(d=>d>=catalog.coverage_start&&d<=catalog.coverage_end);
+  // Start independent sources in parallel: a slow optional timetable endpoint
+  // must not add its timeout on top of the GTFS and operational requests.
+  const canSupplement=selection.line&&selection.line!=='ALL'&&
+    /^\d{5}$/.test(selection.from)&&/^\d{5}$/.test(selection.to);
+  const query=canSupplement?new URLSearchParams({from:selection.from,to:selection.to,
+    date:range.day,limit:'400'}):null;
+  const supplementalTask=canSupplement?
+    loadJson('https://trenalia.org/api/v1/timetable?'+query,signal,CONFIG.timeoutMs)
+      .then(data=>({data}),error=>({error})):Promise.resolve(null);
+  const today=madridDate(),live=range.day===today&&/^\d{5}$/.test(selection.from);
+  const jobs=live?sourceJobs(selection.from):[];
+  const operationalTask=live?Promise.allSettled(jobs.map(j=>loadJson(j.url,signal))):Promise.resolve([]);
   const daily=await Promise.all(availableDays.map(d=>dayData(d,signal)));
   if(signal.aborted||id!==requestId)return;
   const trips=daily.flatMap(x=>x.trains.map(t=>({...t,day:x.day})));
@@ -285,27 +297,21 @@ async function search(){if(!catalog){showToast('El catálogo todavía no está d
   // The optional timetable fallback has no reliable train number or individual
   // intermediate stop times. It MUST NOT replace an available GTFS itinerary.
   let fallback=[],fallbackAvailable=false,fallbackError=null;
-  if(selection.line&&selection.line!=='ALL'&&
-     /^\d{5}$/.test(selection.from)&&/^\d{5}$/.test(selection.to)){
-   const params=new URLSearchParams({from:selection.from,to:selection.to,
-     date:range.day,limit:'400'});
-   try{
-    const thirdParty=await loadJson('https://trenalia.org/api/v1/timetable?'+params,
-      signal,CONFIG.timeoutMs);
-    if(signal.aborted||id!==requestId)return;
+  if(canSupplement){
+   const candidate=await supplementalTask;
+   if(signal.aborted||id!==requestId)return;
+   if(candidate?.data){
     fallbackAvailable=true;
-    fallback=E.normalizeTrenaliaTimetable(thirdParty,selection.from,
+    fallback=E.normalizeTrenaliaTimetable(candidate.data,selection.from,
       selection.to,range.day,selection.line);
-    const supplemental=E.direct(fallback,selection.from,selection.to,
-      range.start,range.end);
+    const supplemental=E.direct(fallback,selection.from,selection.to,range.start,range.end);
     scheduled=E.mergeSupplementalJourneys(scheduled,supplemental);
-   }catch(err){if(signal.aborted||id!==requestId)return;fallbackError=err;}
+   }else fallbackError=candidate?.error||new Error('Sin horario alternativo');
   }
   if(!scheduled.length&&daily.every(x=>x.trains.length===0))showToast('Sin horarios oficiales para esa fecha');
   $('status').textContent=`${scheduled.length} opciones programadas. Contrastando datos…`;
   // Do not send reference-only IDs to providers as verified ADIF station codes.
-  const today=madridDate(),live=range.day===today&&/^\d{5}$/.test(selection.from), jobs=live?sourceJobs(selection.from):[];
-  const res=live?await Promise.allSettled(jobs.map(j=>loadJson(j.url,signal))):[];
+  const res=await operationalTask;
   if(signal.aborted||id!==requestId)return;
   const now=Math.floor(Date.now()/1000);
   const data=i=>res[i]?.status==='fulfilled'?res[i].value:null;
