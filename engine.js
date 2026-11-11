@@ -54,7 +54,7 @@ function normalizeBoard(obj,source,now,requestedStation=''){const overallAge=sou
   // is NOT an operational ETA, even when its estimated_ts is populated.
   const scheduledOnly=/^(scheduled|timetabled|planificado|programado)$/i.test(state.trim());
   const explicitDelay=(ds!==null||dm!==null);
-  if(scheduledOnly&&!explicitDelay)estimated=null;
+  if(tt==='SCHEDULED'||scheduledOnly&&!explicitDelay)estimated=null;
   const station=String(r.stationCode??r.station_code??r.stop_id??obj?.station?.code??requestedStation??'');
   if(requestedStation&&station&&station!==String(requestedStation))continue;
   const nucleus=r.nucleo??r.nucleus??r.core??obj?.station?.nucleo??'';
