@@ -226,12 +226,16 @@ function buildWindow(dayTrains,range){const good=dayTrains.filter(t=>E.LINES.has
 }
 function timeFor(t){return fmtTime(t);}
 function duration(start,end){const min=Math.round((end-start)/60);return min>=60?`${Math.floor(min/60)} h ${String(min%60).padStart(2,'0')} min`:`${min} min`;}
-function stateName(st){return {scheduled:'Solo horario',live:'Posición reciente',cancelled:'Cancelado',conflict:'Datos contradictorios',transfer:'1 transbordo', 'at-risk':'Conexión en riesgo'}[st]||'Sin verificar';}
+function stateName(st){return {scheduled:'Solo horario',estimated:'Hora estimada',live:'Posición reciente',cancelled:'Cancelado',conflict:'Datos contradictorios',transfer:'1 transbordo','at-risk':'Conexión en riesgo'}[st]||'Sin verificar';}
+function displayEvidenceState(j){return j.state==='scheduled'&&j.estimated!==null?'estimated':j.state;}
 function stationName(id){return stationMap.get(id)?.name||id;}
 function renderResultList(){const root=$('results');root.replaceChildren();for(const j of results.slice(0,visible)){
- const panel=el('article','train-card '+j.state),top=el('div','train-top'),time=el('div'),right=el('span','train-status '+j.state,stateName(j.state));
+ const evidenceState=displayEvidenceState(j);
+ const panel=el('article','train-card '+evidenceState),top=el('div','train-top'),time=el('div'),right=el('span','train-status '+evidenceState,stateName(evidenceState));
  const selected=(j.cancelled||j.conflict)?j.depart:(j.estimated??j.depart);
- time.append(el('div','train-time',timeFor(selected)),el('div','train-time-label',(j.estimated&&!j.cancelled&&!j.conflict)?'Salida estimada · programada '+timeFor(j.depart):'Salida programada'));
+ const hasEstimate=j.estimated!==null&&!j.cancelled&&!j.conflict;
+ time.append(el('div','train-time',timeFor(selected)),el('div','train-time-label',hasEstimate?'Salida prevista · horario '+timeFor(j.depart):'Salida programada'));
+ if(hasEstimate&&j.estimated!==j.depart){const delta=Math.round((j.estimated-j.depart)/60);time.append(el('div','train-delta',delta>=0?'Retraso estimado: +'+delta+' min':'Adelanto estimado: '+Math.abs(delta)+' min'));}
  time.append(el('div','train-end','Llegada programada '+timeFor(j.arrive)+' · Duración programada '+duration(j.depart,j.arrive)));top.append(time,right);panel.append(top);
  if(j.kind==='direct'){
   const leg=j.legs[0],lineRow=el('div','train-line'),tag=el('span','line-pill '+(/^(R1[34567]|R11)/.test(leg.t.l)?'regional':''),leg.t.l);lineRow.append(tag,document.createTextNode((leg.t.n?'Tren '+leg.t.n:'Servicio sin número publicado')+' · '+stationName(leg.to)));panel.append(lineRow);
@@ -255,10 +259,11 @@ function updateSummary(range,scheduleCount,live){const direct=results.filter(x=>
  $('results-title').textContent=(selection.line==='ALL'?'Red Rodalies':selection.line)+' · '+stationName(selection.from)+' → '+stationName(selection.to);
  $('results-subtitle').textContent=range.day+' · '+range.from+'–'+range.to+(range.extra?' (hasta mañana)':'');
  $('results-total').textContent=results.length+' '+(results.length===1?'opción':'opciones');
+ const etaCount=results.filter(x=>x.estimated!==null&&!x.cancelled&&!x.conflict).length;
  const st=$('status');if(!results.length){st.className='notice warn';st.textContent=scheduleCount?'No se han encontrado servicios directos ni conexiones de un transbordo en esta franja. No implica que el servicio esté suspendido.':'No hay servicios GTFS verificables para esta combinación de estaciones, línea y fecha. El inventario no garantiza circulación.';
   const refPdf=catalog?.official_reference?.lines?.find(l=>l.id===selection.line)?.timetable_pdf;
   const a=el('a','','Consultar cuadro horario oficial de '+selection.line);a.href=refPdf||'https://rodalies.gencat.cat/es/horaris/tots-els-horaris/';a.target='_blank';a.rel='noopener noreferrer';st.append(document.createTextNode(' · '),a);}
- else{st.className='notice '+(cancel?'warn':pos?'good':'neutral');st.textContent=`${direct} directos · ${transfer} con un transbordo · ${pos} con posición reciente · ${cancel} cancelados. Las horas programadas no confirman circulación.`;}
+ else{st.className='notice '+(cancel?'warn':pos?'good':'neutral');st.textContent=`${direct} directos · ${transfer} con un transbordo · ${etaCount} con hora estimada · ${pos} con posición reciente · ${cancel} cancelados. Sin observación válida se mantiene el horario programado.`;}
  const age=Date.now()-Date.parse(catalog?.generated_at||'');
  $('updated').textContent=`Consulta ${fmtTime(Date.now()/1000)} · Datos operativos: ${live?'consultados en este momento':'solo horarios programados para fecha futura'}. ${Number.isFinite(age)&&age>48*3600000?'ATENCIÓN: GTFS sin regenerar desde hace más de 48 horas. ':''}Esta aplicación es orientativa.`;
 }
@@ -270,7 +275,9 @@ async function search(){if(!catalog){showToast('El catálogo todavía no está d
   // train can depart after 06:00. Always include the preceding service day.
   const days=[datePlus(range.day,-1),range.day];
   if(range.extra)days.push(datePlus(range.day,1));
-  const daily=await Promise.all(days.map(d=>dayData(d,signal)));
+  // A valid first service day has no preceding publication file.
+  const availableDays=days.filter(d=>d>=catalog.coverage_start&&d<=catalog.coverage_end);
+  const daily=await Promise.all(availableDays.map(d=>dayData(d,signal)));
   if(signal.aborted||id!==requestId)return;
   const trips=daily.flatMap(x=>x.trains.map(t=>({...t,day:x.day})));
   let scheduled=buildWindow(trips,range);
@@ -323,10 +330,14 @@ async function search(){if(!catalog){showToast('El catálogo todavía no está d
 async function refreshRuntime(){
  if(document.hidden||isBusy||!catalog)return;
  const today=madridDate();
+ // Rolling quick windows must advance while the app stays open.
+ if(quickValue!==null){const next=Math.ceil((Date.now()+180000)/300000)*300000;
+  if($('trip-date').value!==madridDate(next)||$('from-time').value!==timeInput(next))selectQuick(quickValue);
+ }
  if(lastLocalDay!==today){
   const old=lastLocalDay;lastLocalDay=today;
   $('trip-date').min=today;$('trip-date').max=datePlus(today,CONFIG.nearDays-1);
-  if($('trip-date').value<today||quickValue!==null){selectQuick(quickValue||2);}
+  if($('trip-date').value<today){selectQuick(quickValue||2);}
   else if(old){invalidateResults();}
  }
  if(Date.now()-lastCatalogCheck>=5*60000){
