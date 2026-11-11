@@ -1,0 +1,55 @@
+name: 'Validar V2.2.2 - ETA real, caches y PWA'
+on:
+  push:
+    branches: [release/v2-2-2-eta-integrity]
+  pull_request:
+    paths: ['engine.js','tests/test_schedule_vs_eta.cjs','tests/test_response_cache_age.cjs','index.html','sw.js','.github/workflows/test-release-v222.yml']
+permissions: {contents: read}
+jobs:
+  logic:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with: {python-version: '3.12'}
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - name: Sintaxis y regresiones críticas
+        run: |
+          node --check engine.js
+          node --check app.js
+          node --check sw.js
+          node tests/test_engine.cjs
+          node tests/test_feed_schemas.cjs
+          node tests/test_precision.cjs
+          node tests/test_trenalia_fallback.cjs
+          node tests/test_timetable_live_correlation.cjs
+          node tests/test_position_delay_fallback.cjs
+          node tests/test_merge_alternative_journeys.cjs
+          node tests/test_schedule_vs_eta.cjs
+          node tests/test_response_cache_age.cjs
+          python -m unittest discover -s tests -p 'test_[!u]*.py' -q
+      - name: Integridad GTFS y versión PWA
+        run: |
+          python scripts/validate_generated.py --out data/v2 --days 14
+          python - <<'PY'
+          from pathlib import Path
+          html=Path('index.html').read_text()
+          sw=Path('sw.js').read_text()
+          assert '2.2.2' in html and '?v=222' in html
+          assert 'mi-rodalies-v2.2.2' in sw and '?v=222' in sw
+          print('OK: version 2.2.2 y cache PWA coherentes')
+          PY
+  live:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - name: Contratos y correspondencia de horarios reales
+        run: |
+          node tests/test_trenalia_live.cjs
+          node tests/test_trenalia_alignment.cjs
+          node tests/test_live_anonymous_eta.cjs
