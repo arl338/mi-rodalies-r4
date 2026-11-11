@@ -1,0 +1,29 @@
+name: Matriz 19 líneas · horarios + datos operativos
+on:
+  push:
+    branches: [audit/official-stations-live-correlation-20261111]
+    paths:
+      - 'scripts/probe_line_matrix.cjs'
+      - '.github/workflows/measure-line-matrix.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  matrix:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validar sintaxis
+        run: node --check scripts/probe_line_matrix.cjs
+      - name: Contrastar 19 líneas con 3 fuentes externas y GTFS
+        run: node scripts/probe_line_matrix.cjs
+      - name: Conservar solo metadatos y recuentos
+        uses: actions/upload-artifact@v4
+        with:
+          name: line-source-matrix
+          path: line-source-matrix.json
+          retention-days: 7

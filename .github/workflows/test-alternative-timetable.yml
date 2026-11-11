@@ -1,0 +1,41 @@
+name: Validar horarios externos sin publicar
+on:
+  push:
+    branches: [audit/official-stations-live-correlation-20261111]
+    paths:
+      - 'engine.js'
+      - 'app.js'
+      - 'tests/test_trenalia_fallback.cjs'
+      - 'tests/test_trenalia_live.cjs'
+      - 'tests/test_trenalia_alignment.cjs'
+      - 'tests/test_timetable_live_correlation.cjs'
+      - 'tests/test_position_delay_fallback.cjs'
+      - 'tests/test_live_anonymous_eta.cjs'
+      - '.github/workflows/test-alternative-timetable.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Sintaxis y regresiones base
+        run: |
+          node --check engine.js
+          node --check app.js
+          node tests/test_engine.cjs
+          node tests/test_feed_schemas.cjs
+          node tests/test_precision.cjs
+          node tests/test_trenalia_fallback.cjs
+          node tests/test_timetable_live_correlation.cjs
+          node tests/test_position_delay_fallback.cjs
+      - name: Validación con respuestas reales sin guardarlas
+        run: |
+          node tests/test_trenalia_live.cjs
+          node tests/test_trenalia_alignment.cjs
+          node tests/test_live_anonymous_eta.cjs
