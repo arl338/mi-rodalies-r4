@@ -1,0 +1,33 @@
+name: R4 · consistencia temporal de ETA · sin despliegue
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - 'audit/**'
+    paths:
+      - 'scripts/measure_r4_consistency.cjs'
+      - '.github/workflows/medicion-r4.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  consistencia:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Comprobar sintaxis
+        run: node --check scripts/measure_r4_consistency.cjs
+      - name: Tres observaciones separadas 30 segundos
+        run: node scripts/measure_r4_consistency.cjs
+      - name: Publicar exclusivamente métricas agregadas
+        uses: actions/upload-artifact@v4
+        with:
+          name: r4-consistency
+          path: r4-consistency-report.json
+          retention-days: 7
