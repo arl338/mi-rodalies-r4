@@ -11,6 +11,7 @@ on:
       - 'tests/test_timetable_live_correlation.cjs'
       - 'tests/test_position_delay_fallback.cjs'
       - 'tests/test_live_anonymous_eta.cjs'
+      - 'tests/test_merge_alternative_journeys.cjs'
       - '.github/workflows/test-alternative-timetable.yml'
   workflow_dispatch:
 permissions:
@@ -34,6 +35,7 @@ jobs:
           node tests/test_trenalia_fallback.cjs
           node tests/test_timetable_live_correlation.cjs
           node tests/test_position_delay_fallback.cjs
+          node tests/test_merge_alternative_journeys.cjs
       - name: Validación con respuestas reales sin guardarlas
         run: |
           node tests/test_trenalia_live.cjs
