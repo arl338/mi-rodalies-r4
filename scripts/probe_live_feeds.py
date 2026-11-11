@@ -56,8 +56,14 @@ def describe(value):
                 non_null = [v for v in values if v is not None]
                 if values:
                     field_diagnostics[field] = {"present": len(non_null), "null": len(values)-len(non_null), "types": sorted(set(type(v).__name__ for v in non_null))}
+        geo_properties = {}
+        if rows and isinstance(rows[0], dict) and isinstance(rows[0].get("properties"), dict):
+            props = rows[0]["properties"]
+            geo_properties["keys"] = sorted(props.keys())[:80]
+            if isinstance(props.get("runs"), list) and props["runs"] and isinstance(props["runs"][0], dict):
+                geo_properties["first_run_keys"] = sorted(props["runs"][0].keys())[:80]
         return {"root_type": "object", "root_keys": keys[:80],
-                "field_diagnostics": field_diagnostics,
+                "field_diagnostics": field_diagnostics, "geo_properties": geo_properties,
                 "array_counts": arrays, "first_row_keys": row_keys[:80]}
     if isinstance(value, list):
         return {"root_type": "array", "length": len(value),
