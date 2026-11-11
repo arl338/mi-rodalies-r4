@@ -22,6 +22,19 @@ async function main(){
       stats.fields[k].examples=options;
     }
    }
+   const count=(arr,key)=>(arr.filter(x=>x[key]===true).length);
+   const shape=v=>v===null||v===undefined?'missing':typeof v!=='string'?typeof v:
+      /^\\d{4}-\\d\\d-\\d\\dT/.test(v)?'ISO_datetime':
+      /^\\d\\d:\\d\\d(?::\\d\\d)?$/.test(v)?'HH_MM':
+      /^\\d+$/.test(v)?'numeric_string':'other_string';
+   stats.estimated_true=count(r,'estimated');
+   stats.live_true=count(r,'live');
+   stats.live_and_estimated=r.filter(x=>x.live===true&&x.estimated===true).length;
+   stats.estimated_not_live=r.filter(x=>x.live!==true&&x.estimated===true).length;
+   stats.schedule_patterns=[...new Set(r.map(x=>shape(x.scheduledTime)))];
+   stats.estimate_patterns=[...new Set(r.map(x=>shape(x.estimatedTime)))];
+   stats.id_patterns=[...new Set(r.map(x=>typeof x.id==='string'?
+      x.id.replace(/\\d+/g,'#').slice(0,35):typeof x.id))].slice(0,12);
    info.push(stats);
   }catch(e){info.push({station:code,error:e.name});}
  }
