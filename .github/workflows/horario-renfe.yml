@@ -36,6 +36,8 @@ jobs:
           node --check engine.js
           node tests/test_engine.cjs
           node tests/test_feed_schemas.cjs
+      - name: Auditar paradas originales GTFS Renfe
+        run: python scripts/audit_gtfs.py --days 14 --out data/v2/source_audit.json
       - name: Obtener GTFS Renfe y contrastar líneas con Generalitat
         run: python scripts/build_network.py --days 14 --out data/v2
       - name: Validar JSON generado y servicios
