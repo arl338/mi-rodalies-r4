@@ -28,7 +28,7 @@ function ageSeconds(stamp,now){
  // Clock skew beyond 30 seconds is not proof of a recent observation.
  return age>=-30?Math.max(0,age):null;
 }
-function sourceAge(o,now){return ageSeconds(o?.generated_ts??o?.generated_at??o?.updatedAt??o?.updated_at??o?.reported_at??o?.last_updated,now);}
+function sourceAge(o,now){return ageSeconds(o?.generated_ts??o?.generated_at??o?.generatedAt??o?.updatedAt??o?.updated_at??o?.reported_at??o?.last_updated,now);}
 function normalizeBoard(obj,source,now,requestedStation=''){const overallAge=sourceAge(obj,now),out=[];
  for(const original of rows(obj)){
   const r=original?.properties||original;
@@ -54,7 +54,7 @@ function normalizeBoard(obj,source,now,requestedStation=''){const overallAge=sou
   const nucleus=r.nucleo??r.nucleus??r.core??obj?.station?.nucleo??'';
   if(foreignNucleus(nucleus))continue;
   const scoped=!!requestedStation&&station===String(requestedStation);
-  out.push({source,number:num,trip,line:scopedLine(r.line,nucleus,scoped)||scopedLine(r.product,nucleus,scoped)||scopedLine(r.route,nucleus,scoped),planned,estimated,stale:truth(r.stale),
+  out.push({source,number:num,trip,line:scopedLine(r.line,nucleus,scoped)||scopedLine(r.product,nucleus,scoped)||scopedLine(r.route,nucleus,scoped),planned,estimated,stale:truth(r.stale)||truth(obj?.stale),
    platform:String(r.platform??r.track??r.via??''),cancelled:truth(r.cancelled)||/cancel|suprim|anula|supprim|suppress|suspend/i.test(state),
    age,station,raw:r});
  }return out;
@@ -79,8 +79,12 @@ function normalizePositions(obj,source,now){const out=[];
    const nucleus=run.nucleo??p.nucleo??run.core??p.core??'';
    if(foreignNucleus(nucleus))continue;
    const ln=scopedLine(run.line,nucleus)||scopedLine(p.line,nucleus)||scopedLine(run.product,nucleus)||scopedLine(p.product,nucleus)||scopedLine(run.route,nucleus);
+   const seconds=n(run.delay_s??p.delay_s??run.delaySeconds??p.delaySeconds);
+   const minutes=n(run.delayMinutes??p.delayMinutes??run.delay_minutes??p.delay_minutes);
+   const delaySeconds=seconds!==null?seconds:minutes!==null?minutes*60:null;
    out.push({source,trip,number:num,line:ln,day:String(run.day??run.service_day??p.service_day??''),age,
-    stale:truth(run.stale)||truth(p.stale),cancelled:truth(run.cancelled),reported,category});
+    stale:truth(run.stale)||truth(p.stale),cancelled:truth(run.cancelled),reported,category,
+    delaySeconds:delaySeconds!==null&&delaySeconds>=-600&&delaySeconds<=7200?delaySeconds:null});
   }
  }return out;
 }
@@ -96,6 +100,25 @@ function direct(trains,from,to,start,end){const found=[];
  }
  const unique=new Map();for(const r of found)if(!unique.has(r.key))unique.set(r.key,r);
  return [...unique.values()].sort((a,b)=>a.depart-b.depart||a.arrive-b.arrive);
+}
+/**
+ * Fill timetable gaps without changing or duplicating the official GTFS.
+ * Only direct services from explicitly named alternative lines are eligible.
+ * Times within 90s of an existing GTFS departure on the same line/corridor
+ * are treated as the same service; source with explicit stop_times wins.
+ */
+function mergeSupplementalJourneys(official,alternative){
+ const merged=[...official];
+ for(const journey of alternative){
+  if(journey.kind!=='direct'||journey.legs.length!==1||
+     journey.legs[0].t.src!=='trenalia-schedule-only')continue;
+  const leg=journey.legs[0];
+  const duplicate=merged.some(j=>j.kind==='direct'&&j.legs.length===1&&
+   j.legs[0].t.l===leg.t.l&&j.legs[0].from===leg.from&&j.legs[0].to===leg.to&&
+   Math.abs(j.depart-journey.depart)<=90);
+  if(!duplicate)merged.push(journey);
+ }
+ return merged.sort((a,b)=>a.depart-b.depart||a.arrive-b.arrive);
 }
 function transfers(trains,from,to,start,end,limit=32){
  const byStation=new Map();
@@ -130,9 +153,91 @@ function transfers(trains,from,to,start,end,limit=32){
  return [...best.values()].sort((a,b)=>a.depart-b.depart||a.arrive-b.arrive).slice(0,limit);
 }
 
+
+/**
+ * Source-labelled schedule-only fallback. Trenalia reuses official Renfe data
+ * but is an independent aggregator, NOT a separately verified train identity.
+ * Its timetable endpoint supplies origin/destination times and commercial
+ * line, but may omit the train number and intermediate stops.
+ */
+function normalizeTrenaliaTimetable(payload,from,to,day,requestedLine){
+ if(!payload||payload.date!==day||!Array.isArray(payload.trains))return [];
+ if(!/^[0-9]{5}$/.test(String(from))||!/^[0-9]{5}$/.test(String(to))||from===to)return [];
+ const total=payload.total;
+ if(total!==undefined&&(!Number.isInteger(total)||total<payload.trains.length))return [];
+ const chosen=String(requestedLine||'');
+ const out=[],seen=new Set();
+ for(const r of payload.trains){
+  if(!r||typeof r!=='object')continue;
+  if(r.feed!=='cercanias'||r.operator!=='Renfe Cercanías'||r.train!==null)continue;
+  const label=String(r.product||'');
+  const match=/^Cercan[ií]as\s+(R2N|R2S|RG1|RT1|RT2|RL3|RL4|R1[134567]|R[123478])$/i.exec(label);
+  if(!match)continue;
+  const lid=line(match[1]);if(!lid||chosen!=='ALL'&&lid!==chosen)continue;
+  const startMs=n(r.depMs),endMs=n(r.arrMs);
+  if(startMs===null||endMs===null||!Number.isSafeInteger(startMs)||!Number.isSafeInteger(endMs))continue;
+  const dep=Math.floor(startMs/1000),arr=Math.floor(endMs/1000);
+  if(dep<=0||arr<=dep||arr-dep>6*3600)continue;
+  if(typeof r.stops!=='number'||!Number.isInteger(r.stops)||r.stops<0)continue;
+  // Reject a departure whose local service day differs from the requested day.
+  const d=new Date(startMs);
+  const parts=new Intl.DateTimeFormat('en-CA',{timeZone:'Europe/Madrid',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(d);
+  const values=Object.fromEntries(parts.map(x=>[x.type,x.value]));
+  if(values.year+'-'+values.month+'-'+values.day!==day)continue;
+  const id='trenalia:'+lid+':'+from+':'+to+':'+day+':'+dep;
+  if(seen.has(id))continue;seen.add(id);
+  out.push({id,n:'',l:lid,day,src:'trenalia-schedule-only',
+    dest:to,s:[[from,dep,dep],[to,arr,arr]],intermediate_stop_count:r.stops});
+ }
+ return out.sort((a,b)=>a.s[0][2]-b.s[0][2]);
+}
+
+/**
+ * Join live board ETA to a source-labelled *anonymous* timetable only when
+ * station, explicit commercial line and schedule time identify exactly ONE leg.
+ *
+ * A unique board-to-schedule relationship is evidence for an ETA at the
+ * selected station. It is NOT proof of the train's physical identity, and
+ * must never be upgraded to a live-position match.
+ *
+ * Requires a clock-fresh, non-stale board and its own scheduled timestamp.
+ * Reject collisions of multiple distinct train numbers/trips for one leg.
+ */
+function correlateTimetableBoards(journeys,boards){
+ const legs=journeys.flatMap(j=>j.legs).filter(l=>l.t.src==='trenalia-schedule-only');
+ if(!legs.length)return boards;
+ const candidates=new Map();
+ const fresh=x=>!x.stale&&x.age!==null&&x.age>=0&&x.age<=180&&
+  x.planned!==null&&x.estimated!==null&&x.number&&x.line&&x.station;
+ for(let i=0;i<boards.length;i++){
+  const row=boards[i];
+  if(!fresh(row))continue;
+  const applicable=legs.filter(l=>l.from===row.station&&l.t.l===row.line&&
+   Math.abs(l.depart-row.planned)<=60);
+  if(applicable.length!==1)continue;
+  const leg=applicable[0], key=leg.t.id+'|'+leg.from+'|'+leg.depart;
+  if(!candidates.has(key))candidates.set(key,[]);
+  candidates.get(key).push({index:i,number:row.number,trip:row.trip,leg});
+ }
+ const selected=new Map();
+ for(const [key,items] of candidates){
+  const identities=new Set(items.map(x=>x.trip||('number:'+String(Number(x.number)))));
+  const numbers=new Set(items.map(x=>String(Number(x.number))));
+  // Different providers can disagree about trip_id but still describe the
+  // same commercial number. Different train numbers are a hard conflict.
+  if(numbers.size!==1||!items.length)continue;
+  const legsForIdentity=legs.filter(l=>l.t.id+'|'+l.from+'|'+l.depart===key);
+  if(legsForIdentity.length!==1)continue;
+  for(const x of items)selected.set(x.index,key);
+ }
+ return boards.map((r,i)=>selected.has(i)?{...r,linkedScheduleKey:selected.get(i),
+   linkedByScheduleOnly:true}:r);
+}
+
 function serviceIds(t){return [t.id,...(t.alternative_trip_ids||[])].filter(Boolean).map(String);}
 function matchExact(leg,item){
  const t=leg.t;
+ if(t.src==='trenalia-schedule-only')return !!(item.linkedScheduleKey&&item.linkedScheduleKey===t.id+'|'+leg.from+'|'+leg.depart);
  if(item.line&&item.line!==t.l)return false;
  if(item.day&&t.day&&item.day!==t.day)return false;
  if(item.station&&item.station!==leg.from)return false;
@@ -165,11 +270,23 @@ function enrichLeg(leg,board,positions,cancels,now){
   }else{
    const candidate=plausible[0];current.estimated=candidate.estimated;
    current.delay=candidate.estimated-leg.depart;current.platform=candidate.platform;
-   current.proof.push(`Estimación ${candidate.source} (${Math.round(candidate.age)} s)`);
+   current.proof.push(candidate.linkedByScheduleOnly?`Estimación ${candidate.source} asociada por línea, estación y hora (${Math.round(candidate.age)} s); identidad del tren no confirmada`:`Estimación ${candidate.source} (${Math.round(candidate.age)} s)`);
   }
  }
  const pos=positions.filter(p=>matchPosition(leg,p)).sort((a,b)=>a.age-b.age)[0];
- if(pos){current.position=pos;current.state='live';current.proof.push(`Posición identificada hace ${Math.round(pos.age)} s (${pos.source})`);}
+ if(pos){
+  current.position=pos;current.state='live';
+  current.proof.push(`Posición identificada hace ${Math.round(pos.age)} s (${pos.source})`);
+  // A train-level delay is a secondary estimate, not a measured station
+  // passage. Never override an attributable station-board ETA with it.
+  if(!current.conflict&&current.estimated===null&&pos.delaySeconds!==null){
+   const eta=leg.depart+pos.delaySeconds;
+   if(eta>=now-300&&eta>=leg.depart-1200&&eta<leg.depart+4*3600){
+    current.estimated=eta;current.delay=pos.delaySeconds;
+    current.proof.push(`Hora orientativa: horario + retraso del tren observado (${pos.source}); sin paso confirmado en esta estación`);
+   }
+  }
+ }
  const officialCancelled=cancels.some(x=>x.trip&&serviceIds(leg.t).includes(String(x.trip))&&(!x.day||x.day===leg.t.day)&&(!x.line||x.line===leg.t.l));
  const boardCancelled=freshBoard.some(x=>x.cancelled);
  if(officialCancelled||boardCancelled){current.cancelled=true;current.conflict=!!current.position||current.conflict;current.proof.push('Cancelación atribuida al servicio');}
@@ -218,5 +335,5 @@ function alertsForLines(obj,lines,stationScoped=false){
  return found.slice(0,12);
 }
 
-return {LINES,norm,line,scopedLine,catalanNucleus,n,ts,rows,normalizeBoard,normalizePositions,normalizeCancels,direct,transfers,matchExact,matchPosition,enrichLeg,enrichJourney,alertsForLines};
+return {LINES,norm,line,scopedLine,catalanNucleus,n,ts,rows,normalizeBoard,normalizePositions,normalizeCancels,direct,transfers,mergeSupplementalJourneys,normalizeTrenaliaTimetable,correlateTimetableBoards,matchExact,matchPosition,enrichLeg,enrichJourney,alertsForLines};
 });
