@@ -57,7 +57,7 @@ function renderLineOptions(){
  const lines=[...catalog.lines].sort((a,b)=>[...E.LINES].indexOf(a.id)-[...E.LINES].indexOf(b.id));
  for(const l of lines){
   const amount=lineStations(l.id).length;
-  const label=(l.name||l.id)+(catalog.reference_only?' · referencia parcial':!l.present?' · sin horarios GTFS':'')+` (${amount} estaciones)`;
+  const label=(l.name||l.id)+(catalog.reference_only?' · referencia parcial':!l.present?' · solo estaciones, sin GTFS':'')+` (${amount} estaciones)`;
   sel.append(new Option(label,l.id));
  }
  sel.append(new Option('Todas las líneas · transbordos','ALL'));
@@ -67,7 +67,7 @@ function renderStationSelects(){
  for(const [id,field,other] of [['origin-input','from','to'],['dest-input','to','from']]){
   const sel=$(id);sel.replaceChildren();
   sel.append(new Option(options.length?'Selecciona una estación':'No hay estaciones registradas',''));
-  for(const st of options){const op=new Option(st.name,st.id);op.disabled=st.id===selection[other];sel.append(op);}
+  for(const st of options){const hasSchedule=selection.line==='ALL'?!!st.schedule_lines?.length:st.schedule_lines?.includes(selection.line);const label=st.name+(catalog.reference_only?' · referencia':hasSchedule?'':' · sin horario GTFS');const op=new Option(label,st.id);op.disabled=st.id===selection[other];sel.append(op);}
   sel.disabled=!selection.line||options.length===0;
   sel.value=options.some(s=>s.id===selection[field])?selection[field]:'';
   if(!sel.value)selection[field]='';
@@ -75,7 +75,7 @@ function renderStationSelects(){
  $('line-help').textContent=catalog.reference_only
   ?'Referencia provisional: solo puntos principales con código ADIF validado. Ejecuta la actualización GTFS para obtener todas las paradas y horarios.'
   :selection.line==='ALL'?'Permite buscar entre todas las estaciones y calcular hasta un transbordo.'
-  :`${options.length} estaciones asociadas a ${selection.line}. Solo se mostrarán servicios de esa línea.`+
+  :`${options.length} estaciones asociadas a ${selection.line}. Solo se mostrarán horarios GTFS verificables; la presencia de una estación no confirma un servicio.`+
      (catalog.source_quality?.by_line?.[selection.line]?.raw_two_stop_trips>0?' Aviso: el GTFS original contiene algunos viajes con únicamente dos paradas; no se conocen las horas de paso intermedias.':'');
 }
 function applyLine(line){
@@ -201,9 +201,11 @@ function renderOfficialAudit(cat){
   const row=el('div','catalog-line-row'),left=el('div','catalog-line-name'),right=el('div','catalog-line-status');
   const a=el('a','',l.id);a.href=l.url;a.target='_blank';a.rel='noopener noreferrer';left.append(a);
   left.append(el('small','',l.corridor));
-  let state='Sin horarios GTFS',type='warn';
-  if(l.status==='controles_localizados'){state=`${l.gtfs_station_count} estaciones GTFS · comprobaciones principales localizadas`;type='good';}
-  else if(l.status==='pendiente_contraste'){state=`${l.gtfs_station_count} estaciones GTFS · ${l.not_found_in_gtfs.length} puntos sin cotejar`;type='warn';}
+  const networkCount=cat.network_reference?.line_station_counts?.[l.id];
+  const inventory=Number.isInteger(networkCount)?networkCount+' estaciones del inventario · ':'';
+  let state=inventory+'horarios GTFS no disponibles',type='warn';
+  if(l.status==='controles_localizados'){state=inventory+`${l.gtfs_station_count} estaciones con GTFS · controles principales localizados`;type='good';}
+  else if(l.status==='pendiente_contraste'){state=inventory+`${l.gtfs_station_count} estaciones con GTFS · ${l.not_found_in_gtfs.length} puntos sin cotejar`;type='warn';}
   right.append(el('span',type,state));
   if(l.not_found_in_gtfs?.length && l.status==='pendiente_contraste'){
    right.append(el('small','','Sin cotejar: '+l.not_found_in_gtfs.join(', ')));
@@ -251,7 +253,8 @@ function updateSummary(range,scheduleCount,live){const direct=results.filter(x=>
  $('results-title').textContent=(selection.line==='ALL'?'Red Rodalies':selection.line)+' · '+stationName(selection.from)+' → '+stationName(selection.to);
  $('results-subtitle').textContent=range.day+' · '+range.from+'–'+range.to+(range.extra?' (hasta mañana)':'');
  $('results-total').textContent=results.length+' '+(results.length===1?'opción':'opciones');
- const st=$('status');if(!results.length){st.className='notice warn';st.textContent=scheduleCount?'No se han encontrado servicios directos ni conexiones de un transbordo en esta franja. No implica que el servicio esté suspendido.':'El horario oficial disponible no contiene servicios del recorrido. Comprueba la cobertura de líneas y la fecha.';}
+ const st=$('status');if(!results.length){st.className='notice warn';st.textContent=scheduleCount?'No se han encontrado servicios directos ni conexiones de un transbordo en esta franja. No implica que el servicio esté suspendido.':'No hay servicios GTFS verificables para esta combinación de estaciones, línea y fecha. El inventario no garantiza circulación.';
+  const a=el('a','','Consultar horarios oficiales de Rodalies');a.href='https://rodalies.gencat.cat/es/horaris/tots-els-horaris/';a.target='_blank';a.rel='noopener noreferrer';st.append(document.createTextNode(' · '),a);}
  else{st.className='notice '+(cancel?'warn':pos?'good':'neutral');st.textContent=`${direct} directos · ${transfer} con un transbordo · ${pos} con posición reciente · ${cancel} cancelados. Las horas programadas no confirman circulación.`;}
  const age=Date.now()-Date.parse(catalog?.generated_at||'');
  $('updated').textContent=`Consulta ${fmtTime(Date.now()/1000)} · Datos operativos: ${live?'consultados en este momento':'solo horarios programados para fecha futura'}. ${Number.isFinite(age)&&age>48*3600000?'ATENCIÓN: GTFS sin regenerar desde hace más de 48 horas. ':''}Esta aplicación es orientativa.`;
@@ -270,7 +273,8 @@ async function search(){if(!catalog){showToast('El catálogo todavía no está d
   const scheduled=buildWindow(trips,range);
   if(!scheduled.length&&daily.every(x=>x.trains.length===0))showToast('Sin horarios oficiales para esa fecha');
   $('status').textContent=`${scheduled.length} opciones programadas. Contrastando datos…`;
-  const today=madridDate(),live=range.day===today, jobs=live?sourceJobs(selection.from):[];
+  // Do not send reference-only IDs to providers as verified ADIF station codes.
+  const today=madridDate(),live=range.day===today&&/^\d{5}$/.test(selection.from), jobs=live?sourceJobs(selection.from):[];
   const res=live?await Promise.allSettled(jobs.map(j=>loadJson(j.url,signal))):[];
   if(signal.aborted||id!==requestId)return;
   const now=Math.floor(Date.now()/1000);
@@ -314,7 +318,7 @@ async function refreshRuntime(){
     stationMap=new Map(candidate.stations.map(s=>[s.id,s]));loadedDay.clear();
     renderLineOptions();renderOfficialAudit(candidate);
     $('network-tag').textContent=candidate.reference_only?`Referencia: ${candidate.stations.length} puntos`:
-      `${candidate.lines.filter(x=>x.present).length} líneas · ${candidate.stations.length} estaciones`;
+      `${candidate.lines.length} líneas · ${candidate.stations.length} estaciones`;
     if(stationMap.has(previous.from)&&stationMap.has(previous.to))applyPair(previous.from,previous.to);
     else applyLine(candidate.lines.find(x=>x.present)?.id||'R4');
     showToast('Catálogo ferroviario actualizado');
@@ -336,7 +340,7 @@ async function init(){const d=madridDate();lastLocalDay=d;lastCatalogCheck=Date.
   const response=await loadCatalog(null);catalog=response;
   stationMap=new Map(response.stations.map(s=>[s.id,s]));wirePickers();renderLineOptions();renderOfficialAudit(response);
   const available=response.lines.filter(x=>x.present);
-  $('network-tag').textContent=response.reference_only?`Referencia: ${response.stations.length} puntos`:`${available.length} líneas · ${response.stations.length} estaciones`;
+  $('network-tag').textContent=response.reference_only?`Referencia: ${response.stations.length} puntos`:`${response.lines.length} líneas · ${response.stations.length} estaciones`;
   const absent=response.lines.filter(x=>!x.present).map(x=>x.id);
   const generated=Date.parse(response.generated_at||'');
   const staleGTFS=!Number.isFinite(generated)||Date.now()-generated>48*3600*1000;
@@ -347,7 +351,8 @@ async function init(){const d=madridDate();lastLocalDay=d;lastCatalogCheck=Date.
    $('status').className='notice warn';$('status').textContent='Todavía no se ha generado data/v2/catalog.json. Los desplegables solo incluyen estaciones verificadas de referencia; no están todas las paradas.';
   }else{
    $('catalog-message').textContent=(staleGTFS?'ATENCIÓN: el GTFS lleva más de 48 h sin actualizarse. ':'GTFS actualizado '+String(response.generated_at||'').slice(0,10)+'. ')
-    +(absent.length?`Sin cobertura horaria de ${absent.join(', ')}.`:`${unchecked} líneas con puntos de referencia pendientes de contraste.`);
+    +`Inventario: ${response.network_reference?.reference_station_count||response.stations.length} estaciones de referencia; ${available.length}/${response.lines.length} líneas con horarios GTFS. `
+    +(absent.length?`Faltan horarios GTFS en ${absent.join(', ')}; sus estaciones siguen visibles.`:`${unchecked} líneas con puntos de referencia pendientes de contraste.`);
    setHealth(staleGTFS||absent.length?'partial':'good',staleGTFS?'Horario desactualizado':absent.length?'Cobertura parcial':'Red disponible');
   }
   let pair=null;try{pair=JSON.parse(localStorage.getItem('mirodalies-v2-pair')||'null');}catch{}
