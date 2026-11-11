@@ -1,6 +1,12 @@
-name: Actualizar red Rodalies · GTFS + validación Generalitat V2.0.3
+name: Actualizar red Rodalies · GTFS + validación Generalitat V2.0.4
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/build_network.py'
+      - 'data/reference/**'
+      - '.github/workflows/horario-renfe.yml'
   workflow_dispatch:
   schedule:
     - cron: '37 3 * * *'
