@@ -94,6 +94,16 @@ def run():
    assert '+4 min' in page.locator('#results').inner_text()
    assert page.evaluate('document.documentElement.scrollWidth')<=width+2,width
    assert not errors,errors
+   # A quick interval is rolling, not anchored forever. Advance the browser
+   # clock by 11 minutes without restarting the PWA and request refresh.
+   before=page.locator('#from-time').input_value()
+   page.evaluate("""async () => {
+     const original=Date.now;
+     Date.now=()=>original()+11*60*1000;
+     try { await refreshRuntime(); } finally { Date.now=original; }
+   }""")
+   after=page.locator('#from-time').input_value()
+   assert after!=before,(width,before,after)
    # This deliberately did not provide a daily file prior to DAY. The
    # successful train result proves the catalog boundary bug was fixed.
    page.locator('#line-select').select_option('R2N')
