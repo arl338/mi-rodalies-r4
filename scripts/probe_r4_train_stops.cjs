@@ -12,7 +12,7 @@ async function get(u){const ac=new AbortController(),timer=setTimeout(()=>ac.abo
  const r4=trains.filter(x=>['R4','C4'].includes(String(x.line??x.productName??x.product??'').toUpperCase()));
  const selected=r4.slice(0,5);
  const out={r4_fleet_count:r4.length,sampled:selected.length,with_id:0,
-  stops_responses_ok:0,nonempty_stop_arrays:0,stop_keys:{},field_types:{},
+  stops_responses_ok:0,nonempty_stop_arrays:0,root_keys:{},root_array_sizes:{},stop_keys:{},field_types:{},
   station_match_count:0,station_estimated_count:0,error_counts:{}};
  for(const train of selected){
   const id=train.id;
@@ -20,6 +20,10 @@ async function get(u){const ac=new AbortController(),timer=setTimeout(()=>ac.abo
   out.with_id++;
   try{const result=await get(base+'/trains/'+encodeURIComponent(id)+'/stops');
    out.stops_responses_ok++;
+   for(const [k,v] of Object.entries(result||{})){
+    out.root_keys[k]=(out.root_keys[k]||0)+1;
+    if(Array.isArray(v))out.root_array_sizes[k]=(out.root_array_sizes[k]||[]).concat([v.length]);
+   }
    const arr=Array.isArray(result)?result:Array.isArray(result.stops)?result.stops:
       Array.isArray(result.data?.stops)?result.data.stops:[];
    if(arr.length)out.nonempty_stop_arrays++;
