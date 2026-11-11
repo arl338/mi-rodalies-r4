@@ -1,0 +1,26 @@
+name: Explorar alternativas horarios/estaciones · sin despliegue
+on:
+  push:
+    branches: [audit/official-stations-live-correlation-20261111]
+    paths:
+      - 'scripts/probe_alternative_apis.py'
+      - '.github/workflows/probe-alternative-apis.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Comprobar disponibilidad y metadatos de 3 APIs públicas
+        run: python scripts/probe_alternative_apis.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: alternative-api-probe
+          path: alternative-api-probe.json
+          retention-days: 7
