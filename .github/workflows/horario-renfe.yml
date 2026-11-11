@@ -1,10 +1,16 @@
-name: Actualizar red Rodalies · GTFS + validación Generalitat V2.0.4
+name: Actualizar red Rodalies · GTFS + validación Generalitat V2.0.5
 
 on:
   push:
     branches: [main]
     paths:
-      - 'scripts/build_network.py'
+      - 'scripts/**'
+      - 'tests/**'
+      - 'app.js'
+      - 'engine.js'
+      - 'index.html'
+      - 'styles.css'
+      - 'sw.js'
       - 'data/reference/**'
       - '.github/workflows/horario-renfe.yml'
   workflow_dispatch:
@@ -21,12 +27,12 @@ concurrency:
 jobs:
   catalogo:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 12
     steps:
       - name: Descargar repositorio
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Preparar Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: '3.12'
       - name: Comprobar sintaxis y motor de datos
@@ -36,10 +42,14 @@ jobs:
           node --check engine.js
           node tests/test_engine.cjs
           node tests/test_feed_schemas.cjs
+          node tests/test_precision.cjs
+          python -m unittest discover -s tests -p 'test_*.py' -q
       - name: Auditar paradas originales GTFS Renfe
         run: python scripts/audit_gtfs.py --days 14 --out data/v2/source_audit.json
       - name: Obtener GTFS Renfe y contrastar líneas con Generalitat
         run: python scripts/build_network.py --days 14 --out data/v2
+      - name: Validar integridad temporal, lotes y paradas por línea
+        run: python scripts/validate_generated.py --out data/v2 --days 14
       - name: Validar JSON generado y servicios
         shell: bash
         run: |

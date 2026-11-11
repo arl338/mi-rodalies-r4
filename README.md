@@ -1,21 +1,26 @@
-# Mi Rodalies Catalunya · V2.0.4
+# Mi Rodalies Catalunya · V2.0.5
 
-## Correcciones
+PWA gratuita para consultar horarios **programados** Renfe GTFS y contrastar observaciones operativas a través de Valfiguer y RadarDeTrenes. No confirma que un tren esté circulando.
 
-- Selección **línea → origen → destino** mediante tres listas nativas, sin texto libre.
-- Los dos favoritos de Terrassa conservan la R4 y permiten invertir las estaciones.
-- Con una línea concreta solo se listan servicios oficiales de esa línea. «Todas las líneas» permite combinaciones con un transbordo.
-- El catálogo completo y los horarios proceden de Renfe GTFS. Un catálogo de referencia **parcial** permite mostrar controles mientras no se haya ejecutado GitHub Actions; **no incluye horarios** y está rotulado como provisional.
-- El workflow se ejecuta al subir la nueva configuración a `main`, además de poder ejecutarse manualmente y cada día.
-- Si los archivos no se han publicado en GitHub Pages, se intenta la lectura desde `raw.githubusercontent.com`, y viceversa.
-- Las fuentes externas mantienen únicamente función de contraste: no crean itinerarios ajenos al GTFS.
+## Precisión de datos
 
-## Instalación
+- Interpretación de `delay_s` en segundos y `delayMinutes` en minutos.
+- Correspondencia `C4`/ `R4` y similares únicamente cuando consta el núcleo Catalunya o se consulta un panel de estación catalana.
+- Avisos de otros núcleos (p.ej., Madrid) descartados; avisos de la línea elegida mostrados aunque no haya trenes en la franja.
+- Transbordos afectados por retrasos etiquetados «Conexión en riesgo»; llegadas sin ETA comprobada siempre «programadas».
+- Cambio de día, revalidación de catálogo, descarga del día de servicio anterior para horas GTFS mayores de 24 h, comprobación del mismo `batch_id` para catálogo y días.
+- Conversión temporal según la regla oficial GTFS de mediodía menos doce horas, incluyendo cambios de horario.
+- Auditoría de paradas GTFS original: `data/v2/source_audit.json`. Validación de salidas: `scripts/validate_generated.py`.
 
-Subir a la raíz los archivos estáticos, `data/reference/fallback_catalog.json`, los dos ficheros de referencia restantes, `scripts/build_network.py` y `.github/workflows/horario-renfe.yml`.
-Ejecutar **Actions → Actualizar red Rodalies → Run workflow** si no empieza automáticamente. Confirmar que existe `data/v2/catalog.json` y ficheros `AAAA-MM-DD.json`.
-En móvil recargar y comprobar `2.0.4`.
+## Limitaciones demostradas de la fuente
 
-## Limitaciones
+El `stop_times.txt` de Renfe aporta **3.024 instancias R3 con solo dos paradas** durante el periodo auditado de 14 días. No se inventan estaciones ni horas intermedias. El GTFS incluye viajes etiquetados R2N/R2S y otras líneas sin sus correspondientes `stop_times` utilizables. La cobertura comercial completa de las 19 líneas no está garantizada; cada línea sin datos queda señalizada.
 
-Sin ejecución del workflow no hay catálogo completo ni horarios; el catálogo de referencia solo contiene estaciones con códigos ADIF comprobados. La cobertura por líneas regionales dependerá del etiquetado del GTFS real; no se inventa. No se han verificado todas las respuestas en vivo contra monitores físicos.
+## Desarrollo y actualización
+
+GitHub Actions ejecuta las pruebas JS y Python, audita el GTFS original, regenera los horarios y valida 15 ficheros diarios con una misma huella de lote.
+
+- App: https://arl338.github.io/mi-rodalies-r4/
+- CI: https://github.com/arl338/mi-rodalies-r4/actions/workflows/horario-renfe.yml
+
+Datos: Renfe Data (CC BY 4.0), [Valfiguer](https://trenes.valfiguer.com/desarrolladores), [RadarDeTrenes](https://radardetrenes.com/docs) y referencia de líneas de [Generalitat de Catalunya](https://rodalies.gencat.cat/es/linies_estacions_i_trens/index.html). Información orientativa; consulta Renfe/Rodalies para decisiones de viaje.

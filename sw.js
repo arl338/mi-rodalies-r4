@@ -1,6 +1,6 @@
 'use strict';
-const CACHE='mi-rodalies-v2.0.4-20261111';
-const STATIC=['./','./index.html','./styles.css?v=204','./engine.js?v=204','./app.js?v=204','./manifest.webmanifest','./icon-192.png','./icon-512.png'];
+const CACHE='mi-rodalies-v2.0.5-20261111';
+const STATIC=['./','./index.html','./styles.css?v=205','./engine.js?v=205','./app.js?v=205','./manifest.webmanifest','./icon-192.png','./icon-512.png'];
 self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(STATIC)).then(()=>self.skipWaiting())));
 self.addEventListener('activate',e=>e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(x=>x.startsWith('mi-rodalies-')&&x!==CACHE).map(x=>caches.delete(x)))).then(()=>self.clients.claim())));
 self.addEventListener('fetch',e=>{const r=e.request,u=new URL(r.url);if(r.method!=='GET'||u.origin!==self.location.origin)return;

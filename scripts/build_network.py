@@ -10,7 +10,7 @@ under Renfe Data CC BY 4.0 with attribution.
 from __future__ import annotations
 import argparse, csv, hashlib, io, json, re, sys, unicodedata, urllib.request, zipfile, traceback
 from collections import defaultdict, Counter
-from datetime import date, datetime, timedelta, time
+from datetime import date, datetime, timedelta, time, timezone
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
@@ -114,7 +114,14 @@ def hms(s):
     return None
 
 def as_ts(d,secs):
-    return int((datetime.combine(d,time.min,tzinfo=TZ)+timedelta(seconds=secs)).timestamp())
+    """GTFS defines service times as elapsed seconds after local noon minus 12h.
+
+    Arithmetic in UTC is essential around DST jumps (Europe/Madrid),
+    otherwise a train scheduled after the gap can shift by one hour.
+    https://gtfs.org/documentation/schedule/reference/#stop_timestxt
+    """
+    noon_utc = datetime.combine(d,time(12),tzinfo=TZ).astimezone(timezone.utc)
+    return int((noon_utc+timedelta(seconds=secs-12*3600)).timestamp())
 
 
 def parse_gtfs_date(value):
@@ -409,6 +416,7 @@ def build(cer,md,output,days,base=None):
     # Include the previous service day for GTFS trips with 24:xx–29:xx times.
     dates=[base-timedelta(days=1)]+[base+timedelta(days=i) for i in range(days)]
     results=[]; errors=[]; static_catalog={}
+    batch_id=hashlib.sha256(cer+(md or b'')+str(base).encode()).hexdigest()[:20]
     for source,raw in [('cer',cer),('md',md)]:
         if raw is None:errors.append(f'{source}: fuente no disponible');continue
         try:
@@ -456,17 +464,31 @@ def build(cer,md,output,days,base=None):
     for existing in out.glob('20??-??-??.json'):existing.unlink()
     for d in dates:
         daily=sorted(by_day[d.isoformat()],key=lambda r:r['s'][0][2])
-        (out/f'{d.isoformat()}.json').write_text(json.dumps({'schema':2,'day':d.isoformat(),'trains':daily},ensure_ascii=False,separators=(',',':')),encoding='utf-8')
+        (out/f'{d.isoformat()}.json').write_text(json.dumps({'schema':2,'day':d.isoformat(),'batch_id':batch_id,'trains':daily},ensure_ascii=False,separators=(',',':')),encoding='utf-8')
+    source_quality=None
+    audit_path=out/'source_audit.json'
+    if audit_path.exists():
+        try:
+            raw_audit=json.loads(audit_path.read_text(encoding='utf8'))
+            if cer is not None and raw_audit.get('gtfs_sha256')==hashlib.sha256(cer).hexdigest():
+                source_quality={'source_sha256':raw_audit['gtfs_sha256'],
+                                'by_line':{k:{field:val for field,val in info.items() if field!='samples'}
+                                           for k,info in raw_audit['by_line'].items()},
+                                'discarded_stop_times':raw_audit.get('discarded_stop_times',{})}
+            else:
+                errors.append('La auditoría de la fuente corresponde a otro ZIP GTFS: no se usa como evidencia.')
+        except (ValueError,TypeError,KeyError) as exc:
+            errors.append('Informe de auditoría de origen no válido: '+str(exc))
     reference=official_reference()
     audit=validate_official_reference(reference,[dict(st,lines=list(st['lines'])) for st in stations.values()],
                                      [{'id':line,'present':by_line[line]>0,'scheduled_trips_in_period':by_line[line]} for line in LINES])
     catalog={
-       'schema':2,'generated_at':datetime.now(TZ).isoformat(),
+       'schema':2,'batch_id':batch_id,'generated_at':datetime.now(TZ).isoformat(),
        'coverage_start':base.isoformat(),'coverage_end':dates[-1].isoformat(),
        'source':'Renfe Data GTFS oficial (Cercanías; MD solo con línea Rodalies explícita)',
        'station_names':'ADIF/BOE verified code crosswalk; GTFS as fallback; exact match only',
        'source_urls':{'cer':CERCANIAS,'md':MEDIA_DISTANCIA},'license':'CC BY 4.0',
-       'official_reference':audit,
+       'official_reference':audit,'source_quality':source_quality,
        'lines':[{'id':line,'name':LINE_NAMES.get(line,line),'present':by_line[line]>0,
                  'scheduled_trips_in_period':by_line[line]} for line in LINES],
        'stations':sorted([dict(r,lines=sorted(r['lines'],key=lambda x:LINES.index(x))) for r in stations.values()],key=lambda x:norm(x['name'])),

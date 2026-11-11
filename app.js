@@ -13,7 +13,7 @@ const $=id=>document.getElementById(id);
 const fmt=new Intl.DateTimeFormat('es-ES',{timeZone:'Europe/Madrid',hour:'2-digit',minute:'2-digit',hourCycle:'h23'});
 const partsFmt=new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Madrid',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hourCycle:'h23'});
 const tzFmt=new Intl.DateTimeFormat('en-US',{timeZone:'Europe/Madrid',timeZoneName:'shortOffset'});
-let catalog=null,stationMap=new Map(),catalogSource='not-loaded',selection={line:'R4',from:'78710',to:'78805'},requestId=0,controller=null,results=[],visible=12,quickValue=null,latestSearch=null,loadedDay=new Map(),isBusy=false;
+let catalog=null,stationMap=new Map(),catalogSource='not-loaded',selection={line:'R4',from:'78710',to:'78805'},requestId=0,controller=null,results=[],visible=12,quickValue=null,latestSearch=null,loadedDay=new Map(),isBusy=false,lastCatalogCheck=0,lastLocalDay=null;
 function madridParts(ms){const obj={};for(const v of partsFmt.formatToParts(new Date(ms)))if(v.type!=='literal')obj[v.type]=v.value;return obj;}
 function madridDate(ms=Date.now()){const p=madridParts(ms);return `${p.year}-${p.month}-${p.day}`;}
 function fmtTime(ts){return fmt.format(new Date(ts*1000));}
@@ -75,7 +75,8 @@ function renderStationSelects(){
  $('line-help').textContent=catalog.reference_only
   ?'Referencia provisional: solo puntos principales con código ADIF validado. Ejecuta la actualización GTFS para obtener todas las paradas y horarios.'
   :selection.line==='ALL'?'Permite buscar entre todas las estaciones y calcular hasta un transbordo.'
-  :`${options.length} estaciones asociadas a ${selection.line}. Solo se mostrarán servicios de esa línea.`;
+  :`${options.length} estaciones asociadas a ${selection.line}. Solo se mostrarán servicios de esa línea.`+
+     (catalog.source_quality?.by_line?.[selection.line]?.raw_two_stop_trips>0?' Aviso: el GTFS original contiene algunos viajes con únicamente dos paradas; no se conocen las horas de paso intermedias.':'');
 }
 function applyLine(line){
  if(!catalog||!catalog.lines.some(l=>l.id===line)&&line!=='ALL')return;
@@ -159,6 +160,7 @@ async function dayData(day,signal){
  const cached=loadedDay.get(day);if(cached&&Date.now()-cached.loadedAt<5*60000)return cached.data;
  const data=await loadDataFile(day+'.json',signal);
  if(data.schema!==2||data.day!==day||!Array.isArray(data.trains))throw new Error('Horario diario incorrecto para '+day);
+ if(catalog?.batch_id&&data.batch_id!==catalog.batch_id)throw new Error('El catálogo y los horarios diarios pertenecen a versiones distintas de Renfe. Vuelve a consultar en unos minutos.');
  loadedDay.set(day,{loadedAt:Date.now(),data});if(loadedDay.size>4)loadedDay.delete(loadedDay.keys().next().value);return data;
 }
 function sourceJobs(station){return [
@@ -168,7 +170,8 @@ function sourceJobs(station){return [
   {name:'Renfe/ADIF · flota',detail:'Red redistribuida por RadarDeTrenes',url:`${CONFIG.radar}/fleet?type=commuter`},
   {name:'Renfe · cancelaciones',detail:'Redistribuidas por Valfiguer',url:`${CONFIG.val}/cancellations`},
   {name:'Renfe · avisos',detail:'Redistribuidos por Valfiguer',url:`${CONFIG.val}/alerts`},
-  {name:'Estado de feeds',detail:'Antigüedad publicada por origen',url:`${CONFIG.val}/status`}
+  {name:'Estado de feeds',detail:'Antigüedad publicada por origen',url:`${CONFIG.val}/status`},
+  {name:'RadarDeTrenes · avisos de estación',detail:'Incidencias vinculadas al origen',url:`${CONFIG.radar}/stations/${station}/alerts`}
  ];}
 function renderSourceSummary(res,jobs,mode,cat){const content=$('source-details');content.replaceChildren();
  const catalogRow=sourceRow('Horario oficial GTFS','Cercanías / MD con línea Rodalies explícita',true,`${cat.stations.length} estaciones · ${cat.lines.filter(x=>x.present).length}/${cat.lines.length} líneas`);content.append(catalogRow);
@@ -212,7 +215,7 @@ function renderOfficialAudit(cat){
 function sourceRow(title,description,ok,value){const r=el('div','source-row'),l=el('div');l.append(el('strong','',title),el('small','',description));r.append(l,el('span',ok?'good':'bad',value));return r;}
 function renderAlerts(list,live){const elmt=$('alerts');elmt.replaceChildren();if(!live){elmt.append(el('p','subtle','Para esa fecha todavía no hay avisos futuros contrastados. Consulta el estado del servicio el mismo día.'));return;}
  if(!list.length){elmt.append(el('p','subtle','No se han recuperado avisos específicos. Esto no garantiza que el servicio funcione normalmente.'));return;}
- for(const obj of list){const x=el('div','alert',obj.text);if(obj.lines.length)x.append(el('div','subtle','Líneas: '+obj.lines.join(', ')));elmt.append(x);}}
+ for(const obj of list){const x=el('div','alert',obj.text);if(obj.lines.length)x.append(el('div','subtle','Líneas: '+obj.lines.join(', ')));if(obj.source)x.append(el('div','subtle','Fuente: '+obj.source));elmt.append(x);}}
 function buildWindow(dayTrains,range){const good=dayTrains.filter(t=>E.LINES.has(t.l)&&(selection.line==='ALL'||t.l===selection.line)&&Array.isArray(t.s)&&t.s.length>=2).map(t=>({...t,day:t.day||''}));
  const direct=E.direct(good,selection.from,selection.to,range.start,range.end);
  const trans=selection.line==='ALL'?E.transfers(good,selection.from,selection.to,range.start,range.end):[];
@@ -220,13 +223,13 @@ function buildWindow(dayTrains,range){const good=dayTrains.filter(t=>E.LINES.has
 }
 function timeFor(t){return fmtTime(t);}
 function duration(start,end){const min=Math.round((end-start)/60);return min>=60?`${Math.floor(min/60)} h ${String(min%60).padStart(2,'0')} min`:`${min} min`;}
-function stateName(st){return {scheduled:'Solo horario',live:'Posición reciente',cancelled:'Cancelado',conflict:'Datos contradictorios',transfer:'1 transbordo'}[st]||'Sin verificar';}
+function stateName(st){return {scheduled:'Solo horario',live:'Posición reciente',cancelled:'Cancelado',conflict:'Datos contradictorios',transfer:'1 transbordo', 'at-risk':'Conexión en riesgo'}[st]||'Sin verificar';}
 function stationName(id){return stationMap.get(id)?.name||id;}
 function renderResultList(){const root=$('results');root.replaceChildren();for(const j of results.slice(0,visible)){
  const panel=el('article','train-card '+j.state),top=el('div','train-top'),time=el('div'),right=el('span','train-status '+j.state,stateName(j.state));
  const selected=(j.cancelled||j.conflict)?j.depart:(j.estimated??j.depart);
  time.append(el('div','train-time',timeFor(selected)),el('div','train-time-label',(j.estimated&&!j.cancelled&&!j.conflict)?'Salida estimada · programada '+timeFor(j.depart):'Salida programada'));
- time.append(el('div','train-end','Llegada '+timeFor(j.arrive)+' · '+duration(j.depart,j.arrive)));top.append(time,right);panel.append(top);
+ time.append(el('div','train-end','Llegada programada '+timeFor(j.arrive)+' · Duración programada '+duration(j.depart,j.arrive)));top.append(time,right);panel.append(top);
  if(j.kind==='direct'){
   const leg=j.legs[0],lineRow=el('div','train-line'),tag=el('span','line-pill '+(/^(R1[34567]|R11)/.test(leg.t.l)?'regional':''),leg.t.l);lineRow.append(tag,document.createTextNode('Tren '+(leg.t.n||'sin número')+' · '+stationName(leg.to)));panel.append(lineRow);
   panel.append(el('div','train-subline','Origen: '+stationName(leg.from)+' · destino: '+stationName(leg.to)));
@@ -236,7 +239,8 @@ function renderResultList(){const root=$('results');root.replaceChildren();for(c
  }
  const proof=el('div','train-evidence');let notes=['Origen: Renfe GTFS oficial'];
  for(const l of j.legs){if(l.proof.length)notes.push(l.proof.join('; '));if(l.platform)notes.push('Vía publicada: '+l.platform);}
- if(j.kind==='transfer')notes.push('Conexión teórica; enlace no confirmado');
+ if(j.kind==='transfer')notes.push(j.connectionRisk?'ATENCIÓN: conexión en riesgo por retraso observado del primer tren; llegada no estimada':'Conexión teórica con margen programado; llegada y enlace no confirmados');
+ if(catalog&&Date.now()-Date.parse(catalog.generated_at||'')>48*3600000)notes.push('Catálogo GTFS antiguo: comprobar el horario vigente en Renfe');
  // Dynamic nodes instead of innerHTML from external providers (XSS-safe).
  proof.append(el('b','', 'Evidencias: '),document.createTextNode(notes.join(' · ')));panel.append(proof);root.append(panel);
  }
@@ -249,15 +253,16 @@ function updateSummary(range,scheduleCount,live){const direct=results.filter(x=>
  $('results-total').textContent=results.length+' '+(results.length===1?'opción':'opciones');
  const st=$('status');if(!results.length){st.className='notice warn';st.textContent=scheduleCount?'No se han encontrado servicios directos ni conexiones de un transbordo en esta franja. No implica que el servicio esté suspendido.':'El horario oficial disponible no contiene servicios del recorrido. Comprueba la cobertura de líneas y la fecha.';}
  else{st.className='notice '+(cancel?'warn':pos?'good':'neutral');st.textContent=`${direct} directos · ${transfer} con un transbordo · ${pos} con posición reciente · ${cancel} cancelados. Las horas programadas no confirman circulación.`;}
- $('updated').textContent=`Consulta ${fmtTime(Date.now()/1000)} · Datos operativos: ${live?'consultados en este momento':'solo horarios oficiales para fecha futura'}. Esta aplicación es orientativa.`;
+ const age=Date.now()-Date.parse(catalog?.generated_at||'');
+ $('updated').textContent=`Consulta ${fmtTime(Date.now()/1000)} · Datos operativos: ${live?'consultados en este momento':'solo horarios programados para fecha futura'}. ${Number.isFinite(age)&&age>48*3600000?'ATENCIÓN: GTFS sin regenerar desde hace más de 48 horas. ':''}Esta aplicación es orientativa.`;
 }
 async function search(){if(!catalog){showToast('El catálogo todavía no está disponible');return;}
  let range;try{range=validateRange();}catch(err){const st=$('status');st.className='notice bad';st.textContent=err.message;showToast(err.message);return;}
  const id=++requestId;controller?.abort();controller=new AbortController();const signal=controller.signal;markBusy(true);setHealth('pending','Consultando');$('status').className='notice neutral';$('status').textContent='Buscando recorridos en el horario oficial…';$('results-total').textContent='…';
  try{
-  const days=[range.day];
-  // GTFS 24:xx departures can belong to the preceding service day.
-  if(range.from<'06:00')days.unshift(datePlus(range.day,-1));
+  // The source accepts GTFS times up to 47:59. A late previous-service-day
+  // train can depart after 06:00. Always include the preceding service day.
+  const days=[datePlus(range.day,-1),range.day];
   if(range.extra)days.push(datePlus(range.day,1));
   const daily=await Promise.all(days.map(d=>dayData(d,signal)));
   if(signal.aborted||id!==requestId)return;
@@ -270,13 +275,17 @@ async function search(){if(!catalog){showToast('El catálogo todavía no está d
   if(signal.aborted||id!==requestId)return;
   const now=Math.floor(Date.now()/1000);
   const data=i=>res[i]?.status==='fulfilled'?res[i].value:null;
-  const board=live?[...E.normalizeBoard(data(0),'Valfiguer',now).map(x=>({...x,boardStop:selection.from})),...E.normalizeBoard(data(1),'ADIF/RadarDeTrenes',now).map(x=>({...x,boardStop:selection.from}))]:[];
+  const board=live?[...E.normalizeBoard(data(0),'Valfiguer',now,selection.from).map(x=>({...x,boardStop:selection.from})),...E.normalizeBoard(data(1),'ADIF/RadarDeTrenes',now,selection.from).map(x=>({...x,boardStop:selection.from}))]:[];
   const positions=live?[...E.normalizePositions(data(2),'Renfe/Valfiguer',now),...E.normalizePositions(data(3),'Renfe/ADIF',now)]:[];
   const cancellations=live?E.normalizeCancels(data(4)):[];
   results=scheduled.map(j=>E.enrichJourney(j,board,positions,cancellations,now));visible=12;latestSearch={range};
   renderResultList();updateSummary(range,trips.length,live);
-  const lines=new Set(results.flatMap(j=>j.legs.map(l=>l.t.l)));
-  renderAlerts(live?E.alertsForLines(data(5),lines):[],live);
+  const lines=selection.line==='ALL'?new Set(E.LINES):new Set([selection.line]);
+  // An incident can explain why no trips were found; do not use results to filter it.
+  const alerts=live?[...E.alertsForLines(data(5),lines).map(a=>({...a,source:'Valfiguer'})),
+    ...E.alertsForLines(data(7),lines,true).map(a=>({...a,source:'RadarDeTrenes'}))]:[];
+  const uniqueAlerts=new Map();for(const a of alerts){const key=E.norm(a.text);if(!uniqueAlerts.has(key))uniqueAlerts.set(key,a);}
+  renderAlerts([...uniqueAlerts.values()],live);
   renderSourceSummary(res,jobs,live?'live':'future',catalog);
   const failures=res.filter(x=>x.status==='rejected').length;
   setHealth(!live?'good':failures?'partial':'good',!live?'Horario oficial':failures?'Datos parciales':'Datos consultados');
@@ -284,7 +293,37 @@ async function search(){if(!catalog){showToast('El catálogo todavía no está d
  }catch(err){if(!signal.aborted&&id===requestId){const st=$('status');st.className='notice bad';st.textContent='No se ha podido consultar el horario: '+err.message;setHealth('bad','Sin horario');}}
  finally{if(id===requestId)markBusy(false);}
 }
-async function init(){const d=madridDate();$('trip-date').value=d;$('trip-date').min=d;$('trip-date').max=datePlus(d,CONFIG.nearDays-1);
+async function refreshRuntime(){
+ if(document.hidden||isBusy||!catalog)return;
+ const today=madridDate();
+ if(lastLocalDay!==today){
+  const old=lastLocalDay;lastLocalDay=today;
+  $('trip-date').min=today;$('trip-date').max=datePlus(today,CONFIG.nearDays-1);
+  if($('trip-date').value<today||quickValue!==null){selectQuick(quickValue||2);}
+  else if(old){invalidateResults();}
+ }
+ if(Date.now()-lastCatalogCheck>=5*60000){
+  lastCatalogCheck=Date.now();
+  try{
+   const candidate=await loadCatalog(null);
+   if(candidate.reference_only&&!catalog.reference_only){
+    setHealth('partial','Sin revalidación de datos');
+    $('catalog-message').textContent='No ha sido posible comprobar la última versión del GTFS. Se conserva el catálogo anterior, que podría estar desactualizado.';
+   }else if(candidate.generated_at!==catalog.generated_at||candidate.batch_id!==catalog.batch_id){
+    const previous={...selection};catalog=candidate;
+    stationMap=new Map(candidate.stations.map(s=>[s.id,s]));loadedDay.clear();
+    renderLineOptions();renderOfficialAudit(candidate);
+    $('network-tag').textContent=candidate.reference_only?`Referencia: ${candidate.stations.length} puntos`:
+      `${candidate.lines.filter(x=>x.present).length} líneas · ${candidate.stations.length} estaciones`;
+    if(stationMap.has(previous.from)&&stationMap.has(previous.to))applyPair(previous.from,previous.to);
+    else applyLine(candidate.lines.find(x=>x.present)?.id||'R4');
+    showToast('Catálogo ferroviario actualizado');
+   }
+  }catch{setHealth('partial','Sin revalidación de datos');}
+ }
+ if(catalog&&!catalog.reference_only&&selection.from&&selection.to)void search();
+}
+async function init(){const d=madridDate();lastLocalDay=d;lastCatalogCheck=Date.now();$('trip-date').value=d;$('trip-date').min=d;$('trip-date').max=datePlus(d,CONFIG.nearDays-1);
  for(const b of document.querySelectorAll('[data-hours]'))b.addEventListener('click',()=>selectQuick(Number(b.dataset.hours)));
  for(const id of ['trip-date','from-time','to-time'])$(id).addEventListener('change',manualChanged);
  $('search').addEventListener('click',()=>void search());$('refresh').addEventListener('click',()=>void search());
@@ -325,8 +364,8 @@ async function init(){const d=madridDate();$('trip-date').value=d;$('trip-date')
   $('status').className='notice bad';$('status').textContent='No se pudo cargar el catálogo. Comprueba que data/reference/fallback_catalog.json esté publicado y ejecuta el workflow GTFS.';
   $('network-tag').textContent='Red no disponible';
  }
- document.addEventListener('visibilitychange',()=>{if(!document.hidden&&catalog&&selection.from&&selection.to)void search();});
- setInterval(()=>{if(!document.hidden&&catalog&&selection.from&&selection.to&&!isBusy&&madridDate()===$('trip-date').value)void search();},CONFIG.refreshMs);
+ document.addEventListener('visibilitychange',()=>{if(!document.hidden)void refreshRuntime();});
+ setInterval(()=>{if(!document.hidden&&!isBusy)void refreshRuntime();},CONFIG.refreshMs);
  if('serviceWorker'in navigator&&location.protocol==='https:')navigator.serviceWorker.register('./sw.js').catch(()=>{});
 }
 init();
