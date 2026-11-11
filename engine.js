@@ -155,7 +155,7 @@ function normalizeTrenaliaTimetable(payload,from,to,day,requestedLine){
   if(startMs===null||endMs===null||!Number.isSafeInteger(startMs)||!Number.isSafeInteger(endMs))continue;
   const dep=Math.floor(startMs/1000),arr=Math.floor(endMs/1000);
   if(dep<=0||arr<=dep||arr-dep>6*3600)continue;
-  if(typeof r.stops!=='number'||!Number.isInteger(r.stops)||r.stops<2)continue;
+  if(typeof r.stops!=='number'||!Number.isInteger(r.stops)||r.stops<0)continue;
   // Reject a departure whose local service day differs from the requested day.
   const d=new Date(startMs);
   const parts=new Intl.DateTimeFormat('en-CA',{timeZone:'Europe/Madrid',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(d);
@@ -164,7 +164,7 @@ function normalizeTrenaliaTimetable(payload,from,to,day,requestedLine){
   const id='trenalia:'+lid+':'+from+':'+to+':'+day+':'+dep;
   if(seen.has(id))continue;seen.add(id);
   out.push({id,n:'',l:lid,day,src:'trenalia-schedule-only',
-    dest:to,s:[[from,dep,dep],[to,arr,arr]],intermediate_stop_count:r.stops-2});
+    dest:to,s:[[from,dep,dep],[to,arr,arr]],intermediate_stop_count:r.stops});
  }
  return out.sort((a,b)=>a.s[0][2]-b.s[0][2]);
 }
