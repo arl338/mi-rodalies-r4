@@ -88,8 +88,19 @@ def txt(z,name):
     if not files: raise ValueError(f'GTFS missing {name}')
     return io.TextIOWrapper(z.open(files[0]),encoding='utf-8-sig',errors='replace',newline='')
 
+def normalized_csv_rows(stream):
+    """Strip whitespace around CSV header names; Renfe pads end_date heavily."""
+    reader = csv.DictReader(stream)
+    if reader.fieldnames is None:
+        return reader
+    names = [name.strip() if name is not None else name for name in reader.fieldnames]
+    if len(names) != len(set(names)):
+        raise ValueError('GTFS con columnas duplicadas tras normalizar encabezados')
+    reader.fieldnames = names
+    return reader
+
 def load(z,name):
-    with txt(z,name) as f: return list(csv.DictReader(f))
+    with txt(z,name) as f: return list(normalized_csv_rows(f))
 
 def load_optional(z,name):
     try:return load(z,name)
@@ -340,7 +351,7 @@ def parse_archive(raw,source,dates):
             return stop_key(sid),s
         by_trip=defaultdict(list);catalog_candidates={}
         with txt(z,'stop_times.txt') as f:
-            for r in csv.DictReader(f):
+            for r in normalized_csv_rows(f):
                 tid=r.get('trip_id')
                 if tid not in all_recognized:continue
                 sid=r.get('stop_id')
