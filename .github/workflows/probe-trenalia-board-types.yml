@@ -1,0 +1,26 @@
+name: Inspección tipos de panel operativo Trenalia
+on:
+  push:
+    branches: [audit/official-stations-live-correlation-20261111]
+    paths:
+      - 'scripts/probe_trenalia_board_types.cjs'
+      - '.github/workflows/probe-trenalia-board-types.yml'
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: |
+          node --check scripts/probe_trenalia_board_types.cjs
+          node scripts/probe_trenalia_board_types.cjs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: trenalia-board-types
+          path: trenalia-board-types.json
+          retention-days: 5
