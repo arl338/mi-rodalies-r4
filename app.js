@@ -201,6 +201,7 @@ function renderOfficialAudit(cat){
   const row=el('div','catalog-line-row'),left=el('div','catalog-line-name'),right=el('div','catalog-line-status');
   const a=el('a','',l.id);a.href=l.url;a.target='_blank';a.rel='noopener noreferrer';left.append(a);
   left.append(el('small','',l.corridor));
+  if(l.timetable_pdf){const pdf=el('a','','Cuadro horario oficial (PDF)');pdf.href=l.timetable_pdf;pdf.target='_blank';pdf.rel='noopener noreferrer';left.append(pdf);}
   const networkCount=cat.network_reference?.line_station_counts?.[l.id];
   const inventory=Number.isInteger(networkCount)?networkCount+' estaciones del inventario · ':'';
   let state=inventory+'horarios GTFS no disponibles',type='warn';
@@ -254,7 +255,8 @@ function updateSummary(range,scheduleCount,live){const direct=results.filter(x=>
  $('results-subtitle').textContent=range.day+' · '+range.from+'–'+range.to+(range.extra?' (hasta mañana)':'');
  $('results-total').textContent=results.length+' '+(results.length===1?'opción':'opciones');
  const st=$('status');if(!results.length){st.className='notice warn';st.textContent=scheduleCount?'No se han encontrado servicios directos ni conexiones de un transbordo en esta franja. No implica que el servicio esté suspendido.':'No hay servicios GTFS verificables para esta combinación de estaciones, línea y fecha. El inventario no garantiza circulación.';
-  const a=el('a','','Consultar horarios oficiales de Rodalies');a.href='https://rodalies.gencat.cat/es/horaris/tots-els-horaris/';a.target='_blank';a.rel='noopener noreferrer';st.append(document.createTextNode(' · '),a);}
+  const refPdf=catalog?.official_reference?.lines?.find(l=>l.id===selection.line)?.timetable_pdf;
+  const a=el('a','','Consultar cuadro horario oficial de '+selection.line);a.href=refPdf||'https://rodalies.gencat.cat/es/horaris/tots-els-horaris/';a.target='_blank';a.rel='noopener noreferrer';st.append(document.createTextNode(' · '),a);}
  else{st.className='notice '+(cancel?'warn':pos?'good':'neutral');st.textContent=`${direct} directos · ${transfer} con un transbordo · ${pos} con posición reciente · ${cancel} cancelados. Las horas programadas no confirman circulación.`;}
  const age=Date.now()-Date.parse(catalog?.generated_at||'');
  $('updated').textContent=`Consulta ${fmtTime(Date.now()/1000)} · Datos operativos: ${live?'consultados en este momento':'solo horarios programados para fecha futura'}. ${Number.isFinite(age)&&age>48*3600000?'ATENCIÓN: GTFS sin regenerar desde hace más de 48 horas. ':''}Esta aplicación es orientativa.`;
