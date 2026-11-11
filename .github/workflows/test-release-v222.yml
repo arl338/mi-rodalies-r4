@@ -1,4 +1,4 @@
-name: Validar V2.2.2: ETA real, caches y PWA
+name: 'Validar V2.2.2 - ETA real, caches y PWA'
 on:
   push:
     branches: [release/v2-2-2-eta-integrity]
