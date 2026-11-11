@@ -1,0 +1,50 @@
+name: Auditoría de cobertura y fuentes · sin despliegue
+
+on:
+  push:
+    branches:
+      - 'audit/**'
+    paths:
+      - 'scripts/diagnose_coverage.py'
+      - 'scripts/diagnose_feeds.cjs'
+      - 'tests/test_diagnose_coverage.py'
+      - 'tests/test_diagnostics.cjs'
+      - '.github/workflows/auditoria-diagnosticos.yml'
+  pull_request:
+    paths:
+      - 'scripts/diagnose_coverage.py'
+      - 'scripts/diagnose_feeds.cjs'
+      - 'tests/test_diagnose_coverage.py'
+      - 'tests/test_diagnostics.cjs'
+
+permissions:
+  contents: read
+
+jobs:
+  diagnostico:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validar sintaxis de scripts
+        run: |
+          python -m py_compile scripts/diagnose_coverage.py
+          node --check scripts/diagnose_feeds.cjs
+      - name: Pruebas de diagnóstico
+        run: |
+          python -m unittest discover -s tests -p test_diagnose_coverage.py -v
+          node tests/test_diagnostics.cjs
+      - name: Diagnóstico del catálogo publicado
+        run: python scripts/diagnose_coverage.py --out data/v2 --json coverage-diagnostics.json
+      - name: Guardar informe de diagnóstico
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-diagnostics
+          path: coverage-diagnostics.json
+          retention-days: 14
