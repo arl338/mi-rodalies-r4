@@ -28,7 +28,7 @@ function ageSeconds(stamp,now){
  // Clock skew beyond 30 seconds is not proof of a recent observation.
  return age>=-30?Math.max(0,age):null;
 }
-function sourceAge(o,now){return ageSeconds(o?.generated_ts??o?.generated_at??o?.updatedAt??o?.updated_at??o?.reported_at??o?.last_updated,now);}
+function sourceAge(o,now){return ageSeconds(o?.generated_ts??o?.generated_at??o?.generatedAt??o?.updatedAt??o?.updated_at??o?.reported_at??o?.last_updated,now);}
 function normalizeBoard(obj,source,now,requestedStation=''){const overallAge=sourceAge(obj,now),out=[];
  for(const original of rows(obj)){
   const r=original?.properties||original;
@@ -54,7 +54,7 @@ function normalizeBoard(obj,source,now,requestedStation=''){const overallAge=sou
   const nucleus=r.nucleo??r.nucleus??r.core??obj?.station?.nucleo??'';
   if(foreignNucleus(nucleus))continue;
   const scoped=!!requestedStation&&station===String(requestedStation);
-  out.push({source,number:num,trip,line:scopedLine(r.line,nucleus,scoped)||scopedLine(r.product,nucleus,scoped)||scopedLine(r.route,nucleus,scoped),planned,estimated,stale:truth(r.stale),
+  out.push({source,number:num,trip,line:scopedLine(r.line,nucleus,scoped)||scopedLine(r.product,nucleus,scoped)||scopedLine(r.route,nucleus,scoped),planned,estimated,stale:truth(r.stale)||truth(obj?.stale),
    platform:String(r.platform??r.track??r.via??''),cancelled:truth(r.cancelled)||/cancel|suprim|anula|supprim|suppress|suspend/i.test(state),
    age,station,raw:r});
  }return out;
@@ -168,9 +168,53 @@ function normalizeTrenaliaTimetable(payload,from,to,day,requestedLine){
  }
  return out.sort((a,b)=>a.s[0][2]-b.s[0][2]);
 }
+
+/**
+ * Join live board ETA to a source-labelled *anonymous* timetable only when
+ * station, explicit commercial line and schedule time identify exactly ONE leg.
+ *
+ * A unique board-to-schedule relationship is evidence for an ETA at the
+ * selected station. It is NOT proof of the train's physical identity, and
+ * must never be upgraded to a live-position match.
+ *
+ * Requires a clock-fresh, non-stale board and its own scheduled timestamp.
+ * Reject collisions of multiple distinct train numbers/trips for one leg.
+ */
+function correlateTimetableBoards(journeys,boards){
+ const legs=journeys.flatMap(j=>j.legs).filter(l=>l.t.src==='trenalia-schedule-only');
+ if(!legs.length)return boards;
+ const candidates=new Map();
+ const fresh=x=>!x.stale&&x.age!==null&&x.age>=0&&x.age<=180&&
+  x.planned!==null&&x.estimated!==null&&x.number&&x.line&&x.station;
+ for(let i=0;i<boards.length;i++){
+  const row=boards[i];
+  if(!fresh(row))continue;
+  const applicable=legs.filter(l=>l.from===row.station&&l.t.l===row.line&&
+   Math.abs(l.depart-row.planned)<=60);
+  if(applicable.length!==1)continue;
+  const leg=applicable[0], key=leg.t.id+'|'+leg.from+'|'+leg.depart;
+  if(!candidates.has(key))candidates.set(key,[]);
+  candidates.get(key).push({index:i,number:row.number,trip:row.trip,leg});
+ }
+ const selected=new Map();
+ for(const [key,items] of candidates){
+  const identities=new Set(items.map(x=>x.trip||('number:'+String(Number(x.number)))));
+  const numbers=new Set(items.map(x=>String(Number(x.number))));
+  // Different providers can disagree about trip_id but still describe the
+  // same commercial number. Different train numbers are a hard conflict.
+  if(numbers.size!==1||!items.length)continue;
+  const legsForIdentity=legs.filter(l=>l.t.id+'|'+l.from+'|'+l.depart===key);
+  if(legsForIdentity.length!==1)continue;
+  for(const x of items)selected.set(x.index,key);
+ }
+ return boards.map((r,i)=>selected.has(i)?{...r,linkedScheduleKey:selected.get(i),
+   linkedByScheduleOnly:true}:r);
+}
+
 function serviceIds(t){return [t.id,...(t.alternative_trip_ids||[])].filter(Boolean).map(String);}
 function matchExact(leg,item){
  const t=leg.t;
+ if(t.src==='trenalia-schedule-only')return !!(item.linkedScheduleKey&&item.linkedScheduleKey===t.id+'|'+leg.from+'|'+leg.depart);
  if(item.line&&item.line!==t.l)return false;
  if(item.day&&t.day&&item.day!==t.day)return false;
  if(item.station&&item.station!==leg.from)return false;
@@ -203,7 +247,7 @@ function enrichLeg(leg,board,positions,cancels,now){
   }else{
    const candidate=plausible[0];current.estimated=candidate.estimated;
    current.delay=candidate.estimated-leg.depart;current.platform=candidate.platform;
-   current.proof.push(`Estimación ${candidate.source} (${Math.round(candidate.age)} s)`);
+   current.proof.push(candidate.linkedByScheduleOnly?`Estimación ${candidate.source} asociada por línea, estación y hora (${Math.round(candidate.age)} s); identidad del tren no confirmada`:`Estimación ${candidate.source} (${Math.round(candidate.age)} s)`);
   }
  }
  const pos=positions.filter(p=>matchPosition(leg,p)).sort((a,b)=>a.age-b.age)[0];
@@ -256,5 +300,5 @@ function alertsForLines(obj,lines,stationScoped=false){
  return found.slice(0,12);
 }
 
-return {LINES,norm,line,scopedLine,catalanNucleus,n,ts,rows,normalizeBoard,normalizePositions,normalizeCancels,direct,transfers,normalizeTrenaliaTimetable,matchExact,matchPosition,enrichLeg,enrichJourney,alertsForLines};
+return {LINES,norm,line,scopedLine,catalanNucleus,n,ts,rows,normalizeBoard,normalizePositions,normalizeCancels,direct,transfers,normalizeTrenaliaTimetable,correlateTimetableBoards,matchExact,matchPosition,enrichLeg,enrichJourney,alertsForLines};
 });
