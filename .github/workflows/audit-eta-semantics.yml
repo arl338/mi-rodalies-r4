@@ -1,0 +1,25 @@
+name: Final precision semantics audit - read only
+on:
+  push:
+    branches: [audit/final-precision-proof-20261111]
+    paths:
+      - 'scripts/audit_eta_semantics.cjs'
+      - '.github/workflows/audit-eta-semantics.yml'
+  workflow_dispatch:
+permissions: {contents: read}
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - run: |
+          node --check scripts/audit_eta_semantics.cjs
+          node scripts/audit_eta_semantics.cjs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: precision-source-audit
+          path: precision-source-audit.json
+          retention-days: 5
