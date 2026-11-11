@@ -47,11 +47,19 @@ function registerRadar(j){
 function getId(name){const x=[...(ids.get(normalize(name))||[])];return x.length===1?x[0]:null;}
 const now=Math.floor(Date.now()/1000),timeout=10000;
 async function getJson(url){
- const ac=new AbortController(),timer=setTimeout(()=>ac.abort(),timeout);
- try{const r=await fetch(url,{headers:{Accept:'application/json',Origin:'https://arl338.github.io'},signal:ac.signal});
-  if(!r.ok)throw Error('http_'+r.status);
-  return await r.json();
- }finally{clearTimeout(timer);}
+ for(let retry=0;retry<=2;retry++){
+  const ac=new AbortController(),timer=setTimeout(()=>ac.abort(),timeout);
+  try{
+   const r=await fetch(url,{headers:{Accept:'application/json',Origin:'https://arl338.github.io'},signal:ac.signal});
+   if(r.status===429&&retry<2){
+    const waitMs=Math.min(65000,Math.max(3000,Number(r.headers.get('retry-after')||10)*1000));
+    await new Promise(ok=>setTimeout(ok,waitMs));continue;
+   }
+   if(!r.ok)throw Error('http_'+r.status);
+   return await r.json();
+  }finally{clearTimeout(timer);}
+ }
+ throw Error('rate_limited');
 }
 async function pool(actions,n=5){
  let next=0;const results=new Array(actions.length);
