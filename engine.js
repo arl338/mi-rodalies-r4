@@ -54,7 +54,7 @@ function normalizeBoard(obj,source,now,requestedStation=''){const overallAge=sou
   const nucleus=r.nucleo??r.nucleus??r.core??obj?.station?.nucleo??'';
   if(foreignNucleus(nucleus))continue;
   const scoped=!!requestedStation&&station===String(requestedStation);
-  out.push({source,number:num,trip,line:scopedLine(r.line,nucleus,scoped)||scopedLine(r.product,nucleus,scoped)||scopedLine(r.route,nucleus,scoped),planned,estimated,
+  out.push({source,number:num,trip,line:scopedLine(r.line,nucleus,scoped)||scopedLine(r.product,nucleus,scoped)||scopedLine(r.route,nucleus,scoped),planned,estimated,stale:truth(r.stale),
    platform:String(r.platform??r.track??r.via??''),cancelled:truth(r.cancelled)||/cancel|suprim|anula|supprim|suppress|suspend/i.test(state),
    age,station,raw:r});
  }return out;
@@ -129,6 +129,7 @@ function transfers(trains,from,to,start,end,limit=32){
  }
  return [...best.values()].sort((a,b)=>a.depart-b.depart||a.arrive-b.arrive).slice(0,limit);
 }
+
 function serviceIds(t){return [t.id,...(t.alternative_trip_ids||[])].filter(Boolean).map(String);}
 function matchExact(leg,item){
  const t=leg.t;
@@ -153,7 +154,7 @@ function matchPosition(leg,item){
 function enrichLeg(leg,board,positions,cancels,now){
  const current={...leg,state:'scheduled',estimated:null,delay:null,platform:'',proof:[],position:null,cancelled:false,conflict:false};
  const matched=board.filter(x=>(!x.boardStop||x.boardStop===leg.from)&&matchExact(leg,x));
- const freshBoard=matched.filter(x=>x.age!==null&&x.age>=0&&x.age<=180&&x.planned!==null);
+ const freshBoard=matched.filter(x=>!x.stale&&x.age!==null&&x.age>=0&&x.age<=180&&x.planned!==null);
  const plausible=freshBoard.filter(x=>x.estimated!==null&&x.estimated>=now-300&&x.estimated>=leg.depart-1200&&x.estimated<leg.depart+4*3600);
  plausible.sort((a,b)=>a.age-b.age);
  if(plausible.length){

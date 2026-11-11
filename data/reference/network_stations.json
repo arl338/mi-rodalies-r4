@@ -1,0 +1,1381 @@
+{
+  "schema": 1,
+  "source": "https://transportam.cat/es/stops/network/rodalies",
+  "official_crosscheck": "https://rodalies.gencat.cat/es/horaris/tots-els-horaris/",
+  "checked_on": "2026-11-11",
+  "status": "Referencia de estaciones y adscripción a líneas; fuente secundaria, no equivale a horarios o paradas comerciales garantizadas",
+  "stations": [
+    {
+      "name": "Aeroport",
+      "lines": [
+        "R2N"
+      ]
+    },
+    {
+      "name": "Aguilar de Segarra",
+      "lines": [
+        "RL4"
+      ]
+    },
+    {
+      "name": "Alcover",
+      "lines": [
+        "R14",
+        "RT1"
+      ]
+    },
+    {
+      "name": "Altafulla-Tamarit",
+      "lines": [
+        "R14",
+        "R15",
+        "R16",
+        "R17"
+      ]
+    },
+    {
+      "name": "Anglesola",
+      "lines": [
+        "RL3",
+        "RL4"
+      ]
+    },
+    {
+      "name": "Arenys de Mar",
+      "lines": [
+        "R1",
+        "RG1"
+      ]
+    },
+    {
+      "name": "Ascó",
+      "lines": [
+        "R15"
+      ]
+    },
+    {
+      "name": "Badalona",
+      "lines": [
+        "R1",
+        "RG1"
+      ]
+    },
+    {
+      "name": "Balenyà-Els Hostalets",
+      "lines": [
+        "R3"
+      ]
+    },
+    {
+      "name": "Balenyà-Tona-Seva",
+      "lines": [
+        "R3"
+      ]
+    },
+    {
+      "name": "Barberà del Vallès",
+      "lines": [
+        "R4"
+      ]
+    },
+    {
+      "name": "Barcelona-Arc de Triomf",
+      "lines": [
+        "R1",
+        "R3",
+        "R4",
+        "RG1"
+      ]
+    },
+    {
+      "name": "Barcelona-El Clot",
+      "lines": [
+        "R1",
+        "R2",
+        "R2N",
+        "R11",
+        "RG1"
+      ]
+    },
+    {
+      "name": "Barcelona-Estació de França",
+      "lines": [
+        "R2S",
+        "R13",
+        "R14",
+        "R15",
+        "R16",
+        "R17"
+      ]
+    },
+    {
+      "name": "Barcelona-Fabra i Puig",
+      "lines": [
+        "R3",
+        "R4",
+        "R7"
+      ]
+    },
+    {
+      "name": "Barcelona-La Sagrera-Meridiana",
+      "lines": [
+        "R3",
+        "R4"
+      ]
+    },
+    {
+      "name": "Barcelona-Passeig de Gràcia",
+      "lines": [
+        "R2",
+        "R2N",
+        "R2S",
+        "R11",
+        "R13",
+        "R14",
+        "R15",
+        "R16",
+        "R17"
+      ]
+    },
+    {
+      "name": "Barcelona-Plaça de Catalunya",
+      "lines": [
+        "R1",
+        "R3",
+        "R4",
+        "RG1"
+      ]
+    },
+    {
+      "name": "Barcelona-Sant Andreu",
+      "lines": [
+        "R2",
+        "R2N",
+        "R11"
+      ]
+    },
+    {
+      "name": "Barcelona-Sants",
+      "lines": [
+        "R1",
+        "R2",
+        "R2N",
+        "R2S",
+        "R3",
+        "R4",
+        "R11",
+        "R13",
+        "R14",
+        "R15",
+        "R16",
+        "R17",
+        "RG1"
+      ]
+    },
+    {
+      "name": "Barcelona-Torre Baró | Vallbona",
+      "lines": [
+        "R3",
+        "R4",
+        "R7"
+      ]
+    },
+    {
+      "name": "Bell-lloc d'Urgell",
+      "lines": [
+        "RL3",
+        "RL4"
+      ]
+    },
+    {
+      "name": "Bellpuig",
+      "lines": [
+        "RL3",
+        "RL4"
+      ]
+    },
+    {
+      "name": "Bellvitge | Gornal",
+      "lines": [
+        "R2",
+        "R2N",
+        "R2S"
+      ]
+    },
+    {
+      "name": "Blanes",
+      "lines": [
+        "R1",
+        "RG1"
+      ]
+    },
+    {
+      "name": "Bordils-Juià",
+      "lines": [
+        "R11",
+        "RG1"
+      ]
+    },
+    {
+      "name": "Borgonyà",
+      "lines": [
+        "R3"
+      ]
+    },
+    {
+      "name": "Cabrera de Mar-Vilassar de Mar",
+      "lines": [
+        "R1",
+        "RG1"
+      ]
+    },
+    {
+      "name": "Calaf",
+      "lines": [
+        "RL4"
+      ]
+    },
+    {
+      "name": "Calafell",
+      "lines": [
+        "R2S"
+      ]
+    },
+    {
+      "name": "Caldes d'Estrac",
+      "lines": [
+        "R1",
+        "RG1"
+      ]
+    },
+    {
+      "name": "Caldes de Malavella",
+      "lines": [
+        "R11",
+        "RG1"
+      ]
+    },
+    {
+      "name": "Calella",
+      "lines": [
+        "R1",
+        "RG1"
+      ]
+    },
+    {
+      "name": "Camallera",
+      "lines": [
+        "R11",
+        "RG1"
+      ]
+    },
+    {
+      "name": "Camarles-Deltebre",
+      "lines": [
+        "R16"
+      ]
+    },
+    {
+      "name": "Cambrils",
+      "lines": [
+        "R16"
+      ]
+    },
+    {
+      "name": "Camp-redó",
+      "lines": [
+        "R16"
+      ]
+    },
+    {
+      "name": "Campdevànol",
+      "lines": [
+        "R3"
+      ]
+    },
+    {
+      "name": "Canet de Mar",
+      "lines": [
+        "R1",
+        "RG1"
+      ]
+    },
+    {
+      "name": "Capçanes",
+      "lines": [
+        "R15"
+      ]
+    },
+    {
+      "name": "Cardedeu",
+      "lines": [
+        "R2N"
+      ]
+    },
+    {
+      "name": "Castellbell i el Vilar-Monistrol de Montserrat",
+      "lines": [
+        "R4"
+      ]
+    },
+    {
+      "name": "Castellbisbal",
+      "lines": [
+        "R4",
+        "R8"
+      ]
+    },
+    {
+      "name": "Castelldefels",
+      "lines": [
+        "R2",
+        "R2S"
+      ]
+    },
+    {
+      "name": "Castellnou de Seana",
+      "lines": [
+        "RL3",
+        "RL4"
+      ]
+    },
+    {
+      "name": "Celrà",
+      "lines": [
+        "R11",
+        "RG1"
+      ]
+    },
+    {
+      "name": "Centelles",
+      "lines": [
+        "R3"
+      ]
+    },
+    {
+      "name": "Cerbère",
+      "lines": [
+        "R11"
+      ]
+    },
+    {
+      "name": "Cerdanyola del Vallès",
+      "lines": [
+        "R4",
+        "R7"
+      ]
+    },
+    {
+      "name": "Cerdanyola-Universitat",
+      "lines": [
+        "R7",
+        "R8"
+      ]
+    },
+    {
+      "name": "Cervera",
+      "lines": [
+        "RL3",
+        "RL4"
+      ]
+    },
+    {
+      "name": "Colera",
+      "lines": [
+        "R11",
+        "RG1"
+      ]
+    },
+    {
+      "name": "Cornellà",
+      "lines": [
+        "R1",
+        "R4"
+      ]
+    },
+    {
+      "name": "Cubelles",
+      "lines": [
+        "R2S"
+      ]
+    },
+    {
+      "name": "Cunit",
+      "lines": [
+        "R2S"
+      ]
+    },
+    {
+      "name": "Duesaigües-L'Argentera",
+      "lines": [
+        "R15"
+      ]
+    },
+    {
+      "name": "El Masnou",
+      "lines": [
+        "R1",
+        "RG1"
+      ]
+    },
+    {
+      "name": "El Papiol",
+      "lines": [
+        "R4"
+      ]
+    },
+    {
+      "name": "El Prat de Llobregat",
+      "lines": [
+        "R2",
+        "R2N",
+        "R2S"
+      ]
+    },
+    {
+      "name": "El Vendrell",
+      "lines": [
+        "R4"
+      ]
+    },
+    {
+      "name": "Els Monjos",
+      "lines": [
+        "R4"
+      ]
+    },
+    {
+      "name": "Figaró",
+      "lines": [
+        "R3"
+      ]
+    },
+    {
+      "name": "Figueres",
+      "lines": [
+        "R11",
+        "RG1"
+      ]
+    },
+    {
+      "name": "Flaçà",
+      "lines": [
+        "R11",
+        "RG1"
+      ]
+    },
+    {
+      "name": "Flix",
+      "lines": [
+        "R15"
+      ]
+    },
+    {
+      "name": "Fornells de la Selva",
+      "lines": [
+        "R11",
+        "RG1"
+      ]
+    },
+    {
+      "name": "Garraf",
+      "lines": [
+        "R2S"
+      ]
+    },
+    {
+      "name": "Gavà",
+      "lines": [
+        "R2",
+        "R2S"
+      ]
+    },
+    {
+      "name": "Gelida",
+      "lines": [
+        "R4"
+      ]
+    },
+    {
+      "name": "Girona",
+      "lines": [
+        "R11",
+        "RG1"
+      ]
+    },
+    {
+      "name": "Golmés",
+      "lines": [
+        "RL3",
+        "RL4"
+      ]
+    },
+    {
+      "name": "Granollers Centre",
+      "lines": [
+        "R2",
+        "R2N",
+        "R8",
+        "R11"
+      ]
+    },
+    {
+      "name": "Granollers-Canovelles",
+      "lines": [
+        "R3"
+      ]
+    },
+    {
+      "name": "Gualba",
+      "lines": [
+        "R2N",
+        "R11"
+      ]
+    },
+    {
+      "name": "Hostalric",
+      "lines": [
+        "R2N",
+        "R11"
+      ]
+    },
+    {
+      "name": "Juneda",
+      "lines": [
+        "R13",
+        "R14"
+      ]
+    },
+    {
+      "name": "L'Aldea-Amposta-Tortosa",
+      "lines": [
+        "R16"
+      ]
+    },
+    {
+      "name": "L'Ametlla de Mar",
+      "lines": [
+        "R16"
+      ]
+    },
+    {
+      "name": "L'Ampolla-El Perelló-Deltebre",
+      "lines": [
+        "R16"
+      ]
+    },
+    {
+      "name": "L'Arboç",
+      "lines": [
+        "R4"
+      ]
+    },
+    {
+      "name": "L'Espluga de Francolí",
+      "lines": [
+        "R13",
+        "R14"
+      ]
+    },
+    {
+      "name": "L'Hospitalet de l'Infant",
+      "lines": [
+        "R16"
+      ]
+    },
+    {
+      "name": "L'Hospitalet de Llobregat",
+      "lines": [
+        "R1",
+        "R3",
+        "R4",
+        "RG1"
+      ]
+    },
+    {
+      "name": "La Farga de Bebié",
+      "lines": [
+        "R3"
+      ]
+    },
+    {
+      "name": "La Floresta",
+      "lines": [
+        "R13",
+        "R14"
+      ]
+    },
+    {
+      "name": "La Garriga",
+      "lines": [
+        "R3"
+      ]
+    },
+    {
+      "name": "La Granada",
+      "lines": [
+        "R4"
+      ]
+    },
+    {
+      "name": "La Llagosta",
+      "lines": [
+        "R2",
+        "R2N"
+      ]
+    },
+    {
+      "name": "La Molina",
+      "lines": [
+        "R3"
+      ]
+    },
+    {
+      "name": "La Plana-Picamoixons",
+      "lines": [
+        "R13",
+        "R14",
+        "RT1"
+      ]
+    },
+    {
+      "name": "La Riba",
+      "lines": [
+        "R13",
+        "R14"
+      ]
+    },
+    {
+      "name": "La Selva del Camp",
+      "lines": [
+        "R14",
+        "RT1"
+      ]
+    },
+    {
+      "name": "La Tor de Querol-Enveig",
+      "lines": [
+        "R3"
+      ]
+    },
+    {
+      "name": "Lavern-Subirats",
+      "lines": [
+        "R4"
+      ]
+    },
+    {
+      "name": "Les Borges Blanques",
+      "lines": [
+        "R13",
+        "R14"
+      ]
+    },
+    {
+      "name": "Les Borges del Camp",
+      "lines": [
+        "R15"
+      ]
+    },
+    {
+      "name": "Les Franqueses del Vallès",
+      "lines": [
+        "R3"
+      ]
+    },
+    {
+      "name": "Les Franqueses-Granollers Nord",
+      "lines": [
+        "R2N"
+      ]
+    },
+    {
+      "name": "Llançà",
+      "lines": [
+        "R11",
+        "RG1"
+      ]
+    },
+    {
+      "name": "Lleida-Pirineus",
+      "lines": [
+        "R13",
+        "R14",
+        "RL3",
+        "RL4"
+      ]
+    },
+    {
+      "name": "Llinars del Vallès",
+      "lines": [
+        "R2N"
+      ]
+    },
+    {
+      "name": "Maçanet-Massanes",
+      "lines": [
+        "R1",
+        "R2N",
+        "R11",
+        "RG1"
+      ]
+    },
+    {
+      "name": "Malgrat de Mar",
+      "lines": [
+        "R1",
+        "RG1"
+      ]
+    },
+    {
+      "name": "Manlleu",
+      "lines": [
+        "R3"
+      ]
+    },
+    {
+      "name": "Manresa",
+      "lines": [
+        "R4",
+        "RL4"
+      ]
+    },
+    {
+      "name": "Marçà-Falset",
+      "lines": [
+        "R15"
+      ]
+    },
+    {
+      "name": "Martorell Central",
+      "lines": [
+        "R4",
+        "R8"
+      ]
+    },
+    {
+      "name": "Mataró",
+      "lines": [
+        "R1",
+        "RG1"
+      ]
+    },
+    {
+      "name": "Molins de Rei",
+      "lines": [
+        "R1",
+        "R4"
+      ]
+    },
+    {
+      "name": "Mollerussa",
+      "lines": [
+        "RL3",
+        "RL4"
+      ]
+    },
+    {
+      "name": "Mollet-Sant Fost",
+      "lines": [
+        "R2",
+        "R2N",
+        "R8"
+      ]
+    },
+    {
+      "name": "Mollet-Santa Rosa",
+      "lines": [
+        "R3"
+      ]
+    },
+    {
+      "name": "Montblanc",
+      "lines": [
+        "R13",
+        "R14"
+      ]
+    },
+    {
+      "name": "Montcada Bifurcació",
+      "lines": [
+        "R3",
+        "R4",
+        "R7"
+      ]
+    },
+    {
+      "name": "Montcada i Reixac",
+      "lines": [
+        "R2",
+        "R2N"
+      ]
+    },
+    {
+      "name": "Montcada i Reixac-Manresa",
+      "lines": [
+        "R4",
+        "R7"
+      ]
+    },
+    {
+      "name": "Montcada i Reixac-Santa Maria",
+      "lines": [
+        "R4",
+        "R7"
+      ]
+    },
+    {
+      "name": "Montcada Ripollet",
+      "lines": [
+        "R3"
+      ]
+    },
+    {
+      "name": "Montgat",
+      "lines": [
+        "R1",
+        "RG1"
+      ]
+    },
+    {
+      "name": "Montgat Nord",
+      "lines": [
+        "R1",
+        "RG1"
+      ]
+    },
+    {
+      "name": "Montmeló",
+      "lines": [
+        "R2",
+        "R2N",
+        "R8"
+      ]
+    },
+    {
+      "name": "Móra la Nova",
+      "lines": [
+        "R15"
+      ]
+    },
+    {
+      "name": "Nulles-Bràfim",
+      "lines": [
+        "R13"
+      ]
+    },
+    {
+      "name": "Ocata",
+      "lines": [
+        "R1",
+        "RG1"
+      ]
+    },
+    {
+      "name": "Palautordera",
+      "lines": [
+        "R2N"
+      ]
+    },
+    {
+      "name": "Parets del Vallès",
+      "lines": [
+        "R3"
+      ]
+    },
+    {
+      "name": "Pineda de Mar",
+      "lines": [
+        "R1",
+        "RG1"
+      ]
+    },
+    {
+      "name": "Planoles",
+      "lines": [
+        "R3"
+      ]
+    },
+    {
+      "name": "Platja de Castelldefels",
+      "lines": [
+        "R2S"
+      ]
+    },
+    {
+      "name": "Portbou",
+      "lines": [
+        "R11",
+        "RG1"
+      ]
+    },
+    {
+      "name": "Pradell",
+      "lines": [
+        "R15"
+      ]
+    },
+    {
+      "name": "Premià de Mar",
+      "lines": [
+        "R1",
+        "RG1"
+      ]
+    },
+    {
+      "name": "Puigcerdà",
+      "lines": [
+        "R3"
+      ]
+    },
+    {
+      "name": "Puigverd de Lleida-Artesa de Lleida",
+      "lines": [
+        "R13",
+        "R14"
+      ]
+    },
+    {
+      "name": "Rajadell",
+      "lines": [
+        "RL4"
+      ]
+    },
+    {
+      "name": "Reus",
+      "lines": [
+        "R14",
+        "R15",
+        "RT1"
+      ]
+    },
+    {
+      "name": "Riba-roja d'Ebre",
+      "lines": [
+        "R15"
+      ]
+    },
+    {
+      "name": "Ribes de Freser",
+      "lines": [
+        "R3"
+      ]
+    },
+    {
+      "name": "Riells i Viabrea-Breda",
+      "lines": [
+        "R2N",
+        "R11"
+      ]
+    },
+    {
+      "name": "Ripoll",
+      "lines": [
+        "R3"
+      ]
+    },
+    {
+      "name": "Riudecanyes-Botarell",
+      "lines": [
+        "R15"
+      ]
+    },
+    {
+      "name": "Riudellots",
+      "lines": [
+        "R11",
+        "RG1"
+      ]
+    },
+    {
+      "name": "Roda de Mar",
+      "lines": [
+        "R13"
+      ]
+    },
+    {
+      "name": "Rubí Can Vallhonrat",
+      "lines": [
+        "R8"
+      ]
+    },
+    {
+      "name": "Sabadell Centre",
+      "lines": [
+        "R4"
+      ]
+    },
+    {
+      "name": "Sabadell Nord",
+      "lines": [
+        "R4"
+      ]
+    },
+    {
+      "name": "Sabadell Sud",
+      "lines": [
+        "R4"
+      ]
+    },
+    {
+      "name": "Salomó",
+      "lines": [
+        "R13"
+      ]
+    },
+    {
+      "name": "Salou - Port Aventura",
+      "lines": [
+        "R17",
+        "RT2"
+      ]
+    },
+    {
+      "name": "Sant Adrià de Besòs",
+      "lines": [
+        "R1",
+        "RG1"
+      ]
+    },
+    {
+      "name": "Sant Andreu de Llavaneres",
+      "lines": [
+        "R1",
+        "RG1"
+      ]
+    },
+    {
+      "name": "Sant Celoni",
+      "lines": [
+        "R2N",
+        "R11"
+      ]
+    },
+    {
+      "name": "Sant Cugat Coll Favà",
+      "lines": [
+        "R8"
+      ]
+    },
+    {
+      "name": "Sant Feliu de Llobregat",
+      "lines": [
+        "R1",
+        "R4"
+      ]
+    },
+    {
+      "name": "Sant Guim de Freixenet",
+      "lines": [
+        "RL4"
+      ]
+    },
+    {
+      "name": "Sant Joan Despí",
+      "lines": [
+        "R1",
+        "R4"
+      ]
+    },
+    {
+      "name": "Sant Jordi Desvalls",
+      "lines": [
+        "R11",
+        "RG1"
+      ]
+    },
+    {
+      "name": "Sant Martí de Centelles",
+      "lines": [
+        "R3"
+      ]
+    },
+    {
+      "name": "Sant Martí Sesgueioles",
+      "lines": [
+        "RL4"
+      ]
+    },
+    {
+      "name": "Sant Miquel de Fluvià",
+      "lines": [
+        "R11",
+        "RG1"
+      ]
+    },
+    {
+      "name": "Sant Miquel de Gonteres-Viladecavalls",
+      "lines": [
+        "R4"
+      ]
+    },
+    {
+      "name": "Sant Pol de Mar",
+      "lines": [
+        "R1",
+        "RG1"
+      ]
+    },
+    {
+      "name": "Sant Quirze de Besora-Montesquiu",
+      "lines": [
+        "R3"
+      ]
+    },
+    {
+      "name": "Sant Sadurní d'Anoia",
+      "lines": [
+        "R4"
+      ]
+    },
+    {
+      "name": "Sant Vicenç de Calders",
+      "lines": [
+        "R2S",
+        "R4",
+        "R13",
+        "R14",
+        "R15",
+        "R16",
+        "R17"
+      ]
+    },
+    {
+      "name": "Sant Vicenç de Castellet",
+      "lines": [
+        "R4",
+        "RL4"
+      ]
+    },
+    {
+      "name": "Santa Perpètua de Mogoda La Florida",
+      "lines": [
+        "R3"
+      ]
+    },
+    {
+      "name": "Santa Perpètua de Mogoda Riera de Caldes",
+      "lines": [
+        "R8"
+      ]
+    },
+    {
+      "name": "Santa Susanna",
+      "lines": [
+        "R1",
+        "RG1"
+      ]
+    },
+    {
+      "name": "Seguers-Sant Pere Sallavinera",
+      "lines": [
+        "RL4"
+      ]
+    },
+    {
+      "name": "Segur de Calafell",
+      "lines": [
+        "R2S"
+      ]
+    },
+    {
+      "name": "Sils",
+      "lines": [
+        "R11",
+        "RG1"
+      ]
+    },
+    {
+      "name": "Sitges",
+      "lines": [
+        "R2S"
+      ]
+    },
+    {
+      "name": "Tarragona",
+      "lines": [
+        "R14",
+        "R15",
+        "R16",
+        "R17",
+        "RT1",
+        "RT2"
+      ]
+    },
+    {
+      "name": "Tàrrega",
+      "lines": [
+        "RL3",
+        "RL4"
+      ]
+    },
+    {
+      "name": "Terrassa Est",
+      "lines": [
+        "R4"
+      ]
+    },
+    {
+      "name": "Terrassa Estació del Nord",
+      "lines": [
+        "R4",
+        "RL4"
+      ]
+    },
+    {
+      "name": "Tordera",
+      "lines": [
+        "R1",
+        "RG1"
+      ]
+    },
+    {
+      "name": "Torelló",
+      "lines": [
+        "R3"
+      ]
+    },
+    {
+      "name": "Torredembarra",
+      "lines": [
+        "R14",
+        "R15",
+        "R16",
+        "R17"
+      ]
+    },
+    {
+      "name": "Tortosa",
+      "lines": [
+        "R16"
+      ]
+    },
+    {
+      "name": "Toses",
+      "lines": [
+        "R3"
+      ]
+    },
+    {
+      "name": "Ulldecona-Alcanar-La Sénia",
+      "lines": [
+        "R16"
+      ]
+    },
+    {
+      "name": "Urtx-Alp",
+      "lines": [
+        "R3"
+      ]
+    },
+    {
+      "name": "Vacarisses",
+      "lines": [
+        "R4"
+      ]
+    },
+    {
+      "name": "Vacarisses-Torreblanca",
+      "lines": [
+        "R4"
+      ]
+    },
+    {
+      "name": "Valls",
+      "lines": [
+        "R13"
+      ]
+    },
+    {
+      "name": "Vic",
+      "lines": [
+        "R3"
+      ]
+    },
+    {
+      "name": "Vila-seca",
+      "lines": [
+        "R14",
+        "R15",
+        "R16",
+        "RT1"
+      ]
+    },
+    {
+      "name": "Vilabella",
+      "lines": [
+        "R13"
+      ]
+    },
+    {
+      "name": "Viladecans",
+      "lines": [
+        "R2",
+        "R2S"
+      ]
+    },
+    {
+      "name": "Viladecavalls",
+      "lines": [
+        "R4"
+      ]
+    },
+    {
+      "name": "Vilafranca del Penedès",
+      "lines": [
+        "R4"
+      ]
+    },
+    {
+      "name": "Vilajuïga",
+      "lines": [
+        "R11",
+        "RG1"
+      ]
+    },
+    {
+      "name": "Vilamalla",
+      "lines": [
+        "R11",
+        "RG1"
+      ]
+    },
+    {
+      "name": "Vilanova i la Geltrú",
+      "lines": [
+        "R2S",
+        "R15",
+        "R16",
+        "R17"
+      ]
+    },
+    {
+      "name": "Vilassar de Mar",
+      "lines": [
+        "R1",
+        "RG1"
+      ]
+    },
+    {
+      "name": "Vilaverd",
+      "lines": [
+        "R13",
+        "R14"
+      ]
+    },
+    {
+      "name": "Vimbodí i Poblet",
+      "lines": [
+        "R13",
+        "R14"
+      ]
+    },
+    {
+      "name": "Vinaixa",
+      "lines": [
+        "R13",
+        "R14"
+      ]
+    }
+  ]
+}
