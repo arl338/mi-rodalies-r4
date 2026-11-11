@@ -234,13 +234,14 @@ function renderResultList(){const root=$('results');root.replaceChildren();for(c
  time.append(el('div','train-time',timeFor(selected)),el('div','train-time-label',(j.estimated&&!j.cancelled&&!j.conflict)?'Salida estimada · programada '+timeFor(j.depart):'Salida programada'));
  time.append(el('div','train-end','Llegada programada '+timeFor(j.arrive)+' · Duración programada '+duration(j.depart,j.arrive)));top.append(time,right);panel.append(top);
  if(j.kind==='direct'){
-  const leg=j.legs[0],lineRow=el('div','train-line'),tag=el('span','line-pill '+(/^(R1[34567]|R11)/.test(leg.t.l)?'regional':''),leg.t.l);lineRow.append(tag,document.createTextNode('Tren '+(leg.t.n||'sin número')+' · '+stationName(leg.to)));panel.append(lineRow);
+  const leg=j.legs[0],lineRow=el('div','train-line'),tag=el('span','line-pill '+(/^(R1[34567]|R11)/.test(leg.t.l)?'regional':''),leg.t.l);lineRow.append(tag,document.createTextNode((leg.t.n?'Tren '+leg.t.n:'Servicio sin número publicado')+' · '+stationName(leg.to)));panel.append(lineRow);
   panel.append(el('div','train-subline','Origen: '+stationName(leg.from)+' · destino: '+stationName(leg.to)));
  }else{
   panel.append(el('div','train-line','Conexión programada en '+stationName(j.transferAt)));
   const legs=el('div','trip-legs');for(const l of j.legs){const d=el('div','leg');d.append(el('span','small-line',l.t.l),el('span','',timeFor(l.depart)+' '+stationName(l.from)+' → '+timeFor(l.arrive)+' '+stationName(l.to)));legs.append(d);}panel.append(legs);
  }
- const proof=el('div','train-evidence');let notes=['Origen: Renfe GTFS oficial'];
+ const proof=el('div','train-evidence');const alternative=j.legs.some(l=>l.t.src==='trenalia-schedule-only');
+ let notes=[alternative?'Origen: Trenalia (horarios Renfe). Solo horario orientativo, sin número de tren ni horas de paradas intermedias confirmadas.':'Origen: Renfe GTFS oficial'];
  for(const l of j.legs){if(l.proof.length)notes.push(l.proof.join('; '));if(l.platform)notes.push('Vía publicada: '+l.platform);}
  if(j.kind==='transfer')notes.push(j.connectionRisk?'ATENCIÓN: conexión en riesgo por retraso observado del primer tren; llegada no estimada':'Conexión teórica con margen programado; llegada y enlace no confirmados');
  if(catalog&&Date.now()-Date.parse(catalog.generated_at||'')>48*3600000)notes.push('Catálogo GTFS antiguo: comprobar el horario vigente en Renfe');
@@ -272,7 +273,24 @@ async function search(){if(!catalog){showToast('El catálogo todavía no está d
   const daily=await Promise.all(days.map(d=>dayData(d,signal)));
   if(signal.aborted||id!==requestId)return;
   const trips=daily.flatMap(x=>x.trains.map(t=>({...t,day:x.day})));
-  const scheduled=buildWindow(trips,range);
+  let scheduled=buildWindow(trips,range);
+  // The optional timetable fallback has no reliable train number or individual
+  // intermediate stop times. It MUST NOT replace an available GTFS itinerary.
+  let fallback=[];
+  if(!scheduled.length&&selection.line&&selection.line!=='ALL'&&
+     /^\d{5}$/.test(selection.from)&&/^\d{5}$/.test(selection.to)){
+   const params=new URLSearchParams({from:selection.from,to:selection.to,
+     date:range.day,limit:'400'});
+   try{
+    const thirdParty=await loadJson('https://trenalia.org/api/v1/timetable?'+params,
+      signal,CONFIG.timeoutMs);
+    if(signal.aborted||id!==requestId)return;
+    fallback=E.normalizeTrenaliaTimetable(thirdParty,selection.from,
+      selection.to,range.day,selection.line);
+    scheduled=E.direct(fallback,selection.from,selection.to,
+      range.start,range.end);
+   }catch(err){if(signal.aborted||id!==requestId)return;}
+  }
   if(!scheduled.length&&daily.every(x=>x.trains.length===0))showToast('Sin horarios oficiales para esa fecha');
   $('status').textContent=`${scheduled.length} opciones programadas. Contrastando datos…`;
   // Do not send reference-only IDs to providers as verified ADIF station codes.
@@ -285,7 +303,7 @@ async function search(){if(!catalog){showToast('El catálogo todavía no está d
   const positions=live?[...E.normalizePositions(data(2),'Renfe/Valfiguer',now),...E.normalizePositions(data(3),'Renfe/ADIF',now)]:[];
   const cancellations=live?E.normalizeCancels(data(4)):[];
   results=scheduled.map(j=>E.enrichJourney(j,board,positions,cancellations,now));visible=12;latestSearch={range};
-  renderResultList();updateSummary(range,trips.length,live);
+  renderResultList();updateSummary(range,trips.length+fallback.length,live);
   const lines=selection.line==='ALL'?new Set(E.LINES):new Set([selection.line]);
   // An incident can explain why no trips were found; do not use results to filter it.
   const alerts=live?[...E.alertsForLines(data(5),lines).map(a=>({...a,source:'Valfiguer'})),
@@ -294,7 +312,8 @@ async function search(){if(!catalog){showToast('El catálogo todavía no está d
   renderAlerts([...uniqueAlerts.values()],live);
   renderSourceSummary(res,jobs,live?'live':'future',catalog);
   const failures=res.filter(x=>x.status==='rejected').length;
-  setHealth(!live?'good':failures?'partial':'good',!live?'Horario oficial':failures?'Datos parciales':'Datos consultados');
+  setHealth(fallback.length||(!live&&failures)?'partial':!live?'good':failures?'partial':'good',
+    fallback.length?'Horario orientativo':!live?'Horario oficial':failures?'Datos parciales':'Datos consultados');
   $('search-feedback').textContent='';
  }catch(err){if(!signal.aborted&&id===requestId){const st=$('status');st.className='notice bad';st.textContent='No se ha podido consultar el horario: '+err.message;setHealth('bad','Sin horario');}}
  finally{if(id===requestId)markBusy(false);}
