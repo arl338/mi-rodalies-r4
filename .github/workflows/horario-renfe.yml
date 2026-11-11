@@ -1,5 +1,4 @@
-
-name: Actualizar horario oficial Renfe GTFS
+name: Actualizar red Rodalies · GTFS + validación Generalitat V2.0.3
 
 on:
   workflow_dispatch:
@@ -9,25 +8,64 @@ on:
 permissions:
   contents: write
 
-jobs:
-  horario:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
+concurrency:
+  group: rodalies-v2-gtfs
+  cancel-in-progress: false
 
-      - uses: actions/setup-python@v5
+jobs:
+  catalogo:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+      - name: Preparar Python
+        uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-
-      - name: Descargar y transformar GTFS oficial
-        run: python scripts/build_gtfs.py --days 21
-
-      - name: Publicar el horario del día y las siguientes semanas
+      - name: Comprobar sintaxis y motor de datos
+        run: |
+          python -m py_compile scripts/build_network.py
+          node --check app.js
+          node --check engine.js
+          node tests/test_engine.cjs
+          node tests/test_feed_schemas.cjs
+      - name: Obtener GTFS Renfe y contrastar líneas con Generalitat
+        run: python scripts/build_network.py --days 14 --out data/v2
+      - name: Validar JSON generado y servicios
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json, pathlib, sys
+          root=pathlib.Path('data/v2')
+          c=json.loads((root/'catalog.json').read_text(encoding='utf8'))
+          assert c['schema']==2 and len(c['stations'])>=10
+          audit=c.get('official_reference',{})
+          assert len(audit.get('lines',[]))==19, 'No se ha verificado el catálogo oficial Generalitat'
+          assert set(x['id'] for x in audit['lines'])==set(x['id'] for x in c['lines'])
+          print('Referencia Generalitat: 19 líneas cotejadas; el contraste de estaciones es indicativo, no exhaustivo')
+          for line in audit['lines']:
+            if line['status']=='pendiente_contraste':
+              print(f"PENDIENTE {line['id']}: {', '.join(line['not_found_in_gtfs'])}")
+            if line['status']=='sin_horarios_publicados':
+              print(f"SIN HORARIOS {line['id']}: falta cobertura GTFS explícita")
+          assert sum(x['present'] for x in c['lines'])>=1
+          days=list(root.glob('20??-??-??.json'))
+          assert len(days)==15
+          rows=sum(len(json.loads(p.read_text(encoding='utf8'))['trains']) for p in days)
+          assert rows>0
+          print(f'Validación correcta: {len(c["stations"])} estaciones; {len(days)} archivos diarios; {rows} trenes')
+          if c['warnings']:print('ADVERTENCIAS DE COBERTURA:', c['warnings'])
+          PY
+      - name: Guardar catálogo y horarios oficiales
+        shell: bash
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add data/schedule-r4.json
+          git add -A data/v2/
           if ! git diff --cached --quiet; then
-            git commit -m 'Actualizar horario oficial Renfe GTFS'
+            git commit -m 'Actualizar catálogo Rodalies y contraste Generalitat V2 [skip ci]'
             git push
+          else
+            echo 'No han cambiado los datos'
           fi
