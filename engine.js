@@ -47,7 +47,9 @@ function normalizeBoard(obj,source,now,requestedStation=''){const overallAge=sou
   const rowAge=ageSeconds(rowStamp,now);
   const rawAge=n(r.age_s);
   // A malformed or future row timestamp cannot be rescued by a fresh response header.
-  const age=rowStamp!==null&&rowStamp!==undefined?rowAge:(rawAge!==null&&rawAge>=0?rawAge:overallAge);
+  const age=rowStamp!==null&&rowStamp!==undefined?rowAge:
+   (rawAge!==null&&rawAge>=0&&overallAge!==null?Math.max(rawAge,overallAge):
+    rawAge!==null&&rawAge>=0?rawAge:overallAge);
   const state=String(r.circulationState??r.state??r.status??'');
   // Some station APIs include estimated_ts even for trains that have only
   // a planned schedule. A scheduled-only record with no measured delay
@@ -65,7 +67,7 @@ function normalizeBoard(obj,source,now,requestedStation=''){const overallAge=sou
    age,station,raw:r});
  }return out;
 }
-function normalizePositions(obj,source,now){const out=[];
+function normalizePositions(obj,source,now){const out=[],overallAge=sourceAge(obj,now);
  for(const original of rows(obj)){
   const p=original?.properties||original;
   if(!p||typeof p!=='object')continue;
@@ -81,7 +83,9 @@ function normalizePositions(obj,source,now){const out=[];
    const rawAge=n(run.age_s??p.age_s);
    // Use the actual position timestamp when available; never silently turn
    // a stale or future observation into fresh telemetric evidence.
-   const age=reported!==null?ageSeconds(reported,now):(rawAge!==null&&rawAge>=0?rawAge:null);
+   const age=reported!==null?ageSeconds(reported,now):
+    (rawAge!==null&&rawAge>=0&&overallAge!==null?Math.max(rawAge,overallAge):
+     rawAge!==null&&rawAge>=0?rawAge:null);
    const nucleus=run.nucleo??p.nucleo??run.core??p.core??'';
    if(foreignNucleus(nucleus))continue;
    const ln=scopedLine(run.line,nucleus)||scopedLine(p.line,nucleus)||scopedLine(run.product,nucleus)||scopedLine(p.product,nucleus)||scopedLine(run.route,nucleus);
