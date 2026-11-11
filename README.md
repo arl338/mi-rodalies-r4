@@ -1,4 +1,4 @@
-# Mi Rodalies Catalunya · V2.0.5
+# Mi Rodalies Catalunya · V2.1.0
 
 PWA gratuita para consultar horarios **programados** Renfe GTFS y contrastar observaciones operativas a través de Valfiguer y RadarDeTrenes. No confirma que un tren esté circulando.
 
@@ -24,3 +24,12 @@ GitHub Actions ejecuta las pruebas JS y Python, audita el GTFS original, regener
 - CI: https://github.com/arl338/mi-rodalies-r4/actions/workflows/horario-renfe.yml
 
 Datos: Renfe Data (CC BY 4.0), [Valfiguer](https://trenes.valfiguer.com/desarrolladores), [RadarDeTrenes](https://radardetrenes.com/docs) y referencia de líneas de [Generalitat de Catalunya](https://rodalies.gencat.cat/es/linies_estacions_i_trens/index.html). Información orientativa; consulta Renfe/Rodalies para decisiones de viaje.
+
+
+## V2.1.0 · Inventario y PDF oficiales
+
+- Se muestran 19 líneas y un inventario de referencia de 200 estaciones, cotejadas por identificador ADIF/GTFS cuando existe una equivalencia inequívoca. El catálogo generado puede contener estaciones adicionales GTFS; algunas entradas son referencia sin código ADIF verificado.
+- Cada estación indica si dispone de alguna parada horaria GTFS. La pertenencia a la línea no implica trenes, circulación ni servicio vigente.
+- Se enlaza el PDF oficial de cada línea desde el panel de auditoría y desde la búsqueda sin horarios GTFS. Estos documentos tienen calendarios y modificaciones; no se publican automáticamente como servicios estructurados.
+- Los tableros operativos marcados `stale` no se consideran evidencia actual de estimación o cancelación.
+- No se han generado horas ficticias ni reconstruido las 13 líneas con `stop_times` ausentes.
