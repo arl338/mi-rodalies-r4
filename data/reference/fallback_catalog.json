@@ -1,0 +1,407 @@
+{
+  "schema": 2,
+  "reference_only": true,
+  "generated_at": null,
+  "coverage_start": null,
+  "coverage_end": null,
+  "stations": [
+    {
+      "id": "79400",
+      "name": "Barcelona-Estació de França",
+      "aliases": [
+        "Barcelona Estació de França",
+        "Estació de França"
+      ],
+      "lines": [
+        "R2S",
+        "R13",
+        "R14",
+        "R15",
+        "R16",
+        "R17"
+      ],
+      "reference_only": true
+    },
+    {
+      "id": "78802",
+      "name": "Barcelona-Fabra i Puig",
+      "aliases": [
+        "Sant Andreu Arenal",
+        "Fabra i Puig"
+      ],
+      "lines": [
+        "R7"
+      ],
+      "reference_only": true
+    },
+    {
+      "id": "78805",
+      "name": "Barcelona-Plaça de Catalunya",
+      "aliases": [
+        "Plaça de Catalunya",
+        "Barcelona Plaça Catalunya"
+      ],
+      "lines": [
+        "R4"
+      ],
+      "reference_only": true
+    },
+    {
+      "id": "71801",
+      "name": "Barcelona-Sants",
+      "aliases": [
+        "Barcelona Sants",
+        "Sants"
+      ],
+      "lines": [
+        "R4",
+        "R11"
+      ],
+      "reference_only": true
+    },
+    {
+      "id": "72503",
+      "name": "Cerdanyola Universitat",
+      "aliases": [
+        "Cerdanyola-Universitat"
+      ],
+      "lines": [
+        "R7",
+        "R8"
+      ],
+      "reference_only": true
+    },
+    {
+      "id": "78400",
+      "name": "Lleida-Pirineus",
+      "aliases": [
+        "Lleida Pirineus"
+      ],
+      "lines": [
+        "RL3",
+        "RL4",
+        "R13",
+        "R14"
+      ],
+      "reference_only": true
+    },
+    {
+      "id": "72209",
+      "name": "Martorell Central",
+      "aliases": [
+        "Martorell"
+      ],
+      "lines": [
+        "R8"
+      ],
+      "reference_only": true
+    },
+    {
+      "id": "65411",
+      "name": "Salou - Port Aventura",
+      "aliases": [
+        "Salou-Port Aventura",
+        "Salou-PortAventura"
+      ],
+      "lines": [
+        "R17"
+      ],
+      "reference_only": true
+    },
+    {
+      "id": "78710",
+      "name": "Terrassa Est",
+      "aliases": [],
+      "lines": [
+        "R4"
+      ],
+      "reference_only": true
+    },
+    {
+      "id": "78700",
+      "name": "Terrassa Estació del Nord",
+      "aliases": [
+        "Terrassa"
+      ],
+      "lines": [
+        "RL4"
+      ],
+      "reference_only": true
+    }
+  ],
+  "lines": [
+    {
+      "id": "R1",
+      "name": "R1",
+      "present": false,
+      "reference_only": true
+    },
+    {
+      "id": "R2",
+      "name": "R2",
+      "present": false,
+      "reference_only": true
+    },
+    {
+      "id": "R2N",
+      "name": "R2 Nord",
+      "present": false,
+      "reference_only": true
+    },
+    {
+      "id": "R2S",
+      "name": "R2 Sud",
+      "present": false,
+      "reference_only": true
+    },
+    {
+      "id": "R3",
+      "name": "R3",
+      "present": false,
+      "reference_only": true
+    },
+    {
+      "id": "R4",
+      "name": "R4",
+      "present": false,
+      "reference_only": true
+    },
+    {
+      "id": "R7",
+      "name": "R7",
+      "present": false,
+      "reference_only": true
+    },
+    {
+      "id": "R8",
+      "name": "R8",
+      "present": false,
+      "reference_only": true
+    },
+    {
+      "id": "RG1",
+      "name": "RG1",
+      "present": false,
+      "reference_only": true
+    },
+    {
+      "id": "RT1",
+      "name": "RT1",
+      "present": false,
+      "reference_only": true
+    },
+    {
+      "id": "RT2",
+      "name": "RT2",
+      "present": false,
+      "reference_only": true
+    },
+    {
+      "id": "RL3",
+      "name": "RL3",
+      "present": false,
+      "reference_only": true
+    },
+    {
+      "id": "RL4",
+      "name": "RL4",
+      "present": false,
+      "reference_only": true
+    },
+    {
+      "id": "R11",
+      "name": "R11",
+      "present": false,
+      "reference_only": true
+    },
+    {
+      "id": "R13",
+      "name": "R13",
+      "present": false,
+      "reference_only": true
+    },
+    {
+      "id": "R14",
+      "name": "R14",
+      "present": false,
+      "reference_only": true
+    },
+    {
+      "id": "R15",
+      "name": "R15",
+      "present": false,
+      "reference_only": true
+    },
+    {
+      "id": "R16",
+      "name": "R16",
+      "present": false,
+      "reference_only": true
+    },
+    {
+      "id": "R17",
+      "name": "R17",
+      "present": false,
+      "reference_only": true
+    }
+  ],
+  "official_reference": {
+    "lines": [
+      {
+        "id": "R1",
+        "status": "sin_horarios_publicados",
+        "url": "https://rodalies.gencat.cat/es/sobre-rodalies/linies-i-estacions/servei_rodalia_barcelona/r1/",
+        "corridor": "Molins de Rei – Maçanet-Massanes",
+        "gtfs_station_count": 0,
+        "not_found_in_gtfs": []
+      },
+      {
+        "id": "R2",
+        "status": "sin_horarios_publicados",
+        "url": "https://rodalies.gencat.cat/es/sobre-rodalies/linies-i-estacions/servei_rodalia_barcelona/r2/",
+        "corridor": "Castelldefels – Granollers Centre",
+        "gtfs_station_count": 0,
+        "not_found_in_gtfs": []
+      },
+      {
+        "id": "R2N",
+        "status": "sin_horarios_publicados",
+        "url": "https://rodalies.gencat.cat/es/sobre-rodalies/linies-i-estacions/servei_rodalia_barcelona/r2n/",
+        "corridor": "Aeroport – Maçanet-Massanes",
+        "gtfs_station_count": 0,
+        "not_found_in_gtfs": []
+      },
+      {
+        "id": "R2S",
+        "status": "sin_horarios_publicados",
+        "url": "https://rodalies.gencat.cat/es/sobre-rodalies/linies-i-estacions/servei_rodalia_barcelona/r2s/",
+        "corridor": "Barcelona-Estació de França – Sant Vicenç de Calders",
+        "gtfs_station_count": 0,
+        "not_found_in_gtfs": []
+      },
+      {
+        "id": "R3",
+        "status": "sin_horarios_publicados",
+        "url": "https://rodalies.gencat.cat/es/sobre-rodalies/linies-i-estacions/servei_rodalia_barcelona/r3/",
+        "corridor": "L’Hospitalet de Llobregat – Puigcerdà",
+        "gtfs_station_count": 0,
+        "not_found_in_gtfs": []
+      },
+      {
+        "id": "R4",
+        "status": "sin_horarios_publicados",
+        "url": "https://rodalies.gencat.cat/es/sobre-rodalies/linies-i-estacions/servei_rodalia_barcelona/r4/",
+        "corridor": "Sant Vicenç de Calders – Manresa",
+        "gtfs_station_count": 0,
+        "not_found_in_gtfs": []
+      },
+      {
+        "id": "R7",
+        "status": "sin_horarios_publicados",
+        "url": "https://rodalies.gencat.cat/es/sobre-rodalies/linies-i-estacions/servei_rodalia_barcelona/r7/",
+        "corridor": "Barcelona-Fabra i Puig – Cerdanyola Universitat",
+        "gtfs_station_count": 0,
+        "not_found_in_gtfs": []
+      },
+      {
+        "id": "R8",
+        "status": "sin_horarios_publicados",
+        "url": "https://rodalies.gencat.cat/es/sobre-rodalies/linies-i-estacions/servei_rodalia_barcelona/r8/",
+        "corridor": "Martorell – Granollers Centre",
+        "gtfs_station_count": 0,
+        "not_found_in_gtfs": []
+      },
+      {
+        "id": "RG1",
+        "status": "sin_horarios_publicados",
+        "url": "https://rodalies.gencat.cat/es/sobre-rodalies/linies-i-estacions/servei_regionals/rg1/",
+        "corridor": "L’Hospitalet de Llobregat – Figueres/Portbou",
+        "gtfs_station_count": 0,
+        "not_found_in_gtfs": []
+      },
+      {
+        "id": "RT1",
+        "status": "sin_horarios_publicados",
+        "url": "https://rodalies.gencat.cat/es/sobre-rodalies/linies-i-estacions/servei_regionals/rt1/",
+        "corridor": "Tarragona – Reus",
+        "gtfs_station_count": 0,
+        "not_found_in_gtfs": []
+      },
+      {
+        "id": "RT2",
+        "status": "sin_horarios_publicados",
+        "url": "https://rodalies.gencat.cat/es/sobre-rodalies/linies-i-estacions/servei_regionals/rt2/",
+        "corridor": "L’Arboç – L’Hospitalet de l’Infant",
+        "gtfs_station_count": 0,
+        "not_found_in_gtfs": []
+      },
+      {
+        "id": "RL3",
+        "status": "sin_horarios_publicados",
+        "url": "https://rodalies.gencat.cat/es/sobre-rodalies/linies-i-estacions/servei_regionals/linia-rl3/",
+        "corridor": "Lleida-Pirineus – Cervera",
+        "gtfs_station_count": 0,
+        "not_found_in_gtfs": []
+      },
+      {
+        "id": "RL4",
+        "status": "sin_horarios_publicados",
+        "url": "https://rodalies.gencat.cat/es/sobre-rodalies/linies-i-estacions/servei_regionals/linea-rl4/",
+        "corridor": "Lleida-Pirineus – Terrassa Estació del Nord",
+        "gtfs_station_count": 0,
+        "not_found_in_gtfs": []
+      },
+      {
+        "id": "R11",
+        "status": "sin_horarios_publicados",
+        "url": "https://rodalies.gencat.cat/es/sobre-rodalies/linies-i-estacions/servei_regionals/r11/",
+        "corridor": "Barcelona-Sants – Portbou",
+        "gtfs_station_count": 0,
+        "not_found_in_gtfs": []
+      },
+      {
+        "id": "R13",
+        "status": "sin_horarios_publicados",
+        "url": "https://rodalies.gencat.cat/es/sobre-rodalies/linies-i-estacions/servei_regionals/r13/",
+        "corridor": "Barcelona-Estació de França – Lleida por Valls",
+        "gtfs_station_count": 0,
+        "not_found_in_gtfs": []
+      },
+      {
+        "id": "R14",
+        "status": "sin_horarios_publicados",
+        "url": "https://rodalies.gencat.cat/es/sobre-rodalies/linies-i-estacions/servei_regionals/r14/",
+        "corridor": "Barcelona-Estació de França – Lleida por Tarragona y Reus",
+        "gtfs_station_count": 0,
+        "not_found_in_gtfs": []
+      },
+      {
+        "id": "R15",
+        "status": "sin_horarios_publicados",
+        "url": "https://rodalies.gencat.cat/es/sobre-rodalies/linies-i-estacions/servei_regionals/r15/",
+        "corridor": "Barcelona-Estació de França – Riba-roja d’Ebre",
+        "gtfs_station_count": 0,
+        "not_found_in_gtfs": []
+      },
+      {
+        "id": "R16",
+        "status": "sin_horarios_publicados",
+        "url": "https://rodalies.gencat.cat/es/sobre-rodalies/linies-i-estacions/servei_regionals/r16/",
+        "corridor": "Barcelona-Estació de França – Tortosa/Ulldecona",
+        "gtfs_station_count": 0,
+        "not_found_in_gtfs": []
+      },
+      {
+        "id": "R17",
+        "status": "sin_horarios_publicados",
+        "url": "https://rodalies.gencat.cat/es/sobre-rodalies/linies-i-estacions/servei_regionals/linia-r17/",
+        "corridor": "Barcelona-Estació de França – Salou-Port Aventura",
+        "gtfs_station_count": 0,
+        "not_found_in_gtfs": []
+      }
+    ]
+  },
+  "warnings": [
+    "Catálogo de referencia parcial: solo estaciones con código ADIF verificado. No contiene horarios. Es obligatorio ejecutar el generador GTFS para la cobertura completa."
+  ]
+}

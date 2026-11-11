@@ -1,5 +1,7 @@
 'use strict';
 const E=window.RodaliesEngine;
+const EMBEDDED_REFERENCE_CATALOG={"schema":2,"reference_only":true,"generated_at":null,"coverage_start":null,"coverage_end":null,"stations":[{"id":"79400","name":"Barcelona-Estació de França","aliases":["Barcelona Estació de França","Estació de França"],"lines":["R2S","R13","R14","R15","R16","R17"],"reference_only":true},{"id":"78802","name":"Barcelona-Fabra i Puig","aliases":["Sant Andreu Arenal","Fabra i Puig"],"lines":["R7"],"reference_only":true},{"id":"78805","name":"Barcelona-Plaça de Catalunya","aliases":["Plaça de Catalunya","Barcelona Plaça Catalunya"],"lines":["R4"],"reference_only":true},{"id":"71801","name":"Barcelona-Sants","aliases":["Barcelona Sants","Sants"],"lines":["R4","R11"],"reference_only":true},{"id":"72503","name":"Cerdanyola Universitat","aliases":["Cerdanyola-Universitat"],"lines":["R7","R8"],"reference_only":true},{"id":"78400","name":"Lleida-Pirineus","aliases":["Lleida Pirineus"],"lines":["RL3","RL4","R13","R14"],"reference_only":true},{"id":"72209","name":"Martorell Central","aliases":["Martorell"],"lines":["R8"],"reference_only":true},{"id":"65411","name":"Salou - Port Aventura","aliases":["Salou-Port Aventura","Salou-PortAventura"],"lines":["R17"],"reference_only":true},{"id":"78710","name":"Terrassa Est","aliases":[],"lines":["R4"],"reference_only":true},{"id":"78700","name":"Terrassa Estació del Nord","aliases":["Terrassa"],"lines":["RL4"],"reference_only":true}],"lines":[{"id":"R1","name":"R1","present":false,"reference_only":true},{"id":"R2","name":"R2","present":false,"reference_only":true},{"id":"R2N","name":"R2 Nord","present":false,"reference_only":true},{"id":"R2S","name":"R2 Sud","present":false,"reference_only":true},{"id":"R3","name":"R3","present":false,"reference_only":true},{"id":"R4","name":"R4","present":false,"reference_only":true},{"id":"R7","name":"R7","present":false,"reference_only":true},{"id":"R8","name":"R8","present":false,"reference_only":true},{"id":"RG1","name":"RG1","present":false,"reference_only":true},{"id":"RT1","name":"RT1","present":false,"reference_only":true},{"id":"RT2","name":"RT2","present":false,"reference_only":true},{"id":"RL3","name":"RL3","present":false,"reference_only":true},{"id":"RL4","name":"RL4","present":false,"reference_only":true},{"id":"R11","name":"R11","present":false,"reference_only":true},{"id":"R13","name":"R13","present":false,"reference_only":true},{"id":"R14","name":"R14","present":false,"reference_only":true},{"id":"R15","name":"R15","present":false,"reference_only":true},{"id":"R16","name":"R16","present":false,"reference_only":true},{"id":"R17","name":"R17","present":false,"reference_only":true}],"official_reference":{"lines":[{"id":"R1","status":"sin_horarios_publicados","url":"https://rodalies.gencat.cat/es/sobre-rodalies/linies-i-estacions/servei_rodalia_barcelona/r1/","corridor":"Molins de Rei – Maçanet-Massanes","gtfs_station_count":0,"not_found_in_gtfs":[]},{"id":"R2","status":"sin_horarios_publicados","url":"https://rodalies.gencat.cat/es/sobre-rodalies/linies-i-estacions/servei_rodalia_barcelona/r2/","corridor":"Castelldefels – Granollers Centre","gtfs_station_count":0,"not_found_in_gtfs":[]},{"id":"R2N","status":"sin_horarios_publicados","url":"https://rodalies.gencat.cat/es/sobre-rodalies/linies-i-estacions/servei_rodalia_barcelona/r2n/","corridor":"Aeroport – Maçanet-Massanes","gtfs_station_count":0,"not_found_in_gtfs":[]},{"id":"R2S","status":"sin_horarios_publicados","url":"https://rodalies.gencat.cat/es/sobre-rodalies/linies-i-estacions/servei_rodalia_barcelona/r2s/","corridor":"Barcelona-Estació de França – Sant Vicenç de Calders","gtfs_station_count":0,"not_found_in_gtfs":[]},{"id":"R3","status":"sin_horarios_publicados","url":"https://rodalies.gencat.cat/es/sobre-rodalies/linies-i-estacions/servei_rodalia_barcelona/r3/","corridor":"L’Hospitalet de Llobregat – Puigcerdà","gtfs_station_count":0,"not_found_in_gtfs":[]},{"id":"R4","status":"sin_horarios_publicados","url":"https://rodalies.gencat.cat/es/sobre-rodalies/linies-i-estacions/servei_rodalia_barcelona/r4/","corridor":"Sant Vicenç de Calders – Manresa","gtfs_station_count":0,"not_found_in_gtfs":[]},{"id":"R7","status":"sin_horarios_publicados","url":"https://rodalies.gencat.cat/es/sobre-rodalies/linies-i-estacions/servei_rodalia_barcelona/r7/","corridor":"Barcelona-Fabra i Puig – Cerdanyola Universitat","gtfs_station_count":0,"not_found_in_gtfs":[]},{"id":"R8","status":"sin_horarios_publicados","url":"https://rodalies.gencat.cat/es/sobre-rodalies/linies-i-estacions/servei_rodalia_barcelona/r8/","corridor":"Martorell – Granollers Centre","gtfs_station_count":0,"not_found_in_gtfs":[]},{"id":"RG1","status":"sin_horarios_publicados","url":"https://rodalies.gencat.cat/es/sobre-rodalies/linies-i-estacions/servei_regionals/rg1/","corridor":"L’Hospitalet de Llobregat – Figueres/Portbou","gtfs_station_count":0,"not_found_in_gtfs":[]},{"id":"RT1","status":"sin_horarios_publicados","url":"https://rodalies.gencat.cat/es/sobre-rodalies/linies-i-estacions/servei_regionals/rt1/","corridor":"Tarragona – Reus","gtfs_station_count":0,"not_found_in_gtfs":[]},{"id":"RT2","status":"sin_horarios_publicados","url":"https://rodalies.gencat.cat/es/sobre-rodalies/linies-i-estacions/servei_regionals/rt2/","corridor":"L’Arboç – L’Hospitalet de l’Infant","gtfs_station_count":0,"not_found_in_gtfs":[]},{"id":"RL3","status":"sin_horarios_publicados","url":"https://rodalies.gencat.cat/es/sobre-rodalies/linies-i-estacions/servei_regionals/linia-rl3/","corridor":"Lleida-Pirineus – Cervera","gtfs_station_count":0,"not_found_in_gtfs":[]},{"id":"RL4","status":"sin_horarios_publicados","url":"https://rodalies.gencat.cat/es/sobre-rodalies/linies-i-estacions/servei_regionals/linea-rl4/","corridor":"Lleida-Pirineus – Terrassa Estació del Nord","gtfs_station_count":0,"not_found_in_gtfs":[]},{"id":"R11","status":"sin_horarios_publicados","url":"https://rodalies.gencat.cat/es/sobre-rodalies/linies-i-estacions/servei_regionals/r11/","corridor":"Barcelona-Sants – Portbou","gtfs_station_count":0,"not_found_in_gtfs":[]},{"id":"R13","status":"sin_horarios_publicados","url":"https://rodalies.gencat.cat/es/sobre-rodalies/linies-i-estacions/servei_regionals/r13/","corridor":"Barcelona-Estació de França – Lleida por Valls","gtfs_station_count":0,"not_found_in_gtfs":[]},{"id":"R14","status":"sin_horarios_publicados","url":"https://rodalies.gencat.cat/es/sobre-rodalies/linies-i-estacions/servei_regionals/r14/","corridor":"Barcelona-Estació de França – Lleida por Tarragona y Reus","gtfs_station_count":0,"not_found_in_gtfs":[]},{"id":"R15","status":"sin_horarios_publicados","url":"https://rodalies.gencat.cat/es/sobre-rodalies/linies-i-estacions/servei_regionals/r15/","corridor":"Barcelona-Estació de França – Riba-roja d’Ebre","gtfs_station_count":0,"not_found_in_gtfs":[]},{"id":"R16","status":"sin_horarios_publicados","url":"https://rodalies.gencat.cat/es/sobre-rodalies/linies-i-estacions/servei_regionals/r16/","corridor":"Barcelona-Estació de França – Tortosa/Ulldecona","gtfs_station_count":0,"not_found_in_gtfs":[]},{"id":"R17","status":"sin_horarios_publicados","url":"https://rodalies.gencat.cat/es/sobre-rodalies/linies-i-estacions/servei_regionals/linia-r17/","corridor":"Barcelona-Estació de França – Salou-Port Aventura","gtfs_station_count":0,"not_found_in_gtfs":[]}]},"warnings":["Catálogo de referencia parcial: solo estaciones con código ADIF verificado. No contiene horarios. Es obligatorio ejecutar el generador GTFS para la cobertura completa."]};
+
 const CONFIG={
   val:'https://trenes.valfiguer.com/api/v1',radar:'https://radardetrenes.com/api/v1',
   refreshMs:60000,timeoutMs:9000,nearDays:14,
@@ -11,7 +13,7 @@ const $=id=>document.getElementById(id);
 const fmt=new Intl.DateTimeFormat('es-ES',{timeZone:'Europe/Madrid',hour:'2-digit',minute:'2-digit',hourCycle:'h23'});
 const partsFmt=new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Madrid',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hourCycle:'h23'});
 const tzFmt=new Intl.DateTimeFormat('en-US',{timeZone:'Europe/Madrid',timeZoneName:'shortOffset'});
-let catalog=null,stationMap=new Map(),selection={from:'78710',to:'78805'},requestId=0,controller=null,results=[],visible=12,quickValue=null,latestSearch=null,loadedDay=new Map(),isBusy=false;
+let catalog=null,stationMap=new Map(),catalogSource='not-loaded',selection={line:'R4',from:'78710',to:'78805'},requestId=0,controller=null,results=[],visible=12,quickValue=null,latestSearch=null,loadedDay=new Map(),isBusy=false;
 function madridParts(ms){const obj={};for(const v of partsFmt.formatToParts(new Date(ms)))if(v.type!=='literal')obj[v.type]=v.value;return obj;}
 function madridDate(ms=Date.now()){const p=madridParts(ms);return `${p.year}-${p.month}-${p.day}`;}
 function fmtTime(ts){return fmt.format(new Date(ts*1000));}
@@ -45,37 +47,63 @@ function invalidateResults(){
   $('updated').textContent='';
 }
 function savePair(){try{localStorage.setItem('mirodalies-v2-pair',JSON.stringify(selection));}catch{}}
+function lineStations(line){
+ if(!catalog)return [];
+ return catalog.stations.filter(st=>line==='ALL'||(Array.isArray(st.lines)&&st.lines.includes(line)))
+  .slice().sort((a,b)=>a.name.localeCompare(b.name,'es',{sensitivity:'base'}));
+}
+function renderLineOptions(){
+ const sel=$('line-select');sel.replaceChildren();sel.append(new Option('Selecciona una línea',''));
+ const lines=[...catalog.lines].sort((a,b)=>[...E.LINES].indexOf(a.id)-[...E.LINES].indexOf(b.id));
+ for(const l of lines){
+  const amount=lineStations(l.id).length;
+  const label=(l.name||l.id)+(catalog.reference_only?' · referencia parcial':!l.present?' · sin horarios GTFS':'')+` (${amount} estaciones)`;
+  sel.append(new Option(label,l.id));
+ }
+ sel.append(new Option('Todas las líneas · transbordos','ALL'));
+}
+function renderStationSelects(){
+ const options=lineStations(selection.line);
+ for(const [id,field,other] of [['origin-input','from','to'],['dest-input','to','from']]){
+  const sel=$(id);sel.replaceChildren();
+  sel.append(new Option(options.length?'Selecciona una estación':'No hay estaciones registradas',''));
+  for(const st of options){const op=new Option(st.name,st.id);op.disabled=st.id===selection[other];sel.append(op);}
+  sel.disabled=!selection.line||options.length===0;
+  sel.value=options.some(s=>s.id===selection[field])?selection[field]:'';
+  if(!sel.value)selection[field]='';
+ }
+ $('line-help').textContent=catalog.reference_only
+  ?'Referencia provisional: solo puntos principales con código ADIF validado. Ejecuta la actualización GTFS para obtener todas las paradas y horarios.'
+  :selection.line==='ALL'?'Permite buscar entre todas las estaciones y calcular hasta un transbordo.'
+  :`${options.length} estaciones asociadas a ${selection.line}. Solo se mostrarán servicios de esa línea.`;
+}
+function applyLine(line){
+ if(!catalog||!catalog.lines.some(l=>l.id===line)&&line!=='ALL')return;
+ invalidateResults();selection.line=line;selection.from='';selection.to='';$('line-select').value=line;
+ renderStationSelects();savePair();syncFavorites();
+}
 function applyPair(from,to,searchNow=false){
-  if(!stationMap.has(from)||!stationMap.has(to))return;
-  invalidateResults();selection={from,to};$('origin-input').value=stationMap.get(from).name;$('dest-input').value=stationMap.get(to).name;
-  syncFavorites();savePair();closeSuggest();if(searchNow)void search();
+ if(!stationMap.has(from)||!stationMap.has(to)){
+  showToast('Estas estaciones requieren el catálogo GTFS completo.');return;
+ }
+ const common=stationMap.get(from).lines.filter(l=>stationMap.get(to).lines.includes(l));
+ // Both saved commutes are R4; otherwise use an eligible shared line or all-lines mode.
+ const routeLine=common.includes('R4')&&(from==='78710'||to==='78710')?'R4':(common.includes(selection.line)?selection.line:(common[0]||'ALL'));
+ invalidateResults();selection={line:routeLine,from,to};$('line-select').value=routeLine;
+ renderStationSelects();syncFavorites();savePair();if(searchNow&& !catalog.reference_only)void search();
+ else if(searchNow)showToast('Falta generar el horario GTFS completo.');
 }
 function syncFavorites(){for(const [id,fr,to] of [['fav-ida','78710','78805'],['fav-vuelta','71801','78710']]){
  const btn=$(id),is=selection.from===fr&&selection.to===to;btn.classList.toggle('selected',is);btn.setAttribute('aria-pressed',String(is));}}
-function closeSuggest(){for(const id of ['origin','dest']){$(id+'-options').hidden=true;$(id+'-input').setAttribute('aria-expanded','false');}}
-function wirePicker(prefix,which){
- const input=$(prefix+'-input'),list=$(prefix+'-options');let active=-1,shown=[];
- function render(){const term=E.norm(input.value);shown=catalog.stations.filter(st=>{
-   const names=[st.name,st.gtfs_name,...(st.aliases||[])];return !term||names.some(v=>E.norm(v).includes(term))||st.id.includes(term);
- }).sort((a,b)=>{const a0=[a.name,...(a.aliases||[])].some(v=>E.norm(v).startsWith(term))?0:1,b0=[b.name,...(b.aliases||[])].some(v=>E.norm(v).startsWith(term))?0:1;return a0-b0||a.name.localeCompare(b.name,'es');}).slice(0,10);
-  list.replaceChildren();active=-1;
-  if(!shown.length){list.append(el('div','suggest-empty','No se encuentra esa estación en el GTFS disponible.'));}
-  for(let k=0;k<shown.length;k++){
-   const st=shown[k],btn=el('button','suggest-option');btn.type='button';btn.setAttribute('role','option');btn.setAttribute('aria-selected','false');btn.append(el('strong','',st.name),el('small','',`ADIF ${st.id} · ${(st.lines||[]).join(' · ')}${st.gtfs_name&&st.gtfs_name!==st.name?' · GTFS: '+st.gtfs_name:''}`));
-   btn.addEventListener('pointerdown',e=>e.preventDefault());btn.addEventListener('click',()=>choose(st));list.append(btn);
-  }
-  list.hidden=false;input.setAttribute('aria-expanded','true');
+function wirePickers(){
+ $('line-select').addEventListener('change',()=>applyLine($('line-select').value));
+ for(const [id,which] of [['origin-input','from'],['dest-input','to']]){
+  $(id).addEventListener('change',()=>{
+   invalidateResults();selection[which]=$(id).value;
+   if(selection.from===selection.to){selection[which]='';$(id).value='';showToast('Selecciona dos estaciones diferentes');}
+   renderStationSelects();savePair();syncFavorites();
+  });
  }
- function choose(st){invalidateResults();selection[which]=st.id;input.value=st.name;savePair();syncFavorites();closeSuggest();showToast('Estación seleccionada: '+st.name);}
- input.addEventListener('focus',()=>{if(catalog)render();});
- input.addEventListener('input',()=>{invalidateResults();selection[which]='';syncFavorites();savePair();if(catalog)render();});
- input.addEventListener('keydown',e=>{
-  if(e.key==='Escape'){closeSuggest();return;}
-  if(e.key==='ArrowDown'||e.key==='ArrowUp'){if(list.hidden)render();e.preventDefault();active=Math.max(0,Math.min(shown.length-1,active+(e.key==='ArrowDown'?1:-1)));[...list.children].forEach((x,i)=>{x.classList.toggle('active',i===active);x.setAttribute('aria-selected',String(i===active));});}
-  if(e.key==='Enter'&&!list.hidden&&shown.length){e.preventDefault();choose(shown[Math.max(0,active)]);}
- });
- input.addEventListener('blur',()=>setTimeout(()=>{if(input.value&&!selection[which]&&catalog){const exact=catalog.stations.find(x=>E.norm(x.name)===E.norm(input.value));if(exact)choose(exact);}closeSuggest();},140));
- $(prefix+'-clear').addEventListener('click',()=>{invalidateResults();input.value='';selection[which]='';savePair();syncFavorites();input.focus();});
 }
 function selectQuick(hours){if(catalog)invalidateResults();const next=Math.ceil((Date.now()+180000)/300000)*300000;const end=next+hours*3600000;const beginning=madridParts(next);
  $('trip-date').value=madridDate(next);$('from-time').value=`${beginning.hour}:${beginning.minute}`;$('to-time').value=timeInput(end);quickValue=hours;
@@ -84,7 +112,10 @@ function selectQuick(hours){if(catalog)invalidateResults();const next=Math.ceil(
 }
 function manualChanged(){if(catalog)invalidateResults();quickValue=null;for(const b of document.querySelectorAll('[data-hours]')){b.classList.remove('selected');b.setAttribute('aria-pressed','false');}}
 function validateRange(){const day=$('trip-date').value,from=$('from-time').value,to=$('to-time').value;
- if(!catalog)throw new Error('Todavía no se ha cargado el catálogo oficial de estaciones.');
+ if(!catalog)throw new Error('Todavía no se ha cargado el catálogo de estaciones.');
+ if(catalog.reference_only)throw new Error('El catálogo es provisional y no incluye horarios. Ejecuta la actualización GTFS en GitHub Actions.');
+ if(!selection.line)throw new Error('Selecciona primero una línea de Rodalies.');
+ if(selection.line!=='ALL'&&(!stationMap.get(selection.from)?.lines?.includes(selection.line)||!stationMap.get(selection.to)?.lines?.includes(selection.line)))throw new Error('Elige origen y destino de la línea seleccionada.');
  if(!stationMap.has(selection.from)||!stationMap.has(selection.to))throw new Error('Selecciona dos estaciones del listado.');
  if(selection.from===selection.to)throw new Error('Origen y destino deben ser diferentes.');
  if(!/^\d{4}-\d\d-\d\d$/.test(day)||!/^\d\d:\d\d$/.test(from)||!/^\d\d:\d\d$/.test(to))throw new Error('Revisa la fecha y las horas seleccionadas.');
@@ -102,13 +133,31 @@ async function loadJson(url,signal,timeout=CONFIG.timeoutMs){const c=new AbortCo
  if(!r.ok)throw new Error('HTTP '+r.status);
  return await r.json();
 }finally{clearTimeout(timer);signal?.removeEventListener('abort',abort);}}
-async function loadCatalog(signal){const root=CONFIG.dataRoot;const data=await loadJson(root+'catalog.json?ts='+Date.now(),signal,16000);
- if(data?.schema!==2||!Array.isArray(data.stations)||!Array.isArray(data.lines))throw new Error('El catálogo oficial no tiene el formato V2 requerido.');
- return data;
+async function loadDataFile(file,signal,timeout=16000){
+ const roots=[CONFIG.dataRoot,'./data/v2/'];let last=null;
+ for(const root of [...new Set(roots)]){
+  try{return await loadJson(root+file+'?ts='+Date.now(),signal,timeout);}catch(err){if(signal?.aborted)throw err;last=err;}
+ }
+ throw last||new Error('No se ha podido descargar '+file);
+}
+async function loadCatalog(signal){
+ try{
+  const data=await loadDataFile('catalog.json',signal);
+  if(data?.schema!==2||!Array.isArray(data.stations)||!Array.isArray(data.lines))throw new Error('Formato de catálogo V2 incompatible');
+  catalogSource='gtfs';return data;
+ }catch(err){
+  if(signal?.aborted)throw err;
+  // This reference never masquerades as a complete GTFS catalogue.
+  let fallback;
+  try{fallback=await loadJson('./data/reference/fallback_catalog.json?ts='+Date.now(),signal,5000);}catch{fallback=EMBEDDED_REFERENCE_CATALOG;}
+  if(fallback?.schema!==2||fallback?.reference_only!==true||!Array.isArray(fallback.stations))fallback=EMBEDDED_REFERENCE_CATALOG;
+  catalogSource='reference';return fallback;
+ }
 }
 async function dayData(day,signal){
+ if(catalog?.reference_only)throw new Error('El catálogo provisional no contiene horarios. Ejecuta «Actualizar red Rodalies» desde GitHub Actions.');
  const cached=loadedDay.get(day);if(cached&&Date.now()-cached.loadedAt<5*60000)return cached.data;
- const data=await loadJson(CONFIG.dataRoot+day+'.json?ts='+Date.now(),signal,16000);
+ const data=await loadDataFile(day+'.json',signal);
  if(data.schema!==2||data.day!==day||!Array.isArray(data.trains))throw new Error('Horario diario incorrecto para '+day);
  loadedDay.set(day,{loadedAt:Date.now(),data});if(loadedDay.size>4)loadedDay.delete(loadedDay.keys().next().value);return data;
 }
@@ -164,9 +213,9 @@ function sourceRow(title,description,ok,value){const r=el('div','source-row'),l=
 function renderAlerts(list,live){const elmt=$('alerts');elmt.replaceChildren();if(!live){elmt.append(el('p','subtle','Para esa fecha todavía no hay avisos futuros contrastados. Consulta el estado del servicio el mismo día.'));return;}
  if(!list.length){elmt.append(el('p','subtle','No se han recuperado avisos específicos. Esto no garantiza que el servicio funcione normalmente.'));return;}
  for(const obj of list){const x=el('div','alert',obj.text);if(obj.lines.length)x.append(el('div','subtle','Líneas: '+obj.lines.join(', ')));elmt.append(x);}}
-function buildWindow(dayTrains,range){const good=dayTrains.filter(t=>E.LINES.has(t.l)&&Array.isArray(t.s)&&t.s.length>=2).map(t=>({...t,day:t.day||''}));
+function buildWindow(dayTrains,range){const good=dayTrains.filter(t=>E.LINES.has(t.l)&&(selection.line==='ALL'||t.l===selection.line)&&Array.isArray(t.s)&&t.s.length>=2).map(t=>({...t,day:t.day||''}));
  const direct=E.direct(good,selection.from,selection.to,range.start,range.end);
- const trans=E.transfers(good,selection.from,selection.to,range.start,range.end);
+ const trans=selection.line==='ALL'?E.transfers(good,selection.from,selection.to,range.start,range.end):[];
  const keys=new Set(direct.map(x=>x.key));return [...direct,...trans.filter(x=>!keys.has(x.key))].sort((a,b)=>a.depart-b.depart||a.arrive-b.arrive);
 }
 function timeFor(t){return fmtTime(t);}
@@ -195,7 +244,7 @@ function renderResultList(){const root=$('results');root.replaceChildren();for(c
  $('load-more').textContent=`Mostrar más (${Math.max(0,results.length-visible)} restantes)`;
 }
 function updateSummary(range,scheduleCount,live){const direct=results.filter(x=>x.kind==='direct').length,transfer=results.filter(x=>x.kind==='transfer').length,cancel=results.filter(x=>x.cancelled).length,pos=results.filter(x=>x.live).length;
- $('results-title').textContent=stationName(selection.from)+' → '+stationName(selection.to);
+ $('results-title').textContent=(selection.line==='ALL'?'Red Rodalies':selection.line)+' · '+stationName(selection.from)+' → '+stationName(selection.to);
  $('results-subtitle').textContent=range.day+' · '+range.from+'–'+range.to+(range.extra?' (hasta mañana)':'');
  $('results-total').textContent=results.length+' '+(results.length===1?'opción':'opciones');
  const st=$('status');if(!results.length){st.className='notice warn';st.textContent=scheduleCount?'No se han encontrado servicios directos ni conexiones de un transbordo en esta franja. No implica que el servicio esté suspendido.':'El horario oficial disponible no contiene servicios del recorrido. Comprueba la cobertura de líneas y la fecha.';}
@@ -244,24 +293,38 @@ async function init(){const d=madridDate();$('trip-date').value=d;$('trip-date')
  $('fav-ida').addEventListener('click',()=>applyPair('78710','78805',true));
  $('fav-vuelta').addEventListener('click',()=>applyPair('71801','78710',true));
  selectQuick(2);
- try{const response=await loadCatalog(null);catalog=response;stationMap=new Map(response.stations.map(s=>[s.id,s]));wirePicker('origin','from');wirePicker('dest','to');
-  const available=response.lines.filter(x=>x.present);$('network-tag').textContent=`${available.length} líneas · ${response.stations.length} estaciones`;
-  renderOfficialAudit(response);
+ try{
+  const response=await loadCatalog(null);catalog=response;
+  stationMap=new Map(response.stations.map(s=>[s.id,s]));wirePickers();renderLineOptions();renderOfficialAudit(response);
+  const available=response.lines.filter(x=>x.present);
+  $('network-tag').textContent=response.reference_only?`Referencia: ${response.stations.length} puntos`:`${available.length} líneas · ${response.stations.length} estaciones`;
   const absent=response.lines.filter(x=>!x.present).map(x=>x.id);
-  const unchecked=response.official_reference?.lines?.filter(x=>x.status==='pendiente_contraste').length||0;
   const generated=Date.parse(response.generated_at||'');
   const staleGTFS=!Number.isFinite(generated)||Date.now()-generated>48*3600*1000;
-  const coverageText=absent.length?`Cobertura GTFS parcial: sin horarios identificados de ${absent.join(', ')}.`:`${unchecked} líneas con puntos de referencia pendientes de cotejar.`;
-  $('catalog-message').textContent=(staleGTFS?'ATENCIÓN: el horario GTFS lleva más de 48 h sin actualizarse. ':'GTFS actualizado '+String(response.generated_at||'desconocido').slice(0,10)+'. ')+coverageText+' Consulta «Catálogo oficial».';
+  const unchecked=response.official_reference?.lines?.filter(x=>x.status==='pendiente_contraste').length||0;
+  if(response.reference_only){
+   $('catalog-message').textContent='CATÁLOGO PROVISIONAL: puedes ver líneas y algunas estaciones verificadas, pero aún no hay horarios. Ejecuta el workflow de GitHub Actions para generar la red completa.';
+   setHealth('partial','Sin horarios GTFS');
+   $('status').className='notice warn';$('status').textContent='Todavía no se ha generado data/v2/catalog.json. Los desplegables solo incluyen estaciones verificadas de referencia; no están todas las paradas.';
+  }else{
+   $('catalog-message').textContent=(staleGTFS?'ATENCIÓN: el GTFS lleva más de 48 h sin actualizarse. ':'GTFS actualizado '+String(response.generated_at||'').slice(0,10)+'. ')
+    +(absent.length?`Sin cobertura horaria de ${absent.join(', ')}.`:`${unchecked} líneas con puntos de referencia pendientes de contraste.`);
+   setHealth(staleGTFS||absent.length?'partial':'good',staleGTFS?'Horario desactualizado':absent.length?'Cobertura parcial':'Red disponible');
+  }
   let pair=null;try{pair=JSON.parse(localStorage.getItem('mirodalies-v2-pair')||'null');}catch{}
   if(pair&&stationMap.has(pair.from)&&stationMap.has(pair.to))applyPair(pair.from,pair.to);
   else if(stationMap.has('78710')&&stationMap.has('78805'))applyPair('78710','78805');
-  else {selection={from:'',to:''};$('origin-input').value='';$('dest-input').value='';}
-  setHealth(staleGTFS||absent.length?'partial':'good',staleGTFS?'Horario desactualizado':absent.length?'Cobertura parcial':'Red disponible');
-  if(selection.from&&selection.to)await search();
- }catch(e){$('catalog-message').textContent='No se ha podido cargar la red oficial V2. Ejecuta la tarea GTFS en GitHub Actions.';setHealth('bad','Sin catálogo');
-  $('status').className='notice bad';$('status').textContent='Falta data/v2/catalog.json o no es accesible. La V2 no mostrará trenes de otras líneas como sustitutos.';
-  $('network-tag').textContent='Red no disponible';}
+  else applyLine('R4');
+  if(response.reference_only){
+   setHealth('partial','Sin horarios GTFS');
+   $('status').className='notice warn';
+   $('status').textContent='Catálogo provisional: faltan las paradas completas y los horarios. Ejecuta GitHub Actions para generar data/v2/catalog.json.';
+  }
+  if(!response.reference_only&&selection.from&&selection.to)await search();
+ }catch(e){$('catalog-message').textContent='No se ha podido descargar ni el GTFS ni el catálogo provisional de referencia.';setHealth('bad','Sin catálogo');
+  $('status').className='notice bad';$('status').textContent='No se pudo cargar el catálogo. Comprueba que data/reference/fallback_catalog.json esté publicado y ejecuta el workflow GTFS.';
+  $('network-tag').textContent='Red no disponible';
+ }
  document.addEventListener('visibilitychange',()=>{if(!document.hidden&&catalog&&selection.from&&selection.to)void search();});
  setInterval(()=>{if(!document.hidden&&catalog&&selection.from&&selection.to&&!isBusy&&madridDate()===$('trip-date').value)void search();},CONFIG.refreshMs);
  if('serviceWorker'in navigator&&location.protocol==='https:')navigator.serviceWorker.register('./sw.js').catch(()=>{});

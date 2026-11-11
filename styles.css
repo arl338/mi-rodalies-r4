@@ -29,3 +29,16 @@ button:active:not(:disabled){transform:scale(.97);filter:brightness(.92)}
  .date-field:first-child input{text-align:left;padding-left:14px}
  .date-field input{font-size:16px;min-height:50px}
 }
+
+/* V2.0.4: línea primero, listas nativas Android, sin nombre libre */
+.line-field{margin:0 0 18px}
+.line-field>label,.station-field>label{display:block;font-size:13px;font-weight:770;color:#304660;margin:0 0 8px}
+.line-field select,.station-field select{appearance:auto;display:block;width:100%;min-height:54px;padding:10px 12px;background:#fff;border:1.5px solid #cdd8e4;border-radius:12px;color:#172b40;font-size:16px;font-weight:660;line-height:1.4}
+.line-field select:focus,.station-field select:focus{border-color:var(--red);box-shadow:0 0 0 3px #c0000016;outline:none}
+.line-field select:disabled,.station-field select:disabled{background:#f2f4f7;color:#7b8899}
+.field-help{margin:7px 0 0;font-size:12px;line-height:1.5;color:#62778d}
+.station-picker{align-items:flex-end}
+.station-inputs{align-items:end}
+.swap{height:54px;min-height:54px}
+@media(max-width:650px){.station-picker{display:grid;grid-template-columns:minmax(0,1fr) 50px;align-items:end;gap:10px}.station-inputs{display:grid;grid-template-columns:minmax(0,1fr)}.swap{position:static;grid-column:2;grid-row:1;align-self:center;margin-top:29px;height:52px;min-height:52px;width:48px}.station-inputs{grid-column:1;grid-row:1}}
+@media(max-width:370px){.line-field select,.station-field select{font-size:16px}}
