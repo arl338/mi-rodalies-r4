@@ -57,7 +57,7 @@ function renderLineOptions(){
  const lines=[...catalog.lines].sort((a,b)=>[...E.LINES].indexOf(a.id)-[...E.LINES].indexOf(b.id));
  for(const l of lines){
   const amount=lineStations(l.id).length;
-  const label=(l.name||l.id)+(catalog.reference_only?' · referencia parcial':!l.present?' · solo estaciones, sin GTFS':'')+` (${amount} estaciones)`;
+  const label=(l.name||l.id)+(catalog.reference_only?' · referencia parcial':!l.present?' · sin GTFS (consulta alternativa)':'')+` (${amount} estaciones)`;
   sel.append(new Option(label,l.id));
  }
  sel.append(new Option('Todas las líneas · transbordos','ALL'));
@@ -75,7 +75,7 @@ function renderStationSelects(){
  $('line-help').textContent=catalog.reference_only
   ?'Referencia provisional: solo puntos principales con código ADIF validado. Ejecuta la actualización GTFS para obtener todas las paradas y horarios.'
   :selection.line==='ALL'?'Permite buscar entre todas las estaciones y calcular hasta un transbordo.'
-  :`${options.length} estaciones asociadas a ${selection.line}. Solo se mostrarán horarios GTFS verificables; la presencia de una estación no confirma un servicio.`+
+  :`${options.length} estaciones en ${selection.line}. Se consulta GTFS y, cuando faltan servicios, Trenalia. La pertenencia a la línea no confirma parada comercial.`+
      (catalog.source_quality?.by_line?.[selection.line]?.raw_two_stop_trips>0?' Aviso: el GTFS original contiene algunos viajes con únicamente dos paradas; no se conocen las horas de paso intermedias.':'');
 }
 function applyLine(line){
@@ -326,7 +326,7 @@ async function search(){if(!catalog){showToast('El catálogo todavía no está d
   const operationalLinked=results.some(j=>j.estimated!==null&&!j.conflict&&!j.cancelled);
   const failedAllLive=live&&res.length>0&&res.every(x=>x.status==='rejected');
   setHealth(failedAllLive?'partial':operationalLinked?'good':fallback.length?'partial':!live?'good':failures?'partial':'partial',
-    failedAllLive?'Sin datos actuales':operationalLinked?'ETA contrastada':fallback.length?'Horario orientativo':!live?'Horario programado':failures?'Datos parciales':'Sin ETA vinculada');
+    failedAllLive?'Sin datos actuales':operationalLinked?'Estimación disponible':fallback.length?'Horario orientativo':!live?'Horario programado':failures?'Datos parciales':'Sin ETA vinculada');
   $('search-feedback').textContent='';
  }catch(err){if(!signal.aborted&&id===requestId){const st=$('status');st.className='notice bad';st.textContent='No se ha podido consultar el horario: '+err.message;setHealth('bad','Sin horario');}}
  finally{if(id===requestId)markBusy(false);}
@@ -388,9 +388,8 @@ async function init(){const d=madridDate();lastLocalDay=d;lastCatalogCheck=Date.
    setHealth('partial','Sin horarios GTFS');
    $('status').className='notice warn';$('status').textContent='Todavía no se ha generado data/v2/catalog.json. Los desplegables solo incluyen estaciones verificadas de referencia; no están todas las paradas.';
   }else{
-   $('catalog-message').textContent=(staleGTFS?'ATENCIÓN: el GTFS lleva más de 48 h sin actualizarse. ':'GTFS actualizado '+String(response.generated_at||'').slice(0,10)+'. ')
-    +`Inventario: ${response.network_reference?.reference_station_count||response.stations.length} estaciones de referencia; ${available.length}/${response.lines.length} líneas con horarios GTFS. `
-    +(absent.length?`Faltan horarios GTFS en ${absent.join(', ')}; sus estaciones siguen visibles.`:`${unchecked} líneas con puntos de referencia pendientes de contraste.`);
+   $('catalog-message').textContent=(staleGTFS?'GTFS desactualizado. ':'')+
+    `Red: ${response.lines.length} líneas · ${response.stations.length} estaciones · GTFS en ${available.length} líneas. El resto usa horarios complementarios cuando están disponibles. Consulta la cobertura detallada abajo.`;
    setHealth(staleGTFS||absent.length?'partial':'good',staleGTFS?'Horario desactualizado':absent.length?'Cobertura parcial':'Red disponible');
   }
   let pair=null;try{pair=JSON.parse(localStorage.getItem('mirodalies-v2-pair')||'null');}catch{}
