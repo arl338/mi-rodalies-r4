@@ -7,13 +7,13 @@
   <meta name="description" content="Consulta horarios y evidencias de circulación de Rodalies de Catalunya. Datos oficiales y contraste multifuente.">
   <link rel="manifest" href="./manifest.webmanifest">
   <link rel="icon" href="./icon-192.png">
-  <link rel="stylesheet" href="./styles.css?v=220">
+  <link rel="stylesheet" href="./styles.css?v=221">
   <title>Mi Rodalies · Horarios y estado de trenes</title>
 </head>
 <body>
   <div class="shell">
     <header class="topbar">
-      <div class="brand"><div class="logo" aria-hidden="true">R</div><div><h1>Mi Rodalies <span class="version">2.2.0</span></h1><p>Horarios y circulación · Catalunya</p></div></div>
+      <div class="brand"><div class="logo" aria-hidden="true">R</div><div><h1>Mi Rodalies <span class="version">2.2.1</span></h1><p>Horarios y circulación · Catalunya</p></div></div>
       <div id="health" class="health pending" role="status"><i></i><span>Conectando</span></div>
     </header>
     <main>
@@ -55,18 +55,18 @@
           <p><b>3. Posición: Renfe a través de Valfiguer o RadarDeTrenes.</b> Se exige ID de viaje exacto, antigüedad hasta 90 s, ausencia de marca de dato obsoleto y compatibilidad de línea y tren cuando se conocen. Las posiciones no prueban el paso físico por un andén.</p>
           <p><b>4. Cancelación: feed Renfe vía Valfiguer o tablero.</b> La cancelación debe corresponder al servicio concreto; no se atribuye por proximidad geográfica ni solo por número de tren. Ante contradicción entre posición y cancelación, se muestra conflicto.</p>
           <p><b>5. Avisos.</b> Se filtran por las líneas de los servicios presentados. Los avisos no cambian por sí solos los horarios individuales. Los proveedores pueden redistribuir la misma fuente original, por lo que sus coincidencias no son votos independientes.</p>
-          <p><b>6. Resultado.</b> Salida oficial (siempre), estimada solo si se valida la observación, y evidencias específicas. En transbordos, el margen mínimo usado es de ocho minutos y no constituye una garantía de conexión.</p>
+          <p><b>6. Resultado.</b> Hora programada según GTFS o el horario alternativo identificado; estimada solo si se valida la observación, con distinción visible de ambas horas y su retraso. En transbordos, el margen mínimo usado es de ocho minutos y no constituye una garantía de conexión.</p>
           <p><b>Limitaciones actuales:</b> no se ha calibrado todavía una fiabilidad estadística histórica por línea; no se combinan probabilísticamente las predicciones; una API inaccesible no demuestra que no haya trenes; y el modelo no sustituye el panel de la estación.</p>
-          <p><a href="https://data.renfe.com/dataset/horarios-cercanias" target="_blank" rel="noopener">GTFS oficial Renfe</a> · <a href="https://trenes.valfiguer.com/desarrolladores" target="_blank" rel="noopener">API Valfiguer</a> · <a href="https://radardetrenes.com/docs" target="_blank" rel="noopener">API RadarDeTrenes</a> · <a href="https://boe.es/diario_boe/txt.php?id=BOE-A-2023-4789" target="_blank" rel="noopener">Nombres BOE 2023</a></p>
+          <p><a href="https://data.renfe.com/dataset/horarios-cercanias" target="_blank" rel="noopener">GTFS oficial Renfe</a> · <a href="https://trenes.valfiguer.com/desarrolladores" target="_blank" rel="noopener">API Valfiguer</a> · <a href="https://radardetrenes.com/docs" target="_blank" rel="noopener">API RadarDeTrenes</a> · <a href="https://trenalia.org/api" target="_blank" rel="noopener">Horarios Trenalia</a> · <a href="https://boe.es/diario_boe/txt.php?id=BOE-A-2023-4789" target="_blank" rel="noopener">Nombres BOE 2023</a></p>
         </div>
       </details>
       <details class="info-card" id="sources-panel"><summary><span>Diagnóstico de fuentes</span><span class="summary-right">Cobertura y antigüedad <b aria-hidden="true">⌄</b></span></summary><div id="source-details" class="source-list"><p class="subtle">Sin consultas todavía.</p></div></details>
       <details class="info-card" id="alerts-panel" open><summary><span>Incidencias que pueden afectarte</span><span class="summary-right"><b aria-hidden="true">⌄</b></span></summary><div id="alerts" class="alert-list"><p class="subtle">Las incidencias aparecerán al consultar un trayecto.</p></div></details>
       <details class="info-card" id="guide-panel"><summary><span>Cómo interpretar las estimaciones</span><span class="summary-right"><b aria-hidden="true">⌄</b></span></summary><div class="explain"><p><b>Horario oficial:</b> servicio programado según GTFS. No demuestra circulación.</p><p><b>Posición reciente:</b> tren identificado con datos operativos recientes; no equivale a un paso confirmado por el andén.</p><p><b>Salida estimada:</b> solo se presenta cuando existe una observación actualizada, atribuible al tren y a esta estación.</p><p><b>Cancelado / contradicción:</b> requiere revisar los avisos y la estación. Dos webs que reutilizan Renfe no constituyen confirmaciones independientes.</p><p><b>Transbordo:</b> conexión teórica entre dos trenes. Se ofrece únicamente un transbordo, con un margen mínimo de ocho minutos; no asegura el enlace durante incidencias.</p><p>La información de esta app es orientativa. Contrasta siempre con las indicaciones oficiales de la estación.</p></div></details>
     </main>
-    <footer><p><strong>Mi Rodalies 2.2.0</strong> · Proyecto independiente, sin publicidad y sin cuentas.</p><p>Líneas: <a href="https://rodalies.gencat.cat/es/linies_estacions_i_trens/index.html" target="_blank" rel="noopener">Generalitat de Catalunya</a>. Horarios: <a href="https://data.renfe.com/dataset/horarios-cercanias" target="_blank" rel="noopener">Renfe Data GTFS</a> (CC BY 4.0). Datos operativos: Renfe Data mediante <a href="https://trenes.valfiguer.com/desarrolladores" target="_blank" rel="noopener">Valfiguer</a> y paneles de <a href="https://radardetrenes.com/docs" target="_blank" rel="noopener">RadarDeTrenes</a>. Uso de información sujeto a disponibilidad y atribución.</p></footer>
+    <footer><p><strong>Mi Rodalies 2.2.1</strong> · Proyecto independiente, sin publicidad y sin cuentas.</p><p>Líneas: <a href="https://rodalies.gencat.cat/es/linies_estacions_i_trens/index.html" target="_blank" rel="noopener">Generalitat de Catalunya</a>. Horarios: <a href="https://data.renfe.com/dataset/horarios-cercanias" target="_blank" rel="noopener">Renfe Data GTFS</a> (CC BY 4.0). Datos operativos: Renfe Data mediante <a href="https://trenes.valfiguer.com/desarrolladores" target="_blank" rel="noopener">Valfiguer</a> y paneles de <a href="https://radardetrenes.com/docs" target="_blank" rel="noopener">RadarDeTrenes</a>. Horarios alternativos: <a href="https://trenalia.org/api" target="_blank" rel="noopener">Trenalia</a>. Uso de información sujeto a disponibilidad y atribución.</p></footer>
   </div>
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
-  <script src="./engine.js?v=220" defer></script>
-  <script src="./app.js?v=220" defer></script>
+  <script src="./engine.js?v=221" defer></script>
+  <script src="./app.js?v=221" defer></script>
 </body></html>

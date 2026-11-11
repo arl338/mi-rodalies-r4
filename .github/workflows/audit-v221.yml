@@ -1,0 +1,66 @@
+name: Auditoría integral V2.2.1 · Android y datos
+
+on:
+  push:
+    branches: ['audit/v2-2-1-total-validation']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  correctness:
+    runs-on: ubuntu-latest
+    timeout-minutes: 9
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Sintaxis, GTFS, motor, integración y regresiones
+        run: |
+          python -m py_compile scripts/*.py
+          node --check app.js
+          node --check engine.js
+          node --check sw.js
+          node tests/test_engine.cjs
+          node tests/test_feed_schemas.cjs
+          node tests/test_precision.cjs
+          node tests/test_trenalia_fallback.cjs
+          node tests/test_timetable_live_correlation.cjs
+          node tests/test_position_delay_fallback.cjs
+          node tests/test_merge_alternative_journeys.cjs
+          python -m unittest discover -s tests -p 'test_[!u]*.py' -q
+      - name: Integridad del catálogo publicado
+        run: python scripts/validate_generated.py --out data/v2 --days 14
+  android:
+    runs-on: ubuntu-latest
+    timeout-minutes: 13
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Preparar navegador Chromium para capturas funcionales
+        run: |
+          python -m pip install 'playwright>=1.50,<2'
+          python -m playwright install --with-deps chromium
+      - name: Probar interfaz móvil y escritorio sin red ferroviaria
+        run: python tests/test_ui_v221.py
+
+  live-contracts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verificar disponibilidad y estructura de los horarios y ETA en fuentes reales
+        run: |
+          node tests/test_trenalia_live.cjs
+          node tests/test_trenalia_alignment.cjs
+          node tests/test_live_anonymous_eta.cjs
