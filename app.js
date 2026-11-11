@@ -246,7 +246,7 @@ function renderResultList(){const root=$('results');root.replaceChildren();for(c
  if(j.kind==='transfer')notes.push(j.connectionRisk?'ATENCIÓN: conexión en riesgo por retraso observado del primer tren; llegada no estimada':'Conexión teórica con margen programado; llegada y enlace no confirmados');
  if(catalog&&Date.now()-Date.parse(catalog.generated_at||'')>48*3600000)notes.push('Catálogo GTFS antiguo: comprobar el horario vigente en Renfe');
  // Dynamic nodes instead of innerHTML from external providers (XSS-safe).
- proof.append(el('b','', 'Evidencias: '),document.createTextNode(notes.join(' · ')));panel.append(proof);root.append(panel);
+ proof.append(el('b','', 'Evidencias: '),document.createTextNode(notes.join(' · ')));if(alternative){const attribution=el('a','','Trenalia · datos de Renfe');attribution.href='https://trenalia.org/api';attribution.target='_blank';attribution.rel='noopener noreferrer';proof.append(document.createTextNode(' · '),attribution);}panel.append(proof);root.append(panel);
  }
  $('load-more').hidden=results.length<=visible;
  $('load-more').textContent=`Mostrar más (${Math.max(0,results.length-visible)} restantes)`;
