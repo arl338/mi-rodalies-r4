@@ -325,7 +325,20 @@ async function search(){if(!catalog){showToast('El catálogo todavía no está d
   const board=live?[...E.normalizeBoard(data(0),'Valfiguer',now,selection.from).map(x=>({...x,boardStop:selection.from})),...E.normalizeBoard(data(1),'ADIF/RadarDeTrenes',now,selection.from).map(x=>({...x,boardStop:selection.from}))]:[];
   const positions=live?[...E.normalizePositions(data(2),'Renfe/Valfiguer',now),...E.normalizePositions(data(3),'Renfe/ADIF',now)]:[];
   const cancellations=live?E.normalizeCancels(data(4)):[];
-  const correlatedBoard=E.correlateTimetableBoards(scheduled,board,trips);
+  // Match board destination text to one validated ADIF code. Ambiguous or
+  // missing stations never establish direction for an anonymous PDF journey.
+  const stationNames=new Map();
+  for(const station of catalog.stations){
+   if(!/^\d{5}$/.test(station.id))continue;
+   for(const name of [station.name,station.gtfs_name,...(station.aliases||[])]){
+    if(!name)continue;
+    const key=E.norm(name);
+    if(!key)continue;
+    if(!stationNames.has(key))stationNames.set(key,station.id);
+    else if(stationNames.get(key)!==station.id)stationNames.set(key,'');
+   }
+  }
+  const correlatedBoard=E.correlateTimetableBoards(scheduled,board,trips,stationNames);
   results=scheduled.map(j=>E.enrichJourney(j,correlatedBoard,positions,cancellations,now));visible=12;latestSearch={range};
   renderResultList();updateSummary(range,trips.length+fallback.length,live);
   const lines=selection.line==='ALL'?new Set(E.LINES):new Set([selection.line]);
