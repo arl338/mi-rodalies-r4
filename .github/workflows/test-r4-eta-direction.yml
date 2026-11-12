@@ -1,0 +1,43 @@
+name: R4 strict direction and ETA verification
+on:
+  push:
+    branches: [audit/r4-eta-direction-confidence-20261112]
+    paths:
+      - 'engine.js'
+      - 'app.js'
+      - 'tests/test_r4_direction_collision.cjs'
+      - '.github/workflows/test-r4-eta-direction.yml'
+  workflow_dispatch:
+permissions: {contents: read}
+jobs:
+  safety:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with: {python-version: '3.12'}
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - name: Static checks and regression suite
+        run: |
+          node --check engine.js
+          node --check app.js
+          node tests/test_engine.cjs
+          node tests/test_feed_schemas.cjs
+          node tests/test_precision.cjs
+          node tests/test_trenalia_fallback.cjs
+          node tests/test_timetable_live_correlation.cjs
+          node tests/test_position_delay_fallback.cjs
+          node tests/test_merge_alternative_journeys.cjs
+          node tests/test_schedule_vs_eta.cjs
+          node tests/test_response_cache_age.cjs
+          node tests/test_r4_direction_collision.cjs
+          python -m unittest discover -s tests -p 'test_[!u]*.py' -q
+      - name: Validate GTFS R4 source and published line data
+        run: python scripts/validate_generated.py --out data/v2 --days 14
+      - name: Verify real external contracts and R4 timetable alignment
+        run: |
+          node tests/test_trenalia_live.cjs
+          node tests/test_trenalia_alignment.cjs
+          node tests/test_live_anonymous_eta.cjs
