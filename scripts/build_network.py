@@ -535,6 +535,24 @@ def build(cer,md,output,days,base=None):
         print('R4 official PDF added',sum(pdf_counts.values()),
               'schedule-only services (GTFS always retained).',flush=True)
     
+    # Published stop-level schedules include verified official PDFs as well as
+    # Renfe GTFS. Refresh the station-level coverage AFTER the PDF supplements;
+    # otherwise RL3 (and PDF-only calls) appear as 'sin horario' in the UI.
+    # This does not establish service for any other line sharing the station.
+    for daily_trains in by_day.values():
+        for train in daily_trains:
+            line = train['l']
+            for code, _arrival, _departure in train['s']:
+                if code not in stations:
+                    raise ValueError(f'Horario oficial {line} refiere a una parada no catalogada: {code}')
+                station = stations[code]
+                station['lines'].add(line)
+                existing = set(station.get('schedule_lines', []))
+                if line not in existing:
+                    existing.add(line)
+                    station['schedule_lines'] = sorted(existing, key=LINES.index)
+                station['reference_only'] = False
+
     out=Path(output);out.mkdir(parents=True,exist_ok=True)
     for existing in out.glob('20??-??-??.json'):existing.unlink()
     for d in dates:
