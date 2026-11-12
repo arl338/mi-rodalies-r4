@@ -280,7 +280,12 @@ function updateSummary(range,scheduleCount,live){const direct=results.filter(x=>
  $('results-subtitle').textContent=range.day+' · '+range.from+'–'+range.to+(range.extra?' (hasta mañana)':'');
  $('results-total').textContent=results.length+' '+(results.length===1?'opción':'opciones');
  const etaCount=results.filter(x=>x.estimated!==null&&!x.cancelled&&!x.conflict).length;
- const st=$('status');if(!results.length){st.className='notice warn';st.textContent=scheduleCount?'No se han encontrado servicios directos ni conexiones de un transbordo en esta franja. No implica que el servicio esté suspendido.':'No hay servicios GTFS verificables para esta combinación de estaciones, línea y fecha. El inventario no garantiza circulación.';
+ const st=$('status');if(!results.length){st.className='notice warn';
+  const outsidePublishedR1=selection.line==='R1'&&catalog?.official_r1_pdf?.exclusions?.length&&
+   [selection.from,selection.to].some(code=>catalog.official_r1_pdf.exclusions.includes(stationName(code)));
+  st.textContent=outsidePublishedR1?
+   'La estación seleccionada no figura en el cuadro horario R1 actualmente publicado, que cubre L’Hospitalet–Maçanet. No se pueden mostrar trenes sin horarios verificados; consulta las modificaciones del servicio.':
+   scheduleCount?'No se han encontrado servicios directos ni conexiones de un transbordo en esta franja. No implica que el servicio esté suspendido.':'No hay servicios GTFS verificables para esta combinación de estaciones, línea y fecha. El inventario no garantiza circulación.';
   const refPdf=catalog?.official_reference?.lines?.find(l=>l.id===selection.line)?.timetable_pdf;
   const a=el('a','','Consultar cuadro horario oficial de '+selection.line);a.href=refPdf||'https://rodalies.gencat.cat/es/horaris/tots-els-horaris/';a.target='_blank';a.rel='noopener noreferrer';st.append(document.createTextNode(' · '),a);}
  else{st.className='notice '+(cancel?'warn':pos?'good':'neutral');st.textContent=`${direct} directos · ${transfer} con un transbordo · ${etaCount} con hora estimada · ${pos} con posición reciente · ${cancel} cancelados. Sin observación válida se mantiene el horario programado.`;}
