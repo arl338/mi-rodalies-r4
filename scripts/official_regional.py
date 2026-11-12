@@ -50,7 +50,8 @@ def materialize_day(day,document):
             calls.append([code,ts,ts])
         out.append({'id':'pdf-regional-'+item['line'].lower()+'-'+item['train_number']+'-'+day.isoformat(),
                     'n':item['train_number'],'l':item['line'],'src':'official-regional-pdf',
-                    'dest':calls[-1][0], 's':calls})
+                    'dest':calls[-1][0], 's':calls,
+                    'scope':item.get('segment', 'Published verified station-time cells; service may continue beyond source row')})
     return out
 
 def duplicate(candidate,existing):
