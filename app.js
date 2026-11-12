@@ -271,7 +271,7 @@ function renderResultList(){const root=$('results');root.replaceChildren();for(c
  const officialRL3=j.legs.some(l=>l.t.src==='official-rl3-pdf');
  const officialExtra=j.legs.some(l=>l.t.src==='official-supplement-pdf');
  const officialRegional=j.legs.some(l=>l.t.src==='official-regional-pdf');
- let notes=[officialRegional?'Origen: cuadro oficial de Rodalies R11/R16. Solo los trenes y paradas impresos que han podido verificarse; sin confirmación de circulación real ni cobertura completa.':
+ let notes=[officialRegional?'Origen: cuadro oficial de Rodalies R11/R15/R16. Solo los trenes y paradas impresos que han podido verificarse; sin confirmación de circulación real ni cobertura completa.':
    officialExtra?'Origen: cuadro oficial Rodalies 2026 con horas impresas por parada. Horario programado; no confirma circulación, incidencias ni festivos especiales.':
    officialRL3?'Origen: cuadro horario oficial RL3/RL4 de Rodalies (06/07/2026); tiempos impresos por estación, sin confirmar circulación real.':
    officialR1?'Origen: cuadro horario oficial R1 (PDF de Rodalies), 27 estaciones de L’Hospitalet a Maçanet. Solo horario programado sin ETA verificable.':
