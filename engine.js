@@ -115,8 +115,9 @@ function direct(trains,from,to,start,end){const found=[];
 /**
  * Fill timetable gaps without changing or duplicating the official GTFS.
  * Only direct services from explicitly named alternative lines are eligible.
- * Times within 90s of an existing GTFS departure on the same line/corridor
- * are treated as the same service; source with explicit stop_times wins.
+ * Only identical scheduled departure minutes AND practically identical
+ * programmed arrival can be treated as a duplicate. Nearby trains at +1 min
+ * must stay visible: omission is worse than an occasional duplicate.
  */
 function mergeSupplementalJourneys(official,alternative){
  const merged=[...official];
@@ -126,7 +127,7 @@ function mergeSupplementalJourneys(official,alternative){
   const leg=journey.legs[0];
   const duplicate=merged.some(j=>j.kind==='direct'&&j.legs.length===1&&
    j.legs[0].t.l===leg.t.l&&j.legs[0].from===leg.from&&j.legs[0].to===leg.to&&
-   Math.abs(j.depart-journey.depart)<=90);
+   Math.abs(j.depart-journey.depart)<=30&&Math.abs(j.arrive-journey.arrive)<=60);
   if(!duplicate)merged.push(journey);
  }
  return merged.sort((a,b)=>a.depart-b.depart||a.arrive-b.arrive);
@@ -215,6 +216,38 @@ function normalizeTrenaliaTimetable(payload,from,to,day,requestedLine){
  * Reject collisions of multiple distinct train numbers/trips for one leg.
  */
 function anonymousSchedule(t){return t.src==='trenalia-schedule-only'||t.src==='official-r4-pdf';}
+/** Board terminus is a verified ADIF stop, not free text interpreted as a direction. */
+function boardTerminus(row,stationNames){
+ const code=String(row.destinationCode||'').trim();
+ if(/^\d{5}$/.test(code))return code;
+ const name=norm(row.destinationName);
+ return name&&stationNames.get(name)||'';
+}
+/** Prove the observed train travels from origin through the requested
+ * destination toward its declared terminus. A timetable for an unrelated
+ * line, the opposite direction or the other branch is not sufficient.
+ */
+function directionVerified(leg,row,knownServices,stationNames){
+ const terminus=boardTerminus(row,stationNames);
+ if(!terminus)return false;
+ // The original official R4 PDF lists all observed intermediate stops.
+ if(leg.t.src==='official-r4-pdf'){
+  const o=leg.t.s.findIndex(s=>s[0]===leg.from);
+  const d=leg.t.s.findIndex((s,i)=>i>o&&s[0]===leg.to);
+  return o>=0&&d>o&&leg.t.s.findIndex((s,i)=>i>=d&&s[0]===terminus)>=d;
+ }
+ // Trenalia supplies only origin/destination and omits stop-level proof.
+ // A declared terminus equal to the user's destination proves the direction.
+ if(terminus===leg.to)return true;
+ // A longer route can only be trusted when another verified full GTFS journey
+ // of the same line and exact corridor contains these stops in this order.
+ return knownServices.some(t=>{
+  if(!t||t.l!==leg.t.l||anonymousSchedule(t)||!Array.isArray(t.s)||t.s.length<3)return false;
+  const o=t.s.findIndex(s=>s[0]===leg.from);
+  const d=t.s.findIndex((s,i)=>i>o&&s[0]===leg.to);
+  return o>=0&&d>o&&t.s.findIndex((s,i)=>i>=d&&s[0]===terminus)>=d;
+ });
+}
 function correlateTimetableBoards(journeys,boards,knownServices=[],stationNames=new Map()){
  const legs=journeys.flatMap(j=>j.legs).filter(l=>anonymousSchedule(l.t));
  if(!legs.length)return boards;
@@ -238,18 +271,9 @@ function correlateTimetableBoards(journeys,boards,knownServices=[],stationNames=
   if(matchesIdentifiedService)continue;
   const applicable=legs.filter(l=>{
    if(l.from!==row.station||l.t.l!==row.line||Math.abs(l.depart-row.planned)>60)return false;
-   if(l.t.src!=='official-r4-pdf')return true;
-   // PDF R4 has no commercial train identity. A one-minute coincidence
-   // between the two directions is not evidence that it is the same train.
-   // Require the board's *declared terminus* to lie at or beyond the
-   // requested destination on the exact published PDF service.
-   const rawTerminus=row.destinationCode;
-   const terminus=rawTerminus||stationNames.get(norm(row.destinationName));
-   if(!terminus)return false;
-   const originIndex=l.t.s.findIndex(s=>s[0]===l.from);
-   const destinationIndex=l.t.s.findIndex((s,i)=>i>originIndex&&s[0]===l.to);
-   const terminusIndex=l.t.s.findIndex((s,i)=>i>=destinationIndex&&s[0]===terminus);
-   return originIndex>=0&&destinationIndex>originIndex&&terminusIndex>=destinationIndex;
+   // Applies to every anonymous itinerary: R4 PDF and all 19 commercial
+   // lines eligible for Trenalia. Without route proof retain the schedule.
+   return directionVerified(l,row,knownServices,stationNames);
   });
   if(applicable.length!==1)continue;
   const leg=applicable[0], key=leg.t.id+'|'+leg.from+'|'+leg.depart;
