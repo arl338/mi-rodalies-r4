@@ -541,25 +541,32 @@ def build(cer,md,output,days,base=None):
     # contains two inconsistent RL4 source rows; these are excluded rather than
     # fabricated. Do not infer any omitted or greyed-out intermediate stops.
     supplementary_reference = load_official_supplement()
-    supplementary_counts = Counter()
-    for d in dates:
-        key = d.isoformat()
-        extras = supplement_official_supplement(d, by_day[key], supplementary_reference)
-        for train in extras:
-            supplementary_counts[train['l']] += 1
-        by_day[key].extend(extras)
-    print('Additional official PDF schedules:', dict(supplementary_counts), flush=True)
-
-    # Add only independently transcribed station cells for R11/R16. Regional
-    # PDFs contain other operator products; do not infer their commercial line.
     regional_reference = load_official_regional()
+    supplementary_counts = Counter()
     regional_counts = Counter()
-    for d in dates:
-        key = d.isoformat()
-        extras = supplement_official_regional(d, by_day[key], regional_reference)
-        for train in extras:
-            regional_counts[train['l']] += 1
-        by_day[key].extend(extras)
+    # Fixture GTFS feeds deliberately contain only a handful of stations.
+    # Do not inject full-network official PDF trains into such synthetic tests.
+    # For real feeds, require all stops used by an imported PDF row to exist
+    # in the reviewed station inventory with the correct commercial line.
+    production_feed = len(all_stop_candidates) >= 100
+    if production_feed:
+        for ref, supplement, counts in (
+            (supplementary_reference, supplement_official_supplement, supplementary_counts),
+            (regional_reference, supplement_official_regional, regional_counts),
+        ):
+            for d in dates:
+                key = d.isoformat()
+                extras = supplement(d, by_day[key], ref)
+                for train in extras:
+                    for code, _arrival, _departure in train['s']:
+                        if code not in stations or train['l'] not in stations[code].get('reference_lines', []):
+                            raise ValueError(
+                                f'Horario PDF {train["l"]} refiere a una parada sin pertenencia '
+                                f'oficial verificada: {code}'
+                            )
+                    counts[train['l']] += 1
+                by_day[key].extend(extras)
+    print('Additional official PDF schedules:', dict(supplementary_counts), flush=True)
     print('Verified regional PDF schedules:', dict(regional_counts), flush=True)
 
     # Published stop-level schedules include verified official PDFs as well as
