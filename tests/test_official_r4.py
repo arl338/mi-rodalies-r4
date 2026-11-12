@@ -28,7 +28,7 @@ class OfficialR4Tests(unittest.TestCase):
         self.assertTrue(all(s['direction']=='south' for s in self.reference['services']))
 
     def test_missing_departures_added_without_removing_gtfs(self):
-        original=self.gtfs['trains']
+        original=[t for t in self.gtfs['trains'] if t.get('src')!='official-r4-pdf']
         additions=supplement_day(self.day,original,self.reference)
         self.assertTrue(additions)
         self.assertTrue(all(x['src']=='official-r4-pdf' and x['n']=='' for x in additions))
@@ -52,7 +52,7 @@ class OfficialR4Tests(unittest.TestCase):
         self.assertTrue(all(t['id'] not in {s['id'] for s in original} for t in additions))
 
     def test_original_gtfs_remains_principal(self):
-        additions=supplement_day(self.day,self.gtfs['trains'],self.reference)
+        additions=supplement_day(self.day,[t for t in self.gtfs['trains'] if t.get('src')!='official-r4-pdf'],self.reference)
         pdf_times=[{s[0]:s[2] for s in t['s']} for t in additions]
         # Existing 06:33 and 07:03 are not copied from the PDF.
         self.assertFalse(any('78710' in t and datetime.fromtimestamp(t['78710'],TZ).strftime('%H:%M') in ('06:33','07:03') for t in pdf_times))
