@@ -115,8 +115,9 @@ function direct(trains,from,to,start,end){const found=[];
 /**
  * Fill timetable gaps without changing or duplicating the official GTFS.
  * Only direct services from explicitly named alternative lines are eligible.
- * Times within 90s of an existing GTFS departure on the same line/corridor
- * are treated as the same service; source with explicit stop_times wins.
+ * Only identical scheduled departure minutes AND practically identical
+ * programmed arrival can be treated as a duplicate. Nearby trains at +1 min
+ * must stay visible: omission is worse than an occasional duplicate.
  */
 function mergeSupplementalJourneys(official,alternative){
  const merged=[...official];
@@ -126,7 +127,7 @@ function mergeSupplementalJourneys(official,alternative){
   const leg=journey.legs[0];
   const duplicate=merged.some(j=>j.kind==='direct'&&j.legs.length===1&&
    j.legs[0].t.l===leg.t.l&&j.legs[0].from===leg.from&&j.legs[0].to===leg.to&&
-   Math.abs(j.depart-journey.depart)<=90);
+   Math.abs(j.depart-journey.depart)<=30&&Math.abs(j.arrive-journey.arrive)<=60);
   if(!duplicate)merged.push(journey);
  }
  return merged.sort((a,b)=>a.depart-b.depart||a.arrive-b.arrive);
