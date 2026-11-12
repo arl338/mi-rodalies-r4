@@ -95,7 +95,7 @@ def parse_grid(page,station_codes,calendar,direction):
             skipped['bad_chronology']+=1;continue
         # Avoid treating unlabelled R7/RL4 special rows as R4 unless their
         # physical stop pattern matches a known contiguous R4 section.
-        if len(sequence)<3:skipped['few_cells']+=1;continue
+        if len(sequence)<2:skipped['few_cells']+=1;continue
         identifier=hashlib.sha256(repr((calendar,direction,sequence)).encode()).hexdigest()[:16]
         services.append({'id':f'pdf-r4-{calendar}-{direction}-{identifier}',
                          'calendar':calendar,'direction':direction,'stops':sequence})
