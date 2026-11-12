@@ -2,17 +2,8 @@ name: 'Release V2.2.3: R4 servicios íntegros y ETA conservadora'
 on:
   push:
     branches: [release/v2-2-3-r4-complete-timetable]
-  pull_request:
-    paths:
-      - 'scripts/build_network.py'
-      - 'scripts/official_r4.py'
-      - 'data/reference/r4_official_timetable.json'
-      - 'engine.js'
-      - 'app.js'
-      - 'tests/test_official_r4.py'
-      - 'tests/test_r4_direction_collision.cjs'
-      - 'tests/test_r4_ui_full.py'
-      - '.github/workflows/test-release-r4-v223.yml'
+  # Test historic d'extracció PDF 12/11/2026. Els tests de la versió nova
+  # cobreixen les regressions R4 sense baixar el GTFS d'un dia passat.
 permissions: {contents: read}
 jobs:
   complete:
