@@ -14,6 +14,7 @@ from datetime import date, datetime, timedelta, time, timezone
 from pathlib import Path
 from zoneinfo import ZoneInfo
 from reference_stations import apply_reference
+from official_r4 import load_reference as load_official_r4, supplement_day as supplement_official_r4, reference_metadata as official_r4_metadata
 
 TZ = ZoneInfo('Europe/Madrid')
 REFERENCE_FILE = Path(__file__).resolve().parents[1] / 'data' / 'reference' / 'generalitat_lines.json'
@@ -430,7 +431,7 @@ def build(cer,md,output,days,base=None):
                     parent=raw_stops.get(str(raw_stop.get('parent_station')))
                     st=parent or raw_stop
                     code=stop_key(st.get('stop_id'))
-                    if not re.fullmatch(r'\\d{5}',code) or not in_catalonia(st):
+                    if not re.fullmatch(r'\d{5}',code) or not in_catalonia(st):
                         continue
                     if code not in all_stop_candidates:
                         try:
@@ -484,6 +485,24 @@ def build(cer,md,output,days,base=None):
             st['name_source']='ADIF/BOE';st['name_sources']=official.get('sources',[])
     reference_inventory=apply_reference(stations,all_stop_candidates,
                                          schedule_station_lines,canonical_names,LINES)
+    # Complement incomplete Renfe stop_times with directly observed cells
+    # from the official Rodalies R4 PDF (verified against full-route GTFS).
+    # Keep original GTFS records and their identities unchanged.
+    pdf_r4_meta=None
+    # Synthetic/minimal fixture feeds must not be enriched with production
+    # timetables. Full Renfe archives contain the wider Catalan station set.
+    if by_line['R4']>0 and {'78710','78805'}<=set(stations) and len(all_stop_candidates)>=100:
+        pdf_ref=load_official_r4()
+        pdf_counts={}
+        for d in dates:
+            key=d.isoformat()
+            additions=supplement_official_r4(d,by_day[key],pdf_ref)
+            pdf_counts[key]=len(additions)
+            by_day[key].extend(additions)
+        pdf_r4_meta=official_r4_metadata(pdf_ref,pdf_counts)
+        print('R4 official PDF added',sum(pdf_counts.values()),
+              'schedule-only services (GTFS always retained).',flush=True)
+    
     out=Path(output);out.mkdir(parents=True,exist_ok=True)
     for existing in out.glob('20??-??-??.json'):existing.unlink()
     for d in dates:
@@ -511,13 +530,15 @@ def build(cer,md,output,days,base=None):
     catalog={
        'schema':2,'batch_id':batch_id,'generated_at':datetime.now(TZ).isoformat(),
        'coverage_start':base.isoformat(),'coverage_end':dates[-1].isoformat(),
-       'source':'Renfe Data GTFS oficial (Cercanías; MD solo con línea Rodalies explícita)',
+       'source':'Renfe Data GTFS + PDF oficial Rodalies R4 (solo horarios programados, no circulación)',
        'station_names':'ADIF/BOE exact code > GTFS stop ID > isolated reference placeholder; no inferred timetable',
        'source_urls':{'cer':CERCANIAS,'md':MEDIA_DISTANCIA},'license':'CC BY 4.0',
        'official_reference':audit,'source_quality':source_quality,
        'network_reference':reference_inventory,
+       'official_r4_pdf':pdf_r4_meta,
        'lines':[{'id':line,'name':LINE_NAMES.get(line,line),'present':by_line[line]>0,
-                 'scheduled_trips_in_period':by_line[line]} for line in LINES],
+                 'scheduled_trips_in_period':by_line[line]+(sum(pdf_counts.values()) if line=='R4' and pdf_r4_meta else 0),
+                 'gtfs_trips_in_period':by_line[line]} for line in LINES],
        'stations':sorted([dict(r,lines=sorted(r['lines'],key=lambda x:LINES.index(x))) for r in stations.values()],key=lambda x:norm(x['name'])),
        'warnings':errors+([f'GTFS sin servicios identificables de las líneas: {", ".join(l for l in LINES if by_line[l]==0)}'] if any(by_line[l]==0 for l in LINES) else [])+audit['warnings']
     }
