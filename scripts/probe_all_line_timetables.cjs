@@ -10,7 +10,14 @@ const probes=[
  ['RT1','71500','71400'],['RT2','71500','65411'],['RL3','78400','78500'],
  ['RL4','78400','78700'],['R11','71801','79300'],['R13','71801','78400'],
  ['R14','71801','78400'],['R15','71801','71209'],['R16','71801','65400'],
- ['R17','71801','65411']
+ ['R17','71801','65411'],
+ // Alternative corridors for lines with no suitable schedules in the first sample.
+ ['R3','77109','77309'],['R3','71801','77006'],
+ ['R7','78800','72503'],['R7','78706','72503'],
+ ['RG1','79300','79315'],['RG1','79200','79300'],
+ ['RL4','78400','78500'],['RL4','78500','78600'],
+ ['R13','71600','76004'],['R13','76004','78400'],
+ ['R14','71500','71400'],['R14','71400','78400']
 ];
 const date='2026-11-12';
 async function probe([line,from,to]){
@@ -47,5 +54,6 @@ async function probe([line,from,to]){
   for(const x of batch)console.log(JSON.stringify(x));
  }
  console.log('TOTALS',JSON.stringify({lines_checked:out.length,valid_corridors:out.filter(x=>x.valid_for_requested_line>0).length,
-  zero_or_error:out.filter(x=>!(x.valid_for_requested_line>0)).map(x=>x.line)}));
+  lines_with_any_valid_corridor:[...new Set(out.filter(x=>x.valid_for_requested_line>0).map(x=>x.line))].sort(),
+  lines_without_valid_corridor:[...new Set(probes.map(x=>x[0]))].filter(l=>!out.some(x=>x.line===l&&x.valid_for_requested_line>0))}));
 })().catch(e=>{console.error(e);process.exitCode=1});
