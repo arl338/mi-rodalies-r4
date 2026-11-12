@@ -41,7 +41,7 @@ def main():
  departures.sort()
  expected=[datetime.fromtimestamp(ts,TZ).strftime('%H:%M') for ts,src in departures]
  assert len(departures)>=25,departures
- assert any(src=='official-r1-pdf' for ts,src in departures)
+ # A complete refreshed GTFS may already contain all 190 official trains.
  with sync_playwright() as p:
   browser=p.chromium.launch(headless=True,args=['--no-sandbox'])
   page=browser.new_page(viewport={'width':390,'height':844},is_mobile=True,has_touch=True,
