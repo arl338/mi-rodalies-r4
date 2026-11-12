@@ -526,8 +526,7 @@ def build(cer,md,output,days,base=None):
     # Compare Generalitat checkpoints against GTFS services, never against
     # the expanded static inventory (which may have no train times).
     audit=validate_official_reference(reference,[dict(st,lines=list(st['schedule_lines'])) for st in stations.values()],
-                                     [{'id':line,'present':by_line[line]>0,'scheduled_trips_in_period':by_line[line]+(sum(pdf_counts.values()) if line=='R4' and pdf_r4_meta else 0),
-                 'gtfs_trips_in_period':by_line[line]} for line in LINES])
+                                     [{'id':line,'present':by_line[line]>0,'scheduled_trips_in_period':by_line[line]} for line in LINES])
     catalog={
        'schema':2,'batch_id':batch_id,'generated_at':datetime.now(TZ).isoformat(),
        'coverage_start':base.isoformat(),'coverage_end':dates[-1].isoformat(),
@@ -538,7 +537,8 @@ def build(cer,md,output,days,base=None):
        'network_reference':reference_inventory,
        'official_r4_pdf':pdf_r4_meta,
        'lines':[{'id':line,'name':LINE_NAMES.get(line,line),'present':by_line[line]>0,
-                 'scheduled_trips_in_period':by_line[line]} for line in LINES],
+                 'scheduled_trips_in_period':by_line[line]+(sum(pdf_counts.values()) if line=='R4' and pdf_r4_meta else 0),
+                 'gtfs_trips_in_period':by_line[line]} for line in LINES],
        'stations':sorted([dict(r,lines=sorted(r['lines'],key=lambda x:LINES.index(x))) for r in stations.values()],key=lambda x:norm(x['name'])),
        'warnings':errors+([f'GTFS sin servicios identificables de las líneas: {", ".join(l for l in LINES if by_line[l]==0)}'] if any(by_line[l]==0 for l in LINES) else [])+audit['warnings']
     }
