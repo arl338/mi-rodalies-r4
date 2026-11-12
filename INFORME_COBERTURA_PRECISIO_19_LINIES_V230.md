@@ -19,7 +19,7 @@ Totes les respostes van ser HTTP 200 i es van processar segons les regles estric
 | R1 | Sí | Barcelona-Plaça Catalunya → Arenys de Mar | 43 |
 | R2 | Sí | Barcelona-Sants → Granollers Centre | 13 |
 | R2 Nord | No | Barcelona-Sants → Granollers Centre | 28 |
-| R2 Sud | No | Barcelona-Sants → Castelldefels | 42 |
+| R2 Sud | No | Barcelona-Sants → Vilanova i la Geltrú | 42 |
 | R3 | Sí | Vic → Puigcerdà | 13 |
 | R4 | Sí + PDF oficial (un sentit) | Terrassa Est → Barcelona-Plaça Catalunya | 46 |
 | R7 | Sí | Montcada-Bifurcació → Cerdanyola Universitat | 22 |
