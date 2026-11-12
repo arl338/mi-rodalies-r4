@@ -64,7 +64,8 @@ function normalizeBoard(obj,source,now,requestedStation=''){const overallAge=sou
   const scoped=!!requestedStation&&station===String(requestedStation);
   out.push({source,number:num,trip,line:scopedLine(r.line,nucleus,scoped)||scopedLine(r.product,nucleus,scoped)||scopedLine(r.route,nucleus,scoped),planned,estimated,stale:truth(r.stale)||truth(obj?.stale),
    platform:String(r.platform??r.track??r.via??''),cancelled:truth(r.cancelled)||/cancel|suprim|anula|supprim|suppress|suspend/i.test(state),
-   age,station,raw:r});
+   age,station,destinationCode:String(r.destinationCode??r.destination_code??''),
+   destinationName:String(r.destinationName??r.destination??r.headsign??''),raw:r});
  }return out;
 }
 function normalizePositions(obj,source,now){const out=[],overallAge=sourceAge(obj,now);
@@ -214,7 +215,7 @@ function normalizeTrenaliaTimetable(payload,from,to,day,requestedLine){
  * Reject collisions of multiple distinct train numbers/trips for one leg.
  */
 function anonymousSchedule(t){return t.src==='trenalia-schedule-only'||t.src==='official-r4-pdf';}
-function correlateTimetableBoards(journeys,boards,knownServices=[]){
+function correlateTimetableBoards(journeys,boards,knownServices=[],stationNames=new Map()){
  const legs=journeys.flatMap(j=>j.legs).filter(l=>anonymousSchedule(l.t));
  if(!legs.length)return boards;
  const candidates=new Map();
@@ -235,8 +236,21 @@ function correlateTimetableBoards(journeys,boards,knownServices=[]){
    return !!(n||trip);
   });
   if(matchesIdentifiedService)continue;
-  const applicable=legs.filter(l=>l.from===row.station&&l.t.l===row.line&&
-   Math.abs(l.depart-row.planned)<=60);
+  const applicable=legs.filter(l=>{
+   if(l.from!==row.station||l.t.l!==row.line||Math.abs(l.depart-row.planned)>60)return false;
+   if(l.t.src!=='official-r4-pdf')return true;
+   // PDF R4 has no commercial train identity. A one-minute coincidence
+   // between the two directions is not evidence that it is the same train.
+   // Require the board's *declared terminus* to lie at or beyond the
+   // requested destination on the exact published PDF service.
+   const rawTerminus=row.destinationCode;
+   const terminus=rawTerminus||stationNames.get(norm(row.destinationName));
+   if(!terminus)return false;
+   const originIndex=l.t.s.findIndex(s=>s[0]===l.from);
+   const destinationIndex=l.t.s.findIndex((s,i)=>i>originIndex&&s[0]===l.to);
+   const terminusIndex=l.t.s.findIndex((s,i)=>i>=destinationIndex&&s[0]===terminus);
+   return originIndex>=0&&destinationIndex>originIndex&&terminusIndex>=destinationIndex;
+  });
   if(applicable.length!==1)continue;
   const leg=applicable[0], key=leg.t.id+'|'+leg.from+'|'+leg.depart;
   if(!candidates.has(key))candidates.set(key,[]);
