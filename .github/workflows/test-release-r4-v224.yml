@@ -44,7 +44,7 @@ jobs:
           html=Path('index.html').read_text()
           sw=Path('sw.js').read_text()
           version=re.search(r'class="version"[^>]*>([^<]+)',html)
-          assets=re.findall(r'(?:styles\\.css|engine\\.js|app\\.js)\\?v=(\\d+)',html)
+          assets=re.findall(r'(?:styles\.css|engine\.js|app\.js)\?v=(\d+)',html)
           assert version and len(assets)==3 and len(set(assets))==1
           assert 'mi-rodalies-v'+version.group(1)+'-' in sw
           assert all(name+'?v='+assets[0] in sw for name in ('styles.css','engine.js','app.js'))
