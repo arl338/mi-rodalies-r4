@@ -271,13 +271,13 @@ function renderResultList(){const root=$('results');root.replaceChildren();for(c
  const officialRL3=j.legs.some(l=>l.t.src==='official-rl3-pdf');
  const officialExtra=j.legs.some(l=>l.t.src==='official-supplement-pdf');
  const officialRegional=j.legs.some(l=>l.t.src==='official-regional-pdf');
- let notes=[officialRegional?'Origen: cuadro oficial de Rodalies R11/R15/R16. Solo los trenes y paradas impresos que han podido verificarse; sin confirmación de circulación real ni cobertura completa.':
+ let notes=[officialRegional?'Origen: cuadro oficial de Rodalies regionales. Únicamente horarios y paradas verificadas; los trayectos parciales no incluyen transbordos a autobús ni suponen circulación confirmada.':
    officialExtra?'Origen: cuadro oficial Rodalies 2026 con horas impresas por parada. Horario programado; no confirma circulación, incidencias ni festivos especiales.':
    officialRL3?'Origen: cuadro horario oficial RL3/RL4 de Rodalies (06/07/2026); tiempos impresos por estación, sin confirmar circulación real.':
    officialR1?'Origen: cuadro horario oficial R1 (PDF de Rodalies), 27 estaciones de L’Hospitalet a Maçanet. Solo horario programado sin ETA verificable.':
    officialPdf?'Origen: cuadro horario oficial R4 (PDF de Rodalies). Solo horario programado hasta que una fuente confirme una estimación para este servicio.':
    alternative?'Origen: Trenalia (horarios Renfe). Solo horario orientativo, sin número de tren ni horas de paradas intermedias confirmadas.':'Origen: Renfe GTFS oficial'];
- for(const l of j.legs){if(l.proof.length)notes.push(l.proof.join('; '));if(l.platform)notes.push('Vía publicada: '+l.platform);}
+ for(const l of j.legs){if(l.t.scope)notes.push('Ámbito documentado: '+l.t.scope);if(l.proof.length)notes.push(l.proof.join('; '));if(l.platform)notes.push('Vía publicada: '+l.platform);}
  if(j.kind==='transfer')notes.push(j.connectionRisk?'ATENCIÓN: conexión en riesgo por retraso observado del primer tren; llegada no estimada':'Conexión teórica con margen programado; llegada y enlace no confirmados');
  if(catalog&&Date.now()-Date.parse(catalog.generated_at||'')>48*3600000)notes.push('Catálogo GTFS antiguo: comprobar el horario vigente en Renfe');
  // Dynamic nodes instead of innerHTML from external providers (XSS-safe).
