@@ -2,7 +2,7 @@
   "schema": 1,
   "source": "https://transportam.cat/es/stops/network/rodalies",
   "official_crosscheck": "https://rodalies.gencat.cat/es/horaris/tots-els-horaris/",
-  "checked_on": "2026-11-11",
+  "checked_on": "2026-11-12",
   "status": "Referencia de estaciones y adscripción a líneas; fuente secundaria, no equivale a horarios o paradas comerciales garantizadas",
   "stations": [
     {
@@ -30,7 +30,8 @@
         "R14",
         "R15",
         "R16",
-        "R17"
+        "R17",
+        "RT2"
       ]
     },
     {
@@ -91,21 +92,21 @@
       "name": "Barcelona-El Clot",
       "lines": [
         "R1",
+        "R11",
         "R2",
         "R2N",
-        "R11",
         "RG1"
       ]
     },
     {
       "name": "Barcelona-Estació de França",
       "lines": [
-        "R2S",
         "R13",
         "R14",
         "R15",
         "R16",
-        "R17"
+        "R17",
+        "R2S"
       ]
     },
     {
@@ -126,15 +127,15 @@
     {
       "name": "Barcelona-Passeig de Gràcia",
       "lines": [
-        "R2",
-        "R2N",
-        "R2S",
         "R11",
         "R13",
         "R14",
         "R15",
         "R16",
-        "R17"
+        "R17",
+        "R2",
+        "R2N",
+        "R2S"
       ]
     },
     {
@@ -149,26 +150,26 @@
     {
       "name": "Barcelona-Sant Andreu",
       "lines": [
+        "R11",
         "R2",
-        "R2N",
-        "R11"
+        "R2N"
       ]
     },
     {
       "name": "Barcelona-Sants",
       "lines": [
         "R1",
-        "R2",
-        "R2N",
-        "R2S",
-        "R3",
-        "R4",
         "R11",
         "R13",
         "R14",
         "R15",
         "R16",
         "R17",
+        "R2",
+        "R2N",
+        "R2S",
+        "R3",
+        "R4",
         "RG1"
       ]
     },
@@ -435,7 +436,8 @@
     {
       "name": "El Vendrell",
       "lines": [
-        "R4"
+        "R4",
+        "RT2"
       ]
     },
     {
@@ -513,10 +515,10 @@
     {
       "name": "Granollers Centre",
       "lines": [
+        "R11",
         "R2",
         "R2N",
-        "R8",
-        "R11"
+        "R8"
       ]
     },
     {
@@ -528,15 +530,15 @@
     {
       "name": "Gualba",
       "lines": [
-        "R2N",
-        "R11"
+        "R11",
+        "R2N"
       ]
     },
     {
       "name": "Hostalric",
       "lines": [
-        "R2N",
-        "R11"
+        "R11",
+        "R2N"
       ]
     },
     {
@@ -567,7 +569,8 @@
     {
       "name": "L'Arboç",
       "lines": [
-        "R4"
+        "R4",
+        "RT2"
       ]
     },
     {
@@ -715,8 +718,8 @@
       "name": "Maçanet-Massanes",
       "lines": [
         "R1",
-        "R2N",
         "R11",
+        "R2N",
         "RG1"
       ]
     },
@@ -964,8 +967,8 @@
     {
       "name": "Riells i Viabrea-Breda",
       "lines": [
-        "R2N",
-        "R11"
+        "R11",
+        "R2N"
       ]
     },
     {
@@ -1047,8 +1050,8 @@
     {
       "name": "Sant Celoni",
       "lines": [
-        "R2N",
-        "R11"
+        "R11",
+        "R2N"
       ]
     },
     {
@@ -1131,13 +1134,14 @@
     {
       "name": "Sant Vicenç de Calders",
       "lines": [
-        "R2S",
-        "R4",
         "R13",
         "R14",
         "R15",
         "R16",
-        "R17"
+        "R17",
+        "R2S",
+        "R4",
+        "RT2"
       ]
     },
     {
@@ -1241,7 +1245,8 @@
         "R14",
         "R15",
         "R16",
-        "R17"
+        "R17",
+        "RT2"
       ]
     },
     {
@@ -1343,10 +1348,10 @@
     {
       "name": "Vilanova i la Geltrú",
       "lines": [
-        "R2S",
         "R15",
         "R16",
-        "R17"
+        "R17",
+        "R2S"
       ]
     },
     {
