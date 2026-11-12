@@ -1,0 +1,18 @@
+name: R4 direction and ETA source diagnostics
+on:
+  push:
+    branches: [audit/r4-eta-direction-confidence-20261112]
+    paths: ['scripts/probe_r4_direction_schema.cjs','.github/workflows/probe-r4-direction.yml']
+  workflow_dispatch:
+permissions: {contents: read}
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - run: |
+          node --check scripts/probe_r4_direction_schema.cjs
+          node scripts/probe_r4_direction_schema.cjs
