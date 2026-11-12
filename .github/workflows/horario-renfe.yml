@@ -92,24 +92,25 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add -A data/v2/
-          if ! git diff --cached --quiet; then
+          # Generated files stay in the working tree while main can advance.
+          # Never rebase a generated-catalog commit (JSON files will conflict
+          # even when both rebuilds are valid). Reset only the index/HEAD to
+          # newest main, then stage data/v2/ exclusively and push atomically.
+          for attempt in 1 2 3 4; do
+            git fetch origin main
+            git reset --mixed origin/main
+            git add -A data/v2/
+            if git diff --cached --quiet; then
+              echo 'Catálogo ya actualizado: no hay cambios'
+              exit 0
+            fi
             git commit -m 'Actualizar catálogo Rodalies y contraste Generalitat V2 [skip ci]'
-            # A UI release can advance main while this GTFS job is still
-            # processing. Replay only the generated data commit on top of
-            # latest main; never force-push or overwrite source updates.
-            for attempt in 1 2 3; do
-              git fetch origin main
-              git rebase origin/main
-              if git push origin HEAD:main; then
-                echo "Catálogo publicado sobre el último main"
-                exit 0
-              fi
-              echo "Main ha avanzado durante el push; reintentando..."
-              sleep 2
-            done
-            echo 'No se ha podido publicar el catálogo sin sobrescribir cambios' >&2
-            exit 1
-          else
-            echo 'No han cambiado los datos'
-          fi
+            if git push origin HEAD:main; then
+              echo 'Catálogo publicado sobre el último main, sin cambios de código'
+              exit 0
+            fi
+            echo 'Main ha avanzado durante el push; reintentando sin rebase...'
+            sleep 2
+          done
+          echo 'No se ha podido publicar el catálogo sin sobrescribir cambios' >&2
+          exit 1
