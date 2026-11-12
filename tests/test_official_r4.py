@@ -30,7 +30,8 @@ class OfficialR4Tests(unittest.TestCase):
     def test_missing_departures_added_without_removing_gtfs(self):
         original=[t for t in self.gtfs['trains'] if t.get('src')!='official-r4-pdf']
         additions=supplement_day(self.day,original,self.reference)
-        self.assertTrue(additions)
+        # Renfe may start publishing the previously missing 06:48 itself.
+        # A complete GTFS correctly needs zero PDF additions.
         self.assertTrue(all(x['src']=='official-r4-pdf' and x['n']=='' for x in additions))
         combined=original+additions
         def times(trains):
@@ -47,8 +48,10 @@ class OfficialR4Tests(unittest.TestCase):
         after=times(combined)
         self.assertEqual(after.intersection(before),before)
         self.assertTrue({'06:03','06:18','06:33','06:48','06:55','07:03'}<=after)
-        self.assertNotIn('06:48',before)
-        self.assertTrue({'06:18','06:48','06:55'}<=(after-before))
+        # The 06:18 / 06:48 / 06:55 services must exist, regardless of
+        # whether their source is fresh GTFS or the verified R4 PDF.
+        for departure in ('06:18','06:48','06:55'):
+            self.assertIn(departure,after)
         self.assertTrue(all(t['id'] not in {s['id'] for s in original} for t in additions))
 
     def test_original_gtfs_remains_principal(self):
