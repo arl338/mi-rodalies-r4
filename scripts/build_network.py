@@ -489,7 +489,9 @@ def build(cer,md,output,days,base=None):
     # from the official Rodalies R4 PDF (verified against full-route GTFS).
     # Keep original GTFS records and their identities unchanged.
     pdf_r4_meta=None
-    if by_line['R4']>0 and {'78710','78805'}<=set(stations):
+    # Synthetic/minimal fixture feeds must not be enriched with production
+    # timetables. Full Renfe archives contain the wider Catalan station set.
+    if by_line['R4']>0 and {'78710','78805'}<=set(stations) and len(all_stop_candidates)>=100:
         pdf_ref=load_official_r4()
         pdf_counts={}
         for d in dates:
