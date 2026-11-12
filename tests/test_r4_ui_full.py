@@ -2,7 +2,6 @@
 """Browser regression using real, regenerated R4 service data and synthetic API responses."""
 import json
 from pathlib import Path
-from playwright.sync_api import sync_playwright
 ROOT=Path(__file__).resolve().parents[1]
 DATA=Path('/tmp/rodalies-r4-check')
 DAY='2026-11-12'
@@ -27,6 +26,7 @@ def route_api(route):
  else:data={}
  return route.fulfill(status=200,content_type='application/json',headers={'Access-Control-Allow-Origin':'*'},body=json.dumps(data))
 def main():
+ from playwright.sync_api import sync_playwright
  assert (DATA/(DAY+'.json')).is_file()
  with sync_playwright() as p:
   browser=p.chromium.launch(headless=True,args=['--no-sandbox'])
