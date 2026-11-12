@@ -1,0 +1,16 @@
+name: Inspección de cuadrícula PDF R4 (no publica)
+on:
+  push:
+    branches: [fix/r4-missing-stops-official-pdf-20261112]
+    paths: ['scripts/audit_r4_pdf_layout.py','.github/workflows/audit-r4-official-pdf.yml']
+permissions: {contents: read}
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with: {python-version: '3.12'}
+      - run: python -m pip install 'pymupdf>=1.24,<1.28'
+      - run: python scripts/audit_r4_pdf_layout.py
