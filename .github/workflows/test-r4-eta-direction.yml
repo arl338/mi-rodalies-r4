@@ -6,6 +6,7 @@ on:
       - 'engine.js'
       - 'app.js'
       - 'tests/test_r4_direction_collision.cjs'
+      - 'tests/test_official_r4.py'
       - '.github/workflows/test-r4-eta-direction.yml'
   workflow_dispatch:
 permissions: {contents: read}
