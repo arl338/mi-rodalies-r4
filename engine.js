@@ -215,7 +215,7 @@ function normalizeTrenaliaTimetable(payload,from,to,day,requestedLine){
  * Requires a clock-fresh, non-stale board and its own scheduled timestamp.
  * Reject collisions of multiple distinct train numbers/trips for one leg.
  */
-function anonymousSchedule(t){return t.src==='trenalia-schedule-only'||t.src==='official-r4-pdf'||t.src==='official-r1-pdf'||t.src==='official-rl3-pdf'||t.src==='official-supplement-pdf';}
+function anonymousSchedule(t){return t.src==='trenalia-schedule-only'||t.src==='official-r4-pdf'||t.src==='official-r1-pdf'||t.src==='official-rl3-pdf'||t.src==='official-supplement-pdf'||t.src==='official-regional-pdf';}
 /** Board terminus is a verified ADIF stop, not free text interpreted as a direction. */
 function boardTerminus(row,stationNames){
  const code=String(row.destinationCode||'').trim();
@@ -231,7 +231,7 @@ function directionVerified(leg,row,knownServices,stationNames){
  const terminus=boardTerminus(row,stationNames);
  if(!terminus)return false;
  // The original official R4 PDF lists all observed intermediate stops.
- if(leg.t.src==='official-r4-pdf'||leg.t.src==='official-r1-pdf'||leg.t.src==='official-rl3-pdf'||leg.t.src==='official-supplement-pdf'){
+ if(leg.t.src==='official-r4-pdf'||leg.t.src==='official-r1-pdf'||leg.t.src==='official-rl3-pdf'||leg.t.src==='official-supplement-pdf'||leg.t.src==='official-regional-pdf'){
   const o=leg.t.s.findIndex(s=>s[0]===leg.from);
   const d=leg.t.s.findIndex((s,i)=>i>o&&s[0]===leg.to);
   return o>=0&&d>o&&leg.t.s.findIndex((s,i)=>i>=d&&s[0]===terminus)>=d;
