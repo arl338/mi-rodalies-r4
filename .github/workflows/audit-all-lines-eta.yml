@@ -29,6 +29,7 @@ jobs:
           node tests/test_response_cache_age.cjs
           node tests/test_r4_direction_collision.cjs
           node tests/test_all_lines_direction.cjs
+          node tests/test_all_lines_fallback.cjs
           python -m unittest discover -s tests -p 'test_[!u]*.py' -q
       - name: Integrity of all 19 published lines
         run: |
