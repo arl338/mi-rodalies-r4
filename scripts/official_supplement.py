@@ -11,7 +11,7 @@ from zoneinfo import ZoneInfo
 
 REFERENCE = Path(__file__).resolve().parents[1] / 'data/reference/additional_official_timetables.json'
 TZ = ZoneInfo('Europe/Madrid')
-LINES = ('RT1', 'RT2', 'RL4')
+LINES = ('RT1', 'RT2', 'RL4', 'RG1', 'R17')
 
 def load_reference(path=REFERENCE):
     d = json.loads(Path(path).read_text(encoding='utf8'))
@@ -37,7 +37,7 @@ def load_reference(path=REFERENCE):
         if any(stops[i][1]>=stops[i+1][1] for i in range(len(stops)-1)):
             raise ValueError('Chronologically inconsistent printed official schedule: '+n)
         counts[line] += 1
-    if counts != {'RT1':10,'RT2':16,'RL4':16}:
+    if counts != {'RT1':10,'RT2':16,'RL4':16,'RG1':17,'R17':6}:
         raise ValueError('Official timetable row count changed: '+str(counts))
     if not d.get('excluded'):
         raise ValueError('Expected explicit unresolved source anomaly record')
@@ -61,7 +61,7 @@ def materialize_day(day, reference):
 
 def duplicate(candidate, existing):
     if candidate['l']!=existing.get('l'):return False
-    if candidate['n'] and existing.get('n') and str(int(candidate['n']))!=str(int(existing['n'])):
+    if candidate['n'] and str(existing.get('n') or '').isdigit() and str(int(candidate['n']))!=str(int(existing['n'])):
         return False
     published = {s[0]:s[2] for s in candidate['s']}
     return sum(code in published and abs(published[code]-t)<=60
