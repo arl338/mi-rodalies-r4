@@ -16,7 +16,7 @@ assert.equal(trains.length,2);
 const journeys=E.direct(trains,from,to,dep-60,dep+900);
 assert.equal(journeys.length,2);
 const raw=(number,planned,delay=180,opts={})=>({
- trainCode:number,stationCode:from,line:'R2N',plannedTime:planned*1000,
+ trainCode:number,stationCode:from,destinationCode:to,line:'R2N',plannedTime:planned*1000,
  estimatedTime:(planned+delay)*1000,updatedAt:now*1000,
  timestamp:now*1000,...opts
 });
@@ -30,6 +30,7 @@ assert.equal(enriched.estimated,dep+180,'Reliable unique station+line+scheduled 
 assert.equal(enriched.state,'scheduled','ETA does not establish a real position');
 assert.match(enriched.legs[0].proof.join(' '),/identidad del tren no confirmada/);
 assert.equal(E.enrichJourney(journeys[1],result,[],[],now).estimated,null,'No bleed to other train');
+assert.equal(E.enrichJourney(journeys[0],E.correlateTimetableBoards(journeys,E.normalizeBoard({updatedAt:now*1000,departures:[raw('12345',dep,180,{destinationCode:''})]},'Radar',now,from)),[],[],now).estimated,null,'Missing terminus cannot authorize anonymous R2N ETA');
 function matched(objects,js=journeys,nowOverride=now){
  const b=E.normalizeBoard({updatedAt:nowOverride*1000,departures:objects},'Radar',nowOverride,from);
  return E.correlateTimetableBoards(js,b);
