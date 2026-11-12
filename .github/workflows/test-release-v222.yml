@@ -1,4 +1,4 @@
-name: 'Validar V2.2.2 - ETA real, caches y PWA'
+name: 'Validar contracte ETA i PWA sense versió fixa'
 on:
   push:
     branches: [release/v2-2-2-eta-integrity]
@@ -37,9 +37,13 @@ jobs:
           from pathlib import Path
           html=Path('index.html').read_text()
           sw=Path('sw.js').read_text()
-          assert '2.2.2' in html and '?v=222' in html
-          assert 'mi-rodalies-v2.2.2' in sw and '?v=222' in sw
-          print('OK: version 2.2.2 y cache PWA coherentes')
+          import re
+          version=re.search(r'class="version"[^>]*>([^<]+)',html)
+          assets=re.findall(r'(?:styles\.css|engine\.js|app\.js)\?v=(\d+)',html)
+          assert version and len(assets)==3 and len(set(assets))==1
+          assert 'mi-rodalies-v'+version.group(1)+'-' in sw
+          assert all(name+'?v='+assets[0] in sw for name in ('styles.css','engine.js','app.js'))
+          print('OK: versión y caché PWA coherentes')
           PY
   live:
     runs-on: ubuntu-latest
