@@ -1,0 +1,93 @@
+name: 'Release V2.2.3: R4 servicios íntegros y ETA conservadora'
+on:
+  push:
+    branches: [release/v2-2-3-r4-complete-timetable]
+  pull_request:
+    paths:
+      - 'scripts/build_network.py'
+      - 'scripts/official_r4.py'
+      - 'data/reference/r4_official_timetable.json'
+      - 'engine.js'
+      - 'app.js'
+      - 'tests/test_official_r4.py'
+      - 'tests/test_r4_direction_collision.cjs'
+      - 'tests/test_r4_ui_full.py'
+      - '.github/workflows/test-release-r4-v223.yml'
+permissions: {contents: read}
+jobs:
+  complete:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with: {python-version: '3.12'}
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - name: Verificar código, fuente PDF, regresiones de motor y sentido
+        run: |
+          python -m py_compile scripts/*.py
+          node --check app.js
+          node --check engine.js
+          node --check sw.js
+          python -m unittest discover -s tests -p 'test_[!u]*.py' -q
+          node tests/test_engine.cjs
+          node tests/test_feed_schemas.cjs
+          node tests/test_precision.cjs
+          node tests/test_trenalia_fallback.cjs
+          node tests/test_timetable_live_correlation.cjs
+          node tests/test_position_delay_fallback.cjs
+          node tests/test_merge_alternative_journeys.cjs
+          node tests/test_schedule_vs_eta.cjs
+          node tests/test_response_cache_age.cjs
+          node tests/test_r4_direction_collision.cjs
+      - name: Auditar GTFS auténtico y reconstruir R4 sin borrar servicios
+        run: |
+          mkdir -p /tmp/rodalies-r4-check
+          python - <<'PY'
+          import sys
+          from pathlib import Path
+          sys.path.insert(0,'scripts')
+          from build_network import CERCANIAS,download
+          Path('/tmp/r4-original.zip').write_bytes(download(CERCANIAS))
+          PY
+          python scripts/audit_gtfs.py --zip /tmp/r4-original.zip --days 2 --out /tmp/rodalies-r4-check/source_audit.json
+          python scripts/build_network.py --cer-zip /tmp/r4-original.zip --skip-md --date 2026-11-12 --days 2 --out /tmp/rodalies-r4-check
+          python scripts/validate_generated.py --out /tmp/rodalies-r4-check --days 2
+      - name: Comprobar las seis salidas exactas y su procedencia
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from datetime import datetime
+          from zoneinfo import ZoneInfo
+          d=json.loads(Path('/tmp/rodalies-r4-check/2026-11-12.json').read_text())
+          c=json.loads(Path('/tmp/rodalies-r4-check/catalog.json').read_text())
+          assert c['official_r4_pdf']['source'].endswith('/R4.pdf')
+          seen={}
+          for t in d['trains']:
+            if t['l']!='R4':continue
+            a=next((i for i,s in enumerate(t['s']) if s[0]=='78710'),-1)
+            if a<0 or not any(s[0]=='78805' for s in t['s'][a+1:]):continue
+            clock=datetime.fromtimestamp(t['s'][a][2],ZoneInfo('Europe/Madrid')).strftime('%H:%M')
+            if '06:00'<=clock<='07:10':seen.setdefault(clock,[]).append(t.get('src'))
+          expected={'06:03','06:18','06:33','06:48','06:55','07:03'}
+          assert set(seen)==expected,seen
+          assert all(len(v)==1 for v in seen.values()),seen
+          assert all(seen[t]==['official-r4-pdf'] for t in ['06:18','06:48','06:55']),seen
+          print('OK schedule complete:',seen)
+          PY
+      - name: Comprobar formulario móvil en Chromium con la salida 06:48
+        run: |
+          python -m pip install 'playwright>=1.50,<2'
+          python -m playwright install --with-deps chromium
+          python tests/test_r4_ui_full.py
+      - name: Verificar versión y activos
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          html=Path('index.html').read_text()
+          sw=Path('sw.js').read_text()
+          assert '2.2.3' in html and '?v=223' in html
+          assert 'mi-rodalies-v2.2.3' in sw and '?v=223' in sw
+          PY
