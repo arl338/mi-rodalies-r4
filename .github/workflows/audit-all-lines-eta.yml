@@ -1,0 +1,60 @@
+name: Auditoria ETA i cobertura de les 19 linies
+on:
+  push:
+    branches: [audit/all-lines-eta-direction-and-coverage-20261112]
+  workflow_dispatch:
+permissions: {contents: read}
+jobs:
+  precision:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with: {python-version: '3.12'}
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - name: Engine and schema checks
+        run: |
+          node --check engine.js
+          node --check app.js
+          node tests/test_engine.cjs
+          node tests/test_feed_schemas.cjs
+          node tests/test_precision.cjs
+          node tests/test_trenalia_fallback.cjs
+          node tests/test_timetable_live_correlation.cjs
+          node tests/test_position_delay_fallback.cjs
+          node tests/test_merge_alternative_journeys.cjs
+          node tests/test_schedule_vs_eta.cjs
+          node tests/test_response_cache_age.cjs
+          node tests/test_r4_direction_collision.cjs
+          node tests/test_all_lines_direction.cjs
+          python -m unittest discover -s tests -p 'test_[!u]*.py' -q
+      - name: Integrity of all 19 published lines
+        run: |
+          python scripts/validate_generated.py --out data/v2 --days 14
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          c=json.loads(Path('data/v2/catalog.json').read_text())
+          assert len(c['lines'])==19
+          print('LINE_COVERAGE',json.dumps([{'line':x['id'],'gtfs':bool(x['gtfs_trips_in_period']),'trips':x['scheduled_trips_in_period']} for x in c['lines']]))
+          PY
+      - name: Real-world provider contracts
+        run: |
+          node tests/test_trenalia_live.cjs
+          node tests/test_trenalia_alignment.cjs
+          node tests/test_live_anonymous_eta.cjs
+  browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 13
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with: {python-version: '3.12'}
+      - name: Install headless browser
+        run: |
+          python -m pip install 'playwright>=1.50,<2'
+          python -m playwright install --with-deps chromium
+      - name: Android 320 390 768 regression
+        run: python tests/test_ui_v221.py
