@@ -1,0 +1,66 @@
+name: Validar recuperación de trenes R4 omitidos (sin despliegue)
+on:
+  push:
+    branches: [fix/r4-missing-stops-official-pdf-20261112]
+  workflow_dispatch:
+permissions: {contents: read}
+jobs:
+  r4-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with: {python-version: '3.12'}
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - name: Sintaxis y regresiones de horarios / sentido del tren
+        run: |
+          python -m py_compile scripts/*.py
+          node --check app.js
+          node --check engine.js
+          python -m unittest discover -s tests -p 'test_[!u]*.py' -q
+          node tests/test_engine.cjs
+          node tests/test_feed_schemas.cjs
+          node tests/test_precision.cjs
+          node tests/test_trenalia_fallback.cjs
+          node tests/test_timetable_live_correlation.cjs
+          node tests/test_position_delay_fallback.cjs
+          node tests/test_merge_alternative_journeys.cjs
+          node tests/test_schedule_vs_eta.cjs
+          node tests/test_response_cache_age.cjs
+          node tests/test_r4_direction_collision.cjs
+      - name: Recompilar dos días desde GTFS verdadero con suplementos del PDF
+        run: |
+          python scripts/build_network.py --skip-md --date 2026-11-12 --days 2 --out /tmp/rodalies-r4-check
+          python scripts/validate_generated.py --out /tmp/rodalies-r4-check --days 2
+      - name: Comprobar exhaustivamente las 6 salidas 06:00–07:10 y ausencia de duplicados
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from datetime import datetime
+          from zoneinfo import ZoneInfo
+          d=json.loads(Path('/tmp/rodalies-r4-check/2026-11-12.json').read_text())
+          c=json.loads(Path('/tmp/rodalies-r4-check/catalog.json').read_text())
+          assert c['official_r4_pdf']['source'].endswith('/R4.pdf')
+          seen={}
+          for t in d['trains']:
+            if t['l']!='R4':continue
+            a=next((i for i,s in enumerate(t['s']) if s[0]=='78710'),-1)
+            if a<0 or not any(s[0]=='78805' for s in t['s'][a+1:]):continue
+            ts=t['s'][a][2]
+            clock=datetime.fromtimestamp(ts,ZoneInfo('Europe/Madrid')).strftime('%H:%M')
+            if '06:00'<=clock<='07:10':
+              seen.setdefault(clock,[]).append(t.get('src'))
+          assert all(k in seen for k in ['06:03','06:18','06:33','06:48','06:55','07:03']), seen
+          assert all(len(v)==1 for v in seen.values()),seen
+          assert seen['06:48']==['official-r4-pdf'], seen
+          assert any('cer' in v for v in seen.values()), seen
+          print('SIX VERIFIED SERVICES',seen)
+          PY
+      - name: Contratos vivos conservadores
+        run: |
+          node tests/test_trenalia_live.cjs
+          node tests/test_trenalia_alignment.cjs
+          node tests/test_live_anonymous_eta.cjs
