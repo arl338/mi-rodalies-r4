@@ -181,6 +181,7 @@ function sourceJobs(station){return [
  ];}
 function renderSourceSummary(res,jobs,mode,cat,timetable){const content=$('source-details');content.replaceChildren();
  const catalogRow=sourceRow('Horario Renfe GTFS','Cercanías / MD con línea Rodalies explícita',true,`${cat.stations.length} estaciones · ${cat.lines.filter(x=>x.present).length}/${cat.lines.length} líneas`);content.append(catalogRow);
+ if(cat.additional_official_pdf){for(const [line,count] of Object.entries(cat.additional_official_pdf.counts||{})){content.append(sourceRow('Horario oficial '+line+' (PDF)','Horas directamente observadas por estación; calendario teórico',true,String(count)+' servicios añadidos durante el período'));}}
  if(cat.official_rl3_pdf){content.append(sourceRow('Horarios oficiales RL3 (PDF)',
   'Nueve paradas por tren entre Cervera y Lleida; no confirma circulación',true,
   String(cat.official_rl3_pdf.count_by_day?.[madridDate()]??'')+' servicios teóricos para hoy'));}
@@ -264,7 +265,9 @@ function renderResultList(){const root=$('results');root.replaceChildren();for(c
  const officialPdf=j.legs.some(l=>l.t.src==='official-r4-pdf');
  const officialR1=j.legs.some(l=>l.t.src==='official-r1-pdf');
  const officialRL3=j.legs.some(l=>l.t.src==='official-rl3-pdf');
- let notes=[officialRL3?'Origen: cuadro horario oficial RL3/RL4 de Rodalies (06/07/2026); tiempos impresos por estación, sin confirmar circulación real.':
+ const officialExtra=j.legs.some(l=>l.t.src==='official-supplement-pdf');
+ let notes=[officialExtra?'Origen: cuadro oficial Rodalies 2026 con horas impresas por parada. Horario programado; no confirma circulación, incidencias ni festivos especiales.':
+   officialRL3?'Origen: cuadro horario oficial RL3/RL4 de Rodalies (06/07/2026); tiempos impresos por estación, sin confirmar circulación real.':
    officialR1?'Origen: cuadro horario oficial R1 (PDF de Rodalies), 27 estaciones de L’Hospitalet a Maçanet. Solo horario programado sin ETA verificable.':
    officialPdf?'Origen: cuadro horario oficial R4 (PDF de Rodalies). Solo horario programado hasta que una fuente confirme una estimación para este servicio.':
    alternative?'Origen: Trenalia (horarios Renfe). Solo horario orientativo, sin número de tren ni horas de paradas intermedias confirmadas.':'Origen: Renfe GTFS oficial'];
@@ -275,6 +278,7 @@ function renderResultList(){const root=$('results');root.replaceChildren();for(c
  proof.append(el('b','', 'Evidencias: '),document.createTextNode(notes.join(' · ')));if(alternative){const attribution=el('a','','Trenalia · datos de Renfe');attribution.href='https://trenalia.org/api';attribution.target='_blank';attribution.rel='noopener noreferrer';proof.append(document.createTextNode(' · '),attribution);}
  if(officialPdf){const ref=el('a','','Cuadro oficial R4');ref.href=catalog?.official_r4_pdf?.source||'https://rodalies.gencat.cat/web/.content/02_Horaris/horaris/R4.pdf';ref.target='_blank';ref.rel='noopener noreferrer';proof.append(document.createTextNode(' · '),ref);}
  if(officialRL3){const ref=el('a','','Cuadro oficial RL3/RL4');ref.href=catalog?.official_rl3_pdf?.source||'https://rodalies.gencat.cat/web/.content/02_Horaris/horaris/RL3RL4.pdf';ref.target='_blank';ref.rel='noopener noreferrer';proof.append(document.createTextNode(' · '),ref);}
+ if(officialExtra){for(const line of [...new Set(j.legs.filter(l=>l.t.src==='official-supplement-pdf').map(l=>l.t.l))]){const url=catalog?.additional_official_pdf?.sources?.[line];if(url){const ref=el('a','','Cuadro oficial '+line);ref.href=url;ref.target='_blank';ref.rel='noopener noreferrer';proof.append(document.createTextNode(' · '),ref);}}}
  if(officialR1){const ref=el('a','','Cuadro oficial R1');ref.href=catalog?.official_r1_pdf?.source||'https://rodalies.gencat.cat/web/.content/02_Horaris/horaris/R1.pdf';ref.target='_blank';ref.rel='noopener noreferrer';proof.append(document.createTextNode(' · '),ref);}
  panel.append(proof);root.append(panel);
  }
