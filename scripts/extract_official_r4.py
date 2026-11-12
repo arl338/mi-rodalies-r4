@@ -118,6 +118,7 @@ def inspect(raw:bytes,gtfs_day:Path):
         services,quality=parse_grid(page,ids,daytype,direction)
         all_services.extend(services)
         meta.append({'calendar':daytype,'direction':direction,**quality})
+    print('PRECHECK_QUALITY',json.dumps(meta,ensure_ascii=False),'all',len(all_services))
     if len(all_services)<100:raise ValueError('Too few timetable rows to be complete')
     snapshot=json.loads(gtfs_day.read_text(encoding='utf8'))
     from zoneinfo import ZoneInfo
