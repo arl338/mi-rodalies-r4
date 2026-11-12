@@ -4,9 +4,11 @@
   "sources": {
     "R11": "https://rodalies.gencat.cat/web/.content/02_Horaris/horaris/R11.pdf",
     "R16": "https://rodalies.gencat.cat/web/.content/02_Horaris/horaris/R16.pdf",
-    "R15": "https://rodalies.gencat.cat/web/.content/02_Horaris/horaris/R15.pdf"
+    "R15": "https://rodalies.gencat.cat/web/.content/02_Horaris/horaris/R15.pdf",
+    "R13": "https://rodalies.gencat.cat/web/.content/02_Horaris/horaris/R13R14.pdf",
+    "R14": "https://rodalies.gencat.cat/web/.content/02_Horaris/horaris/R13R14.pdf"
   },
-  "notes": "Verified individual printed train/station cells, not a full timetable. R11 selects full-stop R trains in the outbound direction; R16 selects 8 directly labelled outbound trains. Dashes and non-running cells are excluded, never interpolated. Calendars use printed weekday/weekend for R11; R16 daily rows are subject to timetable footnotes and service notices. R15 includes only explicitly R15-labelled outbound train rows with directly printed calls; service calendar highlights and road replacement segments must be verified separately before asserting complete day-specific operation.",
+  "notes": "Verified individual printed train/station cells, not a full timetable. R11 selects full-stop R trains in the outbound direction; R16 selects 8 directly labelled outbound trains. Dashes and non-running cells are excluded, never interpolated. Calendars use printed weekday/weekend for R11; R16 daily rows are subject to timetable footnotes and service notices. R15 includes only explicitly R15-labelled outbound train rows with directly printed calls; service calendar highlights and road replacement segments must be verified separately before asserting complete day-specific operation. R13 15040/15042/15044/15046 are ONLY the Lleida-Pirineus to La Plana-Picamoixons train segments; the published service alteration requires a road replacement afterward. R14 15051 is explicitly weekday-only. This reference does not establish complete end-to-end railway itineraries.",
   "services": [
     {
       "line": "R11",
@@ -2703,6 +2705,262 @@
         [
           "71400",
           1413
+        ]
+      ]
+    },
+    {
+      "line": "R13",
+      "train_number": "15040",
+      "calendar": "daily",
+      "segment": "Lleida-Pirineus → La Plana-Picamoixons; train segment before replacement bus",
+      "stops": [
+        [
+          "78400",
+          336
+        ],
+        [
+          "73001",
+          345
+        ],
+        [
+          "73002",
+          351
+        ],
+        [
+          "73003",
+          356
+        ],
+        [
+          "73005",
+          368
+        ],
+        [
+          "73006",
+          375
+        ],
+        [
+          "73007",
+          380
+        ],
+        [
+          "73008",
+          387
+        ],
+        [
+          "73100",
+          402
+        ]
+      ]
+    },
+    {
+      "line": "R13",
+      "train_number": "15042",
+      "calendar": "daily",
+      "segment": "Lleida-Pirineus → La Plana-Picamoixons; train segment before replacement bus",
+      "stops": [
+        [
+          "78400",
+          488
+        ],
+        [
+          "73001",
+          497
+        ],
+        [
+          "73002",
+          503
+        ],
+        [
+          "73003",
+          508
+        ],
+        [
+          "73004",
+          512
+        ],
+        [
+          "73005",
+          521
+        ],
+        [
+          "73006",
+          528
+        ],
+        [
+          "73007",
+          533
+        ],
+        [
+          "73008",
+          540
+        ],
+        [
+          "73009",
+          546
+        ],
+        [
+          "73010",
+          549
+        ],
+        [
+          "73100",
+          554
+        ]
+      ]
+    },
+    {
+      "line": "R13",
+      "train_number": "15044",
+      "calendar": "daily",
+      "segment": "Lleida-Pirineus → La Plana-Picamoixons; train segment before replacement bus",
+      "stops": [
+        [
+          "78400",
+          942
+        ],
+        [
+          "73002",
+          954
+        ],
+        [
+          "73003",
+          959
+        ],
+        [
+          "73005",
+          971
+        ],
+        [
+          "73006",
+          978
+        ],
+        [
+          "73007",
+          983
+        ],
+        [
+          "73008",
+          990
+        ],
+        [
+          "73100",
+          1004
+        ]
+      ]
+    },
+    {
+      "line": "R13",
+      "train_number": "15046",
+      "calendar": "daily",
+      "segment": "Lleida-Pirineus → La Plana-Picamoixons; train segment before replacement bus",
+      "stops": [
+        [
+          "78400",
+          1092
+        ],
+        [
+          "73002",
+          1104
+        ],
+        [
+          "73003",
+          1109
+        ],
+        [
+          "73005",
+          1121
+        ],
+        [
+          "73006",
+          1128
+        ],
+        [
+          "73007",
+          1133
+        ],
+        [
+          "73008",
+          1140
+        ],
+        [
+          "73100",
+          1154
+        ]
+      ]
+    },
+    {
+      "line": "R14",
+      "train_number": "15051",
+      "calendar": "weekday",
+      "segment": "Tarragona → Lleida-Pirineus; direct published train stops",
+      "stops": [
+        [
+          "71500",
+          354
+        ],
+        [
+          "71401",
+          362
+        ],
+        [
+          "71400",
+          375
+        ],
+        [
+          "73102",
+          384
+        ],
+        [
+          "73101",
+          391
+        ],
+        [
+          "73100",
+          399
+        ],
+        [
+          "73010",
+          402
+        ],
+        [
+          "73009",
+          405
+        ],
+        [
+          "73008",
+          413
+        ],
+        [
+          "73007",
+          420
+        ],
+        [
+          "73006",
+          425
+        ],
+        [
+          "73005",
+          433
+        ],
+        [
+          "73004",
+          442
+        ],
+        [
+          "73003",
+          447
+        ],
+        [
+          "73002",
+          452
+        ],
+        [
+          "73001",
+          458
+        ],
+        [
+          "78400",
+          467
         ]
       ]
     }
