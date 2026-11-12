@@ -1,0 +1,85 @@
+name: 'Release V2.3.1 - R1 oficial, GTFS i Android'
+on:
+  push:
+    branches: [release/v2-3-1-r1-official-complete]
+    paths:
+      - 'scripts/build_network.py'
+      - 'scripts/official_r1.py'
+      - 'data/reference/r1_official_timetable.json'
+      - 'engine.js'
+      - 'app.js'
+      - 'tests/test_official_r1.py'
+      - 'tests/test_r1_full_browser.py'
+      - 'index.html'
+      - 'sw.js'
+      - '.github/workflows/test-release-r1-v231.yml'
+permissions: {contents: read}
+jobs:
+  r1:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with: {python-version: '3.12'}
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - name: Regression tests, source sanity, syntax
+        run: |
+          python -m py_compile scripts/*.py
+          node --check engine.js
+          node --check app.js
+          python -m unittest discover -s tests -p 'test_[!u]*.py' -q
+          node tests/test_engine.cjs
+          node tests/test_feed_schemas.cjs
+          node tests/test_precision.cjs
+          node tests/test_trenalia_fallback.cjs
+          node tests/test_timetable_live_correlation.cjs
+          node tests/test_merge_alternative_journeys.cjs
+          node tests/test_r4_direction_collision.cjs
+          node tests/test_all_lines_direction.cjs
+          node tests/test_all_lines_fallback.cjs
+      - name: Download Renfe GTFS once for R1 reconstruction
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import sys
+          sys.path.insert(0,'scripts')
+          from build_network import CERCANIAS,download
+          Path('/tmp/r1-gtfs.zip').write_bytes(download(CERCANIAS))
+          PY
+      - name: Rebuild complete R1 with verified PDF timetable
+        run: |
+          mkdir -p /tmp/rodalies-r1-check
+          python scripts/audit_gtfs.py --zip /tmp/r1-gtfs.zip --days 2 --out /tmp/rodalies-r1-check/source_audit.json
+          python scripts/build_network.py --cer-zip /tmp/r1-gtfs.zip --skip-md --date 2026-11-12 --days 2 --out /tmp/rodalies-r1-check
+          python scripts/validate_generated.py --out /tmp/rodalies-r1-check --days 2
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          a=json.loads(Path('/tmp/rodalies-r1-check/catalog.json').read_text())
+          d=json.loads(Path('/tmp/rodalies-r1-check/2026-11-12.json').read_text())
+          r=[t for t in d['trains'] if t['l']=='R1']
+          gtfs=[t for t in r if t.get('src')!='official-r1-pdf']
+          pdf=[t for t in r if t.get('src')=='official-r1-pdf']
+          assert a['official_r1_pdf']['count_by_day']['2026-11-12']==len(pdf)
+          assert len(r)>=190 and len(gtfs)>=100 and len(pdf)>=0, (len(r),len(gtfs),len(pdf))
+          assert len(set(x['id'] for x in r))==len(r)
+          assert a['official_r1_pdf']['weekday_trajectories']==190
+          print('R1_COMPLETE',len(r),'GTFS',len(gtfs),'new official timetable',len(pdf))
+          PY
+      - name: Validate PWA version and catalogue provenance
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          h=Path('index.html').read_text()
+          sw=Path('sw.js').read_text()
+          assert '2.3.1' in h and '?v=231' in h
+          assert 'mi-rodalies-v2.3.1' in sw and '?v=231' in sw
+          print('V2.3.1 PWA / service-worker version synchronized')
+          PY
+      - name: Chromium Android renders every R1 service without false ETA
+        run: |
+          python -m pip install 'playwright>=1.50,<2'
+          python -m playwright install --with-deps chromium
+          python tests/test_r1_full_browser.py
