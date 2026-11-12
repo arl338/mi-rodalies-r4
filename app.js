@@ -49,7 +49,10 @@ function invalidateResults(){
 function savePair(){try{localStorage.setItem('mirodalies-v2-pair',JSON.stringify(selection));}catch{}}
 function lineStations(line){
  if(!catalog)return [];
- return catalog.stations.filter(st=>line==='ALL'||(Array.isArray(st.lines)&&st.lines.includes(line)))
+ // For a named commercial line, use the independently reviewed network
+ // membership, not broad GTFS route labels that can mix R2/R2N/R2S.
+ // All-lines mode still exposes every catalogued station.
+ return catalog.stations.filter(st=>line==='ALL'||(Array.isArray(st.reference_lines)?st.reference_lines.includes(line):Array.isArray(st.lines)&&st.lines.includes(line)))
   .slice().sort((a,b)=>a.name.localeCompare(b.name,'es',{sensitivity:'base'}));
 }
 function renderLineOptions(){
@@ -122,7 +125,7 @@ function validateRange(){const day=$('trip-date').value,from=$('from-time').valu
  if(!catalog)throw new Error('Todavía no se ha cargado el catálogo de estaciones.');
  if(catalog.reference_only)throw new Error('El catálogo es provisional y no incluye horarios. Ejecuta la actualización GTFS en GitHub Actions.');
  if(!selection.line)throw new Error('Selecciona primero una línea de Rodalies.');
- if(selection.line!=='ALL'&&(!stationMap.get(selection.from)?.lines?.includes(selection.line)||!stationMap.get(selection.to)?.lines?.includes(selection.line)))throw new Error('Elige origen y destino de la línea seleccionada.');
+ if(selection.line!=='ALL'&&(!lineStations(selection.line).some(st=>st.id===selection.from)||!lineStations(selection.line).some(st=>st.id===selection.to)))throw new Error('Elige origen y destino de la línea seleccionada.');
  if(!stationMap.has(selection.from)||!stationMap.has(selection.to))throw new Error('Selecciona dos estaciones del listado.');
  if(selection.from===selection.to)throw new Error('Origen y destino deben ser diferentes.');
  if(!/^\d{4}-\d\d-\d\d$/.test(day)||!/^\d\d:\d\d$/.test(from)||!/^\d\d:\d\d$/.test(to))throw new Error('Revisa la fecha y las horas seleccionadas.');
