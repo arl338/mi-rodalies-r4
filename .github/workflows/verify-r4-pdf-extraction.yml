@@ -6,7 +6,7 @@ on:
       - scripts/extract_official_r4.py
       - .github/workflows/verify-r4-pdf-extraction.yml
   workflow_dispatch:
-permissions: {contents: read}
+permissions: {contents: write}
 jobs:
   extract:
     runs-on: ubuntu-latest
@@ -17,9 +17,18 @@ jobs:
         with: {python-version: '3.12'}
       - run: python -m pip install 'pymupdf>=1.24,<1.28'
       - name: Interpretar horarios R4 de las cuatro tablas oficiales
-        run: python scripts/extract_official_r4.py --out /tmp/r4_official_timetable.json
+        run: python scripts/extract_official_r4.py --out data/reference/r4_official_timetable.json
       - uses: actions/upload-artifact@v4
         with:
           name: r4-official-timetable-validated
-          path: /tmp/r4_official_timetable.json
+          path: data/reference/r4_official_timetable.json
           retention-days: 5
+      - name: Añadir referencia oficial validada a la rama aislada
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data/reference/r4_official_timetable.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'datos R4: horarios reales publicados en PDF oficial, con celdas verificadas'
+            git push origin HEAD:fix/r4-missing-stops-official-pdf-20261112
+          fi
