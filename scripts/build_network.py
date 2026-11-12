@@ -431,7 +431,7 @@ def build(cer,md,output,days,base=None):
                     parent=raw_stops.get(str(raw_stop.get('parent_station')))
                     st=parent or raw_stop
                     code=stop_key(st.get('stop_id'))
-                    if not re.fullmatch(r'\\d{5}',code) or not in_catalonia(st):
+                    if not re.fullmatch(r'\d{5}',code) or not in_catalonia(st):
                         continue
                     if code not in all_stop_candidates:
                         try:
