@@ -1,0 +1,17 @@
+name: Cobertura de les 19 linies amb horaris alternatius
+on:
+  push:
+    branches: [audit/all-lines-eta-direction-and-coverage-20261112]
+    paths: ['scripts/probe_all_line_timetables.cjs','.github/workflows/probe-all-line-timetables.yml']
+permissions: {contents: read}
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - run: |
+          node --check scripts/probe_all_line_timetables.cjs
+          node scripts/probe_all_line_timetables.cjs
