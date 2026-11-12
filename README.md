@@ -51,3 +51,14 @@ Les 123 circulacions GTFS de la instantània anterior van coincidir totes amb du
 L'usuari veu un avís específic si busca una de les quatre estacions sense horari R1 verificat en aquest quadre: Molins de Rei, Sant Feliu de Llobregat, Sant Joan Despí i Cornellà. L'absència de resultats no s'equipara a una cancel·lació.
 
 **Validacions:** extracció de 95+95 serveis laborables i 69+69 de cap de setmana; 123/123 viatges GTFS verificats amb dues parades del PDF; reconstrucció de 190 serveis laborables sense duplicats; Chromium Android amb 42 sortides L'Hospitalet → Mataró entre les 06:00 i les 14:00 i identificació exacta dels 12 primers resultats. La informació és programada, no acredita la circulació real ni l'exactitud de les ETA. Els festius i les alteracions puntuals requereixen verificació addicional.
+
+
+## V2.3.2 · RL3: Anglesola → Lleida i les nou parades oficials
+
+La consulta **RL3, Anglesola → Lleida-Pirineus, 12/11/2026, 13:15–21:15** no mostrava cap tren tot i que les fonts publicades en confirmen dos de directes: **15:58→16:35 (15609)** i **19:31→20:08 (33541)**. Trenalia sí retornava dos horaris correctes, però l'aplicació depenia d'una resposta puntual de l'API per disposar de serveis RL3, perquè el GTFS Renfe actual no conté `stop_times` identificats com a RL3.
+
+Aquesta versió incorpora al catàleg els **16 serveis RL3** del [PDF oficial de Rodalies vigent des del 6 de juliol de 2026](https://rodalies.gencat.cat/web/.content/02_Horaris/horaris/RL3RL4.pdf): 12 laborables (sis per sentit) i quatre de cap de setmana (dos per sentit). Es conserven els nou horaris de parada impresos, el número comercial de tren i el sentit. No s'afegeix cap recorregut RL4 a partir de les files RL3.
+
+Les ETA continuen sent conservadores: per vincular una observació a un servei PDF, cal número, estació, línia i sentit coherent. Quan falta aquesta evidència, la sortida es manté com a **«Solo horario»**. Les alteracions, els dies festius i les vagues poden modificar els serveis efectius.
+
+**Prova:** reconstrucció real amb GTFS auditat i Chromium Android amb les dues API externes simulades fora de servei: la consulta exacta d'Anglesola mostra **15:58 i 19:31** com a horari programat. La cobertura de la RL4 continua pendent de revisió específica, sense extreure conclusions de la RL3.
