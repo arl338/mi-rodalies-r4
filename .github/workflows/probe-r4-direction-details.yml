@@ -1,0 +1,17 @@
+name: R4 ETA direction and state audit
+on:
+  push:
+    branches: [audit/r4-eta-direction-confidence-20261112]
+    paths: ['scripts/probe_r4_direction_details.cjs','.github/workflows/probe-r4-direction-details.yml']
+permissions: {contents: read}
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - run: |
+          node --check scripts/probe_r4_direction_details.cjs
+          node scripts/probe_r4_direction_details.cjs
