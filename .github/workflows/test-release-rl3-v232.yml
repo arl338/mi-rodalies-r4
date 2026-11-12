@@ -1,0 +1,78 @@
+name: Release V2.3.2 - RL3 Anglesola real official times
+on:
+  push:
+    branches: [release/v2-3-2-rl3-official-stops]
+    paths:
+      - 'scripts/build_network.py'
+      - 'scripts/official_rl3.py'
+      - 'data/reference/rl3_official_timetable.json'
+      - 'engine.js'
+      - 'app.js'
+      - 'index.html'
+      - 'sw.js'
+      - 'tests/test_official_rl3.py'
+      - 'tests/test_rl3_anglesola_browser.py'
+      - '.github/workflows/test-release-rl3-v232.yml'
+permissions: {contents: read}
+jobs:
+  rl3:
+    runs-on: ubuntu-latest
+    timeout-minutes: 16
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with: {python-version: '3.12'}
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - name: Syntax, RL3 cell validity and existing JS regressions
+        run: |
+          python -m py_compile scripts/*.py
+          node --check app.js
+          node --check engine.js
+          python -m unittest discover -s tests -p 'test_[!u]*.py' -q
+          node tests/test_engine.cjs
+          node tests/test_feed_schemas.cjs
+          node tests/test_precision.cjs
+          node tests/test_timetable_live_correlation.cjs
+          node tests/test_r4_direction_collision.cjs
+          node tests/test_all_lines_direction.cjs
+      - name: Build a complete 2-day actual Renfe dataset with RL3 PDF
+        run: |
+          python - <<'PY'
+          import sys
+          from pathlib import Path
+          sys.path.insert(0,'scripts')
+          from build_network import CERCANIAS,download
+          Path('/tmp/rl3-renfe.zip').write_bytes(download(CERCANIAS))
+          PY
+          mkdir -p /tmp/rl3-official-test
+          python scripts/audit_gtfs.py --zip /tmp/rl3-renfe.zip --days 2 --out /tmp/rl3-official-test/source_audit.json
+          python scripts/build_network.py --cer-zip /tmp/rl3-renfe.zip --skip-md --date 2026-11-12 --days 2 --out /tmp/rl3-official-test
+          python scripts/validate_generated.py --out /tmp/rl3-official-test --days 2
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          catalog=json.loads(Path('/tmp/rl3-official-test/catalog.json').read_text())
+          day=json.loads(Path('/tmp/rl3-official-test/2026-11-12.json').read_text())
+          rl3=[t for t in day['trains'] if t['l']=='RL3']
+          assert len(rl3)==12,len(rl3)
+          assert catalog['official_rl3_pdf']['count_by_day']['2026-11-12']==12
+          assert catalog['lines'][11]['id']=='RL3' and catalog['lines'][11]['present']
+          assert all(len(t['s'])==9 and t.get('src')=='official-rl3-pdf' for t in rl3)
+          print('RL3_INTEGRITY_OK: 12 weekday trains 9 stops each, original GTFS retained')
+          PY
+      - name: Validate synchronized PWA release cache
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          html=Path('index.html').read_text()
+          sw=Path('sw.js').read_text()
+          assert '2.3.2' in html and '?v=232' in html
+          assert 'mi-rodalies-v2.3.2' in sw and '?v=232' in sw
+          print('PWA V2.3.2 valid')
+          PY
+      - name: Verify exact screenshot query with operational API outage
+        run: |
+          python -m pip install 'playwright>=1.50,<2'
+          python -m playwright install --with-deps chromium
+          python tests/test_rl3_anglesola_browser.py
