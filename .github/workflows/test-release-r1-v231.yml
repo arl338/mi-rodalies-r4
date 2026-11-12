@@ -12,7 +12,7 @@ on:
       - 'tests/test_r1_full_browser.py'
       - 'index.html'
       - 'sw.js'
-      - '.github/workflows/test-r1-completeness.yml'
+      - '.github/workflows/test-release-r1-v231.yml'
 permissions: {contents: read}
 jobs:
   r1:
