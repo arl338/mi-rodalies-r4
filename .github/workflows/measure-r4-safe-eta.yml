@@ -1,0 +1,17 @@
+name: R4 live ETA effective coverage
+on:
+  push:
+    branches: [audit/r4-eta-direction-confidence-20261112]
+    paths: ['scripts/measure_r4_safe_eta.cjs','.github/workflows/measure-r4-safe-eta.yml']
+permissions: {contents: read}
+jobs:
+  measure:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - run: |
+          node --check scripts/measure_r4_safe_eta.cjs
+          node scripts/measure_r4_safe_eta.cjs
