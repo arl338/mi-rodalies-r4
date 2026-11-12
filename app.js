@@ -174,7 +174,10 @@ function sourceJobs(station){return [
   {name:'RadarDeTrenes · avisos de estación',detail:'Incidencias vinculadas al origen',url:`${CONFIG.radar}/stations/${station}/alerts`}
  ];}
 function renderSourceSummary(res,jobs,mode,cat,timetable){const content=$('source-details');content.replaceChildren();
- const catalogRow=sourceRow('Horario oficial GTFS','Cercanías / MD con línea Rodalies explícita',true,`${cat.stations.length} estaciones · ${cat.lines.filter(x=>x.present).length}/${cat.lines.length} líneas`);content.append(catalogRow);
+ const catalogRow=sourceRow('Horario Renfe GTFS','Cercanías / MD con línea Rodalies explícita',true,`${cat.stations.length} estaciones · ${cat.lines.filter(x=>x.present).length}/${cat.lines.length} líneas`);content.append(catalogRow);
+ if(cat.official_r4_pdf){content.append(sourceRow('Cuadro oficial Rodalies R4 (PDF)',
+ 'Horarios por parada, laborables y fines de semana; no confirma circulación',true,
+ String(cat.official_r4_pdf.supplement_count_by_day?.[madridDate()]??'')+' servicios adicionales en catálogo para hoy'));}
  if(timetable?.queried){content.append(sourceRow('Trenalia · horarios complementarios','Servicios por fecha, línea y estaciones; no implican circulación',timetable.available,timetable.available?String(timetable.records)+' horarios candidatos':'Sin respuesta; permanecen los horarios GTFS'));}
  if(mode!=='live'){content.append(el('p','subtle','Para fechas futuras se utilizan GTFS y, si están disponibles, horarios alternativos de Trenalia. No son observaciones de circulación.'));return;}
  res.forEach((r,i)=>{
@@ -246,12 +249,16 @@ function renderResultList(){const root=$('results');root.replaceChildren();for(c
   const legs=el('div','trip-legs');for(const l of j.legs){const d=el('div','leg');d.append(el('span','small-line',l.t.l),el('span','',timeFor(l.depart)+' '+stationName(l.from)+' → '+timeFor(l.arrive)+' '+stationName(l.to)));legs.append(d);}panel.append(legs);
  }
  const proof=el('div','train-evidence');const alternative=j.legs.some(l=>l.t.src==='trenalia-schedule-only');
- let notes=[alternative?'Origen: Trenalia (horarios Renfe). Solo horario orientativo, sin número de tren ni horas de paradas intermedias confirmadas.':'Origen: Renfe GTFS oficial'];
+ const officialPdf=j.legs.some(l=>l.t.src==='official-r4-pdf');
+ let notes=[officialPdf?'Origen: cuadro horario oficial R4 (PDF de Rodalies). Solo horario programado hasta que una fuente confirme una estimación para este servicio.':
+   alternative?'Origen: Trenalia (horarios Renfe). Solo horario orientativo, sin número de tren ni horas de paradas intermedias confirmadas.':'Origen: Renfe GTFS oficial'];
  for(const l of j.legs){if(l.proof.length)notes.push(l.proof.join('; '));if(l.platform)notes.push('Vía publicada: '+l.platform);}
  if(j.kind==='transfer')notes.push(j.connectionRisk?'ATENCIÓN: conexión en riesgo por retraso observado del primer tren; llegada no estimada':'Conexión teórica con margen programado; llegada y enlace no confirmados');
  if(catalog&&Date.now()-Date.parse(catalog.generated_at||'')>48*3600000)notes.push('Catálogo GTFS antiguo: comprobar el horario vigente en Renfe');
  // Dynamic nodes instead of innerHTML from external providers (XSS-safe).
- proof.append(el('b','', 'Evidencias: '),document.createTextNode(notes.join(' · ')));if(alternative){const attribution=el('a','','Trenalia · datos de Renfe');attribution.href='https://trenalia.org/api';attribution.target='_blank';attribution.rel='noopener noreferrer';proof.append(document.createTextNode(' · '),attribution);}panel.append(proof);root.append(panel);
+ proof.append(el('b','', 'Evidencias: '),document.createTextNode(notes.join(' · ')));if(alternative){const attribution=el('a','','Trenalia · datos de Renfe');attribution.href='https://trenalia.org/api';attribution.target='_blank';attribution.rel='noopener noreferrer';proof.append(document.createTextNode(' · '),attribution);}
+ if(officialPdf){const ref=el('a','','Cuadro oficial R4');ref.href=catalog?.official_r4_pdf?.source||'https://rodalies.gencat.cat/web/.content/02_Horaris/horaris/R4.pdf';ref.target='_blank';ref.rel='noopener noreferrer';proof.append(document.createTextNode(' · '),ref);}
+ panel.append(proof);root.append(panel);
  }
  $('load-more').hidden=results.length<=visible;
  $('load-more').textContent=`Mostrar más (${Math.max(0,results.length-visible)} restantes)`;
@@ -318,7 +325,7 @@ async function search(){if(!catalog){showToast('El catálogo todavía no está d
   const board=live?[...E.normalizeBoard(data(0),'Valfiguer',now,selection.from).map(x=>({...x,boardStop:selection.from})),...E.normalizeBoard(data(1),'ADIF/RadarDeTrenes',now,selection.from).map(x=>({...x,boardStop:selection.from}))]:[];
   const positions=live?[...E.normalizePositions(data(2),'Renfe/Valfiguer',now),...E.normalizePositions(data(3),'Renfe/ADIF',now)]:[];
   const cancellations=live?E.normalizeCancels(data(4)):[];
-  const correlatedBoard=E.correlateTimetableBoards(scheduled,board);
+  const correlatedBoard=E.correlateTimetableBoards(scheduled,board,trips);
   results=scheduled.map(j=>E.enrichJourney(j,correlatedBoard,positions,cancellations,now));visible=12;latestSearch={range};
   renderResultList();updateSummary(range,trips.length+fallback.length,live);
   const lines=selection.line==='ALL'?new Set(E.LINES):new Set([selection.line]);
