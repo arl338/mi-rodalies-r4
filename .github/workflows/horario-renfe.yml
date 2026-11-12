@@ -95,7 +95,21 @@ jobs:
           git add -A data/v2/
           if ! git diff --cached --quiet; then
             git commit -m 'Actualizar catálogo Rodalies y contraste Generalitat V2 [skip ci]'
-            git push
+            # A UI release can advance main while this GTFS job is still
+            # processing. Replay only the generated data commit on top of
+            # latest main; never force-push or overwrite source updates.
+            for attempt in 1 2 3; do
+              git fetch origin main
+              git rebase origin/main
+              if git push origin HEAD:main; then
+                echo "Catálogo publicado sobre el último main"
+                exit 0
+              fi
+              echo "Main ha avanzado durante el push; reintentando..."
+              sleep 2
+            done
+            echo 'No se ha podido publicar el catálogo sin sobrescribir cambios' >&2
+            exit 1
           else
             echo 'No han cambiado los datos'
           fi
