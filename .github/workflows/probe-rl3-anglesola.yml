@@ -1,0 +1,17 @@
+name: Diagnòstic RL3 Anglesola a Lleida
+on:
+  push:
+    branches: [fix/rl3-anglesola-official-stop-times-20261112]
+    paths: ['scripts/probe_rl3_anglesola.cjs','.github/workflows/probe-rl3-anglesola.yml']
+permissions: {contents: read}
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - run: |
+          node --check scripts/probe_rl3_anglesola.cjs
+          node scripts/probe_rl3_anglesola.cjs
