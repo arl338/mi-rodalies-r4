@@ -58,4 +58,6 @@ jobs:
           python -m pip install 'playwright>=1.50,<2'
           python -m playwright install --with-deps chromium
       - name: Android 320 390 768 regression
-        run: python tests/test_ui_v221.py
+        run: |
+          python tests/test_ui_v221.py
+          python tests/test_all_lines_browser.py
