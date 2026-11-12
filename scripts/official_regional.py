@@ -10,7 +10,7 @@ from zoneinfo import ZoneInfo
 
 REFERENCE=Path(__file__).resolve().parents[1]/'data/reference/official_regional_verified.json'
 TZ=ZoneInfo('Europe/Madrid')
-COUNTS={'R11':12,'R15':14,'R16':8}
+COUNTS={'R11':12,'R13':4,'R14':1,'R15':14,'R16':8}
 
 def load_reference(path=REFERENCE):
     doc=json.loads(Path(path).read_text(encoding='utf8'))
