@@ -32,7 +32,16 @@ jobs:
           node tests/test_r4_direction_collision.cjs
       - name: Recompilar dos días desde GTFS verdadero con suplementos del PDF
         run: |
-          python scripts/build_network.py --skip-md --date 2026-11-12 --days 2 --out /tmp/rodalies-r4-check
+          mkdir -p /tmp/rodalies-r4-check
+          python - <<'PY'
+          from pathlib import Path
+          import sys
+          sys.path.insert(0,'scripts')
+          from build_network import download,CERCANIAS
+          Path('/tmp/cer-r4-verified.zip').write_bytes(download(CERCANIAS))
+          PY
+          python scripts/audit_gtfs.py --zip /tmp/cer-r4-verified.zip --days 2 --out /tmp/rodalies-r4-check/source_audit.json
+          python scripts/build_network.py --cer-zip /tmp/cer-r4-verified.zip --skip-md --date 2026-11-12 --days 2 --out /tmp/rodalies-r4-check
           python scripts/validate_generated.py --out /tmp/rodalies-r4-check --days 2
       - name: Comprobar exhaustivamente las 6 salidas 06:00–07:10 y ausencia de duplicados
         run: |
