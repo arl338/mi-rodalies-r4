@@ -41,6 +41,8 @@ def validate(out,days=14,min_stations=10):
             assert isinstance(train.get('id'),str) and train['id']
             assert all(isinstance(s,list) and len(s)==3 and all(isinstance(x,int) for x in s[1:]) for s in stops)
             assert all(s[0] in stations and train['l'] in stations[s[0]]['lines'] for s in stops)
+            assert all(train['l'] in stations[s[0]].get('schedule_lines', []) for s in stops), 'Horario existente sin cobertura de parada: '+train['l']
+            assert all(not stations[s[0]].get('reference_only', False) for s in stops), 'Parada con horario mal marcada como referencia'
             assert all(a[1]<=a[2] for a in stops)
             assert all(stops[i][1]>=stops[i-1][2] for i in range(1,len(stops)))
             assert stops[-1][1]>stops[0][2]
