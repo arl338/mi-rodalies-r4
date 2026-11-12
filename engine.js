@@ -213,8 +213,9 @@ function normalizeTrenaliaTimetable(payload,from,to,day,requestedLine){
  * Requires a clock-fresh, non-stale board and its own scheduled timestamp.
  * Reject collisions of multiple distinct train numbers/trips for one leg.
  */
-function correlateTimetableBoards(journeys,boards){
- const legs=journeys.flatMap(j=>j.legs).filter(l=>l.t.src==='trenalia-schedule-only');
+function anonymousSchedule(t){return t.src==='trenalia-schedule-only'||t.src==='official-r4-pdf';}
+function correlateTimetableBoards(journeys,boards,knownServices=[]){
+ const legs=journeys.flatMap(j=>j.legs).filter(l=>anonymousSchedule(l.t));
  if(!legs.length)return boards;
  const candidates=new Map();
  const fresh=x=>!x.stale&&x.age!==null&&x.age>=0&&x.age<=180&&
@@ -222,6 +223,18 @@ function correlateTimetableBoards(journeys,boards){
  for(let i=0;i<boards.length;i++){
   const row=boards[i];
   if(!fresh(row))continue;
+  // When a GTFS train with a verified number/trip is departing this station,
+  // its board record cannot be attributed to an anonymous PDF/Trenalia train
+  // running in the opposite direction 1 minute later.
+  const matchesIdentifiedService=knownServices.some(t=>{
+   if(!t||!Array.isArray(t.s)||t.l!==row.line||anonymousSchedule(t))return false;
+   const stop=t.s.find(s=>s[0]===row.station&&Math.abs(s[2]-row.planned)<=180);
+   if(!stop)return false;
+   const n=t.n&&row.number&&String(Number(t.n))===String(Number(row.number));
+   const trip=row.trip&&serviceIds(t).includes(String(row.trip));
+   return !!(n||trip);
+  });
+  if(matchesIdentifiedService)continue;
   const applicable=legs.filter(l=>l.from===row.station&&l.t.l===row.line&&
    Math.abs(l.depart-row.planned)<=60);
   if(applicable.length!==1)continue;
@@ -247,7 +260,7 @@ function correlateTimetableBoards(journeys,boards){
 function serviceIds(t){return [t.id,...(t.alternative_trip_ids||[])].filter(Boolean).map(String);}
 function matchExact(leg,item){
  const t=leg.t;
- if(t.src==='trenalia-schedule-only')return !!(item.linkedScheduleKey&&item.linkedScheduleKey===t.id+'|'+leg.from+'|'+leg.depart);
+ if(anonymousSchedule(t))return !!(item.linkedScheduleKey&&item.linkedScheduleKey===t.id+'|'+leg.from+'|'+leg.depart);
  if(item.line&&item.line!==t.l)return false;
  if(item.day&&t.day&&item.day!==t.day)return false;
  if(item.station&&item.station!==leg.from)return false;
