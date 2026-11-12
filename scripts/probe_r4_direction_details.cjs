@@ -11,7 +11,7 @@ const E=require('../engine.js');
    try{
     const r=await fetch(url,{headers:{Accept:'application/json',Origin:'https://arl338.github.io'}});if(!r.ok)throw Error('HTTP '+r.status);
     const p=await r.json();
-    const raw=E.rows(p).filter(x=>String(x.product||x.line||'').toUpperCase()==='C4'||String(x.line||'').toUpperCase()==='R4');
+    const raw=E.rows(p).filter(x=>E.scopedLine(x.line||x.route_name||x.product,x.nucleo||x.nucleus||'',true)==='R4'||E.scopedLine(x.product,x.nucleo||'',true)==='R4');
     const parsed=E.normalizeBoard(p,source,now,station).filter(x=>x.line==='R4');
     const counts={},statuses={},destKinds={},sampleKeys={};
     for(const x of raw){
