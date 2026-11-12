@@ -67,7 +67,13 @@ function renderStationSelects(){
  for(const [id,field,other] of [['origin-input','from','to'],['dest-input','to','from']]){
   const sel=$(id);sel.replaceChildren();
   sel.append(new Option(options.length?'Selecciona una estación':'No hay estaciones registradas',''));
-  for(const st of options){const hasSchedule=selection.line==='ALL'?!!st.schedule_lines?.length:st.schedule_lines?.includes(selection.line);const label=st.name+(catalog.reference_only?' · referencia':hasSchedule?'':' · sin horario GTFS');const op=new Option(label,st.id);op.disabled=st.id===selection[other];sel.append(op);}
+  for(const st of options){const hasSchedule=selection.line==='ALL'?!!st.schedule_lines?.length:st.schedule_lines?.includes(selection.line);
+  // R1's published 27-stop PDF starts/ends at L'Hospitalet. Keep four
+  // unconfirmed western stations visible without implying train times exist.
+  const r1NotInPublished=selection.line==='R1'&&catalog?.official_r1_pdf?.exclusions?.includes(st.name);
+  const label=st.name+(catalog.reference_only?' · referencia':
+   r1NotInPublished?' · no figura en el cuadro R1 actual':hasSchedule?'':' · sin horario GTFS');
+  const op=new Option(label,st.id);op.disabled=st.id===selection[other];sel.append(op);}
   sel.disabled=!selection.line||options.length===0;
   sel.value=options.some(s=>s.id===selection[field])?selection[field]:'';
   if(!sel.value)selection[field]='';
@@ -175,6 +181,9 @@ function sourceJobs(station){return [
  ];}
 function renderSourceSummary(res,jobs,mode,cat,timetable){const content=$('source-details');content.replaceChildren();
  const catalogRow=sourceRow('Horario Renfe GTFS','Cercanías / MD con línea Rodalies explícita',true,`${cat.stations.length} estaciones · ${cat.lines.filter(x=>x.present).length}/${cat.lines.length} líneas`);content.append(catalogRow);
+ if(cat.official_r1_pdf){content.append(sourceRow('Cuadro oficial Rodalies R1 (PDF)',
+ 'Servicios por parada entre L’Hospitalet y Maçanet; no confirma circulación',true,
+ String(cat.official_r1_pdf.count_by_day?.[madridDate()]??'')+' servicios adicionales para hoy'));}
  if(cat.official_r4_pdf){content.append(sourceRow('Cuadro oficial Rodalies R4 (PDF)',
  'Horarios por parada, laborables y fines de semana; no confirma circulación',true,
  String(cat.official_r4_pdf.supplement_count_by_day?.[madridDate()]??'')+' servicios adicionales en catálogo para hoy'));}
@@ -250,7 +259,9 @@ function renderResultList(){const root=$('results');root.replaceChildren();for(c
  }
  const proof=el('div','train-evidence');const alternative=j.legs.some(l=>l.t.src==='trenalia-schedule-only');
  const officialPdf=j.legs.some(l=>l.t.src==='official-r4-pdf');
- let notes=[officialPdf?'Origen: cuadro horario oficial R4 (PDF de Rodalies). Solo horario programado hasta que una fuente confirme una estimación para este servicio.':
+ const officialR1=j.legs.some(l=>l.t.src==='official-r1-pdf');
+ let notes=[officialR1?'Origen: cuadro horario oficial R1 (PDF de Rodalies), 27 estaciones de L’Hospitalet a Maçanet. Solo horario programado sin ETA verificable.':
+   officialPdf?'Origen: cuadro horario oficial R4 (PDF de Rodalies). Solo horario programado hasta que una fuente confirme una estimación para este servicio.':
    alternative?'Origen: Trenalia (horarios Renfe). Solo horario orientativo, sin número de tren ni horas de paradas intermedias confirmadas.':'Origen: Renfe GTFS oficial'];
  for(const l of j.legs){if(l.proof.length)notes.push(l.proof.join('; '));if(l.platform)notes.push('Vía publicada: '+l.platform);}
  if(j.kind==='transfer')notes.push(j.connectionRisk?'ATENCIÓN: conexión en riesgo por retraso observado del primer tren; llegada no estimada':'Conexión teórica con margen programado; llegada y enlace no confirmados');
@@ -258,6 +269,7 @@ function renderResultList(){const root=$('results');root.replaceChildren();for(c
  // Dynamic nodes instead of innerHTML from external providers (XSS-safe).
  proof.append(el('b','', 'Evidencias: '),document.createTextNode(notes.join(' · ')));if(alternative){const attribution=el('a','','Trenalia · datos de Renfe');attribution.href='https://trenalia.org/api';attribution.target='_blank';attribution.rel='noopener noreferrer';proof.append(document.createTextNode(' · '),attribution);}
  if(officialPdf){const ref=el('a','','Cuadro oficial R4');ref.href=catalog?.official_r4_pdf?.source||'https://rodalies.gencat.cat/web/.content/02_Horaris/horaris/R4.pdf';ref.target='_blank';ref.rel='noopener noreferrer';proof.append(document.createTextNode(' · '),ref);}
+ if(officialR1){const ref=el('a','','Cuadro oficial R1');ref.href=catalog?.official_r1_pdf?.source||'https://rodalies.gencat.cat/web/.content/02_Horaris/horaris/R1.pdf';ref.target='_blank';ref.rel='noopener noreferrer';proof.append(document.createTextNode(' · '),ref);}
  panel.append(proof);root.append(panel);
  }
  $('load-more').hidden=results.length<=visible;
