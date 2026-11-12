@@ -536,7 +536,7 @@ def build(cer,md,output,days,base=None):
         print('R4 official PDF added',sum(pdf_counts.values()),
               'schedule-only services (GTFS always retained).',flush=True)
     
-    # Supplement explicitly printed RT1, RT2 and RL4 rows. The official PDF
+    # Supplement explicitly printed RT1, RT2, RL4, RG1 and R17 rows. The official PDF
     # contains two inconsistent RL4 source rows; these are excluded rather than
     # fabricated. Do not infer any omitted or greyed-out intermediate stops.
     supplementary_reference = load_official_supplement()
@@ -594,7 +594,7 @@ def build(cer,md,output,days,base=None):
     catalog={
        'schema':2,'batch_id':batch_id,'generated_at':datetime.now(TZ).isoformat(),
        'coverage_start':base.isoformat(),'coverage_end':dates[-1].isoformat(),
-       'source':'Renfe Data GTFS + PDF oficials Rodalies R1/R4/RL3/RT1/RT2/RL4 (només horaris programats, sense circulació)',
+       'source':'Renfe Data GTFS + PDF oficials Rodalies R1/R4/RL3/RT1/RT2/RL4/RG1/R17 (només horaris programats, sense circulació)',
        'station_names':'ADIF/BOE exact code > GTFS stop ID > isolated reference placeholder; no inferred timetable',
        'source_urls':{'cer':CERCANIAS,'md':MEDIA_DISTANCIA},'license':'CC BY 4.0',
        'official_reference':audit,'source_quality':source_quality,
