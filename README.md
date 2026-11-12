@@ -33,3 +33,10 @@ Datos: Renfe Data (CC BY 4.0), [Valfiguer](https://trenes.valfiguer.com/desarrol
 - Se enlaza el PDF oficial de cada línea desde el panel de auditoría y desde la búsqueda sin horarios GTFS. Estos documentos tienen calendarios y modificaciones; no se publican automáticamente como servicios estructurados.
 - Los tableros operativos marcados `stale` no se consideran evidencia actual de estimación o cancelación.
 - No se han generado horas ficticias ni reconstruido las 13 líneas con `stop_times` ausentes.
+
+
+## V2.2.3 · Servicios R4 faltantes recuperados
+
+La consulta por estación muestra las **horas programadas de paso por la estación de origen seleccionada**, no la hora de salida desde la cabecera ferroviaria. Para la R4 en sentido Manresa → Barcelona → Sant Vicenç se complementa el GTFS con el cuadro horario PDF oficial de Rodalies (laborables y fines de semana), extraído celda a celda y contrastado con horarios GTFS. Los servicios GTFS existentes no se eliminan, y los solapamientos se deduplican. Ejemplo validado para Terrassa Est → Plaça Catalunya, jueves 12/11/2026, 06:00–07:10: **06:03, 06:18, 06:33, 06:48, 06:55, 07:03**. Los tres nuevos servicios se presentan como horario programado hasta contar con observación operativa inequívoca. Para evitar asignaciones erróneas se impide vincular el tren R4 hacia Manresa de las 06:47 al R4 hacia Barcelona de las 06:48.
+
+**Alcance:** la extracción PDF validada cubre el sentido indicado. El sentido contrario y las demás líneas siguen dependiendo de GTFS y de las alternativas ya integradas; no se certifica cobertura universal. Los cuadros publicados son teóricos, pueden variar por huelgas, obras y festivos, y su fuente/versión debe actualizarse cuando Rodalies publique cambios. Fuente: https://rodalies.gencat.cat/web/.content/02_Horaris/horaris/R4.pdf
