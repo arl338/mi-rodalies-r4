@@ -5,7 +5,6 @@ from datetime import datetime, timedelta
 from zoneinfo import ZoneInfo
 import json
 from pathlib import Path
-from playwright.sync_api import sync_playwright
 ROOT=Path(__file__).resolve().parents[1]
 NOW=datetime.now(ZoneInfo('Europe/Madrid'))
 NEXT=NOW+timedelta(minutes=35)
@@ -47,30 +46,34 @@ def application(route):
   ty='application/javascript' if p.endswith('.js') else 'text/css' if p.endswith('.css') else 'image/png'
   return route.fulfill(status=200,content_type=ty,body=f.read_bytes())
  return route.fulfill(status=404,body='not found')
-with sync_playwright() as p:
- browser=p.chromium.launch(headless=True,args=['--no-sandbox'])
- page=browser.new_page(viewport={'width':390,'height':844},is_mobile=True,has_touch=True,
-  locale='es-ES',timezone_id='Europe/Madrid',service_workers='block')
- errors=[]
- page.on('pageerror',lambda e:errors.append(str(e)))
- page.route('https://rodalies.test/**',application)
- for domain in ('trenalia.org','trenes.valfiguer.com','radardetrenes.com'):
-  page.route('https://'+domain+'/**',external)
- page.goto('https://rodalies.test/',wait_until='domcontentloaded')
- page.wait_for_function("document.querySelector('#line-select')?.options.length >= 4")
- page.locator('#line-select').select_option('ALL')
- page.locator('#origin-input').select_option('78400')
- page.locator('#dest-input').select_option('78500')
- page.locator('#trip-date').fill(DAY)
- page.locator('#from-time').fill((NEXT-timedelta(minutes=2)).strftime('%H:%M'))
- page.locator('#to-time').fill((NEXT+timedelta(minutes=30)).strftime('%H:%M'))
- page.locator('#search').click()
- page.wait_for_function("document.querySelector('#results-total')?.textContent?.startsWith('2 ')",timeout=15000)
- assert page.locator('#results .train-card').count()==2
- assert page.locator('#results .line-pill').all_inner_texts()==['RL3','RL4']
- assert page.locator('#results .train-status').all_inner_texts()==['Solo horario','Solo horario']
- assert all('Trenalia' in text for text in page.locator('#results .train-evidence').all_inner_texts())
- assert page.evaluate('document.documentElement.scrollWidth')<=392
- assert not errors,errors
- print('PASS all-lines mode: RL3 and RL4 2/2 supplemental services, no invented live ETA or horizontal overflow')
- browser.close()
+if __name__=='__main__':
+ from playwright.sync_api import sync_playwright
+ main_playwright=sync_playwright()
+ with main_playwright as p:
+  browser=p.chromium.launch(headless=True,args=['--no-sandbox'])
+  page=browser.new_page(viewport={'width':390,'height':844},is_mobile=True,has_touch=True,
+   locale='es-ES',timezone_id='Europe/Madrid',service_workers='block')
+  errors=[]
+  page.on('pageerror',lambda e:errors.append(str(e)))
+  page.route('https://rodalies.test/**',application)
+  for domain in ('trenalia.org','trenes.valfiguer.com','radardetrenes.com'):
+   page.route('https://'+domain+'/**',external)
+  page.goto('https://rodalies.test/',wait_until='domcontentloaded')
+  page.wait_for_function("document.querySelector('#line-select')?.options.length >= 4")
+  page.locator('#line-select').select_option('ALL')
+  page.locator('#origin-input').select_option('78400')
+  page.locator('#dest-input').select_option('78500')
+  page.locator('#trip-date').fill(DAY)
+  page.locator('#from-time').fill((NEXT-timedelta(minutes=2)).strftime('%H:%M'))
+  page.locator('#to-time').fill((NEXT+timedelta(minutes=30)).strftime('%H:%M'))
+  page.locator('#search').click()
+  page.wait_for_function("document.querySelector('#results-total')?.textContent?.startsWith('2 ')",timeout=15000)
+  assert page.locator('#results .train-card').count()==2
+  assert page.locator('#results .line-pill').all_inner_texts()==['RL3','RL4']
+  assert page.locator('#results .train-status').all_inner_texts()==['Solo horario','Solo horario']
+  assert all('Trenalia' in text for text in page.locator('#results .train-evidence').all_inner_texts())
+  assert page.evaluate('document.documentElement.scrollWidth')<=392
+  assert not errors,errors
+  print('PASS all-lines mode: RL3 and RL4 2/2 supplemental services, no invented live ETA or horizontal overflow')
+  browser.close()
+ 
