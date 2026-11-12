@@ -287,7 +287,10 @@ async function search(){if(!catalog){showToast('El catálogo todavía no está d
   const availableDays=days.filter(d=>d>=catalog.coverage_start&&d<=catalog.coverage_end);
   // Start independent sources in parallel: a slow optional timetable endpoint
   // must not add its timeout on top of the GTFS and operational requests.
-  const canSupplement=selection.line&&selection.line!=='ALL'&&
+  // The Trenalia timetable endpoint also supports multi-line corridors.
+  // In ALL mode retain the explicit commercial line of every validated row,
+  // rather than silently hiding scheduled trains not present in Renfe GTFS.
+  const canSupplement=!!selection.line&&
     /^\d{5}$/.test(selection.from)&&/^\d{5}$/.test(selection.to);
   const query=canSupplement?new URLSearchParams({from:selection.from,to:selection.to,
     date:range.day,limit:'400'}):null;
@@ -347,7 +350,7 @@ async function search(){if(!catalog){showToast('El catálogo todavía no está d
     ...E.alertsForLines(data(7),lines,true).map(a=>({...a,source:'RadarDeTrenes'}))]:[];
   const uniqueAlerts=new Map();for(const a of alerts){const key=E.norm(a.text);if(!uniqueAlerts.has(key))uniqueAlerts.set(key,a);}
   renderAlerts([...uniqueAlerts.values()],live);
-  renderSourceSummary(res,jobs,live?'live':'future',catalog,{queried:selection.line!=='ALL'&&/^\d{5}$/.test(selection.from)&&/^\d{5}$/.test(selection.to),available:fallbackAvailable,records:fallback.length,error:fallbackError});
+  renderSourceSummary(res,jobs,live?'live':'future',catalog,{queried:canSupplement,available:fallbackAvailable,records:fallback.length,error:fallbackError});
   const failures=res.filter(x=>x.status==='rejected').length;
   const operationalLinked=results.some(j=>j.estimated!==null&&!j.conflict&&!j.cancelled);
   const failedAllLive=live&&res.length>0&&res.every(x=>x.status==='rejected');
