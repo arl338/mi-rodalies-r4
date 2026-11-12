@@ -1,4 +1,4 @@
-"""Directly read official R11 and R16 printed station times, no interpolation.
+"""Directly read official R11, R15 and R16 printed station times, no interpolation.
 
 This is deliberately partial coverage of the published tables. Original PDF
 row identities and line metadata remain attached to all generated services.
@@ -10,7 +10,7 @@ from zoneinfo import ZoneInfo
 
 REFERENCE=Path(__file__).resolve().parents[1]/'data/reference/official_regional_verified.json'
 TZ=ZoneInfo('Europe/Madrid')
-COUNTS={'R11':12,'R16':8}
+COUNTS={'R11':12,'R15':14,'R16':8}
 
 def load_reference(path=REFERENCE):
     doc=json.loads(Path(path).read_text(encoding='utf8'))
