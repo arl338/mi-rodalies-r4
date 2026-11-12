@@ -16,6 +16,7 @@ from zoneinfo import ZoneInfo
 from reference_stations import apply_reference
 from official_r4 import load_reference as load_official_r4, supplement_day as supplement_official_r4, reference_metadata as official_r4_metadata
 from official_r1 import load_reference as load_official_r1, supplement_day as supplement_official_r1, reference_metadata as official_r1_metadata
+from official_rl3 import load_reference as load_official_rl3, supplement_day as supplement_official_rl3, metadata as official_rl3_metadata
 
 TZ = ZoneInfo('Europe/Madrid')
 REFERENCE_FILE = Path(__file__).resolve().parents[1] / 'data' / 'reference' / 'generalitat_lines.json'
@@ -486,6 +487,21 @@ def build(cer,md,output,days,base=None):
             st['name_source']='ADIF/BOE';st['name_sources']=official.get('sources',[])
     reference_inventory=apply_reference(stations,all_stop_candidates,
                                          schedule_station_lines,canonical_names,LINES)
+    # RL3 is not included in the published Renfe suburban GTFS even though
+    # the current official Rodalies timetable lists twelve weekday and four
+    # weekend trains with all nine exact stops. Never infer RL4 from it.
+    pdf_rl3_meta=None
+    pdf_rl3_counts={}
+    if len(all_stop_candidates)>=100 and {'78400','78407','78500'}<=set(stations):
+        rl3_ref=load_official_rl3()
+        for d in dates:
+            key=d.isoformat()
+            extra=supplement_official_rl3(d,by_day[key],rl3_ref)
+            pdf_rl3_counts[key]=len(extra)
+            by_day[key].extend(extra)
+        pdf_rl3_meta=official_rl3_metadata(rl3_ref,pdf_rl3_counts)
+        print('RL3 official PDF adds',sum(pdf_rl3_counts.values()),
+              'documented planned trips with 9 verified stations.',flush=True)
     # For R1, the official PDF provides 27 exact station columns for each
     # train in both directions. All 123 R1 GTFS trips were independently
     # verified against two or more official PDF station times.
@@ -542,20 +558,22 @@ def build(cer,md,output,days,base=None):
     # Compare Generalitat checkpoints against GTFS services, never against
     # the expanded static inventory (which may have no train times).
     audit=validate_official_reference(reference,[dict(st,lines=list(st['schedule_lines'])) for st in stations.values()],
-                                     [{'id':line,'present':by_line[line]>0,'scheduled_trips_in_period':by_line[line]} for line in LINES])
+                                     [{'id':line,'present':by_line[line]>0 or (line=='RL3' and bool(pdf_rl3_meta)),'scheduled_trips_in_period':by_line[line]} for line in LINES])
     catalog={
        'schema':2,'batch_id':batch_id,'generated_at':datetime.now(TZ).isoformat(),
        'coverage_start':base.isoformat(),'coverage_end':dates[-1].isoformat(),
-       'source':'Renfe Data GTFS + PDF oficiales Rodalies R1/R4 (solo horarios programados, no circulación)',
+       'source':'Renfe Data GTFS + PDF oficials Rodalies R1/R4/RL3 (només horaris programats, sense circulació)',
        'station_names':'ADIF/BOE exact code > GTFS stop ID > isolated reference placeholder; no inferred timetable',
        'source_urls':{'cer':CERCANIAS,'md':MEDIA_DISTANCIA},'license':'CC BY 4.0',
        'official_reference':audit,'source_quality':source_quality,
        'network_reference':reference_inventory,
        'official_r4_pdf':pdf_r4_meta,
        'official_r1_pdf':pdf_r1_meta,
+       'official_rl3_pdf':pdf_rl3_meta,
        'lines':[{'id':line,'name':LINE_NAMES.get(line,line),'present':by_line[line]>0,
                  'scheduled_trips_in_period':by_line[line]+(sum(pdf_counts.values()) if line=='R4' and pdf_r4_meta else 0)+
                   (sum(pdf_r1_counts.values()) if line=='R1' and pdf_r1_meta else 0),
+                  +(sum(pdf_rl3_counts.values()) if line=='RL3' and pdf_rl3_meta else 0),
                  'gtfs_trips_in_period':by_line[line]} for line in LINES],
        'stations':sorted([dict(r,lines=sorted(r['lines'],key=lambda x:LINES.index(x))) for r in stations.values()],key=lambda x:norm(x['name'])),
        'warnings':errors+([f'GTFS sin servicios identificables de las líneas: {", ".join(l for l in LINES if by_line[l]==0)}'] if any(by_line[l]==0 for l in LINES) else [])+audit['warnings']
