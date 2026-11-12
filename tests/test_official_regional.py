@@ -19,6 +19,10 @@ class RegionalOfficialTests(unittest.TestCase):
   sat=materialize_day(date(2026,11,14),self.ref)
   self.assertEqual(sum(t['l']=='R11' for t in wd),7)
   self.assertEqual(sum(t['l']=='R11' for t in sat),5)
+  self.assertEqual(sum(t['l']=='R13' for t in wd),4)
+  self.assertEqual(sum(t['l']=='R14' for t in wd),1)
+  self.assertEqual(sum(t['l']=='R13' for t in sat),4)
+  self.assertEqual(sum(t['l']=='R14' for t in sat),0)
   self.assertEqual(sum(t['l']=='R15' for t in wd),14)
   self.assertEqual(sum(t['l']=='R15' for t in sat),14)
   self.assertEqual(sum(t['l']=='R16' for t in wd),8)
@@ -29,6 +33,13 @@ class RegionalOfficialTests(unittest.TestCase):
    self.assertTrue(all(stops[i][1]<stops[i+1][1] for i in range(len(stops)-1)))
    if item['line']=='R11':
     self.assertIn(len(stops),(27,28))
+   if item['line']=='R13':
+    self.assertEqual(stops[0][0],'78400')
+    self.assertEqual(stops[-1][0],'73100')
+    self.assertIn('replacement bus',item['segment'])
+   if item['line']=='R14':
+    self.assertEqual(stops[0][0],'71500')
+    self.assertEqual(stops[-1][0],'78400')
    if item['line']=='R15':
     self.assertTrue(10<=len(stops)<=19)
    if item['line']=='R16':
