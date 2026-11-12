@@ -1,0 +1,30 @@
+name: Extreure l'horari oficial vigent RL3
+on:
+  push:
+    branches: [fix/rl3-anglesola-official-stop-times-20261112]
+    paths: ['scripts/extract_official_rl3.py','.github/workflows/extract-rl3-official.yml']
+permissions: {contents: write}
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with: {python-version: '3.12'}
+      - run: python -m pip install 'pymupdf>=1.24,<1.28'
+      - run: python scripts/extract_official_rl3.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: rl3-official-verified
+          path: data/reference/rl3_official_timetable.json
+          retention-days: 5
+      - name: Save verified reference only on isolated branch
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data/reference/rl3_official_timetable.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'Referència RL3: cel·les verificades del PDF Rodalies de juliol'
+            git push origin HEAD:fix/rl3-anglesola-official-stop-times-20261112
+          fi
