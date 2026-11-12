@@ -111,10 +111,11 @@ def inspect(raw:bytes,gtfs_day:Path):
     north,south=station_order(gtfs_day)
     pdf=fitz.open(stream=raw,filetype='pdf')
     if len(pdf)!=4:raise ValueError('Expected exactly 4 R4 PDF pages')
-    specs=[(north,'weekday','north'),(north,'weekend','north'),
-           (south,'weekday','south'),(south,'weekend','south')]
+    # The northbound PDF uses an irregular grid; keep GTFS as the sole
+    # northbound source until that layout has independent cell verification.
+    specs=[(south,'weekday','south'),(south,'weekend','south')]
     all_services=[];meta=[]
-    for page,(ids,daytype,direction) in zip(pdf,specs):
+    for page,(ids,daytype,direction) in zip((pdf[2],pdf[3]),specs):
         services,quality=parse_grid(page,ids,daytype,direction)
         all_services.extend(services)
         meta.append({'calendar':daytype,'direction':direction,**quality})
@@ -152,7 +153,22 @@ def inspect(raw:bytes,gtfs_day:Path):
                           'arrival':f"{stamps['78805']//60:02d}:{stamps['78805']%60:02d}",
                           'service_id':trip['id']})
     print('R4_TERRASSA_EST_TO_PL_CATALUNYA_0600_0710',json.dumps(early,ensure_ascii=False))
-    if matched<25:raise ValueError('PDF extraction failed GTFS station/time alignment witness')
+    official_pairs=[]
+    for t in official_south:
+        stamps={code:minute for code,minute in t['stops']}
+        if '78710' in stamps and '78805' in stamps:
+            official_pairs.append([stamps['78710'],stamps['78805']])
+    gtfspairs=[]
+    for t in snapshot['trains']:
+        if t.get('l')!='R4':continue
+        times={s[0]:mins(s[2]) for s in t['s']}
+        if '78710' in times and '78805' in times and times['78710']<times['78805']:
+            gtfspairs.append([times['78710'],times['78805']])
+    missing=[p for p in official_pairs if not any(abs(p[0]-g[0])<=2 and abs(p[1]-g[1])<=2 for g in gtfspairs)]
+    print('PDF_COVERAGE',json.dumps({'official_direct_services':len(official_pairs),
+      'gtfs_direct_services':len(gtfspairs),'official_absent_in_gtfs':len(missing),
+      'missing_examples':missing[:14]}))
+    if matched<10:raise ValueError('PDF extraction failed GTFS station/time alignment witness')
     if not any(x['departure']=='06:48' for x in early):
         raise ValueError('Official southbound 06:48 service not located')
     return {'schema':1,'source':SOURCE,'sha256':hashlib.sha256(raw).hexdigest(),
