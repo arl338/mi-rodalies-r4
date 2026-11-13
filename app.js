@@ -223,6 +223,9 @@ function renderOfficialAudit(cat){
   const a=el('a','',l.id);a.href=l.url;a.target='_blank';a.rel='noopener noreferrer';left.append(a);
   left.append(el('small','',l.corridor));
   if(l.timetable_pdf){const pdf=el('a','','Cuadro horario oficial (PDF)');pdf.href=l.timetable_pdf;pdf.target='_blank';pdf.rel='noopener noreferrer';left.append(pdf);}
+  if(l.timetable_pdf_weekend){const pdf=el('a','','Cuadro vigente fines de semana y festivos');pdf.href=l.timetable_pdf_weekend;pdf.target='_blank';pdf.rel='noopener noreferrer';left.append(pdf);}
+  if(l.timetable_note)left.append(el('small','','Aviso de vigencia: '+l.timetable_note));
+  if(l.service_alteration_url){const link=el('a','','Modificaciones oficiales del servicio');link.href=l.service_alteration_url;link.target='_blank';link.rel='noopener noreferrer';left.append(link);}
   const networkCount=cat.network_reference?.line_station_counts?.[l.id];
   const inventory=Number.isInteger(networkCount)?networkCount+' estaciones del inventario · ':'';
   let state=inventory+'horarios GTFS no disponibles',type='warn';
