@@ -2,7 +2,7 @@
   "schema": 1,
   "source": "https://ssl.renfe.com/ftransit/Fichero_CER_FOMENTO/fomento_transit.zip",
   "gtfs_sha256": "8930bd3d6870d5b3673ca2d1dd4f5c63d76daef53acd2ae3939282dd7ed32e5d",
-  "generated_at": "2026-11-13T11:58:36.792289+01:00",
+  "generated_at": "2026-11-13T11:59:28.916105+01:00",
   "date_start": "2026-11-12",
   "date_end": "2026-11-26",
   "discarded_stop_times": {

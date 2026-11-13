@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "batch_id": "24be472a387fd75d3023",
-  "generated_at": "2026-11-13T11:58:47.751925+01:00",
+  "generated_at": "2026-11-13T11:59:47.249156+01:00",
   "dates": [
     "2026-11-12",
     "2026-11-13",
@@ -324,27 +324,13 @@
     {
       "line": "R4",
       "reference_stations": 40,
-      "stations_with_published_calls": 38,
-      "missing_station_ids": [
-        "ref:8301c1a6b798ae13",
-        "ref:3a16c6533750cc0b"
-      ],
-      "missing_station_names": [
-        "Castellbell i el Vilar-Monistrol de Montserrat",
-        "Sant Miquel de Gonteres-Viladecavalls"
-      ],
+      "stations_with_published_calls": 40,
+      "missing_station_ids": [],
+      "missing_station_names": [],
       "out_of_inventory_calls": [
         {
           "id": "78506",
           "name": "Rajadell"
-        },
-        {
-          "id": "78605",
-          "name": "Castellbell i el Vilar-Monist Montserrat"
-        },
-        {
-          "id": "78610",
-          "name": "Sant Miquel de Gonteres"
         }
       ],
       "services_by_day": {
@@ -4405,30 +4391,30 @@
     },
     {
       "line": "R4",
-      "station_id": "ref:8301c1a6b798ae13",
+      "station_id": "78605",
       "station": "Castellbell i el Vilar-Monistrol de Montserrat",
-      "calls_total": 0,
-      "days_with_calls": 0,
+      "calls_total": 539,
+      "days_with_calls": 15,
       "published_days": 15,
-      "minimum_calls_on_any_day": 0,
-      "maximum_calls_on_any_day": 0,
-      "source_status": "inventory_only",
+      "minimum_calls_on_any_day": 33,
+      "maximum_calls_on_any_day": 37,
+      "source_status": "timetable_calls",
       "per_day": {
-        "2026-11-12": 0,
-        "2026-11-13": 0,
-        "2026-11-14": 0,
-        "2026-11-15": 0,
-        "2026-11-16": 0,
-        "2026-11-17": 0,
-        "2026-11-18": 0,
-        "2026-11-19": 0,
-        "2026-11-20": 0,
-        "2026-11-21": 0,
-        "2026-11-22": 0,
-        "2026-11-23": 0,
-        "2026-11-24": 0,
-        "2026-11-25": 0,
-        "2026-11-26": 0
+        "2026-11-12": 37,
+        "2026-11-13": 37,
+        "2026-11-14": 33,
+        "2026-11-15": 33,
+        "2026-11-16": 37,
+        "2026-11-17": 37,
+        "2026-11-18": 37,
+        "2026-11-19": 37,
+        "2026-11-20": 37,
+        "2026-11-21": 33,
+        "2026-11-22": 33,
+        "2026-11-23": 37,
+        "2026-11-24": 37,
+        "2026-11-25": 37,
+        "2026-11-26": 37
       }
     },
     {
@@ -5049,30 +5035,30 @@
     },
     {
       "line": "R4",
-      "station_id": "ref:3a16c6533750cc0b",
-      "station": "Sant Miquel de Gonteres-Viladecavalls",
-      "calls_total": 0,
-      "days_with_calls": 0,
+      "station_id": "78610",
+      "station": "Sant Miquel de Gonteres",
+      "calls_total": 539,
+      "days_with_calls": 15,
       "published_days": 15,
-      "minimum_calls_on_any_day": 0,
-      "maximum_calls_on_any_day": 0,
-      "source_status": "inventory_only",
+      "minimum_calls_on_any_day": 33,
+      "maximum_calls_on_any_day": 37,
+      "source_status": "timetable_calls",
       "per_day": {
-        "2026-11-12": 0,
-        "2026-11-13": 0,
-        "2026-11-14": 0,
-        "2026-11-15": 0,
-        "2026-11-16": 0,
-        "2026-11-17": 0,
-        "2026-11-18": 0,
-        "2026-11-19": 0,
-        "2026-11-20": 0,
-        "2026-11-21": 0,
-        "2026-11-22": 0,
-        "2026-11-23": 0,
-        "2026-11-24": 0,
-        "2026-11-25": 0,
-        "2026-11-26": 0
+        "2026-11-12": 37,
+        "2026-11-13": 37,
+        "2026-11-14": 33,
+        "2026-11-15": 33,
+        "2026-11-16": 37,
+        "2026-11-17": 37,
+        "2026-11-18": 37,
+        "2026-11-19": 37,
+        "2026-11-20": 37,
+        "2026-11-21": 33,
+        "2026-11-22": 33,
+        "2026-11-23": 37,
+        "2026-11-24": 37,
+        "2026-11-25": 37,
+        "2026-11-26": 37
       }
     },
     {

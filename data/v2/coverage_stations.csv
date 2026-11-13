@@ -124,7 +124,7 @@ R4,78801,Barcelona Torre Baró-Vallbona,2138,15,15,119,151,timetable_calls
 R4,78802,Barcelona-Fabra i Puig,2141,15,15,119,151,timetable_calls
 R4,78805,Barcelona-Plaça de Catalunya,2141,15,15,119,151,timetable_calls
 R4,71801,Barcelona-Sants,2141,15,15,119,151,timetable_calls
-R4,ref:8301c1a6b798ae13,Castellbell i el Vilar-Monistrol de Montserrat,0,0,15,0,0,inventory_only
+R4,78605,Castellbell i el Vilar-Monistrol de Montserrat,539,15,15,33,37,timetable_calls
 R4,72210,Castellbisbal,1900,15,15,95,138,timetable_calls
 R4,78706,Cerdanyola del Vallès,2090,15,15,117,149,timetable_calls
 R4,72303,Cornellà,1902,15,15,95,138,timetable_calls
@@ -147,7 +147,7 @@ R4,78709,Sabadell Nord,2090,15,15,117,149,timetable_calls
 R4,78703,Sabadell Sud,2090,15,15,117,149,timetable_calls
 R4,72301,Sant Feliu de Llobregat,1900,15,15,95,138,timetable_calls
 R4,72302,Sant Joan Despí,1900,15,15,95,138,timetable_calls
-R4,ref:3a16c6533750cc0b,Sant Miquel de Gonteres-Viladecavalls,0,0,15,0,0,inventory_only
+R4,78610,Sant Miquel de Gonteres,539,15,15,33,37,timetable_calls
 R4,72207,Sant Sadurní d'Anoia,1028,15,15,64,70,timetable_calls
 R4,71600,Sant Vicenç de Calders,608,15,15,36,42,timetable_calls
 R4,78604,Sant Vicenç de Castellet,902,15,15,33,70,timetable_calls
