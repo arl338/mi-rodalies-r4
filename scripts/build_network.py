@@ -461,6 +461,41 @@ def build(cer,md,output,days,base=None):
                          'viajes reconocidos, calendario, paradas y errores de parseo. ' +
                          'No se publican datos ficticios.')
     rows=dedupe(results)
+    # Renfe's legacy GTFS may label the initial Manresa-Rajadell segment
+    # of an official RL4 service as R4 (e.g. 33521). Require BOTH exact
+    # stop/time cells and the commercial train number from the official
+    # RL4 publication before suppressing the incorrectly labelled R4
+    # fragment. The full official RL4 journey is imported below.
+    rl4_verified = load_official_supplement()
+    rl4_rows = defaultdict(list)
+    for item in rl4_verified["services"]:
+        if item["line"] == "RL4":
+            rl4_rows[item["train_number"]].append(item)
+    filtered = []
+    corrected_rl4_fragments = 0
+    for train in rows:
+        mismatch = False
+        if (train["l"] == "R4" and len(train["s"]) == 2
+                and train.get("n") in rl4_rows):
+            service_day = date.fromisoformat(train["day"])
+            calendar = "weekend" if service_day.weekday() >= 5 else "weekday"
+            actual = [(stop[0], datetime.fromtimestamp(stop[2], TZ).hour * 60
+                       + datetime.fromtimestamp(stop[2], TZ).minute) for stop in train["s"]]
+            for official in rl4_rows[train["n"]]:
+                if official["calendar"] not in (calendar, "daily"):
+                    continue
+                expected = dict(official["stops"])
+                if all(code in expected and minute == expected[code]
+                       for code, minute in actual):
+                    mismatch = True
+                    corrected_rl4_fragments += 1
+                    break
+        if not mismatch:
+            filtered.append(train)
+    rows = filtered
+    if corrected_rl4_fragments:
+        print("CORRECCION ETIQUETADO GTFS: excluidos", corrected_rl4_fragments,
+              "fragmentos RL4 rotulados R4; recorrido RL4 oficial importado", flush=True)
     stations={};by_day=defaultdict(list);by_line=Counter()
     for code,stop in static_catalog.items():
         stations[code]={'id':code,'name':stop['name'] or code,'lat':float(stop['lat']) if stop['lat'] else None,'lon':float(stop['lon']) if stop['lon'] else None,'lines':set(stop['lines'])}
