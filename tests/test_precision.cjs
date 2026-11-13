@@ -42,4 +42,24 @@ assert.equal(E.scopedLine('C4',''),'');
 assert.equal(E.alertsForLines({alerts:[{text:'Incidencia R3',line:'R3'}]},new Set(['R4']),true).length,0);
 assert.equal(E.alertsForLines({alerts:[{text:'Incidencia C4',line:'C4'}]},new Set(['R4']),true).length,1);
 
+// Official regional PDF with a train number: refuse ETA from a different train
+// even when line, station, destination and scheduled minute coincide.
+const rail={id:'pdf-regional-r13-15040',n:'15040',l:'R13',
+ day:'2026-11-12',src:'official-regional-pdf',
+ s:[['78400',dep,dep],['73003',dep+2700,dep+2700]]};
+const pdfTrip=E.direct([rail],'78400','73003',dep-60,dep+120)[0];
+function pdfBoard(number){
+ return E.normalizeBoard({updatedAt:now*1000,
+ departures:[{line:'R13',trainCode:number,stationCode:'78400',
+ destinationCode:'73003',plannedTime:dep*1000,
+ estimatedTime:(dep+180)*1000,circulationState:'RUNNING',
+ timestamp:now*1000}]},'test',now,'78400');
+}
+const reject=E.correlateTimetableBoards([pdfTrip],pdfBoard('15042'),[],new Map());
+assert.equal(reject[0].linkedScheduleKey,undefined,'Wrong numbered PDF train must never inherit ETA');
+assert.equal(E.enrichJourney(pdfTrip,reject,[],[],now).estimated,null);
+const accept=E.correlateTimetableBoards([pdfTrip],pdfBoard('15040'),[],new Map());
+assert.ok(accept[0].linkedScheduleKey,'Verified numbered PDF train may link to its own station ETA');
+assert.equal(E.enrichJourney(pdfTrip,accept,[],[],now).estimated,dep+180);
+
 console.log('OK: 19 controles de precisión: C4/R4, ámbitos, delay_s, transbordos y avisos');
