@@ -45,7 +45,11 @@
           "aliases": []
         }
       ],
-      "timetable_pdf": "https://rodalies.gencat.cat/web/.content/02_Horaris/horaris/R2.pdf"
+      "timetable_pdf": "https://rodalies.gencat.cat/web/.content/02_Horaris/horaris/R2.pdf",
+      "timetable_pdf_weekend": "https://rodalies.gencat.cat/web/.content/01_Actualitat/2026/11_09_Gava_Castelldefels/R2_2026-A-partir-del12.11.26-Castelldefels-acaben-en-Gava-1.pdf",
+      "timetable_effective_from": "2026-11-12",
+      "service_alteration_url": "https://rodalies.gencat.cat/es/alteracions_del_servei/",
+      "timetable_note": "El PDF base de julio NO incorpora todos los cambios vigentes. Desde el 12/11/2026 hasta el 14/12/2026, los trenes comerciales R2 Granollers-Castelldefels terminan en Gavà. Existe PDF actualizado para fines de semana y festivos; no inferir laborables de él."
     },
     {
       "id": "R2N",
@@ -73,7 +77,11 @@
           ]
         }
       ],
-      "timetable_pdf": "https://rodalies.gencat.cat/web/.content/02_Horaris/horaris/R2.pdf"
+      "timetable_pdf": "https://rodalies.gencat.cat/web/.content/02_Horaris/horaris/R2.pdf",
+      "timetable_pdf_weekend": "https://rodalies.gencat.cat/web/.content/01_Actualitat/2026/11_09_Gava_Castelldefels/R2_2026-A-partir-del12.11.26-Castelldefels-acaben-en-Gava-1.pdf",
+      "timetable_effective_from": "2026-11-12",
+      "service_alteration_url": "https://rodalies.gencat.cat/es/alteracions_del_servei/",
+      "timetable_note": "El PDF base de julio NO incorpora todos los cambios vigentes. Desde el 12/11/2026 hasta el 14/12/2026, los trenes comerciales R2 Granollers-Castelldefels terminan en Gavà. Existe PDF actualizado para fines de semana y festivos; no inferir laborables de él."
     },
     {
       "id": "R2S",
@@ -102,7 +110,11 @@
           ]
         }
       ],
-      "timetable_pdf": "https://rodalies.gencat.cat/web/.content/02_Horaris/horaris/R2.pdf"
+      "timetable_pdf": "https://rodalies.gencat.cat/web/.content/02_Horaris/horaris/R2.pdf",
+      "timetable_pdf_weekend": "https://rodalies.gencat.cat/web/.content/01_Actualitat/2026/11_09_Gava_Castelldefels/R2_2026-A-partir-del12.11.26-Castelldefels-acaben-en-Gava-1.pdf",
+      "timetable_effective_from": "2026-11-12",
+      "service_alteration_url": "https://rodalies.gencat.cat/es/alteracions_del_servei/",
+      "timetable_note": "El PDF base de julio NO incorpora todos los cambios vigentes. Desde el 12/11/2026 hasta el 14/12/2026, los trenes comerciales R2 Granollers-Castelldefels terminan en Gavà. Existe PDF actualizado para fines de semana y festivos; no inferir laborables de él."
     },
     {
       "id": "R3",
