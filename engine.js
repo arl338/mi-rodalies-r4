@@ -275,7 +275,7 @@ function correlateTimetableBoards(journeys,boards,knownServices=[],stationNames=
    // number. Same station/line/minute is NOT sufficient to identify a train.
    // Anonymous PDF and Trenalia schedule-only rows remain subject to the
    // stricter unique-time/direction checks below.
-   if(anonymousSchedule(l.t)&&/^\\d{3,6}$/.test(String(l.t.n||''))&&
+   if(anonymousSchedule(l.t)&&/^[0-9]{3,6}$/.test(String(l.t.n||''))&&
       String(Number(l.t.n))!==String(Number(row.number)))return false;
    // Applies to every anonymous itinerary: R4 PDF and all 19 commercial
    // lines eligible for Trenalia. Without route proof retain the schedule.
