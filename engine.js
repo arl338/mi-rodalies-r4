@@ -271,9 +271,12 @@ function correlateTimetableBoards(journeys,boards,knownServices=[],stationNames=
   if(matchesIdentifiedService)continue;
   const applicable=legs.filter(l=>{
    if(l.from!==row.station||l.t.l!==row.line||Math.abs(l.depart-row.planned)>60)return false;
-   // RL3 PDF prints the commercial number; reject a different train even
-   // when the same line and departure minute accidentally coincide.
-   if(l.t.src==='official-rl3-pdf'&&String(Number(l.t.n))!==String(Number(row.number)))return false;
+   // Any official PDF row carrying a commercial number must match that
+   // number. Same station/line/minute is NOT sufficient to identify a train.
+   // Anonymous PDF and Trenalia schedule-only rows remain subject to the
+   // stricter unique-time/direction checks below.
+   if(anonymousSchedule(l.t)&&/^\\d{3,6}$/.test(String(l.t.n||''))&&
+      String(Number(l.t.n))!==String(Number(row.number)))return false;
    // Applies to every anonymous itinerary: R4 PDF and all 19 commercial
    // lines eligible for Trenalia. Without route proof retain the schedule.
    return directionVerified(l,row,knownServices,stationNames);
