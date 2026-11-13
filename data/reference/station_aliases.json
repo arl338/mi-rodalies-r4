@@ -118,6 +118,27 @@
       "sources": [
         "https://www.adif.es/w/78400-lleida-pirineus"
       ]
+    },
+    {
+      "adif_code": "78605",
+      "display_name": "Castellbell i el Vilar-Monistrol de Montserrat",
+      "aliases": [
+        "Castellbell i el Vilar-Monist Montserrat",
+        "Castellbell-Monistrol"
+      ],
+      "sources": [
+        "https://www.adif.es/w/78605-castellbell-monist."
+      ]
+    },
+    {
+      "adif_code": "78610",
+      "display_name": "Sant Miquel de Gonteres",
+      "aliases": [
+        "Sant Miquel de Gonteres-Viladecavalls"
+      ],
+      "sources": [
+        "https://www.adif.es/w/78610-st.miquel-gonteres"
+      ]
     }
   ]
 }
