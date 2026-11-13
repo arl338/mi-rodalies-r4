@@ -91,7 +91,7 @@ Los importadores manejan las plantillas `weekday`, `weekend` y `daily`, pero no 
 
 `engine.js` mantiene normalizadores separados para paneles, posiciones, cancelaciones y avisos. Existen límites de frescura orientativos (panel hasta 180 s, posición hasta 90 s), filtros para otros núcleos, coincidencia por `trip_id`/número y detección de contradicciones de ETA. Este diseño es conservador, pero:
 
-- Los cuadros PDF “anónimos” pueden correlacionarse con un panel por estación/línea/hora/destino incluso cuando su número comercial está disponible: reforzar coincidencia de número para **todas** las fuentes PDF con número, no solo RL3.
+- **Corregido en esta auditoría:** antes la comprobación obligatoria del número comercial para una ETA de PDF se limitaba a RL3. Se ha extendido a todos los PDF que publican número comercial, con prueba de regresión de coincidencia negativa y positiva. Los PDF sin número requieren aún correlación inequívoca por estación, línea, minuto y sentido.
 - La aplicación mezcla resultados oficiales con horarios directos de Trenalia etiquetados como `schedule-only`. Deben separarse visiblemente de la base oficial y no contarse como cumplimiento de cobertura.
 - Valfiguer y RadarDeTrenes pueden redistribuir el mismo origen Renfe/ADIF: el acuerdo entre ambos no acredita independencia estadística.
 - La comprobación de disponibilidad HTTP 200 de un proveedor externo puede fallar con servicios caídos o límites de acceso; no equivale automáticamente a error del motor.
@@ -105,6 +105,7 @@ Los importadores manejan las plantillas `weekday`, `weekend` y `daily`, pero no 
 - Exclusión estricta de fragmentos RL4 que Renfe GTFS marcaba erróneamente como R4 cuando coincidían número, dos estaciones y minutos oficiales.
 - Registro de vigencia/alteración de R2 y enlace al cuadro especial de noviembre.
 - Mejoras de información de procedencia y advertencias en la interfaz.
+- Control generalizado de número comercial al enlazar la ETA de un panel con cualquier horario PDF numerado; comprobado con prueba de regresión.
 
 ## 8. Orden de resolución propuesto
 
