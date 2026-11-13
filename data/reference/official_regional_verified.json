@@ -8,7 +8,7 @@
     "R13": "https://rodalies.gencat.cat/web/.content/02_Horaris/horaris/R13R14.pdf",
     "R14": "https://rodalies.gencat.cat/web/.content/02_Horaris/horaris/R13R14.pdf"
   },
-  "notes": "Verified individual printed train/station cells, not a full timetable. R11 selects full-stop R trains in the outbound direction; R16 selects 8 directly labelled outbound trains. Dashes and non-running cells are excluded, never interpolated. Calendars use printed weekday/weekend for R11; R16 daily rows are subject to timetable footnotes and service notices. R15 includes only explicitly R15-labelled outbound train rows with directly printed calls; service calendar highlights and road replacement segments must be verified separately before asserting complete day-specific operation. R13 15040/15042/15044/15046 are ONLY the Lleida-Pirineus to La Plana-Picamoixons train segments; the published service alteration requires a road replacement afterward. R14 15051 is explicitly weekday-only. This reference does not establish complete end-to-end railway itineraries.",
+  "notes": "Verified individual printed train/station cells, not a full timetable. R11 selects full-stop R trains in the outbound direction; R16 selects 8 directly labelled outbound trains. Dashes and non-running cells are excluded, never interpolated. Calendars use printed weekday/weekend for R11; R16 daily rows are subject to timetable footnotes and service notices. R15 includes only explicitly R15-labelled outbound train rows with directly printed calls; service calendar highlights and road replacement segments must be verified separately before asserting complete day-specific operation. R13 records are deliberately cut at Les Borges Blanques, current rail service limit; the published full timetable continues through a road-replacement corridor. R14 15051 is weekday-only and is cut at La Plana-Picamoixons, current rail-only service limit. This reference does not establish complete end-to-end railway itineraries.",
   "services": [
     {
       "line": "R11",
@@ -2712,7 +2712,7 @@
       "line": "R13",
       "train_number": "15040",
       "calendar": "daily",
-      "segment": "Lleida-Pirineus → La Plana-Picamoixons; train segment before replacement bus",
+      "segment": "Lleida-Pirineus → Les Borges Blanques: solo tramo ferroviario operativo; continuación por carretera no modelada como tren",
       "stops": [
         [
           "78400",
@@ -2729,26 +2729,6 @@
         [
           "73003",
           356
-        ],
-        [
-          "73005",
-          368
-        ],
-        [
-          "73006",
-          375
-        ],
-        [
-          "73007",
-          380
-        ],
-        [
-          "73008",
-          387
-        ],
-        [
-          "73100",
-          402
         ]
       ]
     },
@@ -2756,7 +2736,7 @@
       "line": "R13",
       "train_number": "15042",
       "calendar": "daily",
-      "segment": "Lleida-Pirineus → La Plana-Picamoixons; train segment before replacement bus",
+      "segment": "Lleida-Pirineus → Les Borges Blanques: solo tramo ferroviario operativo; continuación por carretera no modelada como tren",
       "stops": [
         [
           "78400",
@@ -2773,38 +2753,6 @@
         [
           "73003",
           508
-        ],
-        [
-          "73004",
-          512
-        ],
-        [
-          "73005",
-          521
-        ],
-        [
-          "73006",
-          528
-        ],
-        [
-          "73007",
-          533
-        ],
-        [
-          "73008",
-          540
-        ],
-        [
-          "73009",
-          546
-        ],
-        [
-          "73010",
-          549
-        ],
-        [
-          "73100",
-          554
         ]
       ]
     },
@@ -2812,7 +2760,7 @@
       "line": "R13",
       "train_number": "15044",
       "calendar": "daily",
-      "segment": "Lleida-Pirineus → La Plana-Picamoixons; train segment before replacement bus",
+      "segment": "Lleida-Pirineus → Les Borges Blanques: solo tramo ferroviario operativo; continuación por carretera no modelada como tren",
       "stops": [
         [
           "78400",
@@ -2825,26 +2773,6 @@
         [
           "73003",
           959
-        ],
-        [
-          "73005",
-          971
-        ],
-        [
-          "73006",
-          978
-        ],
-        [
-          "73007",
-          983
-        ],
-        [
-          "73008",
-          990
-        ],
-        [
-          "73100",
-          1004
         ]
       ]
     },
@@ -2852,7 +2780,7 @@
       "line": "R13",
       "train_number": "15046",
       "calendar": "daily",
-      "segment": "Lleida-Pirineus → La Plana-Picamoixons; train segment before replacement bus",
+      "segment": "Lleida-Pirineus → Les Borges Blanques: solo tramo ferroviario operativo; continuación por carretera no modelada como tren",
       "stops": [
         [
           "78400",
@@ -2865,26 +2793,6 @@
         [
           "73003",
           1109
-        ],
-        [
-          "73005",
-          1121
-        ],
-        [
-          "73006",
-          1128
-        ],
-        [
-          "73007",
-          1133
-        ],
-        [
-          "73008",
-          1140
-        ],
-        [
-          "73100",
-          1154
         ]
       ]
     },
@@ -2892,7 +2800,7 @@
       "line": "R14",
       "train_number": "15051",
       "calendar": "weekday",
-      "segment": "Tarragona → Lleida-Pirineus; direct published train stops",
+      "segment": "Tarragona → La Plana-Picamoixons: solo tramo ferroviario operativo; tramo posterior afectado por servicio alternativo por carretera",
       "stops": [
         [
           "71500",
@@ -2917,50 +2825,6 @@
         [
           "73100",
           399
-        ],
-        [
-          "73010",
-          402
-        ],
-        [
-          "73009",
-          405
-        ],
-        [
-          "73008",
-          413
-        ],
-        [
-          "73007",
-          420
-        ],
-        [
-          "73006",
-          425
-        ],
-        [
-          "73005",
-          433
-        ],
-        [
-          "73004",
-          442
-        ],
-        [
-          "73003",
-          447
-        ],
-        [
-          "73002",
-          452
-        ],
-        [
-          "73001",
-          458
-        ],
-        [
-          "78400",
-          467
         ]
       ]
     }
