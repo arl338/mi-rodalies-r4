@@ -35,11 +35,11 @@ class RegionalOfficialTests(unittest.TestCase):
     self.assertIn(len(stops),(27,28))
    if item['line']=='R13':
     self.assertEqual(stops[0][0],'78400')
-    self.assertEqual(stops[-1][0],'73100')
-    self.assertIn('replacement bus',item['segment'])
+    self.assertEqual(stops[-1][0],'73003')
+    self.assertIn('carretera',item['segment'])
    if item['line']=='R14':
     self.assertEqual(stops[0][0],'71500')
-    self.assertEqual(stops[-1][0],'78400')
+    self.assertEqual(stops[-1][0],'73100')
    if item['line']=='R15':
     self.assertTrue(10<=len(stops)<=19)
    if item['line']=='R16':
