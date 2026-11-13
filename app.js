@@ -214,10 +214,10 @@ function renderOfficialAudit(cat){
   intro.textContent='Este catálogo todavía no incorpora el contraste con la Generalitat. Ejecuta la tarea V2.0.1 de GitHub Actions.';
   return;
  }
- const total=audit.lines.length,scheduled=audit.lines.filter(l=>l.status!=='sin_horarios_publicados').length;
+ const total=audit.lines.length,scheduled=cat.lines.filter(l=>l.present).length;
  const full=audit.lines.filter(l=>l.status==='controles_localizados').length;
  const partial=audit.lines.filter(l=>l.status==='pendiente_contraste').length;
- intro.textContent=`${total} líneas en la referencia de la Generalitat · ${scheduled} con horarios GTFS · ${full} con puntos de control localizados · ${partial} pendientes de contraste. La comparación no certifica todas las estaciones.`;
+ intro.textContent=`${total} líneas en la referencia de la Generalitat · ${scheduled} con horarios estructurados GTFS/PDF (cobertura parcial) · ${full} con puntos de control localizados · ${partial} pendientes de contraste. La comparación no certifica todas las estaciones.`;
  for(const l of audit.lines){
   const row=el('div','catalog-line-row'),left=el('div','catalog-line-name'),right=el('div','catalog-line-status');
   const a=el('a','',l.id);a.href=l.url;a.target='_blank';a.rel='noopener noreferrer';left.append(a);
@@ -228,7 +228,11 @@ function renderOfficialAudit(cat){
   if(l.service_alteration_url){const link=el('a','','Modificaciones oficiales del servicio');link.href=l.service_alteration_url;link.target='_blank';link.rel='noopener noreferrer';left.append(link);}
   const networkCount=cat.network_reference?.line_station_counts?.[l.id];
   const inventory=Number.isInteger(networkCount)?networkCount+' estaciones del inventario · ':'';
-  let state=inventory+'horarios GTFS no disponibles',type='warn';
+  const entry=cat.lines.find(x=>x.id===l.id);
+  let state=inventory+'sin horarios estructurados oficiales',type='warn';
+  if(entry?.present&&l.status==='sin_horarios_publicados'){
+   state=inventory+`${entry.scheduled_trips_in_period} instancias PDF programadas en el período; sin GTFS, cobertura parcial`;
+  }
   if(l.status==='controles_localizados'){state=inventory+`${l.gtfs_station_count} estaciones con GTFS · controles principales localizados`;type='good';}
   else if(l.status==='pendiente_contraste'){state=inventory+`${l.gtfs_station_count} estaciones con GTFS · ${l.not_found_in_gtfs.length} puntos sin cotejar`;type='warn';}
   right.append(el('span',type,state));
