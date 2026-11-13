@@ -654,7 +654,7 @@ def build(cer,md,output,days,base=None):
     catalog={
        'schema':2,'batch_id':batch_id,'generated_at':datetime.now(TZ).isoformat(),
        'coverage_start':base.isoformat(),'coverage_end':dates[-1].isoformat(),
-       'source':'Renfe Data GTFS + PDF oficials Rodalies R1/R4/RL3/RT1/RT2/RL4/RG1/R17/R11/R16 (només horaris programats, sense circulació)',
+       'source':'Renfe Data GTFS + PDF oficials R1/R4/RL3/RT1/RT2/RL4/RG1/R17/R11/R13/R14/R15/R16; horaris programats, no circulació confirmada',
        'station_names':'ADIF/BOE exact code > GTFS stop ID > isolated reference placeholder; no inferred timetable',
        'source_urls':{'cer':CERCANIAS,'md':MEDIA_DISTANCIA},'license':'CC BY 4.0',
        'official_reference':audit,'source_quality':source_quality,
