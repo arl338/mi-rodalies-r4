@@ -306,7 +306,12 @@ def validate_official_reference(reference, stations, lines):
         elif unmatched:status='pendiente_contraste'
         else:status='controles_localizados'
         checks.append({'id':line,'area':entry['area'],'corridor':entry['corridor'],
-                       'url':entry['url'],'timetable_pdf':entry.get('timetable_pdf'), 'status':status,
+                       'url':entry['url'],'timetable_pdf':entry.get('timetable_pdf'),
+                        'timetable_pdf_weekend':entry.get('timetable_pdf_weekend'),
+                        'timetable_effective_from':entry.get('timetable_effective_from'),
+                        'timetable_note':entry.get('timetable_note'),
+                        'service_alteration_url':entry.get('service_alteration_url'),
+                        'status':status,
                        'scheduled_trips':live[line]['scheduled_trips_in_period'],
                        'gtfs_station_count':len(stops),
                        'reference_checkpoints':len(entry.get('checkpoints',[])),
