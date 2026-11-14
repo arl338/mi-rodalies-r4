@@ -1,9 +1,9 @@
 # Auditoría automática de horarios, líneas y estaciones
 
-**Generado:** 2026-11-13T12:29:15.838280+01:00  
-**Lote:** \`24be472a387fd75d3023\`  
-**Días publicados:** 15; 2026-11-12 a 2026-11-26  
-**Instancias de tren:** 15581
+**Generado:** 2026-11-14T11:52:36.952315+01:00  
+**Lote:** \`9ddcb759df1a40616c3e\`  
+**Días publicados:** 15; 2026-11-13 a 2026-11-27  
+**Instancias de tren:** 14306
 
 La presencia de una parada no acredita servicio comercial ni cobertura íntegra.
 Las horas son programadas; no se usan feeds de terceros en este informe.
@@ -14,9 +14,9 @@ Las horas son programadas; no se usan feeds de terceros en este informe.
 | R2 | 14 | 14 | 0 | 0 |
 | R2N | 21 | 0 | 21 | 0 |
 | R2S | 17 | 0 | 17 | 0 |
-| R3 | 35 | 28 | 7 | 3240 |
-| R4 | 40 | 40 | 0 | 4 |
-| R7 | 7 | 5 | 2 | 0 |
+| R3 | 35 | 28 | 7 | 3031 |
+| R4 | 40 | 40 | 0 | 8 |
+| R7 | 7 | 6 | 1 | 0 |
 | R8 | 9 | 9 | 0 | 0 |
 | RG1 | 44 | 18 | 26 | 0 |
 | RT1 | 6 | 6 | 0 | 0 |
@@ -40,7 +40,7 @@ Las horas son programadas; no se usan feeds de terceros en este informe.
 
 **R3**: Barcelona Arc de Triomf, Barcelona La Sagrera-Meridiana, Barcelona Torre Baró-Vallbona, Barcelona-Plaça de Catalunya, Barcelona-Sants, L'Hospitalet de Llobregat, La Tor de Querol-Enveig
 
-**R7**: Barcelona Torre Baró-Vallbona, Barcelona-Fabra i Puig
+**R7**: Barcelona Torre Baró-Vallbona
 
 **RG1**: Arenys de Mar, Badalona, Barcelona Arc de Triomf, Barcelona El Clot, Barcelona-Plaça de Catalunya, Barcelona-Sants, Blanes, Cabrera de Mar-Vilassar de Mar, Caldes d'Estrac, Calella, Canet de Mar, El Masnou, L'Hospitalet de Llobregat, Malgrat de Mar, Mataró, Montgat, Montgat-Nord, Ocata, Pineda de Mar, Premià de Mar, Sant Adrià de Besòs, Sant Andreu de Llavaneres, Sant Pol de Mar, Santa Susanna, Tordera, Vilassar de Mar
 
@@ -61,6 +61,8 @@ Las horas son programadas; no se usan feeds de terceros en este informe.
 **R2**: Sant Vicenç de Calders (71600), Calafell (71601), Segur de Calafell (71602), Cunit (71603), Cubelles (71604), Vilanova i la Geltrú (71700), Sitges (71701), Garraf (71703), Platja de Castelldefels (71704), Cardedeu (79101), Llinars del Vallès (79102), Palautordera (79103), Sant Celoni (79104), Gualba (79105), Riells i Viabrea-Breda (79106), Hostalric (79107), Les Franqueses-Granollers Nord (79109), Maçanet-Massanes (79200)
 
 **R4**: Rajadell (78506)
+
+**R7**: Barcelona-Sants (71801), Cornellà (72303), L'Hospitalet de Llobregat (72305), Barcelona Arc de Triomf (78804), Barcelona-Plaça de Catalunya (78805), Barcelona La Sagrera-Meridiana (78806)
 
 ## Interpretación
 
