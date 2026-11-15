@@ -41,14 +41,22 @@ def batch_is_current(root: Path, today: date | None = None) -> tuple[bool, str]:
         published = sorted(p.name for p in root.glob("20??-??-??.json"))
         if published != [day + ".json" for day in dates]:
             return False, "missing, obsolete, or extra daily timetable"
+        train_count = 0
         for day in dates:
             file = json.loads((root / (day + ".json")).read_text(encoding="utf-8"))
             if (file.get("schema") != 2 or file.get("day") != day
                     or file.get("batch_id") != batch
                     or not isinstance(file.get("trains"), list)):
                 return False, "daily timetable from a different or invalid batch: " + day
+            train_count += len(file["trains"])
+        if train_count <= 0:
+            return False, "daily files contain no train services"
+        # Reapply the same integrity gate used before publication: batch,
+        # source SHA, every train call, every line total and all daily files.
+        from validate_generated import validate
+        validate(root, days=14)
         return True, "today's validated GTFS batch and station audit are present"
-    except (OSError, ValueError, TypeError, KeyError) as exc:
+    except (OSError, ValueError, TypeError, KeyError, AssertionError) as exc:
         return False, "cannot verify daily batch: " + str(exc)[:200]
 
 def main() -> None:
