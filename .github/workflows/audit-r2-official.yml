@@ -1,0 +1,26 @@
+name: Auditoría R2 Nord y Sud · PDF oficial vigente (diagnóstico)
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/audit_official_r2_pdf.py'
+      - '.github/workflows/audit-r2-official.yml'
+  workflow_dispatch:
+permissions: {contents: read}
+jobs:
+  positioned-cells:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with: {python-version: '3.12'}
+      - name: Install PDF text geometry reader (not OCR)
+        run: python -m pip install 'pymupdf>=1.24,<2'
+      - name: Analyze source PDF by actual station/grid coordinates
+        run: python scripts/audit_official_r2_pdf.py --out /tmp/rodalies-r2-position-audit.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: rodalies-r2-verified-pdf-cell-audit
+          path: /tmp/rodalies-r2-position-audit.json
+          retention-days: 7
