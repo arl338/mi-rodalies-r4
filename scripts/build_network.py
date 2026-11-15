@@ -673,6 +673,19 @@ def build(cer,md,output,days,base=None):
                 r2_counts[train['l']] += 1
             r2_count_by_day[key] = len(extras)
             by_day[key].extend(extras)
+        # The source has a verified special R2 Nord service from Barcelona
+        # Estació de França to Aeroport, beyond the usual 21-station corridor.
+        # Include that stop in the selector only when the official PDF
+        # documents an actual train call, not from geographic inference.
+        if any(train["l"]=="R2N" and
+               any(call[0]=="79400" for call in train["s"])
+               for trains in by_day.values() for train in trains):
+            st=stations["79400"]
+            refs=set(st.get("reference_lines",[]))
+            refs.add("R2N")
+            st["reference_lines"]=sorted(refs,key=LINES.index)
+            st.setdefault("official_service_variants",[]).append(
+                "R2N: Estació de França → Aeroport (documented PDF special service)")
     pdf_r2_meta=official_r2_metadata(r2_reference,r2_count_by_day)
     print('R2 Nord/Sud verified official PDF schedules:',dict(r2_counts),flush=True)
 
