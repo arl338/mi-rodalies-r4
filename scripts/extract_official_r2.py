@@ -89,12 +89,10 @@ def parse_row(page_index, row, highlighted=False):
             "printed_y":round(sum(x["y"] for x in row)/len(row),2),
             "stops":pairs},None
 
-def highlighted_row(page,y) -> bool:
+def highlighted_row(pix,y) -> bool:
     """Flag PDF rows highlighted for Sunday/holiday-specific operation.
     Do not turn 'Sunday only' into Saturday service or vice versa.
     """
-    pix=page.get_pixmap(matrix=__import__("fitz").Matrix(1,1),
-                       colorspace=__import__("fitz").csRGB,alpha=False)
     # A bright non-neutral background at multiple cells denotes official
     # salmon/lilac exception highlighting (not alternating grey columns).
     matches=0
@@ -126,12 +124,15 @@ def extract(raw:bytes):
                 if 575<=y<=page.rect.height-130:
                     cells.append({"x":x,"y":y,"time":token})
         groups=group_rows(cells)
+        # One rasterization per page rather than one per row.
+        pix=page.get_pixmap(matrix=fitz.Matrix(1,1),colorspace=fitz.csRGB,
+                           alpha=False) if pageno>=2 else None
         reasons=Counter()
         for row in groups:
             y=sum(x["y"] for x in row)/len(row)
             # Exception markings appear only on weekend pages. Never infer
             # Saturday vs Sunday/holiday for those highlighted services.
-            highlight=highlighted_row(page,y) if pageno>=2 else False
+            highlight=highlighted_row(pix,y) if pix is not None else False
             record,error=parse_row(pageno,row,highlighted=highlight)
             if error:reasons[error]+=1;continue
             record["id"]=f'r2-{pageno+1}-{round(y*10)}'
