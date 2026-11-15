@@ -1,7 +1,7 @@
 # Auditoría automática de horarios, líneas y estaciones
 
-**Generado:** 2026-11-15T21:08:03.946882+01:00  
-**Lote:** \`b168c46af2261cb9be45\`  
+**Generado:** 2026-11-15T21:09:31.724074+01:00  
+**Lote:** \`491c416929c0ef63772b\`  
 **Días publicados:** 15; 2026-11-14 a 2026-11-28  
 **Instancias de tren:** 18070
 
@@ -12,7 +12,7 @@ Las horas son programadas; no se usan feeds de terceros en este informe.
 |---|---:|---:|---:|---:|
 | R1 | 31 | 27 | 4 | 0 |
 | R2 | 14 | 14 | 0 | 0 |
-| R2N | 21 | 21 | 0 | 0 |
+| R2N | 22 | 22 | 0 | 0 |
 | R2S | 17 | 17 | 0 | 0 |
 | R3 | 35 | 28 | 7 | 3247 |
 | R4 | 40 | 40 | 0 | 5 |
@@ -55,8 +55,6 @@ Las horas son programadas; no se usan feeds de terceros en este informe.
 ## Horarios fuera del inventario comercial
 
 **R2**: Sant Vicenç de Calders (71600), Calafell (71601), Segur de Calafell (71602), Cunit (71603), Cubelles (71604), Vilanova i la Geltrú (71700), Sitges (71701), Garraf (71703), Platja de Castelldefels (71704), Cardedeu (79101), Llinars del Vallès (79102), Palautordera (79103), Sant Celoni (79104), Gualba (79105), Riells i Viabrea-Breda (79106), Hostalric (79107), Les Franqueses-Granollers Nord (79109), Maçanet-Massanes (79200)
-
-**R2N**: Barcelona-Estació de França (79400)
 
 **R4**: Rajadell (78506)
 

@@ -1,7 +1,7 @@
 {
   "schema": 1,
-  "batch_id": "b168c46af2261cb9be45",
-  "generated_at": "2026-11-15T21:08:03.946882+01:00",
+  "batch_id": "491c416929c0ef63772b",
+  "generated_at": "2026-11-15T21:09:31.724074+01:00",
   "dates": [
     "2026-11-14",
     "2026-11-15",
@@ -173,16 +173,11 @@
     },
     {
       "line": "R2N",
-      "reference_stations": 21,
-      "stations_with_published_calls": 21,
+      "reference_stations": 22,
+      "stations_with_published_calls": 22,
       "missing_station_ids": [],
       "missing_station_names": [],
-      "out_of_inventory_calls": [
-        {
-          "id": "79400",
-          "name": "Barcelona-Estació de França"
-        }
-      ],
+      "out_of_inventory_calls": [],
       "services_by_day": {
         "2026-11-14": 74,
         "2026-11-15": 74,
@@ -204,7 +199,7 @@
         "official-r2-pdf": 1110
       },
       "two_stop_trips_in_period": 0,
-      "coverage_complete": false
+      "coverage_complete": true
     },
     {
       "line": "R2S",
@@ -2212,6 +2207,34 @@
         "2026-11-26": 72,
         "2026-11-27": 72,
         "2026-11-28": 72
+      }
+    },
+    {
+      "line": "R2N",
+      "station_id": "79400",
+      "station": "Barcelona-Estació de França",
+      "calls_total": 30,
+      "days_with_calls": 15,
+      "published_days": 15,
+      "minimum_calls_on_any_day": 2,
+      "maximum_calls_on_any_day": 2,
+      "source_status": "timetable_calls",
+      "per_day": {
+        "2026-11-14": 2,
+        "2026-11-15": 2,
+        "2026-11-16": 2,
+        "2026-11-17": 2,
+        "2026-11-18": 2,
+        "2026-11-19": 2,
+        "2026-11-20": 2,
+        "2026-11-21": 2,
+        "2026-11-22": 2,
+        "2026-11-23": 2,
+        "2026-11-24": 2,
+        "2026-11-25": 2,
+        "2026-11-26": 2,
+        "2026-11-27": 2,
+        "2026-11-28": 2
       }
     },
     {

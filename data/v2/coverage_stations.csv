@@ -47,6 +47,7 @@ R2,71709,Viladecans,540,15,15,2,53,timetable_calls
 R2N,72400,Aeroport,1110,15,15,74,74,timetable_calls
 R2N,79009,Barcelona El Clot,1080,15,15,72,72,timetable_calls
 R2N,79004,Barcelona Sant Andreu,1080,15,15,72,72,timetable_calls
+R2N,79400,Barcelona-Estació de França,30,15,15,2,2,timetable_calls
 R2N,71802,Barcelona-Passeig de Gràcia,1110,15,15,74,74,timetable_calls
 R2N,71801,Barcelona-Sants,1110,15,15,74,74,timetable_calls
 R2N,71708,Bellvitge - Gornal,1110,15,15,74,74,timetable_calls
