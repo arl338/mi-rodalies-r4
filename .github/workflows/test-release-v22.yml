@@ -39,6 +39,7 @@ jobs:
           node tests/test_engine.cjs
           node tests/test_feed_schemas.cjs
           node tests/test_precision.cjs
+          node tests/test_r2_official_engine.cjs
           node tests/test_trenalia_fallback.cjs
           node tests/test_timetable_live_correlation.cjs
           node tests/test_position_delay_fallback.cjs
