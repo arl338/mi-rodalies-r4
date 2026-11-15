@@ -1,9 +1,9 @@
 # Auditoría automática de horarios, líneas y estaciones
 
-**Generado:** 2026-11-14T11:52:36.952315+01:00  
-**Lote:** \`9ddcb759df1a40616c3e\`  
-**Días publicados:** 15; 2026-11-13 a 2026-11-27  
-**Instancias de tren:** 14306
+**Generado:** 2026-11-15T14:13:03.775359+01:00  
+**Lote:** \`3b78209d9cb3fbf6a9cc\`  
+**Días publicados:** 15; 2026-11-14 a 2026-11-28  
+**Instancias de tren:** 14880
 
 La presencia de una parada no acredita servicio comercial ni cobertura íntegra.
 Las horas son programadas; no se usan feeds de terceros en este informe.
@@ -14,8 +14,8 @@ Las horas son programadas; no se usan feeds de terceros en este informe.
 | R2 | 14 | 14 | 0 | 0 |
 | R2N | 21 | 0 | 21 | 0 |
 | R2S | 17 | 0 | 17 | 0 |
-| R3 | 35 | 28 | 7 | 3031 |
-| R4 | 40 | 40 | 0 | 8 |
+| R3 | 35 | 28 | 7 | 3247 |
+| R4 | 40 | 40 | 0 | 5 |
 | R7 | 7 | 6 | 1 | 0 |
 | R8 | 9 | 9 | 0 | 0 |
 | RG1 | 44 | 18 | 26 | 0 |
