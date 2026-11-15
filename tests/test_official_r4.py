@@ -1,7 +1,7 @@
 import json
 import sys
 import unittest
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
@@ -14,8 +14,20 @@ TZ=ZoneInfo("Europe/Madrid")
 class OfficialR4Tests(unittest.TestCase):
     def setUp(self):
         self.reference=load_reference()
-        self.gtfs=json.loads((ROOT/'data/v2/2026-11-12.json').read_text(encoding='utf8'))
-        self.day=date(2026,11,12)
+        # Published daily files are a moving 15-day window. A fixed filename
+        # becomes unavailable within days and must never break a daily rebuild.
+        catalog=json.loads((ROOT/'data/v2/catalog.json').read_text(encoding='utf8'))
+        first=date.fromisoformat(catalog['coverage_start'])
+        last=date.fromisoformat(catalog['coverage_end'])
+        self.day=next((first+timedelta(days=i)
+                       for i in range((last-first).days+1)
+                       if (first+__import__('datetime').timedelta(days=i)).weekday()<5),None)
+        if self.day is None:
+            self.fail('No published weekday available for R4 PDF verification')
+        source=ROOT/'data/v2'/f'{self.day.isoformat()}.json'
+        self.gtfs=json.loads(source.read_text(encoding='utf8'))
+        self.assertEqual(self.gtfs['batch_id'],catalog['batch_id'],
+                         'R4 reference test must use a consistent current data batch')
 
     def test_coverage_and_document_provenance(self):
         self.assertEqual(self.reference['schema'],1)
@@ -47,18 +59,32 @@ class OfficialR4Tests(unittest.TestCase):
         before=times(original)
         after=times(combined)
         self.assertEqual(after.intersection(before),before)
-        self.assertTrue({'06:03','06:18','06:33','06:48','06:55','07:03'}<=after)
-        # The 06:18 / 06:48 / 06:55 services must exist, regardless of
-        # whether their source is fresh GTFS or the verified R4 PDF.
-        for departure in ('06:18','06:48','06:55'):
-            self.assertIn(departure,after)
+        # Every published PDF southbound departure is retained, either
+        # independently or as an existing GTFS train. A GTFS/PDF match is
+        # defined by two station-time witnesses within 120 seconds, so this
+        # test allows the same documented margin at Terrassa Est.
+        from official_r4 import materialize_day, duplicate_gtfs
+        for pdf in materialize_day(self.day,self.reference):
+            stops={s[0]:s[2] for s in pdf['s']}
+            if '78710' not in stops or '78805' not in stops:continue
+            expected=stops['78710']
+            matched=any(t['l']=='R4' and any(
+                s[0]=='78710' and abs(s[2]-expected)<=120 for s in t['s'])
+                and any(s[0]=='78805' for s in t['s']) for t in combined)
+            self.assertTrue(matched or duplicate_gtfs(pdf,combined),
+                'Published PDF R4 departure silently lost: '+pdf['id'])
         self.assertTrue(all(t['id'] not in {s['id'] for s in original} for t in additions))
 
     def test_original_gtfs_remains_principal(self):
-        additions=supplement_day(self.day,[t for t in self.gtfs['trains'] if t.get('src')!='official-r4-pdf'],self.reference)
-        pdf_times=[{s[0]:s[2] for s in t['s']} for t in additions]
-        # Existing 06:33 and 07:03 are not copied from the PDF.
-        self.assertFalse(any('78710' in t and datetime.fromtimestamp(t['78710'],TZ).strftime('%H:%M') in ('06:33','07:03') for t in pdf_times))
+        from official_r4 import materialize_day
+        published=materialize_day(self.day,self.reference)
+        example=next(x for x in published if len(x['s'])>=3)
+        gtfs_witness={**example,'id':'gtfs-test-identity','src':'cer','n':'77512'}
+        additions=supplement_day(self.day,[gtfs_witness],self.reference)
+        self.assertNotIn(example['id'],{x['id'] for x in additions},
+            'A GTFS service corroborated at multiple official stops must not be duplicated')
+        self.assertEqual(gtfs_witness['src'],'cer',
+            'Never mutate a real GTFS service when supplementing official PDF hours')
 
 if __name__=='__main__':
     unittest.main()
