@@ -1,7 +1,7 @@
 # Auditoría automática de horarios, líneas y estaciones
 
-**Generado:** 2026-11-15T20:39:40.360298+01:00  
-**Lote:** \`b168c46af2261cb9be45\`  
+**Generado:** 2026-11-15T20:40:18.234902+01:00  
+**Lote:** \`3b78209d9cb3fbf6a9cc\`  
 **Días publicados:** 15; 2026-11-14 a 2026-11-28  
 **Instancias de tren:** 14880
 
