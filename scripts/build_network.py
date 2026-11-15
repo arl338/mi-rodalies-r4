@@ -381,6 +381,25 @@ def parse_archive(raw,source,dates):
                 all_recognized[t['trip_id']]=label
                 if services.get(t.get('service_id')):
                     selected[t['trip_id']]=(t,label,services[t['service_id']])
+        # Source diagnostics for the official R2 Nord and R2 Sud route IDs.
+        # A route can be present but have no active service_id in the date
+        # window; never confuse missing service with parser rejection.
+        branch_routes={rid:info for rid,info in routes.items()
+                       if re.fullmatch(r'51T[0-9]{4}R2[NS]',str(rid or ''),re.I)}
+        branch_all=Counter()
+        branch_active=Counter()
+        branch_discarded=Counter()
+        for item in trips:
+            rid=item.get('route_id')
+            if rid in branch_routes:
+                branch_all[rid]+=1
+                if services.get(item.get('service_id')): branch_active[rid]+=1
+                elif item.get('service_id'): branch_discarded[rid]+=1
+        print('AUDITORIA RAMALES R2',source,
+              'route_ids',dict(sorted((rid,info.get('route_short_name'))
+                                     for rid,info in branch_routes.items())),
+              'trips',dict(branch_all),'active',dict(branch_active),
+              'inactive_or_unusable_calendar',dict(branch_discarded),flush=True)
         print(f"DIAGNOSTICO {source}: {len(all_recognized)} viajes con línea identificada, "
               f"{len(selected)} viajes activos en las fechas solicitadas, "
               f"ejemplos de trip_id: {[t['trip_id'] for t in trips[:3]]}", flush=True)
