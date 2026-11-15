@@ -72,8 +72,15 @@ jobs:
             assert 'R4' in st['schedule_lines']
           print('OK versión, caché, correlación y 3 estaciones principales de R4')
           PY
-      - name: Prueba de contratos públicos (con límite de uso)
-        run: |
-          node tests/test_trenalia_live.cjs
-          node tests/test_trenalia_alignment.cjs
-          node tests/test_live_anonymous_eta.cjs
+      # Live APIs have independent rate limits, maintenance and outages.
+      # They must be diagnosed but must never turn a correct local release
+      # or a successful official GTFS refresh into a failed software test.
+      - name: Diagnóstico externo · Trenalia (no bloqueante)
+        continue-on-error: true
+        run: node tests/test_trenalia_live.cjs
+      - name: Diagnóstico externo · coincidencia Trenalia/GTFS (no bloqueante)
+        continue-on-error: true
+        run: node tests/test_trenalia_alignment.cjs
+      - name: Diagnóstico externo · Valfiguer/Radar ETA (no bloqueante)
+        continue-on-error: true
+        run: node tests/test_live_anonymous_eta.cjs
