@@ -61,6 +61,15 @@ def infer_line(trip, route):
     designation = norm(' '.join((short, str(route.get('route_long_name') or ''))))
     if re.search(r'\b(ave|avant|alvia|euromed|intercity|larga distancia|ld)\b', designation):
         return None
+    # Renfe's official Catalunya GTFS route_ids explicitly encode the R2
+    # commercial branches (e.g. 51T0003R2N and 51T0007R2S). Previously the
+    # parser only accepted bare 'R2N'/'R2S' and silently dropped these trips,
+    # leaving zero timetables for both lines. The 51T nucleus plus anchored,
+    # exact commercial suffix is essential: never infer a branch from station
+    # geography or a generic C2 label.
+    official_branch = re.fullmatch(r'51T[0-9]{4}(R2N|R2S)', rid, re.I)
+    if official_branch:
+        return official_branch.group(1).upper()
     # Explicit public Rodalies label has priority. A numeric route id by itself
     # is not a commercial line identifier and must never be interpreted as one.
     explicit = line_id(short)
