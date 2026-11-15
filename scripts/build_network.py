@@ -19,6 +19,7 @@ from official_r1 import load_reference as load_official_r1, supplement_day as su
 from official_rl3 import load_reference as load_official_rl3, supplement_day as supplement_official_rl3, metadata as official_rl3_metadata
 from official_supplement import load_reference as load_official_supplement, supplement_day as supplement_official_supplement
 from official_regional import load_reference as load_official_regional, supplement_day as supplement_official_regional
+from official_r2 import load_reference as load_official_r2, supplement_day as supplement_official_r2, metadata as official_r2_metadata
 
 TZ = ZoneInfo('Europe/Madrid')
 REFERENCE_FILE = Path(__file__).resolve().parents[1] / 'data' / 'reference' / 'generalitat_lines.json'
@@ -655,6 +656,26 @@ def build(cer,md,output,days,base=None):
     print('Additional official PDF schedules:', dict(supplementary_counts), flush=True)
     print('Verified regional PDF schedules:', dict(regional_counts), flush=True)
 
+    # R2 Nord and R2 Sud must be separate commercial lines. The official CER
+    # ZIP currently omits the branch route IDs; import only verified printed
+    # PDF cells, with source validity and no guessed intermediate stops.
+    r2_reference = load_official_r2()
+    r2_counts = Counter()
+    r2_count_by_day = {}
+    if production_feed:
+        for d in dates:
+            key = d.isoformat()
+            extras = supplement_official_r2(d, by_day[key], r2_reference)
+            for train in extras:
+                for code, _arrival, _departure in train['s']:
+                    if code not in stations:
+                        raise ValueError('R2 official PDF call has no verified station code: '+code)
+                r2_counts[train['l']] += 1
+            r2_count_by_day[key] = len(extras)
+            by_day[key].extend(extras)
+    pdf_r2_meta=official_r2_metadata(r2_reference,r2_count_by_day)
+    print('R2 Nord/Sud verified official PDF schedules:',dict(r2_counts),flush=True)
+
     # Published stop-level schedules include verified official PDFs as well as
     # Renfe GTFS. Refresh the station-level coverage AFTER the PDF supplements;
     # otherwise RL3 (and PDF-only calls) appear as 'sin horario' in the UI.
@@ -700,7 +721,7 @@ def build(cer,md,output,days,base=None):
     catalog={
        'schema':2,'batch_id':batch_id,'generated_at':datetime.now(TZ).isoformat(),
        'coverage_start':base.isoformat(),'coverage_end':dates[-1].isoformat(),
-       'source':'Renfe Data GTFS + PDF oficials R1/R4/RL3/RT1/RT2/RL4/RG1/R17/R11/R13/R14/R15/R16; horaris programats, no circulació confirmada',
+       'source':'Renfe Data GTFS + PDF oficials R1/R2N/R2S/R4/RL3/RT1/RT2/RL4/RG1/R17/R11/R13/R14/R15/R16; horaris programats, no circulació confirmada',
        'station_names':'ADIF/BOE exact code > GTFS stop ID > isolated reference placeholder; no inferred timetable',
        'source_urls':{'cer':CERCANIAS,'md':MEDIA_DISTANCIA},'license':'CC BY 4.0',
        'official_reference':audit,'source_quality':source_quality,
@@ -708,16 +729,17 @@ def build(cer,md,output,days,base=None):
        'official_r4_pdf':pdf_r4_meta,
        'official_r1_pdf':pdf_r1_meta,
        'official_rl3_pdf':pdf_rl3_meta,
+       'official_r2_pdf':pdf_r2_meta,
        'regional_official_pdf':{'sources':regional_reference['sources'], 'counts':dict(regional_counts),
              'notes':regional_reference['notes']},
        'additional_official_pdf':{'sources':supplementary_reference['sources'],
             'counts':dict(supplementary_counts), 'excluded':supplementary_reference['excluded'],
             'note':supplementary_reference['note']},
-       'lines':[{'id':line,'name':LINE_NAMES.get(line,line),'present':by_line[line]>0 or (line=='RL3' and bool(pdf_rl3_meta)) or supplementary_counts[line]>0 or regional_counts[line]>0,
+       'lines':[{'id':line,'name':LINE_NAMES.get(line,line),'present':by_line[line]>0 or (line=='RL3' and bool(pdf_rl3_meta)) or supplementary_counts[line]>0 or regional_counts[line]>0 or r2_counts[line]>0,
                  'scheduled_trips_in_period':by_line[line]+(sum(pdf_counts.values()) if line=='R4' and pdf_r4_meta else 0)+
                   (sum(pdf_r1_counts.values()) if line=='R1' and pdf_r1_meta else 0)+
                   (sum(pdf_rl3_counts.values()) if line=='RL3' and pdf_rl3_meta else 0)+
-                  supplementary_counts[line]+regional_counts[line],
+                  supplementary_counts[line]+regional_counts[line]+r2_counts[line],
                  'gtfs_trips_in_period':by_line[line]} for line in LINES],
        'stations':sorted([dict(r,lines=sorted(r['lines'],key=lambda x:LINES.index(x))) for r in stations.values()],key=lambda x:norm(x['name'])),
        'warnings':errors+([f'GTFS sin servicios identificables de las líneas: {", ".join(l for l in LINES if by_line[l]==0)}'] if any(by_line[l]==0 for l in LINES) else [])+audit['warnings']
