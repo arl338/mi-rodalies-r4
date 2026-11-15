@@ -139,6 +139,19 @@
       "sources": [
         "https://www.adif.es/w/78610-st.miquel-gonteres"
       ]
+    },
+    {
+      "adif_code": "72400",
+      "display_name": "Aeroport",
+      "aliases": [
+        "El Prat Aeroport",
+        "Barcelona Aeroport",
+        "Aeroport T2"
+      ],
+      "sources": [
+        "https://www.adif.es/w/72400-aeroport",
+        "https://data.renfe.com/files/estaciones/FichaEstacion72400.pdf"
+      ]
     }
   ]
 }
