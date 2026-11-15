@@ -288,7 +288,7 @@ function renderResultList(){const root=$('results');root.replaceChildren();for(c
    officialR1?'Origen: cuadro horario oficial R1 (PDF de Rodalies), 27 estaciones de L’Hospitalet a Maçanet. Solo horario programado sin ETA verificable.':
    officialPdf?'Origen: cuadro horario oficial R4 (PDF de Rodalies). Solo horario programado hasta que una fuente confirme una estimación para este servicio.':
    alternative?'Origen: Trenalia (horarios Renfe). Solo horario orientativo, sin número de tren ni horas de paradas intermedias confirmadas.':'Origen: Renfe GTFS oficial'];
- if(officialR2&&selection.day==='2026-11-17')notes.push('17/11: jornada de huelga anunciada. Este cuadro teórico NO acredita servicios mínimos ni circulación efectiva.');
+ if(officialR2&&$('trip-date').value==='2026-11-17')notes.push('17/11: jornada de huelga anunciada. Este cuadro teórico NO acredita servicios mínimos ni circulación efectiva.');
  for(const l of j.legs){if(l.t.scope)notes.push('Ámbito documentado: '+l.t.scope);if(l.proof.length)notes.push(l.proof.join('; '));if(l.platform)notes.push('Vía publicada: '+l.platform);}
  if(j.kind==='transfer')notes.push(j.connectionRisk?'ATENCIÓN: conexión en riesgo por retraso observado del primer tren; llegada no estimada':'Conexión teórica con margen programado; llegada y enlace no confirmados');
  if(catalog&&Date.now()-Date.parse(catalog.generated_at||'')>48*3600000)notes.push('Catálogo GTFS antiguo: comprobar el horario vigente en Renfe');
