@@ -1,9 +1,9 @@
 # Auditoría automática de horarios, líneas y estaciones
 
-**Generado:** 2026-11-15T21:03:24.503286+01:00  
+**Generado:** 2026-11-15T21:07:10.330562+01:00  
 **Lote:** \`b168c46af2261cb9be45\`  
 **Días publicados:** 15; 2026-11-14 a 2026-11-28  
-**Instancias de tren:** 14880
+**Instancias de tren:** 18070
 
 La presencia de una parada no acredita servicio comercial ni cobertura íntegra.
 Las horas son programadas; no se usan feeds de terceros en este informe.
@@ -12,8 +12,8 @@ Las horas son programadas; no se usan feeds de terceros en este informe.
 |---|---:|---:|---:|---:|
 | R1 | 31 | 27 | 4 | 0 |
 | R2 | 14 | 14 | 0 | 0 |
-| R2N | 21 | 0 | 21 | 0 |
-| R2S | 17 | 0 | 17 | 0 |
+| R2N | 21 | 21 | 0 | 0 |
+| R2S | 17 | 17 | 0 | 0 |
 | R3 | 35 | 28 | 7 | 3247 |
 | R4 | 40 | 40 | 0 | 5 |
 | R7 | 7 | 6 | 1 | 0 |
@@ -33,10 +33,6 @@ Las horas son programadas; no se usan feeds de terceros en este informe.
 ## Estaciones sin horarios estructurados
 
 **R1**: Cornellà, Molins de Rei, Sant Feliu de Llobregat, Sant Joan Despí
-
-**R2N**: Aeroport, Barcelona El Clot, Barcelona Sant Andreu, Barcelona-Passeig de Gràcia, Barcelona-Sants, Bellvitge - Gornal, Cardedeu, El Prat de Llobregat, Granollers Centre, Gualba, Hostalric, La Llagosta, Les Franqueses-Granollers Nord, Llinars del Vallès, Maçanet-Massanes, Mollet-Sant Fost, Montcada i Reixac, Montmeló, Palautordera, Riells i Viabrea-Breda, Sant Celoni
-
-**R2S**: Barcelona-Estació de França, Barcelona-Passeig de Gràcia, Barcelona-Sants, Bellvitge - Gornal, Calafell, Castelldefels, Cubelles, Cunit, El Prat de Llobregat, Garraf, Gavà, Platja de Castelldefels, Sant Vicenç de Calders, Segur de Calafell, Sitges, Viladecans, Vilanova i la Geltrú
 
 **R3**: Barcelona Arc de Triomf, Barcelona La Sagrera-Meridiana, Barcelona Torre Baró-Vallbona, Barcelona-Plaça de Catalunya, Barcelona-Sants, L'Hospitalet de Llobregat, La Tor de Querol-Enveig
 
@@ -59,6 +55,8 @@ Las horas son programadas; no se usan feeds de terceros en este informe.
 ## Horarios fuera del inventario comercial
 
 **R2**: Sant Vicenç de Calders (71600), Calafell (71601), Segur de Calafell (71602), Cunit (71603), Cubelles (71604), Vilanova i la Geltrú (71700), Sitges (71701), Garraf (71703), Platja de Castelldefels (71704), Cardedeu (79101), Llinars del Vallès (79102), Palautordera (79103), Sant Celoni (79104), Gualba (79105), Riells i Viabrea-Breda (79106), Hostalric (79107), Les Franqueses-Granollers Nord (79109), Maçanet-Massanes (79200)
+
+**R2N**: Barcelona-Estació de França (79400)
 
 **R4**: Rajadell (78506)
 
