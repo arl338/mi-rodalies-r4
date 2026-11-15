@@ -184,6 +184,8 @@ function sourceJobs(station){return [
  ];}
 function renderSourceSummary(res,jobs,mode,cat,timetable){const content=$('source-details');content.replaceChildren();
  const catalogRow=sourceRow('Horario Renfe GTFS','Cercanías / MD con línea Rodalies explícita',true,`${cat.stations.length} estaciones · ${cat.lines.filter(x=>x.present).length}/${cat.lines.length} líneas`);content.append(catalogRow);
+ if(cat.official_r2_pdf){content.append(sourceRow('Cuadro oficial R2 Nord / R2 Sud (PDF)','Horas verificadas por estación y sentido; no acredita circulación ni excepciones por huelga',true,
+  String(Object.values(cat.official_r2_pdf.counts_by_day||{}).reduce((x,y)=>x+y,0))+' servicios programados en el período'));}
  if(cat.regional_official_pdf){for(const [line,count] of Object.entries(cat.regional_official_pdf.counts||{})){content.append(sourceRow('Cuadro oficial '+line+' (PDF)','Servicios impresos verificables; cobertura parcial sin datos operativos',true,String(count)+' servicios añadidos en el período'));}}
  if(cat.additional_official_pdf){for(const [line,count] of Object.entries(cat.additional_official_pdf.counts||{})){content.append(sourceRow('Horario oficial '+line+' (PDF)','Horas directamente observadas por estación; calendario teórico',true,String(count)+' servicios añadidos durante el período'));}}
  if(cat.official_rl3_pdf){content.append(sourceRow('Horarios oficiales RL3 (PDF)',
@@ -278,12 +280,15 @@ function renderResultList(){const root=$('results');root.replaceChildren();for(c
  const officialRL3=j.legs.some(l=>l.t.src==='official-rl3-pdf');
  const officialExtra=j.legs.some(l=>l.t.src==='official-supplement-pdf');
  const officialRegional=j.legs.some(l=>l.t.src==='official-regional-pdf');
- let notes=[officialRegional?'Origen: cuadro oficial de Rodalies regionales. Únicamente horarios y paradas verificadas; los trayectos parciales no incluyen transbordos a autobús ni suponen circulación confirmada.':
+ const officialR2=j.legs.some(l=>l.t.src==='official-r2-pdf');
+ let notes=[officialR2?'Origen: cuadro oficial vigente R2 Nord / R2 Sud de Rodalies (noviembre de 2026). Solo horas de paso impresas, sin confirmación de circulación; servicio sujeto a cambios especiales y huelgas.':
+  officialRegional?'Origen: cuadro oficial de Rodalies regionales. Únicamente horarios y paradas verificadas; los trayectos parciales no incluyen transbordos a autobús ni suponen circulación confirmada.':
    officialExtra?'Origen: cuadro oficial Rodalies 2026 con horas impresas por parada. Horario programado; no confirma circulación, incidencias ni festivos especiales.':
    officialRL3?'Origen: cuadro horario oficial RL3/RL4 de Rodalies (06/07/2026); tiempos impresos por estación, sin confirmar circulación real.':
    officialR1?'Origen: cuadro horario oficial R1 (PDF de Rodalies), 27 estaciones de L’Hospitalet a Maçanet. Solo horario programado sin ETA verificable.':
    officialPdf?'Origen: cuadro horario oficial R4 (PDF de Rodalies). Solo horario programado hasta que una fuente confirme una estimación para este servicio.':
    alternative?'Origen: Trenalia (horarios Renfe). Solo horario orientativo, sin número de tren ni horas de paradas intermedias confirmadas.':'Origen: Renfe GTFS oficial'];
+ if(officialR2&&selection.day==='2026-11-17')notes.push('17/11: jornada de huelga anunciada. Este cuadro teórico NO acredita servicios mínimos ni circulación efectiva.');
  for(const l of j.legs){if(l.t.scope)notes.push('Ámbito documentado: '+l.t.scope);if(l.proof.length)notes.push(l.proof.join('; '));if(l.platform)notes.push('Vía publicada: '+l.platform);}
  if(j.kind==='transfer')notes.push(j.connectionRisk?'ATENCIÓN: conexión en riesgo por retraso observado del primer tren; llegada no estimada':'Conexión teórica con margen programado; llegada y enlace no confirmados');
  if(catalog&&Date.now()-Date.parse(catalog.generated_at||'')>48*3600000)notes.push('Catálogo GTFS antiguo: comprobar el horario vigente en Renfe');
@@ -291,6 +296,7 @@ function renderResultList(){const root=$('results');root.replaceChildren();for(c
  proof.append(el('b','', 'Evidencias: '),document.createTextNode(notes.join(' · ')));if(alternative){const attribution=el('a','','Trenalia · datos de Renfe');attribution.href='https://trenalia.org/api';attribution.target='_blank';attribution.rel='noopener noreferrer';proof.append(document.createTextNode(' · '),attribution);}
  if(officialPdf){const ref=el('a','','Cuadro oficial R4');ref.href=catalog?.official_r4_pdf?.source||'https://rodalies.gencat.cat/web/.content/02_Horaris/horaris/R4.pdf';ref.target='_blank';ref.rel='noopener noreferrer';proof.append(document.createTextNode(' · '),ref);}
  if(officialRL3){const ref=el('a','','Cuadro oficial RL3/RL4');ref.href=catalog?.official_rl3_pdf?.source||'https://rodalies.gencat.cat/web/.content/02_Horaris/horaris/RL3RL4.pdf';ref.target='_blank';ref.rel='noopener noreferrer';proof.append(document.createTextNode(' · '),ref);}
+ if(officialR2){const ref=el('a','','Cuadro oficial R2 Nord / R2 Sud');ref.href=catalog?.official_r2_pdf?.source||'https://rodalies.gencat.cat/es/horaris/tots-els-horaris/';ref.target='_blank';ref.rel='noopener noreferrer';proof.append(document.createTextNode(' · '),ref);}
  if(officialRegional){for(const line of [...new Set(j.legs.filter(l=>l.t.src==='official-regional-pdf').map(l=>l.t.l))]){const url=catalog?.regional_official_pdf?.sources?.[line];if(url){const ref=el('a','','Cuadro oficial '+line);ref.href=url;ref.target='_blank';ref.rel='noopener noreferrer';proof.append(document.createTextNode(' · '),ref);}}}
  if(officialExtra){for(const line of [...new Set(j.legs.filter(l=>l.t.src==='official-supplement-pdf').map(l=>l.t.l))]){const url=catalog?.additional_official_pdf?.sources?.[line];if(url){const ref=el('a','','Cuadro oficial '+line);ref.href=url;ref.target='_blank';ref.rel='noopener noreferrer';proof.append(document.createTextNode(' · '),ref);}}}
  if(officialR1){const ref=el('a','','Cuadro oficial R1');ref.href=catalog?.official_r1_pdf?.source||'https://rodalies.gencat.cat/web/.content/02_Horaris/horaris/R1.pdf';ref.target='_blank';ref.rel='noopener noreferrer';proof.append(document.createTextNode(' · '),ref);}
