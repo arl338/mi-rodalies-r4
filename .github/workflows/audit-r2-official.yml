@@ -5,9 +5,13 @@ on:
     paths:
       - 'scripts/audit_official_r2_pdf.py'
       - 'scripts/extract_official_r2.py'
+      - 'scripts/official_r2.py'
       - '.github/workflows/audit-r2-official.yml'
   workflow_dispatch:
-permissions: {contents: read}
+  schedule:
+    # Weekly source-hash check; a changed PDF fails closed for review.
+    - cron: '47 7 * * 1'
+permissions: {contents: write}
 jobs:
   positioned-cells:
     runs-on: ubuntu-latest
@@ -21,7 +25,37 @@ jobs:
       - name: Analyze source PDF by actual station/grid coordinates
         run: python scripts/audit_official_r2_pdf.py --out /tmp/rodalies-r2-position-audit.json
       - name: Extract safe R2N/R2S official schedule candidates
-        run: python scripts/extract_official_r2.py --out /tmp/rodalies-r2-official-candidates.json
+        run: |
+          python scripts/extract_official_r2.py --out data/reference/r2_official_timetable.json
+          cp data/reference/r2_official_timetable.json /tmp/rodalies-r2-official-candidates.json
+      - name: Strictly validate all official R2N/R2S PDF station grids
+        run: |
+          python - <<'PY'
+          import sys
+          sys.path.insert(0,'scripts')
+          from official_r2 import load_reference
+          obj=load_reference()
+          print('Validated R2 source',obj['document_sha256'],
+                'commercial timetable rows',len(obj['services']),obj['counts'])
+          PY
+      - name: Persist new verified reference only when source changes
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git fetch origin main
+          if ! git diff --quiet "$GITHUB_SHA" origin/main -- scripts/extract_official_r2.py scripts/official_r2.py .github/workflows/audit-r2-official.yml; then
+            echo 'Extractor has advanced; a newer workflow will re-extract. No stale commit.' >&2
+            exit 1
+          fi
+          git reset --mixed origin/main
+          git add data/reference/r2_official_timetable.json
+          if git diff --cached --quiet; then
+            echo 'Verified official R2 source unchanged'
+            exit 0
+          fi
+          git commit -m 'Actualizar referencia R2 Nord/Sud desde PDF oficial [skip ci]'
+          git push origin HEAD:main
       - uses: actions/upload-artifact@v4
         with:
           name: rodalies-r2-verified-pdf-cell-audit
