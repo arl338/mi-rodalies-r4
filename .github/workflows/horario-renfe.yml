@@ -58,6 +58,13 @@ jobs:
           else
             python scripts/check_daily_refresh.py --out data/v2 --mode force --github-output "$GITHUB_OUTPUT"
           fi
+      - name: Conservar catálogo validado anterior como referencia de calidad
+        if: steps.freshness.outputs.refresh == 'true'
+        shell: bash
+        run: |
+          if [ -f data/v2/catalog.json ]; then
+            cp data/v2/catalog.json /tmp/rodalies-previous-catalog.json
+          fi
       - name: Descargar fuente GTFS Cercanías verificable
         if: steps.freshness.outputs.refresh == 'true'
         run: |
@@ -108,6 +115,9 @@ jobs:
           print(f'Validación correcta: {len(c["stations"])} estaciones; {len(days)} archivos diarios; {rows} trenes')
           if c['warnings']:print('ADVERTENCIAS DE COBERTURA:', c['warnings'])
           PY
+      - name: Evitar publicar pérdidas masivas de trenes o paradas
+        if: steps.freshness.outputs.refresh == 'true'
+        run: python scripts/guard_catalog_regression.py --previous /tmp/rodalies-previous-catalog.json --current data/v2/catalog.json
       - name: Guardar catálogo y horarios oficiales
         if: steps.freshness.outputs.refresh == 'true'
         shell: bash
