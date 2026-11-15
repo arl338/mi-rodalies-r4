@@ -15,7 +15,11 @@ on:
       - '.github/workflows/horario-renfe.yml'
   workflow_dispatch:
   schedule:
-    - cron: '37 3 * * *'
+    # GitHub cron runs in UTC and can be delayed. A second daily attempt
+    # recovers transient failures, and the preflight skips an already valid
+    # Madrid-local catalog (also on Saturdays, Sundays and holidays).
+    - cron: '17 4 * * *'
+    - cron: '17 11 * * *'
 
 permissions:
   contents: write
@@ -45,7 +49,17 @@ jobs:
           node tests/test_precision.cjs
           # Testes unitarios del generador; los test_ui*.py usan Playwright y se ejecutan en navegador aparte.
           python -m unittest discover -s tests -p 'test_[!u]*.py' -q
+      - name: Verificar frescura del lote diario en horario de Madrid
+        id: freshness
+        shell: bash
+        run: |
+          if [ "${{ github.event_name }}" = "schedule" ]; then
+            python scripts/check_daily_refresh.py --out data/v2 --mode schedule --github-output "$GITHUB_OUTPUT"
+          else
+            python scripts/check_daily_refresh.py --out data/v2 --mode force --github-output "$GITHUB_OUTPUT"
+          fi
       - name: Descargar fuente GTFS Cercanías verificable
+        if: steps.freshness.outputs.refresh == 'true'
         run: |
           python - <<'PY'
           import sys
@@ -57,14 +71,19 @@ jobs:
           print('Fuente GTFS Cercanías descargada una única vez:', len(raw), 'bytes')
           PY
       - name: Auditar paradas originales GTFS Renfe
+        if: steps.freshness.outputs.refresh == 'true'
         run: python scripts/audit_gtfs.py --zip /tmp/rodalies-cer.zip --days 14 --out data/v2/source_audit.json
       - name: Obtener GTFS Renfe y contrastar líneas con Generalitat
+        if: steps.freshness.outputs.refresh == 'true'
         run: python scripts/build_network.py --cer-zip /tmp/rodalies-cer.zip --days 14 --out data/v2
       - name: Validar integridad temporal, lotes y paradas por línea
+        if: steps.freshness.outputs.refresh == 'true'
         run: python scripts/validate_generated.py --out data/v2 --days 14
       - name: Auditar todas las líneas y estaciones por día y fuente
+        if: steps.freshness.outputs.refresh == 'true'
         run: python scripts/audit_line_station_coverage.py --out data/v2
       - name: Validar JSON generado y servicios
+        if: steps.freshness.outputs.refresh == 'true'
         shell: bash
         run: |
           python - <<'PY'
@@ -90,6 +109,7 @@ jobs:
           if c['warnings']:print('ADVERTENCIAS DE COBERTURA:', c['warnings'])
           PY
       - name: Guardar catálogo y horarios oficiales
+        if: steps.freshness.outputs.refresh == 'true'
         shell: bash
         run: |
           git config user.name 'github-actions[bot]'
