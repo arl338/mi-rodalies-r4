@@ -47,6 +47,22 @@ class BuilderTest(unittest.TestCase):
     self.assertIsNone(b.line_id('AVE'))
     self.assertIsNone(b.line_id('R22'))
     self.assertIsNone(b.infer_line({'trip_id':'D12345R4'},{'route_short_name':'AVE','route_long_name':'Madrid'}))
+    # R2 Nord/Sud are present in Renfe's official 51T route IDs even
+    # when the GTFS short name is a generic or legacy C2 designation.
+    self.assertEqual(b.infer_line({'trip_id':'X1'},
+      {'route_id':'51T0003R2N','route_short_name':'C2','route_long_name':'Aeroport - Maçanet'}),'R2N')
+    self.assertEqual(b.infer_line({'trip_id':'X2'},
+      {'route_id':'51T0004R2N','route_short_name':'C2','route_long_name':'Maçanet - Aeroport'}),'R2N')
+    self.assertEqual(b.infer_line({'trip_id':'X3'},
+      {'route_id':'51T0007R2S','route_short_name':'C2','route_long_name':'Vilanova - Estació França'}),'R2S')
+    self.assertEqual(b.infer_line({'trip_id':'X4'},
+      {'route_id':'51T0008R2S','route_short_name':'C2','route_long_name':'Estació França - Vilanova'}),'R2S')
+    self.assertIsNone(b.infer_line({'trip_id':'X5'},
+      {'route_id':'52T0003R2N','route_short_name':'C2','route_long_name':'Other nucleus'}))
+    self.assertIsNone(b.infer_line({'trip_id':'X6'},
+      {'route_id':'51T0003R2NX','route_short_name':'C2','route_long_name':'Not a Rodalies route'}))
+    self.assertIsNone(b.infer_line({'trip_id':'X7'},
+      {'route_id':'51T0003R2N','route_short_name':'AVE','route_long_name':'High speed'}))
   def test_build_and_dedup(self):
     with tempfile.TemporaryDirectory() as directory:
       cat=b.build(make_zip(),None,Path(directory),days=2,base=date(2026,11,12))
