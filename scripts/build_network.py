@@ -660,6 +660,20 @@ def build(cer,md,output,days,base=None):
     # ZIP currently omits the branch route IDs; import only verified printed
     # PDF cells, with source validity and no guessed intermediate stops.
     r2_reference = load_official_r2()
+    r2_expiry = date.fromisoformat(r2_reference["valid_through"])
+    if production_feed and base > r2_expiry:
+        raise ValueError(
+            "El cuadro oficial R2 Nord/Sud ha caducado el "+str(r2_expiry)+
+            ". Actualizar fuente y vigencia en Rodalies antes de publicar nuevos horarios. "
+            "No se inferirán servicios a partir de calendarios antiguos.")
+    if production_feed and dates[-1] > r2_expiry:
+        errors.append(
+            "Horario oficial R2 Nord/Sud válido solo hasta "+str(r2_expiry)+
+            "; días posteriores sin servicios PDF verificados, revisar nuevo cuadro.")
+    elif production_feed and (r2_expiry-base).days <= 7:
+        errors.append(
+            "El cuadro oficial R2 Nord/Sud vence el "+str(r2_expiry)+
+            ": revisar su sustitución en la web de Rodalies.")
     r2_counts = Counter()
     r2_count_by_day = {}
     if production_feed:
