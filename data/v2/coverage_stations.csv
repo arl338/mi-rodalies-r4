@@ -44,7 +44,7 @@ R2,79006,Mollet-Sant Fost,544,15,15,3,53,timetable_calls
 R2,79005,Montcada i Reixac,530,15,15,2,52,timetable_calls
 R2,79007,Montmeló,544,15,15,3,53,timetable_calls
 R2,71709,Viladecans,540,15,15,2,53,timetable_calls
-R2N,ref:b22fa66fce9cba7f,Aeroport,0,0,15,0,0,inventory_only
+R2N,72400,Aeroport,0,0,15,0,0,inventory_only
 R2N,79009,Barcelona El Clot,0,0,15,0,0,inventory_only
 R2N,79004,Barcelona Sant Andreu,0,0,15,0,0,inventory_only
 R2N,71802,Barcelona-Passeig de Gràcia,0,0,15,0,0,inventory_only

@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "batch_id": "8d716697ff7a7cf51aa8",
-  "generated_at": "2026-11-15T20:51:02.782643+01:00",
+  "generated_at": "2026-11-15T20:54:55.093287+01:00",
   "dates": [
     "2026-11-14",
     "2026-11-15",
@@ -176,7 +176,7 @@
       "reference_stations": 21,
       "stations_with_published_calls": 0,
       "missing_station_ids": [
-        "ref:b22fa66fce9cba7f",
+        "72400",
         "79009",
         "79004",
         "71802",
@@ -2171,7 +2171,7 @@
     },
     {
       "line": "R2N",
-      "station_id": "ref:b22fa66fce9cba7f",
+      "station_id": "72400",
       "station": "Aeroport",
       "calls_total": 0,
       "days_with_calls": 0,
