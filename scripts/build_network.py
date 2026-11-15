@@ -8,7 +8,7 @@ Python 3.12+ standard library only. The output is static and publicly reusable
 under Renfe Data CC BY 4.0 with attribution.
 """
 from __future__ import annotations
-import argparse, csv, hashlib, io, json, re, sys, unicodedata, urllib.request, zipfile, traceback
+import argparse, csv, hashlib, io, json, re, sys, unicodedata, urllib.request, urllib.error, zipfile, traceback, time as clock
 from collections import defaultdict, Counter
 from datetime import date, datetime, timedelta, time, timezone
 from pathlib import Path
@@ -325,11 +325,29 @@ def validate_official_reference(reference, stations, lines):
             'lines':checks,'warnings':warnings}
 
 def download(url,max_mb=75):
+    """Fetch fresh GTFS with bounded retries for transient network failures.
+
+    Never fall back to an old archive or to unvalidated bytes. HTTP 4xx errors
+    other than 408/429 are not transient and must fail the publication.
+    """
     request=urllib.request.Request(url,headers={'User-Agent':'MiRodalies/2.0 (+GTFS public data CC BY 4.0)'})
-    with urllib.request.urlopen(request,timeout=75) as response: raw=response.read(max_mb*1024*1024+1)
-    if len(raw)>max_mb*1024*1024:raise ValueError('GTFS too large')
-    if not raw.startswith(b'PK'):raise ValueError('GTFS source did not return ZIP')
-    return raw
+    for attempt in range(3):
+        try:
+            with urllib.request.urlopen(request,timeout=55) as response:
+                raw=response.read(max_mb*1024*1024+1)
+            if len(raw)>max_mb*1024*1024:raise ValueError('GTFS too large')
+            if not raw.startswith(b'PK'):raise ValueError('GTFS source did not return ZIP')
+            return raw
+        except (urllib.error.URLError, TimeoutError, OSError) as exc:
+            code=getattr(exc, 'code', None)
+            retryable=(code is None or code in (408,429,500,502,503,504))
+            if not retryable or attempt==2:
+                raise
+            delay=3*(attempt+1)
+            print(f'GTFS download attempt {attempt+1}/3 failed ({type(exc).__name__}, HTTP {code}); '
+                  f'retrying in {delay} seconds',flush=True)
+            clock.sleep(delay)
+    raise RuntimeError('GTFS download attempts exhausted')
 
 def parse_archive(raw,source,dates):
     records=[]
