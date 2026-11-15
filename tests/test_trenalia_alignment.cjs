@@ -6,12 +6,26 @@
  */
 const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict');
 const E=require('../engine.js');
-const day='2026-11-12',now=Math.floor(Date.now()/1000);
-const data=JSON.parse(fs.readFileSync(path.join(__dirname,'..','data','v2',day+'.json'),'utf8'));
+const now=Math.floor(Date.now()/1000);
 const c=JSON.parse(fs.readFileSync(path.join(__dirname,'..','data','v2','catalog.json'),'utf8'));
+const first=c.coverage_start;
+// A hard-coded date expires because the daily GTFS data is a moving window.
+// Use the next published weekday with an actual data file.
+const dates=Array.from({length:14},(_,i)=>{
+ const dt=new Date(first+'T12:00:00Z');dt.setUTCDate(dt.getUTCDate()+i);
+ return dt.toISOString().slice(0,10);
+});
+const day=dates.find(d=>{
+ const dow=new Date(d+'T12:00:00Z').getUTCDay();
+ return dow>=1&&dow<=5&&fs.existsSync(path.join(__dirname,'..','data','v2',d+'.json'));
+});
+assert.ok(day,'Expected a published weekday in the rolling GTFS data');
+const data=JSON.parse(fs.readFileSync(path.join(__dirname,'..','data','v2',day+'.json'),'utf8'));
 assert.equal(data.batch_id,c.batch_id);
 const examples=[['ida','78710','78805'],['vuelta','71801','78710']];
-const start=Date.parse(day+'T00:00:00+01:00')/1000,end=start+86400;
+// Wide window avoids hard-coding CET on summer dates. The daily file already
+// scopes the trains to their declared service date.
+const start=Date.parse(day+'T00:00:00Z')/1000-5*3600,end=start+35*3600;
 (async()=>{
  for(const [name,from,to] of examples){
   const p=new URLSearchParams({from,to,date:day,limit:'400'});
