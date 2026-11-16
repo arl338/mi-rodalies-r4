@@ -1,9 +1,9 @@
 # Auditoría automática de horarios, líneas y estaciones
 
-**Generado:** 2026-11-15T21:40:08.756433+01:00  
-**Lote:** \`8d716697ff7a7cf51aa8\`  
-**Días publicados:** 15; 2026-11-14 a 2026-11-28  
-**Instancias de tren:** 18070
+**Generado:** 2026-11-16T13:50:00.236644+01:00  
+**Lote:** \`005fa2e38f542bb24560\`  
+**Días publicados:** 15; 2026-11-15 a 2026-11-29  
+**Instancias de tren:** 17348
 
 La presencia de una parada no acredita servicio comercial ni cobertura íntegra.
 Las horas son programadas; no se usan feeds de terceros en este informe.
@@ -14,9 +14,9 @@ Las horas son programadas; no se usan feeds de terceros en este informe.
 | R2 | 14 | 14 | 0 | 0 |
 | R2N | 22 | 22 | 0 | 0 |
 | R2S | 17 | 17 | 0 | 0 |
-| R3 | 35 | 28 | 7 | 3247 |
-| R4 | 40 | 40 | 0 | 5 |
-| R7 | 7 | 6 | 1 | 0 |
+| R3 | 35 | 28 | 7 | 3029 |
+| R4 | 40 | 40 | 0 | 7 |
+| R7 | 7 | 1 | 6 | 0 |
 | R8 | 9 | 9 | 0 | 0 |
 | RG1 | 44 | 18 | 26 | 0 |
 | RT1 | 6 | 6 | 0 | 0 |
@@ -36,7 +36,7 @@ Las horas son programadas; no se usan feeds de terceros en este informe.
 
 **R3**: Barcelona Arc de Triomf, Barcelona La Sagrera-Meridiana, Barcelona Torre Baró-Vallbona, Barcelona-Plaça de Catalunya, Barcelona-Sants, L'Hospitalet de Llobregat, La Tor de Querol-Enveig
 
-**R7**: Barcelona Torre Baró-Vallbona
+**R7**: Barcelona Torre Baró-Vallbona, Cerdanyola Universitat, Cerdanyola del Vallès, Montcada i Reixac-Manresa, Montcada i Reixac-Santa Maria, Montcada-Bifurcació
 
 **RG1**: Arenys de Mar, Badalona, Barcelona Arc de Triomf, Barcelona El Clot, Barcelona-Plaça de Catalunya, Barcelona-Sants, Blanes, Cabrera de Mar-Vilassar de Mar, Caldes d'Estrac, Calella, Canet de Mar, El Masnou, L'Hospitalet de Llobregat, Malgrat de Mar, Mataró, Montgat, Montgat-Nord, Ocata, Pineda de Mar, Premià de Mar, Sant Adrià de Besòs, Sant Andreu de Llavaneres, Sant Pol de Mar, Santa Susanna, Tordera, Vilassar de Mar
 
