@@ -1,5 +1,5 @@
 line,station_id,station,calls_total,days_with_calls,published_days,minimum_calls_on_any_day,maximum_calls_on_any_day,source_status
-R1,79600,Arenys de Mar,1710,15,15,76,136,timetable_calls
+R1,79600,Arenys de Mar,1685,15,15,76,136,timetable_calls
 R1,79404,Badalona,2674,15,15,146,190,timetable_calls
 R1,78804,Barcelona Arc de Triomf,2674,15,15,146,190,timetable_calls
 R1,79009,Barcelona El Clot,2674,15,15,146,190,timetable_calls
@@ -7,9 +7,9 @@ R1,78805,Barcelona-Plaça de Catalunya,2674,15,15,146,190,timetable_calls
 R1,71801,Barcelona-Sants,2674,15,15,146,190,timetable_calls
 R1,79606,Blanes,1034,15,15,66,70,timetable_calls
 R1,79412,Cabrera de Mar-Vilassar de Mar,2674,15,15,146,190,timetable_calls
-R1,79502,Caldes d'Estrac,1710,15,15,76,136,timetable_calls
-R1,79603,Calella,1303,15,15,74,99,timetable_calls
-R1,79601,Canet de Mar,1303,15,15,74,99,timetable_calls
+R1,79502,Caldes d'Estrac,1685,15,15,76,136,timetable_calls
+R1,79603,Calella,1278,15,15,74,99,timetable_calls
+R1,79601,Canet de Mar,1278,15,15,74,99,timetable_calls
 R1,72303,Cornellà,0,0,15,0,0,inventory_only
 R1,79407,El Masnou,2674,15,15,146,190,timetable_calls
 R1,72305,L'Hospitalet de Llobregat,2674,15,15,146,190,timetable_calls
@@ -23,27 +23,27 @@ R1,79408,Ocata,2674,15,15,146,190,timetable_calls
 R1,79604,Pineda de Mar,1034,15,15,66,70,timetable_calls
 R1,79409,Premià de Mar,2674,15,15,146,190,timetable_calls
 R1,79403,Sant Adrià de Besòs,2674,15,15,146,190,timetable_calls
-R1,79501,Sant Andreu de Llavaneres,1710,15,15,76,136,timetable_calls
+R1,79501,Sant Andreu de Llavaneres,1685,15,15,76,136,timetable_calls
 R1,72301,Sant Feliu de Llobregat,0,0,15,0,0,inventory_only
 R1,72302,Sant Joan Despí,0,0,15,0,0,inventory_only
-R1,79602,Sant Pol de Mar,1303,15,15,74,99,timetable_calls
+R1,79602,Sant Pol de Mar,1278,15,15,74,99,timetable_calls
 R1,79608,Santa Susanna,1034,15,15,66,70,timetable_calls
 R1,79607,Tordera,510,15,15,34,34,timetable_calls
 R1,79410,Vilassar de Mar,2674,15,15,146,190,timetable_calls
-R2,79009,Barcelona El Clot,437,13,15,0,53,timetable_calls
-R2,79004,Barcelona Sant Andreu,437,13,15,0,53,timetable_calls
-R2,71802,Barcelona-Passeig de Gràcia,437,13,15,0,53,timetable_calls
-R2,71801,Barcelona-Sants,437,13,15,0,53,timetable_calls
-R2,71708,Bellvitge - Gornal,437,13,15,0,53,timetable_calls
-R2,71705,Castelldefels,294,13,15,0,53,timetable_calls
-R2,71707,El Prat de Llobregat,437,13,15,0,53,timetable_calls
-R2,71706,Gavà,437,13,15,0,53,timetable_calls
-R2,79100,Granollers Centre,441,13,15,0,53,timetable_calls
-R2,79011,La Llagosta,429,13,15,0,52,timetable_calls
-R2,79006,Mollet-Sant Fost,441,13,15,0,53,timetable_calls
-R2,79005,Montcada i Reixac,429,13,15,0,52,timetable_calls
-R2,79007,Montmeló,441,13,15,0,53,timetable_calls
-R2,71709,Viladecans,437,13,15,0,53,timetable_calls
+R2,79009,Barcelona El Clot,384,12,15,0,53,timetable_calls
+R2,79004,Barcelona Sant Andreu,384,12,15,0,53,timetable_calls
+R2,71802,Barcelona-Passeig de Gràcia,384,12,15,0,53,timetable_calls
+R2,71801,Barcelona-Sants,384,12,15,0,53,timetable_calls
+R2,71708,Bellvitge - Gornal,384,12,15,0,53,timetable_calls
+R2,71705,Castelldefels,194,12,15,0,53,timetable_calls
+R2,71707,El Prat de Llobregat,384,12,15,0,53,timetable_calls
+R2,71706,Gavà,384,12,15,0,53,timetable_calls
+R2,79100,Granollers Centre,387,12,15,0,53,timetable_calls
+R2,79011,La Llagosta,377,12,15,0,52,timetable_calls
+R2,79006,Mollet-Sant Fost,387,12,15,0,53,timetable_calls
+R2,79005,Montcada i Reixac,377,12,15,0,52,timetable_calls
+R2,79007,Montmeló,387,12,15,0,53,timetable_calls
+R2,71709,Viladecans,384,12,15,0,53,timetable_calls
 R2N,72400,Aeroport,1110,15,15,74,74,timetable_calls
 R2N,79009,Barcelona El Clot,1080,15,15,72,72,timetable_calls
 R2N,79004,Barcelona Sant Andreu,1080,15,15,72,72,timetable_calls
@@ -83,81 +83,81 @@ R2S,71602,Segur de Calafell,1016,15,15,67,68,timetable_calls
 R2S,71701,Sitges,2054,15,15,134,138,timetable_calls
 R2S,71709,Viladecans,2067,15,15,129,141,timetable_calls
 R2S,71700,Vilanova i la Geltrú,2054,15,15,134,138,timetable_calls
-R3,77106,Balenyà-Els Hostalets,1179,13,15,0,106,timetable_calls
-R3,77107,Balenyà-Tona-Seva,1179,13,15,0,106,timetable_calls
+R3,77106,Balenyà-Els Hostalets,1001,12,15,0,106,timetable_calls
+R3,77107,Balenyà-Tona-Seva,1001,12,15,0,106,timetable_calls
 R3,78804,Barcelona Arc de Triomf,0,0,15,0,0,inventory_only
 R3,78806,Barcelona La Sagrera-Meridiana,0,0,15,0,0,inventory_only
 R3,78801,Barcelona Torre Baró-Vallbona,0,0,15,0,0,inventory_only
-R3,78802,Barcelona-Fabra i Puig,5187,13,15,0,399,timetable_calls
+R3,78802,Barcelona-Fabra i Puig,4788,12,15,0,399,timetable_calls
 R3,78805,Barcelona-Plaça de Catalunya,0,0,15,0,0,inventory_only
 R3,71801,Barcelona-Sants,0,0,15,0,0,inventory_only
-R3,77112,Borgonyà,698,13,15,0,66,timetable_calls
-R3,77301,Campdevànol,321,13,15,0,30,timetable_calls
-R3,77105,Centelles,3051,13,15,0,250,timetable_calls
-R3,77103,Figaró,1187,13,15,0,107,timetable_calls
-R3,77006,Granollers-Canovelles,2379,13,15,0,183,timetable_calls
+R3,77112,Borgonyà,574,12,15,0,66,timetable_calls
+R3,77301,Campdevànol,265,12,15,0,30,timetable_calls
+R3,77105,Centelles,2729,12,15,0,250,timetable_calls
+R3,77103,Figaró,1046,12,15,0,107,timetable_calls
+R3,77006,Granollers-Canovelles,2196,12,15,0,183,timetable_calls
 R3,72305,L'Hospitalet de Llobregat,0,0,15,0,0,inventory_only
-R3,77114,La Farga de Bebié,539,13,15,0,48,timetable_calls
-R3,77102,La Garriga,2266,13,15,0,190,timetable_calls
-R3,77306,La Molina,411,13,15,0,42,timetable_calls
+R3,77114,La Farga de Bebié,463,12,15,0,48,timetable_calls
+R3,77102,La Garriga,2042,12,15,0,190,timetable_calls
+R3,77306,La Molina,315,12,15,0,42,timetable_calls
 R3,ref:3a176326b5a03797,La Tor de Querol-Enveig,0,0,15,0,0,inventory_only
-R3,77100,Les Franqueses del Vallès,949,13,15,0,73,timetable_calls
-R3,77110,Manlleu,698,13,15,0,66,timetable_calls
-R3,77004,Mollet-Santa Rosa,2379,13,15,0,183,timetable_calls
-R3,78800,Montcada-Bifurcació,715,13,15,0,55,timetable_calls
-R3,77002,Montcada-Ripollet,1430,13,15,0,110,timetable_calls
-R3,77005,Parets del Vallès,2379,13,15,0,183,timetable_calls
-R3,77304,Planoles,416,13,15,0,42,timetable_calls
-R3,77309,Puigcerdà,273,13,15,0,26,timetable_calls
-R3,77303,Ribes de Freser,321,13,15,0,30,timetable_calls
-R3,77200,Ripoll,841,13,15,0,82,timetable_calls
-R3,77104,Sant Martí de Centelles,1374,13,15,0,107,timetable_calls
-R3,77113,Sant Quirze de Besora-Montesquiu,698,13,15,0,66,timetable_calls
-R3,77003,Santa Perpètua de Mogoda la Florida,1430,13,15,0,110,timetable_calls
-R3,77111,Torelló,698,13,15,0,66,timetable_calls
-R3,77305,Toses,273,13,15,0,26,timetable_calls
-R3,77307,Urtx-Alp,273,13,15,0,26,timetable_calls
-R3,77109,Vic,2601,13,15,0,220,timetable_calls
-R4,78705,Barberà del Vallès,1776,15,15,22,149,timetable_calls
-R4,78804,Barcelona Arc de Triomf,1819,15,15,23,151,timetable_calls
-R4,78806,Barcelona La Sagrera-Meridiana,1819,15,15,23,151,timetable_calls
-R4,78801,Barcelona Torre Baró-Vallbona,1813,15,15,23,151,timetable_calls
-R4,78802,Barcelona-Fabra i Puig,1819,15,15,23,151,timetable_calls
-R4,78805,Barcelona-Plaça de Catalunya,1816,15,15,22,151,timetable_calls
-R4,71801,Barcelona-Sants,1816,15,15,22,151,timetable_calls
-R4,78605,Castellbell i el Vilar-Monistrol de Montserrat,496,15,15,17,37,timetable_calls
-R4,72210,Castellbisbal,1606,15,15,19,138,timetable_calls
-R4,78706,Cerdanyola del Vallès,1776,15,15,22,149,timetable_calls
-R4,72303,Cornellà,1605,15,15,18,138,timetable_calls
-R4,72211,El Papiol,1600,15,15,17,138,timetable_calls
-R4,72201,El Vendrell,546,15,15,11,42,timetable_calls
-R4,72203,Els Monjos,546,15,15,11,42,timetable_calls
-R4,72208,Gelida,891,15,15,8,70,timetable_calls
-R4,72202,L'Arboç,546,15,15,11,42,timetable_calls
-R4,72305,L'Hospitalet de Llobregat,1825,15,15,22,152,timetable_calls
-R4,72205,La Granada,891,15,15,8,70,timetable_calls
-R4,72206,Lavern-Subirats,891,15,15,8,70,timetable_calls
-R4,78600,Manresa,794,15,15,21,70,timetable_calls
-R4,72209,Martorell Central,1604,15,15,18,138,timetable_calls
-R4,72300,Molins de Rei,1600,15,15,17,138,timetable_calls
-R4,78708,Montcada i Reixac-Manresa,1769,15,15,22,147,timetable_calls
-R4,78707,Montcada i Reixac-Santa Maria,1769,15,15,22,147,timetable_calls
-R4,78800,Montcada-Bifurcació,1813,15,15,23,151,timetable_calls
-R4,78704,Sabadell Centre,1779,15,15,23,149,timetable_calls
-R4,78709,Sabadell Nord,1779,15,15,23,149,timetable_calls
-R4,78703,Sabadell Sud,1779,15,15,23,149,timetable_calls
-R4,72301,Sant Feliu de Llobregat,1603,15,15,18,138,timetable_calls
-R4,72302,Sant Joan Despí,1603,15,15,18,138,timetable_calls
-R4,78610,Sant Miquel de Gonteres,484,15,15,11,37,timetable_calls
-R4,72207,Sant Sadurní d'Anoia,911,15,15,17,70,timetable_calls
-R4,71600,Sant Vicenç de Calders,546,15,15,11,42,timetable_calls
-R4,78604,Sant Vicenç de Castellet,790,15,15,21,70,timetable_calls
-R4,78710,Terrassa Est,1779,15,15,23,149,timetable_calls
-R4,78700,Terrassa Estació del Nord,1779,15,15,23,149,timetable_calls
-R4,78606,Vacarisses,486,15,15,12,37,timetable_calls
-R4,78607,Vacarisses-Torreblanca,486,15,15,12,37,timetable_calls
-R4,78609,Viladecavalls,486,15,15,12,37,timetable_calls
-R4,72204,Vilafranca del Penedès,891,15,15,8,70,timetable_calls
+R3,77100,Les Franqueses del Vallès,876,12,15,0,73,timetable_calls
+R3,77110,Manlleu,574,12,15,0,66,timetable_calls
+R3,77004,Mollet-Santa Rosa,2196,12,15,0,183,timetable_calls
+R3,78800,Montcada-Bifurcació,660,12,15,0,55,timetable_calls
+R3,77002,Montcada-Ripollet,1320,12,15,0,110,timetable_calls
+R3,77005,Parets del Vallès,2196,12,15,0,183,timetable_calls
+R3,77304,Planoles,322,12,15,0,42,timetable_calls
+R3,77309,Puigcerdà,221,12,15,0,26,timetable_calls
+R3,77303,Ribes de Freser,265,12,15,0,30,timetable_calls
+R3,77200,Ripoll,675,12,15,0,82,timetable_calls
+R3,77104,Sant Martí de Centelles,1267,12,15,0,107,timetable_calls
+R3,77113,Sant Quirze de Besora-Montesquiu,574,12,15,0,66,timetable_calls
+R3,77003,Santa Perpètua de Mogoda la Florida,1320,12,15,0,110,timetable_calls
+R3,77111,Torelló,574,12,15,0,66,timetable_calls
+R3,77305,Toses,221,12,15,0,26,timetable_calls
+R3,77307,Urtx-Alp,221,12,15,0,26,timetable_calls
+R3,77109,Vic,2285,12,15,0,220,timetable_calls
+R4,78705,Barberà del Vallès,1648,15,15,22,149,timetable_calls
+R4,78804,Barcelona Arc de Triomf,1689,15,15,23,151,timetable_calls
+R4,78806,Barcelona La Sagrera-Meridiana,1689,15,15,23,151,timetable_calls
+R4,78801,Barcelona Torre Baró-Vallbona,1677,15,15,23,151,timetable_calls
+R4,78802,Barcelona-Fabra i Puig,1689,15,15,23,151,timetable_calls
+R4,78805,Barcelona-Plaça de Catalunya,1685,15,15,22,151,timetable_calls
+R4,71801,Barcelona-Sants,1685,15,15,22,151,timetable_calls
+R4,78605,Castellbell i el Vilar-Monistrol de Montserrat,476,15,15,17,37,timetable_calls
+R4,72210,Castellbisbal,1485,15,15,19,138,timetable_calls
+R4,78706,Cerdanyola del Vallès,1648,15,15,22,149,timetable_calls
+R4,72303,Cornellà,1483,15,15,18,138,timetable_calls
+R4,72211,El Papiol,1477,15,15,17,138,timetable_calls
+R4,72201,El Vendrell,513,15,15,11,42,timetable_calls
+R4,72203,Els Monjos,513,15,15,11,42,timetable_calls
+R4,72208,Gelida,827,15,15,8,70,timetable_calls
+R4,72202,L'Arboç,513,15,15,11,42,timetable_calls
+R4,72305,L'Hospitalet de Llobregat,1693,15,15,22,152,timetable_calls
+R4,72205,La Granada,827,15,15,8,70,timetable_calls
+R4,72206,Lavern-Subirats,827,15,15,8,70,timetable_calls
+R4,78600,Manresa,745,15,15,21,70,timetable_calls
+R4,72209,Martorell Central,1482,15,15,18,138,timetable_calls
+R4,72300,Molins de Rei,1477,15,15,17,138,timetable_calls
+R4,78708,Montcada i Reixac-Manresa,1636,15,15,22,147,timetable_calls
+R4,78707,Montcada i Reixac-Santa Maria,1636,15,15,22,147,timetable_calls
+R4,78800,Montcada-Bifurcació,1677,15,15,23,151,timetable_calls
+R4,78704,Sabadell Centre,1652,15,15,23,149,timetable_calls
+R4,78709,Sabadell Nord,1652,15,15,23,149,timetable_calls
+R4,78703,Sabadell Sud,1652,15,15,23,149,timetable_calls
+R4,72301,Sant Feliu de Llobregat,1481,15,15,18,138,timetable_calls
+R4,72302,Sant Joan Despí,1481,15,15,18,138,timetable_calls
+R4,78610,Sant Miquel de Gonteres,458,15,15,11,37,timetable_calls
+R4,72207,Sant Sadurní d'Anoia,856,15,15,17,70,timetable_calls
+R4,71600,Sant Vicenç de Calders,513,15,15,11,42,timetable_calls
+R4,78604,Sant Vicenç de Castellet,741,15,15,21,70,timetable_calls
+R4,78710,Terrassa Est,1652,15,15,23,149,timetable_calls
+R4,78700,Terrassa Estació del Nord,1652,15,15,23,149,timetable_calls
+R4,78606,Vacarisses,461,15,15,12,37,timetable_calls
+R4,78607,Vacarisses-Torreblanca,461,15,15,12,37,timetable_calls
+R4,78609,Viladecavalls,461,15,15,12,37,timetable_calls
+R4,72204,Vilafranca del Penedès,827,15,15,8,70,timetable_calls
 R7,78801,Barcelona Torre Baró-Vallbona,0,0,15,0,0,inventory_only
 R7,78802,Barcelona-Fabra i Puig,1,1,15,0,1,timetable_calls
 R7,72503,Cerdanyola Universitat,0,0,15,0,0,inventory_only
@@ -165,15 +165,15 @@ R7,78706,Cerdanyola del Vallès,0,0,15,0,0,inventory_only
 R7,78708,Montcada i Reixac-Manresa,0,0,15,0,0,inventory_only
 R7,78707,Montcada i Reixac-Santa Maria,0,0,15,0,0,inventory_only
 R7,78800,Montcada-Bifurcació,0,0,15,0,0,inventory_only
-R8,72210,Castellbisbal,400,13,15,0,32,timetable_calls
-R8,72503,Cerdanyola Universitat,408,13,15,0,33,timetable_calls
-R8,79100,Granollers Centre,408,13,15,0,33,timetable_calls
-R8,72209,Martorell Central,400,13,15,0,32,timetable_calls
-R8,79006,Mollet-Sant Fost,408,13,15,0,33,timetable_calls
-R8,79007,Montmeló,408,13,15,0,33,timetable_calls
-R8,72501,Rubí Can Vallhonrat,400,13,15,0,32,timetable_calls
-R8,72502,Sant Cugat Coll Favà,400,13,15,0,32,timetable_calls
-R8,72508,Santa Perpètua de Mogoda Riera de Caldes,408,13,15,0,33,timetable_calls
+R8,72210,Castellbisbal,368,12,15,0,32,timetable_calls
+R8,72503,Cerdanyola Universitat,375,12,15,0,33,timetable_calls
+R8,79100,Granollers Centre,375,12,15,0,33,timetable_calls
+R8,72209,Martorell Central,368,12,15,0,32,timetable_calls
+R8,79006,Mollet-Sant Fost,375,12,15,0,33,timetable_calls
+R8,79007,Montmeló,375,12,15,0,33,timetable_calls
+R8,72501,Rubí Can Vallhonrat,368,12,15,0,32,timetable_calls
+R8,72502,Sant Cugat Coll Favà,368,12,15,0,32,timetable_calls
+R8,72508,Santa Perpètua de Mogoda Riera de Caldes,375,12,15,0,33,timetable_calls
 RG1,79600,Arenys de Mar,0,0,15,0,0,inventory_only
 RG1,79404,Badalona,0,0,15,0,0,inventory_only
 RG1,78804,Barcelona Arc de Triomf,0,0,15,0,0,inventory_only
