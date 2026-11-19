@@ -1,115 +1,98 @@
 {
   "schema": 1,
   "source": "https://ssl.renfe.com/ftransit/Fichero_CER_FOMENTO/fomento_transit.zip",
-  "gtfs_sha256": "30903e33f1a691b02c0428985bfa8699a3769ab0e992e67f910afb6ed395e3a0",
-  "generated_at": "2026-11-18T14:08:13.002913+01:00",
-  "date_start": "2026-11-17",
-  "date_end": "2026-12-01",
+  "gtfs_sha256": "58ac554356acddfffb2411f48ada26b5ff4655549e6957372906cf7a38e4ba4e",
+  "generated_at": "2026-11-19T14:18:19.274440+01:00",
+  "date_start": "2026-11-18",
+  "date_end": "2026-12-02",
   "discarded_stop_times": {
-    "outside_catalonia": 131
+    "outside_catalonia": 123
   },
   "by_line": {
     "R1": {
-      "active_trip_ids": 1938,
+      "active_trip_ids": 1748,
       "raw_two_stop_trips": 0,
       "usable_two_stop_trips": 0,
       "trips_with_removed_stops": 0,
       "trips_without_raw_stops": 0,
       "trips_with_fewer_than_two_usable_stops": 0,
       "distribution": {
-        "27": 408,
-        "25": 400,
-        "15": 749,
-        "18": 268,
-        "21": 113
+        "27": 374,
+        "25": 364,
+        "15": 670,
+        "18": 231,
+        "21": 109
       },
       "samples": []
     },
     "R2": {
-      "active_trip_ids": 394,
+      "active_trip_ids": 341,
       "raw_two_stop_trips": 0,
       "usable_two_stop_trips": 0,
       "trips_with_removed_stops": 0,
       "trips_without_raw_stops": 0,
       "trips_with_fewer_than_two_usable_stops": 0,
       "distribution": {
-        "27": 7,
-        "13": 158,
-        "23": 38,
-        "22": 8,
-        "14": 131,
+        "27": 6,
+        "13": 119,
+        "23": 35,
+        "22": 6,
+        "14": 129,
         "19": 15,
         "9": 3,
-        "18": 20,
-        "8": 14
+        "18": 15,
+        "8": 13
       },
       "samples": []
     },
     "R2N": {
-      "active_trip_ids": 839,
+      "active_trip_ids": 767,
       "raw_two_stop_trips": 0,
       "usable_two_stop_trips": 0,
       "trips_with_removed_stops": 0,
-      "trips_without_raw_stops": 839,
-      "trips_with_fewer_than_two_usable_stops": 839,
+      "trips_without_raw_stops": 767,
+      "trips_with_fewer_than_two_usable_stops": 767,
       "distribution": {
-        "0": 839
+        "0": 767
       },
       "samples": []
     },
     "R2S": {
-      "active_trip_ids": 1622,
+      "active_trip_ids": 1479,
       "raw_two_stop_trips": 0,
       "usable_two_stop_trips": 0,
       "trips_with_removed_stops": 0,
-      "trips_without_raw_stops": 1622,
-      "trips_with_fewer_than_two_usable_stops": 1622,
+      "trips_without_raw_stops": 1479,
+      "trips_with_fewer_than_two_usable_stops": 1479,
       "distribution": {
-        "0": 1622
+        "0": 1479
       },
       "samples": []
     },
     "R3": {
-      "active_trip_ids": 6005,
-      "raw_two_stop_trips": 2592,
-      "usable_two_stop_trips": 2599,
-      "trips_with_removed_stops": 131,
+      "active_trip_ids": 5528,
+      "raw_two_stop_trips": 2376,
+      "usable_two_stop_trips": 2382,
+      "trips_with_removed_stops": 123,
       "trips_without_raw_stops": 0,
       "trips_with_fewer_than_two_usable_stops": 0,
       "distribution": {
-        "18": 70,
+        "18": 60,
         "20": 50,
-        "5": 243,
-        "7": 687,
-        "13": 104,
+        "5": 208,
+        "7": 631,
+        "13": 100,
         "15": 20,
-        "11": 219,
-        "2": 2599,
+        "11": 199,
+        "2": 2382,
         "4": 178,
-        "9": 876,
-        "8": 94,
-        "10": 97,
-        "6": 674,
-        "3": 94
+        "9": 803,
+        "8": 92,
+        "10": 96,
+        "6": 617,
+        "3": 92
       },
       "samples": [
-        {
-          "trip_id": "5121X86357R3",
-          "raw_stop_times": 3,
-          "usable_stop_times": 2,
-          "original_stops": [
-            [
-              "77304",
-              "Planoles",
-              "23:13:00"
-            ],
-            [
-              "77305",
-              "Toses",
-              "23:29:00"
-            ]
-          ]
-        },
         {
           "trip_id": "5122J86357R3",
           "raw_stop_times": 3,
@@ -145,7 +128,24 @@
           ]
         },
         {
-          "trip_id": "5121X87316R3",
+          "trip_id": "5124S86357R3",
+          "raw_stop_times": 3,
+          "usable_stop_times": 2,
+          "original_stops": [
+            [
+              "77304",
+              "Planoles",
+              "23:13:00"
+            ],
+            [
+              "77305",
+              "Toses",
+              "23:29:00"
+            ]
+          ]
+        },
+        {
+          "trip_id": "5122J87316R3",
           "raw_stop_times": 2,
           "usable_stop_times": 2,
           "original_stops": [
@@ -162,7 +162,7 @@
           ]
         },
         {
-          "trip_id": "5121X87317R3",
+          "trip_id": "5122J87317R3",
           "raw_stop_times": 2,
           "usable_stop_times": 2,
           "original_stops": [
@@ -179,7 +179,7 @@
           ]
         },
         {
-          "trip_id": "5121X87318R3",
+          "trip_id": "5122J87318R3",
           "raw_stop_times": 2,
           "usable_stop_times": 2,
           "original_stops": [
@@ -198,45 +198,45 @@
       ]
     },
     "R4": {
-      "active_trip_ids": 1730,
-      "raw_two_stop_trips": 55,
-      "usable_two_stop_trips": 55,
+      "active_trip_ids": 1570,
+      "raw_two_stop_trips": 50,
+      "usable_two_stop_trips": 50,
       "trips_with_removed_stops": 0,
       "trips_without_raw_stops": 0,
-      "trips_with_fewer_than_two_usable_stops": 55,
+      "trips_with_fewer_than_two_usable_stops": 50,
       "distribution": {
-        "1": 55,
-        "40": 366,
-        "35": 40,
-        "31": 210,
-        "29": 113,
-        "33": 66,
-        "26": 22,
-        "24": 543,
-        "15": 36,
-        "17": 180,
+        "1": 50,
+        "40": 335,
+        "35": 35,
+        "31": 183,
+        "29": 112,
+        "33": 60,
+        "26": 19,
+        "24": 483,
+        "15": 32,
+        "17": 168,
         "18": 4,
         "22": 6,
-        "2": 55,
-        "36": 19,
+        "2": 50,
+        "36": 17,
         "13": 2,
-        "7": 13
+        "7": 14
       },
       "samples": [
         {
-          "trip_id": "5121X33521R4",
+          "trip_id": "5122J33521R4",
           "raw_stop_times": 2,
           "usable_stop_times": 2,
           "original_stops": []
         },
         {
-          "trip_id": "5121X33523R4",
+          "trip_id": "5122J33523R4",
           "raw_stop_times": 2,
           "usable_stop_times": 2,
           "original_stops": []
         },
         {
-          "trip_id": "5121X33525R4",
+          "trip_id": "5122J33525R4",
           "raw_stop_times": 2,
           "usable_stop_times": 2,
           "original_stops": []
@@ -256,147 +256,147 @@
       "samples": []
     },
     "R8": {
-      "active_trip_ids": 375,
+      "active_trip_ids": 342,
       "raw_two_stop_trips": 0,
       "usable_two_stop_trips": 0,
       "trips_with_removed_stops": 0,
       "trips_without_raw_stops": 0,
       "trips_with_fewer_than_two_usable_stops": 0,
       "distribution": {
-        "9": 368,
-        "5": 7
+        "9": 336,
+        "5": 6
       },
       "samples": []
     },
     "RG1": {
-      "active_trip_ids": 123,
+      "active_trip_ids": 106,
       "raw_two_stop_trips": 0,
       "usable_two_stop_trips": 0,
       "trips_with_removed_stops": 0,
-      "trips_without_raw_stops": 123,
-      "trips_with_fewer_than_two_usable_stops": 123,
+      "trips_without_raw_stops": 106,
+      "trips_with_fewer_than_two_usable_stops": 106,
       "distribution": {
-        "0": 123
+        "0": 106
       },
       "samples": []
     },
     "RT1": {
-      "active_trip_ids": 105,
+      "active_trip_ids": 95,
       "raw_two_stop_trips": 0,
       "usable_two_stop_trips": 0,
       "trips_with_removed_stops": 0,
-      "trips_without_raw_stops": 105,
-      "trips_with_fewer_than_two_usable_stops": 105,
+      "trips_without_raw_stops": 95,
+      "trips_with_fewer_than_two_usable_stops": 95,
       "distribution": {
-        "0": 105
+        "0": 95
       },
       "samples": []
     },
     "RT2": {
-      "active_trip_ids": 183,
+      "active_trip_ids": 167,
       "raw_two_stop_trips": 0,
       "usable_two_stop_trips": 0,
       "trips_with_removed_stops": 0,
-      "trips_without_raw_stops": 183,
-      "trips_with_fewer_than_two_usable_stops": 183,
+      "trips_without_raw_stops": 167,
+      "trips_with_fewer_than_two_usable_stops": 167,
       "distribution": {
-        "0": 183
+        "0": 167
       },
       "samples": []
     },
     "RL3": {
-      "active_trip_ids": 102,
+      "active_trip_ids": 90,
       "raw_two_stop_trips": 0,
       "usable_two_stop_trips": 0,
       "trips_with_removed_stops": 0,
-      "trips_without_raw_stops": 102,
-      "trips_with_fewer_than_two_usable_stops": 102,
+      "trips_without_raw_stops": 90,
+      "trips_with_fewer_than_two_usable_stops": 90,
       "distribution": {
-        "0": 102
+        "0": 90
       },
       "samples": []
     },
     "RL4": {
-      "active_trip_ids": 110,
+      "active_trip_ids": 100,
       "raw_two_stop_trips": 0,
       "usable_two_stop_trips": 0,
       "trips_with_removed_stops": 0,
-      "trips_without_raw_stops": 110,
-      "trips_with_fewer_than_two_usable_stops": 110,
+      "trips_without_raw_stops": 100,
+      "trips_with_fewer_than_two_usable_stops": 100,
       "distribution": {
-        "0": 110
+        "0": 100
       },
       "samples": []
     },
     "R11": {
-      "active_trip_ids": 507,
+      "active_trip_ids": 459,
       "raw_two_stop_trips": 0,
       "usable_two_stop_trips": 0,
       "trips_with_removed_stops": 0,
-      "trips_without_raw_stops": 507,
-      "trips_with_fewer_than_two_usable_stops": 507,
+      "trips_without_raw_stops": 459,
+      "trips_with_fewer_than_two_usable_stops": 459,
       "distribution": {
-        "0": 507
+        "0": 459
       },
       "samples": []
     },
     "R13": {
-      "active_trip_ids": 490,
+      "active_trip_ids": 448,
       "raw_two_stop_trips": 0,
       "usable_two_stop_trips": 0,
       "trips_with_removed_stops": 0,
-      "trips_without_raw_stops": 490,
-      "trips_with_fewer_than_two_usable_stops": 490,
+      "trips_without_raw_stops": 448,
+      "trips_with_fewer_than_two_usable_stops": 448,
       "distribution": {
-        "0": 490
+        "0": 448
       },
       "samples": []
     },
     "R14": {
-      "active_trip_ids": 62,
+      "active_trip_ids": 56,
       "raw_two_stop_trips": 0,
       "usable_two_stop_trips": 0,
       "trips_with_removed_stops": 0,
-      "trips_without_raw_stops": 62,
-      "trips_with_fewer_than_two_usable_stops": 62,
+      "trips_without_raw_stops": 56,
+      "trips_with_fewer_than_two_usable_stops": 56,
       "distribution": {
-        "0": 62
+        "0": 56
       },
       "samples": []
     },
     "R15": {
-      "active_trip_ids": 388,
+      "active_trip_ids": 355,
       "raw_two_stop_trips": 0,
       "usable_two_stop_trips": 0,
       "trips_with_removed_stops": 0,
-      "trips_without_raw_stops": 388,
-      "trips_with_fewer_than_two_usable_stops": 388,
+      "trips_without_raw_stops": 355,
+      "trips_with_fewer_than_two_usable_stops": 355,
       "distribution": {
-        "0": 388
+        "0": 355
       },
       "samples": []
     },
     "R16": {
-      "active_trip_ids": 308,
+      "active_trip_ids": 282,
       "raw_two_stop_trips": 0,
       "usable_two_stop_trips": 0,
       "trips_with_removed_stops": 0,
-      "trips_without_raw_stops": 308,
-      "trips_with_fewer_than_two_usable_stops": 308,
+      "trips_without_raw_stops": 282,
+      "trips_with_fewer_than_two_usable_stops": 282,
       "distribution": {
-        "0": 308
+        "0": 282
       },
       "samples": []
     },
     "R17": {
-      "active_trip_ids": 67,
+      "active_trip_ids": 61,
       "raw_two_stop_trips": 0,
       "usable_two_stop_trips": 0,
       "trips_with_removed_stops": 0,
-      "trips_without_raw_stops": 67,
-      "trips_with_fewer_than_two_usable_stops": 67,
+      "trips_without_raw_stops": 61,
+      "trips_with_fewer_than_two_usable_stops": 61,
       "distribution": {
-        "0": 67
+        "0": 61
       },
       "samples": []
     }
