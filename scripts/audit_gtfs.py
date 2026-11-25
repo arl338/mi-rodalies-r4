@@ -6,13 +6,67 @@ from datetime import datetime, timedelta
 from pathlib import Path
 import build_network as B
 
+def audit_calendar(calendar, exceptions, trips, routes, requested, valid):
+    """Independent strict GTFS YYYYMMDD calendar evaluation, without B.service_days."""
+    def parse(value):
+        try:
+            return datetime.strptime(str(value).strip(), "%Y%m%d").date()
+        except (ValueError, TypeError):
+            return None
+    weekdays = ("monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday")
+    weights = Counter()
+    for trip in trips:
+        line = B.infer_line(trip, routes.get(trip.get("route_id"), {}))
+        if line:
+            weights[(str(trip.get("service_id") or "").strip(), line)] += 1
+    relevant = {sid for sid, line in weights}
+    report = {}
+    for day in requested:
+        covered = set()
+        weekly = set()
+        added = set()
+        removed = set()
+        for row in calendar:
+            sid = str(row.get("service_id") or "").strip()
+            start, end = parse(row.get("start_date")), parse(row.get("end_date"))
+            if sid in relevant and start and end and start <= day <= end:
+                covered.add(sid)
+                if str(row.get(weekdays[day.weekday()]) or "").strip() == "1":
+                    weekly.add(sid)
+        for row in exceptions:
+            sid = str(row.get("service_id") or "").strip()
+            if sid in relevant and parse(row.get("date")) == day:
+                kind = str(row.get("exception_type") or "").strip()
+                if kind == "1":
+                    added.add(sid)
+                elif kind == "2":
+                    removed.add(sid)
+        active = (weekly | added) - removed
+        generator = {sid for sid in relevant if day in valid.get(sid, set())}
+        by_line = defaultdict(Counter)
+        for (sid, line), count in weights.items():
+            for label, group in (("within_date_range", covered), ("weekly_enabled", weekly),
+                                 ("exception_added", added), ("exception_removed", removed),
+                                 ("independent_active", active), ("generator_active", generator)):
+                by_line[line][label] += count if sid in group else 0
+        report[str(day)] = {
+            "by_line": {line: dict(counts) for line, counts in by_line.items()},
+            "independent_only_service_ids": sorted(active - generator),
+            "generator_only_service_ids": sorted(generator - active),
+            "conflicting_exception_service_ids": sorted(added & removed),
+        }
+    return report
+
 def analyze(raw,days=14):
     base=datetime.now(B.TZ).date()
     requested=[base+timedelta(days=i) for i in range(-1,days)]
     with zipfile.ZipFile(io.BytesIO(raw)) as z:
         routes={r['route_id']:r for r in B.load(z,'routes.txt')}
         trips=B.load(z,'trips.txt')
-        valid=B.service_days(B.load_optional(z,'calendar.txt'),B.load_optional(z,'calendar_dates.txt'),requested)
+        calendar=B.load_optional(z,'calendar.txt')
+        exceptions=B.load_optional(z,'calendar_dates.txt')
+        valid=B.service_days(calendar,exceptions,requested)
+        calendar_audit=audit_calendar(calendar,exceptions,trips,routes,requested,valid)
         selected={t['trip_id']:(B.infer_line(t,routes.get(t.get('route_id'),{})),t) for t in trips if valid.get(t.get('service_id'))}
         selected={k:v for k,v in selected.items() if v[0]}
         stops={s['stop_id']:s for s in B.load(z,'stops.txt')}
@@ -66,7 +120,7 @@ def analyze(raw,days=14):
     return {'schema':1,'source':B.CERCANIAS,'gtfs_sha256':hashlib.sha256(raw).hexdigest(),
             'generated_at':datetime.now(B.TZ).isoformat(),'date_start':str(requested[0]),
             'date_end':str(requested[-1]),'discarded_stop_times':dict(discarded),
-            'by_line':lines,'note':'La auditoría compara stop_times original con el filtrado. Nunca reconstruye horarios.'}
+            'calendar_audit':calendar_audit,'by_line':lines,'note':'La auditoría compara stop_times original con el filtrado. Nunca reconstruye horarios.'}
 
 if __name__=='__main__':
     ap=argparse.ArgumentParser();ap.add_argument('--days',type=int,default=14)
