@@ -60,6 +60,8 @@ def daily_source_warnings(previous: dict, current: dict) -> list[str]:
             p = prior.get(day, {}).get("active_trip_ids")
             if n == 0:
                 warnings.append(f"{line} {day}: no active GTFS trip IDs; verify official alternatives")
+            elif counts.get("at_least_two_usable_stops") == 0:
+                warnings.append(f"{line} {day}: active GTFS IDs but no usable journeys; verify official alternatives")
             elif isinstance(p, int) and isinstance(n, int) and p >= 10 and n < p * 0.60:
                 warnings.append(f"{line} {day}: GTFS trip IDs fell over 40%: {p} -> {n}")
     return warnings
