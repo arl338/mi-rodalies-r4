@@ -35,8 +35,11 @@ def load_reference(path=REFERENCE):
     if len(known)!=len(entries):raise ValueError("Duplicate official R4 service IDs")
     return doc
 
+# Official R4 weekend table includes public holidays.
+VERIFIED_HOLIDAYS = {'2026-12-08', '2026-12-25', '2026-12-26'}
+
 def materialize_day(day,reference):
-    calendar="weekend" if day.weekday()>=5 else "weekday"
+    calendar="weekend" if day.weekday()>=5 or day.isoformat() in VERIFIED_HOLIDAYS else "weekday"
     anchor=datetime.combine(day,time.min,tzinfo=TZ)
     out=[]
     for item in reference["services"]:
