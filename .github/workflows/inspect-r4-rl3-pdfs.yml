@@ -165,6 +165,17 @@ jobs:
                       for s in spans:
                           if any(re.search(r'(?<!\d)'+re.escape(n)+r'(?!\d)',s['text']) for n in nums) or re.search(r'festi|laborab|dissabte|diumenge|sábado|domingo',s['text'],re.I):
                               print('REGIONAL_STYLE',','.join(sorted(lines)),i+1,json.dumps({k:s[k] for k in ('text','bbox','color','font','flags')},ensure_ascii=False))
+                      drawings=page.get_drawings()
+                      for s in spans:
+                          if s['text'].strip() not in nums and not re.search(r'festi|laborab|dissabte|diumenge|sábado|domingo',s['text'],re.I):continue
+                          box=fitz.Rect(s['bbox'])
+                          marks=[]
+                          for v in drawings:
+                              rect=v['rect']
+                              if v.get('fill') is None or rect.width>page.rect.width*.95 or rect.height>35:continue
+                              if rect.y0<=box.y1+3 and rect.y1>=box.y0-3 and rect.x0<=box.x1+20 and rect.x1>=box.x0-40:
+                                  marks.append({'rect':list(rect),'fill':v['fill']})
+                          print('REGIONAL_MARK',','.join(sorted(lines)),i+1,s['text'],json.dumps(marks))
                       Path('/tmp/pdf-review/'+url.rsplit('/',1)[-1]+f'-page-{i+1}-drawings.json').write_text(json.dumps(page.get_drawings(),default=str))
           PY
       - uses: actions/upload-artifact@v4
