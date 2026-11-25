@@ -299,17 +299,18 @@ function renderResultList(){const root=$('results');root.replaceChildren();for(c
  if(catalog&&Date.now()-Date.parse(catalog.generated_at||'')>48*3600000)notes.push('Catálogo GTFS antiguo: comprobar el horario vigente en Renfe');
  // Dynamic nodes instead of innerHTML from external providers (XSS-safe).
  proof.append(el('b','', 'Evidencias: '),document.createTextNode(notes.join(' · ')));if(alternative){const attribution=el('a','','Trenalia · datos de Renfe');attribution.href='https://trenalia.org/api';attribution.target='_blank';attribution.rel='noopener noreferrer';proof.append(document.createTextNode(' · '),attribution);}
- if(officialPdf){const ref=el('a','','Cuadro oficial R4');ref.href=catalog?.official_r4_pdf?.source||'https://rodalies.gencat.cat/web/.content/02_Horaris/horaris/R4.pdf';ref.target='_blank';ref.rel='noopener noreferrer';proof.append(document.createTextNode(' · '),ref);}
- if(officialRL3){const ref=el('a','','Cuadro oficial RL3/RL4');ref.href=catalog?.official_rl3_pdf?.source||'https://rodalies.gencat.cat/web/.content/02_Horaris/horaris/RL3RL4.pdf';ref.target='_blank';ref.rel='noopener noreferrer';proof.append(document.createTextNode(' · '),ref);}
- if(officialR2){const ref=el('a','','Cuadro oficial R2 Nord / R2 Sud');ref.href=catalog?.official_r2_pdf?.source||'https://rodalies.gencat.cat/es/horaris/tots-els-horaris/';ref.target='_blank';ref.rel='noopener noreferrer';proof.append(document.createTextNode(' · '),ref);}
+ if(officialPdf){const ref=el('a','','Cuadro oficial R4');ref.href=safeOfficialUrl(catalog?.official_r4_pdf?.source||'https://rodalies.gencat.cat/web/.content/02_Horaris/horaris/R4.pdf');ref.target='_blank';ref.rel='noopener noreferrer';proof.append(document.createTextNode(' · '),ref);}
+ if(officialRL3){const ref=el('a','','Cuadro oficial RL3/RL4');ref.href=safeOfficialUrl(catalog?.official_rl3_pdf?.source||'https://rodalies.gencat.cat/web/.content/02_Horaris/horaris/RL3RL4.pdf');ref.target='_blank';ref.rel='noopener noreferrer';proof.append(document.createTextNode(' · '),ref);}
+ if(officialR2){const ref=el('a','','Cuadro oficial R2 Nord / R2 Sud');ref.href=safeOfficialUrl(catalog?.official_r2_pdf?.source||'https://rodalies.gencat.cat/es/horaris/tots-els-horaris/');ref.target='_blank';ref.rel='noopener noreferrer';proof.append(document.createTextNode(' · '),ref);}
  if(officialRegional){for(const line of [...new Set(j.legs.filter(l=>l.t.src==='official-regional-pdf').map(l=>l.t.l))]){const url=catalog?.regional_official_pdf?.sources?.[line];if(url){const ref=el('a','','Cuadro oficial '+line);ref.href=url;ref.target='_blank';ref.rel='noopener noreferrer';proof.append(document.createTextNode(' · '),ref);}}}
  if(officialExtra){for(const line of [...new Set(j.legs.filter(l=>l.t.src==='official-supplement-pdf').map(l=>l.t.l))]){const url=catalog?.additional_official_pdf?.sources?.[line];if(url){const ref=el('a','','Cuadro oficial '+line);ref.href=url;ref.target='_blank';ref.rel='noopener noreferrer';proof.append(document.createTextNode(' · '),ref);}}}
- if(officialR1){const ref=el('a','','Cuadro oficial R1');ref.href=catalog?.official_r1_pdf?.source||'https://rodalies.gencat.cat/web/.content/02_Horaris/horaris/R1.pdf';ref.target='_blank';ref.rel='noopener noreferrer';proof.append(document.createTextNode(' · '),ref);}
+ if(officialR1){const ref=el('a','','Cuadro oficial R1');ref.href=safeOfficialUrl(catalog?.official_r1_pdf?.source||'https://rodalies.gencat.cat/web/.content/02_Horaris/horaris/R1.pdf');ref.target='_blank';ref.rel='noopener noreferrer';proof.append(document.createTextNode(' · '),ref);}
  panel.append(proof);root.append(panel);
  }
  $('load-more').hidden=results.length<=visible;
  $('load-more').textContent=`Mostrar más (${Math.max(0,results.length-visible)} restantes)`;
 }
+function safeOfficialUrl(value){try{const u=new URL(value);if(u.protocol==='https:'&&u.hostname==='rodalies.gencat.cat'&&!u.username&&!u.password)return u.href;}catch{}return 'https://rodalies.gencat.cat/es/horaris/tots-els-horaris/';}
 function gtfsCoverageGaps(range){
  const dates=[range.day,...(range.extra?[datePlus(range.day,1)]:[])];
  const lines=selection.line==='ALL'?[...E.LINES]:[selection.line];
@@ -328,7 +329,7 @@ function updateSummary(range,scheduleCount,live){const direct=results.filter(x=>
    'La estación seleccionada no figura en el cuadro horario R1 actualmente publicado, que cubre L’Hospitalet–Maçanet. No se pueden mostrar trenes sin horarios verificados; consulta las modificaciones del servicio.':
    scheduleCount?'No se han encontrado servicios directos ni conexiones de un transbordo en esta franja. No implica que el servicio esté suspendido.':'No hay servicios GTFS verificables para esta combinación de estaciones, línea y fecha. El inventario no garantiza circulación.';
   const refPdf=catalog?.official_reference?.lines?.find(l=>l.id===selection.line)?.timetable_pdf;
-  const a=el('a','','Consultar cuadro horario oficial de '+selection.line);a.href=refPdf||'https://rodalies.gencat.cat/es/horaris/tots-els-horaris/';a.target='_blank';a.rel='noopener noreferrer';st.append(document.createTextNode(' · '),a);}
+  const a=el('a','','Consultar cuadro horario oficial de '+selection.line);a.href=safeOfficialUrl(refPdf);a.target='_blank';a.rel='noopener noreferrer';st.append(document.createTextNode(' · '),a);}
  else{st.className='notice '+(cancel?'warn':pos?'good':'neutral');st.textContent=`${direct} directos · ${transfer} con un transbordo · ${etaCount} con hora estimada · ${pos} con posición reciente · ${cancel} cancelados. Sin observación válida se mantiene el horario programado.`;}
  const gaps=gtfsCoverageGaps(range);
  if(gaps.length){st.className='notice warn';st.append(document.createTextNode(' · COBERTURA GTFS INCOMPLETA: '+gaps.map(g=>g.line+' '+g.day).join(', ')+'. Los horarios alternativos pueden ser parciales. No implica suspensión ni cancelación. Consulta el horario oficial.'));}
