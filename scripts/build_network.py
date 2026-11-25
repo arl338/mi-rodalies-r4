@@ -744,7 +744,25 @@ def build(cer,md,output,days,base=None):
     # the expanded static inventory (which may have no train times).
     audit=validate_official_reference(reference,[dict(st,lines=list(st['schedule_lines'])) for st in stations.values()],
                                      [{'id':line,'present':by_line[line]>0,'scheduled_trips_in_period':by_line[line]} for line in LINES])
+    # Document age is not validity: flag references requiring renewed review.
+    document_review = []
+    for label, filename, field in (
+        ("R4", "r4_official_timetable.json", "verified_at"),
+        ("R1", "r1_official_timetable.json", "verified_date"),
+        ("RL3", "rl3_official_timetable.json", "verified_date"),
+        ("Additional", "additional_official_timetables.json", "validated_on"),
+        ("Regional", "official_regional_verified.json", "source_verified_on"),
+    ):
+        doc = json.loads((REFERENCE_FILE.parent / filename).read_text(encoding="utf8"))
+        verified = date.fromisoformat(doc[field])
+        age = (base - verified).days
+        document_review.append({"source": label, "verified_on": str(verified),
+                                "age_days": age, "review_due": age >= 30,
+                                "validity_confirmed": False})
+        if production_feed and age >= 30:
+            errors.append(f"Referencia PDF {label}: {age} días desde revisión; vigencia pendiente de contraste.")
     catalog={
+       'document_review':document_review,
        'schema':2,'batch_id':batch_id,'generated_at':datetime.now(TZ).isoformat(),
        'coverage_start':base.isoformat(),'coverage_end':dates[-1].isoformat(),
        'source':'Renfe Data GTFS + PDF oficials R1/R2N/R2S/R4/RL3/RT1/RT2/RL4/RG1/R17/R11/R13/R14/R15/R16; horaris programats, no circulació confirmada',
