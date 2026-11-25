@@ -358,7 +358,7 @@ function enrichLeg(leg,board,positions,cancels,now){
  const boardCancelled=freshBoard.some(x=>x.cancelled);
  if(officialCancelled||boardCancelled){current.cancelled=true;current.conflict=!!current.position||current.conflict;current.proof.push('Cancelación atribuida al servicio');}
  if(current.conflict)current.state='conflict';else if(current.cancelled)current.state='cancelled';
- if(!current.proof.length)current.proof.push('Solo horario oficial; sin observación vinculada');
+ if(!current.proof.length)current.proof.push(leg.t.src==='trenalia-schedule-only'?'Horario alternativo Trenalia; sin observación vinculada':'Solo horario oficial; sin observación vinculada');
  return current;
 }
 function enrichJourney(journey,board,positions,cancels,now){const legs=journey.legs.map(l=>enrichLeg(l,board,positions,cancels,now));
