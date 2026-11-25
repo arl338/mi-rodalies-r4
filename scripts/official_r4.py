@@ -1,7 +1,6 @@
 """Compile independently verified official R4 PDF station cells into daily schedules.
 
-Only southern direction is certified by current PDF extraction. The northern
-direction continues to use Renfe GTFS. Never synthesise intermediate stops.
+Only independently verified PDF rows are accepted. Never synthesise intermediate stops.
 """
 from __future__ import annotations
 import json
@@ -22,7 +21,7 @@ def load_reference(path=REFERENCE):
         raise ValueError("R4 official timetable is incomplete")
     known={}
     for item in entries:
-        if item["calendar"] not in ("weekday","weekend") or item["direction"]!="south":
+        if item["calendar"] not in ("weekday","weekend") or item["direction"] not in ("south","north"):
             raise ValueError("Unverified direction in R4 PDF input")
         stops=item["stops"]
         if len(stops)<2 or any(not isinstance(st[1],int) or not 0<=st[1]<1800 for st in stops):
@@ -78,7 +77,7 @@ def reference_metadata(reference,count_by_day):
     return {"source":reference["source"],
             "document_sha256":reference["sha256"],
             "extracted_at":reference["verified_at"],
-            "direction":"Manresa to Sant Vicenç de Calders, via Terrassa Est",
+            "direction":"Verified directions: "+", ".join(sorted({s["direction"] for s in reference["services"]})),
             "weekday_template_count":sum(s["calendar"]=="weekday" for s in reference["services"]),
             "weekend_template_count":sum(s["calendar"]=="weekend" for s in reference["services"]),
             "supplement_count_by_day":count_by_day,
