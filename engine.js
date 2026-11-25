@@ -354,7 +354,9 @@ function enrichLeg(leg,board,positions,cancels,now){
    }
   }
  }
- const officialCancelled=cancels.some(x=>x.trip&&serviceIds(leg.t).includes(String(x.trip))&&(x.day===leg.t.day||( !x.day&&Number.isFinite(x.updated)&&now-x.updated>=0&&now-x.updated<=180))&&(!x.line||x.line===leg.t.l));
+ const todayParts=new Intl.DateTimeFormat('en-CA',{timeZone:'Europe/Madrid',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date(now*1000));
+ const today=['year','month','day'].map(k=>todayParts.find(p=>p.type===k).value).join('-');
+ const officialCancelled=cancels.some(x=>x.trip&&serviceIds(leg.t).includes(String(x.trip))&&(x.day===leg.t.day||( !x.day&&leg.t.day===today&&Number.isFinite(x.updated)&&now-x.updated>=0&&now-x.updated<=180))&&(!x.line||x.line===leg.t.l));
  const boardCancelled=freshBoard.some(x=>x.cancelled);
  if(officialCancelled||boardCancelled){current.cancelled=true;current.conflict=!!current.position||current.conflict;current.proof.push('Cancelación atribuida al servicio');}
  if(current.conflict)current.state='conflict';else if(current.cancelled)current.state='cancelled';
