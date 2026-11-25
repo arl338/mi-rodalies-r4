@@ -141,7 +141,12 @@ function validateRange(){const day=$('trip-date').value,from=$('from-time').valu
 async function loadJson(url,signal,timeout=CONFIG.timeoutMs){const c=new AbortController(),timer=setTimeout(()=>c.abort(),timeout),abort=()=>c.abort();signal?.addEventListener('abort',abort,{once:true});try{
  const r=await fetch(url,{signal:c.signal,cache:'no-store',headers:{'Accept':'application/json'}});
  if(!r.ok)throw new Error('HTTP '+r.status);
- return await r.json();
+ const limit=20*1024*1024;
+ const declared=Number(r.headers.get('content-length'));
+ if(declared>limit)throw new Error('Respuesta JSON demasiado grande');
+ if(!r.body){const raw=await r.text();if(raw.length>limit)throw new Error('Respuesta JSON demasiado grande');return JSON.parse(raw);}
+ const reader=r.body.getReader(),decoder=new TextDecoder();let size=0,raw='';
+ try{while(true){const {done,value}=await reader.read();if(done)break;size+=value.byteLength;if(size>limit){await reader.cancel();throw new Error('Respuesta JSON demasiado grande');}raw+=decoder.decode(value,{stream:true});}raw+=decoder.decode();return JSON.parse(raw);}finally{reader.releaseLock();}
 }finally{clearTimeout(timer);signal?.removeEventListener('abort',abort);}}
 async function loadDataFile(file,signal,timeout=16000){
  const roots=[CONFIG.dataRoot,'./data/v2/'];let last=null;
