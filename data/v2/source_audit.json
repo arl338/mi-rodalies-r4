@@ -2,11 +2,2398 @@
   "schema": 1,
   "source": "https://ssl.renfe.com/ftransit/Fichero_CER_FOMENTO/fomento_transit.zip",
   "gtfs_sha256": "0609cbf45a41dcc6a328bf82271d80f6675947b5a54168a453d5e98d407b8100",
-  "generated_at": "2026-11-25T18:09:27.453515+01:00",
+  "generated_at": "2026-11-25T18:17:26.676600+01:00",
   "date_start": "2026-11-24",
   "date_end": "2026-12-08",
   "discarded_stop_times": {
     "outside_catalonia": 133
+  },
+  "calendar_audit": {
+    "2026-11-24": {
+      "by_line": {
+        "R1": {
+          "within_date_range": 190,
+          "weekly_enabled": 190,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 190,
+          "generator_active": 190
+        },
+        "R2N": {
+          "within_date_range": 72,
+          "weekly_enabled": 72,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 72,
+          "generator_active": 72
+        },
+        "R2S": {
+          "within_date_range": 143,
+          "weekly_enabled": 143,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 143,
+          "generator_active": 143
+        },
+        "R2": {
+          "within_date_range": 54,
+          "weekly_enabled": 54,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 54,
+          "generator_active": 54
+        },
+        "R3": {
+          "within_date_range": 477,
+          "weekly_enabled": 477,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 477,
+          "generator_active": 477
+        },
+        "R4": {
+          "within_date_range": 161,
+          "weekly_enabled": 161,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 161,
+          "generator_active": 161
+        },
+        "R8": {
+          "within_date_range": 33,
+          "weekly_enabled": 33,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 33,
+          "generator_active": 33
+        },
+        "R7": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "RL4": {
+          "within_date_range": 10,
+          "weekly_enabled": 10,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 10,
+          "generator_active": 10
+        },
+        "R11": {
+          "within_date_range": 48,
+          "weekly_enabled": 48,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 48,
+          "generator_active": 48
+        },
+        "R15": {
+          "within_date_range": 36,
+          "weekly_enabled": 36,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 36,
+          "generator_active": 36
+        },
+        "RL3": {
+          "within_date_range": 12,
+          "weekly_enabled": 12,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 12,
+          "generator_active": 12
+        },
+        "R14": {
+          "within_date_range": 6,
+          "weekly_enabled": 6,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 6,
+          "generator_active": 6
+        },
+        "R16": {
+          "within_date_range": 26,
+          "weekly_enabled": 26,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 26,
+          "generator_active": 26
+        },
+        "R17": {
+          "within_date_range": 6,
+          "weekly_enabled": 6,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 6,
+          "generator_active": 6
+        },
+        "RT2": {
+          "within_date_range": 16,
+          "weekly_enabled": 16,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 16,
+          "generator_active": 16
+        },
+        "RG1": {
+          "within_date_range": 17,
+          "weekly_enabled": 17,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 17,
+          "generator_active": 17
+        },
+        "RT1": {
+          "within_date_range": 10,
+          "weekly_enabled": 10,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 10,
+          "generator_active": 10
+        },
+        "R13": {
+          "within_date_range": 42,
+          "weekly_enabled": 42,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 42,
+          "generator_active": 42
+        }
+      },
+      "independent_only_service_ids": [],
+      "generator_only_service_ids": [],
+      "conflicting_exception_service_ids": []
+    },
+    "2026-11-25": {
+      "by_line": {
+        "R1": {
+          "within_date_range": 190,
+          "weekly_enabled": 190,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 190,
+          "generator_active": 190
+        },
+        "R2N": {
+          "within_date_range": 72,
+          "weekly_enabled": 72,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 72,
+          "generator_active": 72
+        },
+        "R2S": {
+          "within_date_range": 143,
+          "weekly_enabled": 143,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 143,
+          "generator_active": 143
+        },
+        "R2": {
+          "within_date_range": 54,
+          "weekly_enabled": 54,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 54,
+          "generator_active": 54
+        },
+        "R3": {
+          "within_date_range": 477,
+          "weekly_enabled": 477,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 477,
+          "generator_active": 477
+        },
+        "R4": {
+          "within_date_range": 161,
+          "weekly_enabled": 161,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 161,
+          "generator_active": 161
+        },
+        "R8": {
+          "within_date_range": 33,
+          "weekly_enabled": 33,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 33,
+          "generator_active": 33
+        },
+        "R7": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "RL4": {
+          "within_date_range": 10,
+          "weekly_enabled": 10,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 10,
+          "generator_active": 10
+        },
+        "R11": {
+          "within_date_range": 48,
+          "weekly_enabled": 48,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 48,
+          "generator_active": 48
+        },
+        "R15": {
+          "within_date_range": 36,
+          "weekly_enabled": 36,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 36,
+          "generator_active": 36
+        },
+        "RL3": {
+          "within_date_range": 12,
+          "weekly_enabled": 12,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 12,
+          "generator_active": 12
+        },
+        "R14": {
+          "within_date_range": 6,
+          "weekly_enabled": 6,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 6,
+          "generator_active": 6
+        },
+        "R16": {
+          "within_date_range": 26,
+          "weekly_enabled": 26,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 26,
+          "generator_active": 26
+        },
+        "R17": {
+          "within_date_range": 6,
+          "weekly_enabled": 6,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 6,
+          "generator_active": 6
+        },
+        "RT2": {
+          "within_date_range": 16,
+          "weekly_enabled": 16,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 16,
+          "generator_active": 16
+        },
+        "RG1": {
+          "within_date_range": 17,
+          "weekly_enabled": 17,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 17,
+          "generator_active": 17
+        },
+        "RT1": {
+          "within_date_range": 10,
+          "weekly_enabled": 10,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 10,
+          "generator_active": 10
+        },
+        "R13": {
+          "within_date_range": 42,
+          "weekly_enabled": 42,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 42,
+          "generator_active": 42
+        }
+      },
+      "independent_only_service_ids": [],
+      "generator_only_service_ids": [],
+      "conflicting_exception_service_ids": []
+    },
+    "2026-11-26": {
+      "by_line": {
+        "R1": {
+          "within_date_range": 190,
+          "weekly_enabled": 190,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 190,
+          "generator_active": 190
+        },
+        "R2N": {
+          "within_date_range": 72,
+          "weekly_enabled": 72,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 72,
+          "generator_active": 72
+        },
+        "R2S": {
+          "within_date_range": 143,
+          "weekly_enabled": 143,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 143,
+          "generator_active": 143
+        },
+        "R2": {
+          "within_date_range": 54,
+          "weekly_enabled": 54,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 54,
+          "generator_active": 54
+        },
+        "R3": {
+          "within_date_range": 477,
+          "weekly_enabled": 477,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 477,
+          "generator_active": 477
+        },
+        "R4": {
+          "within_date_range": 161,
+          "weekly_enabled": 161,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 161,
+          "generator_active": 161
+        },
+        "R8": {
+          "within_date_range": 33,
+          "weekly_enabled": 33,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 33,
+          "generator_active": 33
+        },
+        "R7": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "RL4": {
+          "within_date_range": 10,
+          "weekly_enabled": 10,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 10,
+          "generator_active": 10
+        },
+        "R11": {
+          "within_date_range": 48,
+          "weekly_enabled": 48,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 48,
+          "generator_active": 48
+        },
+        "R15": {
+          "within_date_range": 36,
+          "weekly_enabled": 36,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 36,
+          "generator_active": 36
+        },
+        "RL3": {
+          "within_date_range": 12,
+          "weekly_enabled": 12,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 12,
+          "generator_active": 12
+        },
+        "R14": {
+          "within_date_range": 6,
+          "weekly_enabled": 6,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 6,
+          "generator_active": 6
+        },
+        "R16": {
+          "within_date_range": 26,
+          "weekly_enabled": 26,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 26,
+          "generator_active": 26
+        },
+        "R17": {
+          "within_date_range": 6,
+          "weekly_enabled": 6,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 6,
+          "generator_active": 6
+        },
+        "RT2": {
+          "within_date_range": 16,
+          "weekly_enabled": 16,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 16,
+          "generator_active": 16
+        },
+        "RG1": {
+          "within_date_range": 17,
+          "weekly_enabled": 17,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 17,
+          "generator_active": 17
+        },
+        "RT1": {
+          "within_date_range": 10,
+          "weekly_enabled": 10,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 10,
+          "generator_active": 10
+        },
+        "R13": {
+          "within_date_range": 42,
+          "weekly_enabled": 42,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 42,
+          "generator_active": 42
+        }
+      },
+      "independent_only_service_ids": [],
+      "generator_only_service_ids": [],
+      "conflicting_exception_service_ids": []
+    },
+    "2026-11-27": {
+      "by_line": {
+        "R1": {
+          "within_date_range": 190,
+          "weekly_enabled": 190,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 190,
+          "generator_active": 190
+        },
+        "R2N": {
+          "within_date_range": 72,
+          "weekly_enabled": 72,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 72,
+          "generator_active": 72
+        },
+        "R2S": {
+          "within_date_range": 143,
+          "weekly_enabled": 143,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 143,
+          "generator_active": 143
+        },
+        "R2": {
+          "within_date_range": 54,
+          "weekly_enabled": 54,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 54,
+          "generator_active": 54
+        },
+        "R3": {
+          "within_date_range": 537,
+          "weekly_enabled": 537,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 537,
+          "generator_active": 537
+        },
+        "R4": {
+          "within_date_range": 163,
+          "weekly_enabled": 163,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 163,
+          "generator_active": 163
+        },
+        "R8": {
+          "within_date_range": 33,
+          "weekly_enabled": 33,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 33,
+          "generator_active": 33
+        },
+        "R7": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "RL4": {
+          "within_date_range": 10,
+          "weekly_enabled": 10,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 10,
+          "generator_active": 10
+        },
+        "R11": {
+          "within_date_range": 50,
+          "weekly_enabled": 50,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 50,
+          "generator_active": 50
+        },
+        "R15": {
+          "within_date_range": 36,
+          "weekly_enabled": 36,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 36,
+          "generator_active": 36
+        },
+        "RL3": {
+          "within_date_range": 12,
+          "weekly_enabled": 12,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 12,
+          "generator_active": 12
+        },
+        "R14": {
+          "within_date_range": 6,
+          "weekly_enabled": 6,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 6,
+          "generator_active": 6
+        },
+        "R16": {
+          "within_date_range": 26,
+          "weekly_enabled": 26,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 26,
+          "generator_active": 26
+        },
+        "R17": {
+          "within_date_range": 6,
+          "weekly_enabled": 6,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 6,
+          "generator_active": 6
+        },
+        "RT2": {
+          "within_date_range": 16,
+          "weekly_enabled": 16,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 16,
+          "generator_active": 16
+        },
+        "RG1": {
+          "within_date_range": 17,
+          "weekly_enabled": 17,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 17,
+          "generator_active": 17
+        },
+        "RT1": {
+          "within_date_range": 10,
+          "weekly_enabled": 10,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 10,
+          "generator_active": 10
+        },
+        "R13": {
+          "within_date_range": 42,
+          "weekly_enabled": 42,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 42,
+          "generator_active": 42
+        }
+      },
+      "independent_only_service_ids": [],
+      "generator_only_service_ids": [],
+      "conflicting_exception_service_ids": []
+    },
+    "2026-11-28": {
+      "by_line": {
+        "R1": {
+          "within_date_range": 130,
+          "weekly_enabled": 130,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 130,
+          "generator_active": 130
+        },
+        "R2N": {
+          "within_date_range": 72,
+          "weekly_enabled": 72,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 72,
+          "generator_active": 72
+        },
+        "R2S": {
+          "within_date_range": 136,
+          "weekly_enabled": 136,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 136,
+          "generator_active": 136
+        },
+        "R2": {
+          "within_date_range": 3,
+          "weekly_enabled": 3,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 3,
+          "generator_active": 3
+        },
+        "R3": {
+          "within_date_range": 536,
+          "weekly_enabled": 536,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 536,
+          "generator_active": 536
+        },
+        "R4": {
+          "within_date_range": 131,
+          "weekly_enabled": 131,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 131,
+          "generator_active": 131
+        },
+        "R8": {
+          "within_date_range": 32,
+          "weekly_enabled": 32,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 32,
+          "generator_active": 32
+        },
+        "R7": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "RL4": {
+          "within_date_range": 8,
+          "weekly_enabled": 8,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 8,
+          "generator_active": 8
+        },
+        "R11": {
+          "within_date_range": 34,
+          "weekly_enabled": 34,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 34,
+          "generator_active": 34
+        },
+        "R15": {
+          "within_date_range": 31,
+          "weekly_enabled": 31,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 31,
+          "generator_active": 31
+        },
+        "RL3": {
+          "within_date_range": 4,
+          "weekly_enabled": 4,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 4,
+          "generator_active": 4
+        },
+        "R14": {
+          "within_date_range": 4,
+          "weekly_enabled": 4,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 4,
+          "generator_active": 4
+        },
+        "R16": {
+          "within_date_range": 26,
+          "weekly_enabled": 26,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 26,
+          "generator_active": 26
+        },
+        "R17": {
+          "within_date_range": 6,
+          "weekly_enabled": 6,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 6,
+          "generator_active": 6
+        },
+        "RT2": {
+          "within_date_range": 16,
+          "weekly_enabled": 16,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 16,
+          "generator_active": 16
+        },
+        "RG1": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "RT1": {
+          "within_date_range": 8,
+          "weekly_enabled": 8,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 8,
+          "generator_active": 8
+        },
+        "R13": {
+          "within_date_range": 42,
+          "weekly_enabled": 42,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 42,
+          "generator_active": 42
+        }
+      },
+      "independent_only_service_ids": [],
+      "generator_only_service_ids": [],
+      "conflicting_exception_service_ids": []
+    },
+    "2026-11-29": {
+      "by_line": {
+        "R1": {
+          "within_date_range": 130,
+          "weekly_enabled": 130,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 130,
+          "generator_active": 130
+        },
+        "R2N": {
+          "within_date_range": 72,
+          "weekly_enabled": 72,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 72,
+          "generator_active": 72
+        },
+        "R2S": {
+          "within_date_range": 136,
+          "weekly_enabled": 136,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 136,
+          "generator_active": 136
+        },
+        "R2": {
+          "within_date_range": 3,
+          "weekly_enabled": 3,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 3,
+          "generator_active": 3
+        },
+        "R3": {
+          "within_date_range": 536,
+          "weekly_enabled": 536,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 536,
+          "generator_active": 536
+        },
+        "R4": {
+          "within_date_range": 129,
+          "weekly_enabled": 129,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 129,
+          "generator_active": 129
+        },
+        "R8": {
+          "within_date_range": 32,
+          "weekly_enabled": 32,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 32,
+          "generator_active": 32
+        },
+        "R7": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "RL4": {
+          "within_date_range": 8,
+          "weekly_enabled": 8,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 8,
+          "generator_active": 8
+        },
+        "R11": {
+          "within_date_range": 37,
+          "weekly_enabled": 37,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 37,
+          "generator_active": 37
+        },
+        "R15": {
+          "within_date_range": 31,
+          "weekly_enabled": 31,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 31,
+          "generator_active": 31
+        },
+        "RL3": {
+          "within_date_range": 4,
+          "weekly_enabled": 4,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 4,
+          "generator_active": 4
+        },
+        "R14": {
+          "within_date_range": 4,
+          "weekly_enabled": 4,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 4,
+          "generator_active": 4
+        },
+        "R16": {
+          "within_date_range": 26,
+          "weekly_enabled": 26,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 26,
+          "generator_active": 26
+        },
+        "R17": {
+          "within_date_range": 6,
+          "weekly_enabled": 6,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 6,
+          "generator_active": 6
+        },
+        "RT2": {
+          "within_date_range": 16,
+          "weekly_enabled": 16,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 16,
+          "generator_active": 16
+        },
+        "RG1": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "RT1": {
+          "within_date_range": 8,
+          "weekly_enabled": 8,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 8,
+          "generator_active": 8
+        },
+        "R13": {
+          "within_date_range": 42,
+          "weekly_enabled": 42,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 42,
+          "generator_active": 42
+        }
+      },
+      "independent_only_service_ids": [],
+      "generator_only_service_ids": [],
+      "conflicting_exception_service_ids": []
+    },
+    "2026-11-30": {
+      "by_line": {
+        "R1": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "R2N": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "R2S": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "R2": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "R3": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "R4": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "R8": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "R7": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "RL4": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "R11": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "R15": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "RL3": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "R14": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "R16": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "R17": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "RT2": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "RG1": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "RT1": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "R13": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        }
+      },
+      "independent_only_service_ids": [],
+      "generator_only_service_ids": [],
+      "conflicting_exception_service_ids": []
+    },
+    "2026-12-01": {
+      "by_line": {
+        "R1": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "R2N": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "R2S": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "R2": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "R3": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "R4": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "R8": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "R7": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "RL4": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "R11": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "R15": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "RL3": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "R14": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "R16": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "R17": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "RT2": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "RG1": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "RT1": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "R13": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        }
+      },
+      "independent_only_service_ids": [],
+      "generator_only_service_ids": [],
+      "conflicting_exception_service_ids": []
+    },
+    "2026-12-02": {
+      "by_line": {
+        "R1": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "R2N": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "R2S": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "R2": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "R3": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "R4": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "R8": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "R7": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "RL4": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "R11": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "R15": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "RL3": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "R14": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "R16": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "R17": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "RT2": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "RG1": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "RT1": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "R13": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        }
+      },
+      "independent_only_service_ids": [],
+      "generator_only_service_ids": [],
+      "conflicting_exception_service_ids": []
+    },
+    "2026-12-03": {
+      "by_line": {
+        "R1": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "R2N": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "R2S": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "R2": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "R3": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "R4": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "R8": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "R7": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "RL4": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "R11": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "R15": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "RL3": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "R14": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "R16": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "R17": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "RT2": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "RG1": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "RT1": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "R13": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        }
+      },
+      "independent_only_service_ids": [],
+      "generator_only_service_ids": [],
+      "conflicting_exception_service_ids": []
+    },
+    "2026-12-04": {
+      "by_line": {
+        "R1": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "R2N": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "R2S": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "R2": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "R3": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "R4": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "R8": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "R7": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "RL4": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "R11": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "R15": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "RL3": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "R14": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "R16": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "R17": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "RT2": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "RG1": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "RT1": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "R13": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        }
+      },
+      "independent_only_service_ids": [],
+      "generator_only_service_ids": [],
+      "conflicting_exception_service_ids": []
+    },
+    "2026-12-05": {
+      "by_line": {
+        "R1": {
+          "within_date_range": 130,
+          "weekly_enabled": 130,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 130,
+          "generator_active": 130
+        },
+        "R2N": {
+          "within_date_range": 72,
+          "weekly_enabled": 72,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 72,
+          "generator_active": 72
+        },
+        "R2S": {
+          "within_date_range": 136,
+          "weekly_enabled": 136,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 136,
+          "generator_active": 136
+        },
+        "R2": {
+          "within_date_range": 3,
+          "weekly_enabled": 3,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 3,
+          "generator_active": 3
+        },
+        "R3": {
+          "within_date_range": 536,
+          "weekly_enabled": 536,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 536,
+          "generator_active": 536
+        },
+        "R4": {
+          "within_date_range": 131,
+          "weekly_enabled": 131,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 131,
+          "generator_active": 131
+        },
+        "R8": {
+          "within_date_range": 32,
+          "weekly_enabled": 32,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 32,
+          "generator_active": 32
+        },
+        "R7": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "RL4": {
+          "within_date_range": 8,
+          "weekly_enabled": 8,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 8,
+          "generator_active": 8
+        },
+        "R11": {
+          "within_date_range": 34,
+          "weekly_enabled": 34,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 34,
+          "generator_active": 34
+        },
+        "R15": {
+          "within_date_range": 31,
+          "weekly_enabled": 31,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 31,
+          "generator_active": 31
+        },
+        "RL3": {
+          "within_date_range": 4,
+          "weekly_enabled": 4,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 4,
+          "generator_active": 4
+        },
+        "R14": {
+          "within_date_range": 4,
+          "weekly_enabled": 4,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 4,
+          "generator_active": 4
+        },
+        "R16": {
+          "within_date_range": 26,
+          "weekly_enabled": 26,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 26,
+          "generator_active": 26
+        },
+        "R17": {
+          "within_date_range": 6,
+          "weekly_enabled": 6,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 6,
+          "generator_active": 6
+        },
+        "RT2": {
+          "within_date_range": 16,
+          "weekly_enabled": 16,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 16,
+          "generator_active": 16
+        },
+        "RG1": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "RT1": {
+          "within_date_range": 8,
+          "weekly_enabled": 8,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 8,
+          "generator_active": 8
+        },
+        "R13": {
+          "within_date_range": 42,
+          "weekly_enabled": 42,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 42,
+          "generator_active": 42
+        }
+      },
+      "independent_only_service_ids": [],
+      "generator_only_service_ids": [],
+      "conflicting_exception_service_ids": []
+    },
+    "2026-12-06": {
+      "by_line": {
+        "R1": {
+          "within_date_range": 130,
+          "weekly_enabled": 130,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 130,
+          "generator_active": 130
+        },
+        "R2N": {
+          "within_date_range": 72,
+          "weekly_enabled": 72,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 72,
+          "generator_active": 72
+        },
+        "R2S": {
+          "within_date_range": 136,
+          "weekly_enabled": 136,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 136,
+          "generator_active": 136
+        },
+        "R2": {
+          "within_date_range": 3,
+          "weekly_enabled": 3,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 3,
+          "generator_active": 3
+        },
+        "R3": {
+          "within_date_range": 536,
+          "weekly_enabled": 536,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 536,
+          "generator_active": 536
+        },
+        "R4": {
+          "within_date_range": 129,
+          "weekly_enabled": 129,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 129,
+          "generator_active": 129
+        },
+        "R8": {
+          "within_date_range": 32,
+          "weekly_enabled": 32,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 32,
+          "generator_active": 32
+        },
+        "R7": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "RL4": {
+          "within_date_range": 8,
+          "weekly_enabled": 8,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 8,
+          "generator_active": 8
+        },
+        "R11": {
+          "within_date_range": 37,
+          "weekly_enabled": 37,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 37,
+          "generator_active": 37
+        },
+        "R15": {
+          "within_date_range": 31,
+          "weekly_enabled": 31,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 31,
+          "generator_active": 31
+        },
+        "RL3": {
+          "within_date_range": 4,
+          "weekly_enabled": 4,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 4,
+          "generator_active": 4
+        },
+        "R14": {
+          "within_date_range": 4,
+          "weekly_enabled": 4,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 4,
+          "generator_active": 4
+        },
+        "R16": {
+          "within_date_range": 26,
+          "weekly_enabled": 26,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 26,
+          "generator_active": 26
+        },
+        "R17": {
+          "within_date_range": 6,
+          "weekly_enabled": 6,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 6,
+          "generator_active": 6
+        },
+        "RT2": {
+          "within_date_range": 16,
+          "weekly_enabled": 16,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 16,
+          "generator_active": 16
+        },
+        "RG1": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "RT1": {
+          "within_date_range": 8,
+          "weekly_enabled": 8,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 8,
+          "generator_active": 8
+        },
+        "R13": {
+          "within_date_range": 42,
+          "weekly_enabled": 42,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 42,
+          "generator_active": 42
+        }
+      },
+      "independent_only_service_ids": [],
+      "generator_only_service_ids": [],
+      "conflicting_exception_service_ids": []
+    },
+    "2026-12-07": {
+      "by_line": {
+        "R1": {
+          "within_date_range": 191,
+          "weekly_enabled": 191,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 191,
+          "generator_active": 191
+        },
+        "R2N": {
+          "within_date_range": 72,
+          "weekly_enabled": 72,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 72,
+          "generator_active": 72
+        },
+        "R2S": {
+          "within_date_range": 143,
+          "weekly_enabled": 143,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 143,
+          "generator_active": 143
+        },
+        "R2": {
+          "within_date_range": 54,
+          "weekly_enabled": 54,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 54,
+          "generator_active": 54
+        },
+        "R3": {
+          "within_date_range": 541,
+          "weekly_enabled": 541,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 541,
+          "generator_active": 541
+        },
+        "R4": {
+          "within_date_range": 168,
+          "weekly_enabled": 168,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 168,
+          "generator_active": 168
+        },
+        "R8": {
+          "within_date_range": 33,
+          "weekly_enabled": 33,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 33,
+          "generator_active": 33
+        },
+        "R7": {
+          "within_date_range": 65,
+          "weekly_enabled": 65,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 65,
+          "generator_active": 65
+        },
+        "RL4": {
+          "within_date_range": 10,
+          "weekly_enabled": 10,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 10,
+          "generator_active": 10
+        },
+        "R11": {
+          "within_date_range": 50,
+          "weekly_enabled": 50,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 50,
+          "generator_active": 50
+        },
+        "R15": {
+          "within_date_range": 37,
+          "weekly_enabled": 37,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 37,
+          "generator_active": 37
+        },
+        "RL3": {
+          "within_date_range": 12,
+          "weekly_enabled": 12,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 12,
+          "generator_active": 12
+        },
+        "R14": {
+          "within_date_range": 6,
+          "weekly_enabled": 6,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 6,
+          "generator_active": 6
+        },
+        "R16": {
+          "within_date_range": 26,
+          "weekly_enabled": 26,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 26,
+          "generator_active": 26
+        },
+        "R17": {
+          "within_date_range": 6,
+          "weekly_enabled": 6,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 6,
+          "generator_active": 6
+        },
+        "RT2": {
+          "within_date_range": 16,
+          "weekly_enabled": 16,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 16,
+          "generator_active": 16
+        },
+        "RG1": {
+          "within_date_range": 17,
+          "weekly_enabled": 17,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 17,
+          "generator_active": 17
+        },
+        "RT1": {
+          "within_date_range": 10,
+          "weekly_enabled": 10,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 10,
+          "generator_active": 10
+        },
+        "R13": {
+          "within_date_range": 42,
+          "weekly_enabled": 42,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 42,
+          "generator_active": 42
+        }
+      },
+      "independent_only_service_ids": [],
+      "generator_only_service_ids": [],
+      "conflicting_exception_service_ids": []
+    },
+    "2026-12-08": {
+      "by_line": {
+        "R1": {
+          "within_date_range": 130,
+          "weekly_enabled": 130,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 130,
+          "generator_active": 130
+        },
+        "R2N": {
+          "within_date_range": 72,
+          "weekly_enabled": 72,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 72,
+          "generator_active": 72
+        },
+        "R2S": {
+          "within_date_range": 136,
+          "weekly_enabled": 136,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 136,
+          "generator_active": 136
+        },
+        "R2": {
+          "within_date_range": 3,
+          "weekly_enabled": 3,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 3,
+          "generator_active": 3
+        },
+        "R3": {
+          "within_date_range": 540,
+          "weekly_enabled": 540,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 540,
+          "generator_active": 540
+        },
+        "R4": {
+          "within_date_range": 143,
+          "weekly_enabled": 143,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 143,
+          "generator_active": 143
+        },
+        "R8": {
+          "within_date_range": 32,
+          "weekly_enabled": 32,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 32,
+          "generator_active": 32
+        },
+        "R7": {
+          "within_date_range": 33,
+          "weekly_enabled": 33,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 33,
+          "generator_active": 33
+        },
+        "RL4": {
+          "within_date_range": 8,
+          "weekly_enabled": 8,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 8,
+          "generator_active": 8
+        },
+        "R11": {
+          "within_date_range": 37,
+          "weekly_enabled": 37,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 37,
+          "generator_active": 37
+        },
+        "R15": {
+          "within_date_range": 31,
+          "weekly_enabled": 31,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 31,
+          "generator_active": 31
+        },
+        "RL3": {
+          "within_date_range": 4,
+          "weekly_enabled": 4,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 4,
+          "generator_active": 4
+        },
+        "R14": {
+          "within_date_range": 4,
+          "weekly_enabled": 4,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 4,
+          "generator_active": 4
+        },
+        "R16": {
+          "within_date_range": 26,
+          "weekly_enabled": 26,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 26,
+          "generator_active": 26
+        },
+        "R17": {
+          "within_date_range": 6,
+          "weekly_enabled": 6,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 6,
+          "generator_active": 6
+        },
+        "RT2": {
+          "within_date_range": 16,
+          "weekly_enabled": 16,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 16,
+          "generator_active": 16
+        },
+        "RG1": {
+          "within_date_range": 0,
+          "weekly_enabled": 0,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 0,
+          "generator_active": 0
+        },
+        "RT1": {
+          "within_date_range": 8,
+          "weekly_enabled": 8,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 8,
+          "generator_active": 8
+        },
+        "R13": {
+          "within_date_range": 42,
+          "weekly_enabled": 42,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 42,
+          "generator_active": 42
+        }
+      },
+      "independent_only_service_ids": [],
+      "generator_only_service_ids": [],
+      "conflicting_exception_service_ids": []
+    }
   },
   "by_line": {
     "R1": {
