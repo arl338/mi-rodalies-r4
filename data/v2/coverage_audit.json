@@ -1,7 +1,7 @@
 {
   "schema": 1,
-  "batch_id": "6ef76740defe6d48de2a",
-  "generated_at": "2026-11-25T18:49:03.592648+01:00",
+  "batch_id": "79f8019b60144b323993",
+  "generated_at": "2026-11-25T18:53:46.813628+01:00",
   "dates": [
     "2026-11-24",
     "2026-11-25",
@@ -25,7 +25,7 @@
     "Absence of published calls is not proof of line closure.",
     "Third-party alternatives are not included in the static catalog."
   ],
-  "total_train_instances": 15234,
+  "total_train_instances": 15087,
   "lines": [
     {
       "line": "R1",
@@ -59,11 +59,11 @@
         "2026-12-05": 146,
         "2026-12-06": 146,
         "2026-12-07": 250,
-        "2026-12-08": 229
+        "2026-12-08": 151
       },
       "services_by_source": {
         "cer": 1601,
-        "official-r1-pdf": 1172
+        "official-r1-pdf": 1094
       },
       "two_stop_trips_in_period": 0,
       "coverage_complete": false
@@ -218,10 +218,10 @@
         "2026-12-05": 134,
         "2026-12-06": 134,
         "2026-12-07": 141,
-        "2026-12-08": 141
+        "2026-12-08": 134
       },
       "services_by_source": {
-        "official-r2-pdf": 2087
+        "official-r2-pdf": 2080
       },
       "two_stop_trips_in_period": 0,
       "coverage_complete": true
@@ -422,11 +422,10 @@
         "2026-12-02": 17,
         "2026-12-03": 17,
         "2026-12-04": 17,
-        "2026-12-07": 17,
-        "2026-12-08": 17
+        "2026-12-07": 17
       },
       "services_by_source": {
-        "official-supplement-pdf": 187
+        "official-supplement-pdf": 170
       },
       "two_stop_trips_in_period": 0,
       "coverage_complete": false
@@ -453,10 +452,10 @@
         "2026-12-05": 9,
         "2026-12-06": 9,
         "2026-12-07": 10,
-        "2026-12-08": 10
+        "2026-12-08": 9
       },
       "services_by_source": {
-        "official-supplement-pdf": 146
+        "official-supplement-pdf": 145
       },
       "two_stop_trips_in_period": 0,
       "coverage_complete": true
@@ -525,10 +524,10 @@
         "2026-12-05": 4,
         "2026-12-06": 4,
         "2026-12-07": 12,
-        "2026-12-08": 12
+        "2026-12-08": 4
       },
       "services_by_source": {
-        "official-rl3-pdf": 148
+        "official-rl3-pdf": 140
       },
       "two_stop_trips_in_period": 0,
       "coverage_complete": true
@@ -561,10 +560,10 @@
         "2026-12-05": 7,
         "2026-12-06": 7,
         "2026-12-07": 9,
-        "2026-12-08": 9
+        "2026-12-08": 7
       },
       "services_by_source": {
-        "official-supplement-pdf": 127
+        "official-supplement-pdf": 125
       },
       "two_stop_trips_in_period": 0,
       "coverage_complete": false
@@ -590,11 +589,10 @@
         "2026-12-04": 7,
         "2026-12-05": 5,
         "2026-12-06": 5,
-        "2026-12-07": 7,
-        "2026-12-08": 7
+        "2026-12-07": 7
       },
       "services_by_source": {
-        "official-regional-pdf": 97
+        "official-regional-pdf": 90
       },
       "two_stop_trips_in_period": 0,
       "coverage_complete": true
@@ -656,11 +654,10 @@
         "2026-12-04": 4,
         "2026-12-05": 4,
         "2026-12-06": 4,
-        "2026-12-07": 4,
-        "2026-12-08": 4
+        "2026-12-07": 4
       },
       "services_by_source": {
-        "official-regional-pdf": 60
+        "official-regional-pdf": 56
       },
       "two_stop_trips_in_period": 0,
       "coverage_complete": false
@@ -718,11 +715,10 @@
         "2026-12-02": 1,
         "2026-12-03": 1,
         "2026-12-04": 1,
-        "2026-12-07": 1,
-        "2026-12-08": 1
+        "2026-12-07": 1
       },
       "services_by_source": {
-        "official-regional-pdf": 11
+        "official-regional-pdf": 10
       },
       "two_stop_trips_in_period": 0,
       "coverage_complete": false
@@ -752,11 +748,10 @@
         "2026-12-04": 14,
         "2026-12-05": 14,
         "2026-12-06": 14,
-        "2026-12-07": 14,
-        "2026-12-08": 14
+        "2026-12-07": 14
       },
       "services_by_source": {
-        "official-regional-pdf": 210
+        "official-regional-pdf": 196
       },
       "two_stop_trips_in_period": 0,
       "coverage_complete": false
@@ -788,11 +783,10 @@
         "2026-12-04": 8,
         "2026-12-05": 8,
         "2026-12-06": 8,
-        "2026-12-07": 8,
-        "2026-12-08": 8
+        "2026-12-07": 8
       },
       "services_by_source": {
-        "official-regional-pdf": 120
+        "official-regional-pdf": 112
       },
       "two_stop_trips_in_period": 0,
       "coverage_complete": false
@@ -833,7 +827,7 @@
       "line": "R1",
       "station_id": "79600",
       "station": "Arenys de Mar",
-      "calls_total": 1759,
+      "calls_total": 1712,
       "days_with_calls": 15,
       "published_days": 15,
       "minimum_calls_on_any_day": 76,
@@ -854,14 +848,14 @@
         "2026-12-05": 76,
         "2026-12-06": 76,
         "2026-12-07": 177,
-        "2026-12-08": 129
+        "2026-12-08": 82
       }
     },
     {
       "line": "R1",
       "station_id": "79404",
       "station": "Badalona",
-      "calls_total": 2773,
+      "calls_total": 2695,
       "days_with_calls": 15,
       "published_days": 15,
       "minimum_calls_on_any_day": 146,
@@ -882,14 +876,14 @@
         "2026-12-05": 146,
         "2026-12-06": 146,
         "2026-12-07": 250,
-        "2026-12-08": 229
+        "2026-12-08": 151
       }
     },
     {
       "line": "R1",
       "station_id": "78804",
       "station": "Barcelona Arc de Triomf",
-      "calls_total": 2773,
+      "calls_total": 2695,
       "days_with_calls": 15,
       "published_days": 15,
       "minimum_calls_on_any_day": 146,
@@ -910,14 +904,14 @@
         "2026-12-05": 146,
         "2026-12-06": 146,
         "2026-12-07": 250,
-        "2026-12-08": 229
+        "2026-12-08": 151
       }
     },
     {
       "line": "R1",
       "station_id": "79009",
       "station": "Barcelona El Clot",
-      "calls_total": 2773,
+      "calls_total": 2695,
       "days_with_calls": 15,
       "published_days": 15,
       "minimum_calls_on_any_day": 146,
@@ -938,14 +932,14 @@
         "2026-12-05": 146,
         "2026-12-06": 146,
         "2026-12-07": 250,
-        "2026-12-08": 229
+        "2026-12-08": 151
       }
     },
     {
       "line": "R1",
       "station_id": "78805",
       "station": "Barcelona-Plaça de Catalunya",
-      "calls_total": 2773,
+      "calls_total": 2695,
       "days_with_calls": 15,
       "published_days": 15,
       "minimum_calls_on_any_day": 146,
@@ -966,14 +960,14 @@
         "2026-12-05": 146,
         "2026-12-06": 146,
         "2026-12-07": 250,
-        "2026-12-08": 229
+        "2026-12-08": 151
       }
     },
     {
       "line": "R1",
       "station_id": "71801",
       "station": "Barcelona-Sants",
-      "calls_total": 2773,
+      "calls_total": 2695,
       "days_with_calls": 15,
       "published_days": 15,
       "minimum_calls_on_any_day": 146,
@@ -994,14 +988,14 @@
         "2026-12-05": 146,
         "2026-12-06": 146,
         "2026-12-07": 250,
-        "2026-12-08": 229
+        "2026-12-08": 151
       }
     },
     {
       "line": "R1",
       "station_id": "79606",
       "station": "Blanes",
-      "calls_total": 1058,
+      "calls_total": 1056,
       "days_with_calls": 15,
       "published_days": 15,
       "minimum_calls_on_any_day": 66,
@@ -1022,14 +1016,14 @@
         "2026-12-05": 66,
         "2026-12-06": 66,
         "2026-12-07": 89,
-        "2026-12-08": 75
+        "2026-12-08": 73
       }
     },
     {
       "line": "R1",
       "station_id": "79412",
       "station": "Cabrera de Mar-Vilassar de Mar",
-      "calls_total": 2773,
+      "calls_total": 2695,
       "days_with_calls": 15,
       "published_days": 15,
       "minimum_calls_on_any_day": 146,
@@ -1050,14 +1044,14 @@
         "2026-12-05": 146,
         "2026-12-06": 146,
         "2026-12-07": 250,
-        "2026-12-08": 229
+        "2026-12-08": 151
       }
     },
     {
       "line": "R1",
       "station_id": "79502",
       "station": "Caldes d'Estrac",
-      "calls_total": 1759,
+      "calls_total": 1712,
       "days_with_calls": 15,
       "published_days": 15,
       "minimum_calls_on_any_day": 76,
@@ -1078,14 +1072,14 @@
         "2026-12-05": 76,
         "2026-12-06": 76,
         "2026-12-07": 177,
-        "2026-12-08": 129
+        "2026-12-08": 82
       }
     },
     {
       "line": "R1",
       "station_id": "79603",
       "station": "Calella",
-      "calls_total": 1352,
+      "calls_total": 1336,
       "days_with_calls": 15,
       "published_days": 15,
       "minimum_calls_on_any_day": 74,
@@ -1106,14 +1100,14 @@
         "2026-12-05": 76,
         "2026-12-06": 76,
         "2026-12-07": 134,
-        "2026-12-08": 98
+        "2026-12-08": 82
       }
     },
     {
       "line": "R1",
       "station_id": "79601",
       "station": "Canet de Mar",
-      "calls_total": 1352,
+      "calls_total": 1336,
       "days_with_calls": 15,
       "published_days": 15,
       "minimum_calls_on_any_day": 74,
@@ -1134,7 +1128,7 @@
         "2026-12-05": 76,
         "2026-12-06": 76,
         "2026-12-07": 134,
-        "2026-12-08": 98
+        "2026-12-08": 82
       }
     },
     {
@@ -1169,7 +1163,7 @@
       "line": "R1",
       "station_id": "79407",
       "station": "El Masnou",
-      "calls_total": 2773,
+      "calls_total": 2695,
       "days_with_calls": 15,
       "published_days": 15,
       "minimum_calls_on_any_day": 146,
@@ -1190,14 +1184,14 @@
         "2026-12-05": 146,
         "2026-12-06": 146,
         "2026-12-07": 250,
-        "2026-12-08": 229
+        "2026-12-08": 151
       }
     },
     {
       "line": "R1",
       "station_id": "72305",
       "station": "L'Hospitalet de Llobregat",
-      "calls_total": 2773,
+      "calls_total": 2695,
       "days_with_calls": 15,
       "published_days": 15,
       "minimum_calls_on_any_day": 146,
@@ -1218,14 +1212,14 @@
         "2026-12-05": 146,
         "2026-12-06": 146,
         "2026-12-07": 250,
-        "2026-12-08": 229
+        "2026-12-08": 151
       }
     },
     {
       "line": "R1",
       "station_id": "79605",
       "station": "Malgrat de Mar",
-      "calls_total": 1058,
+      "calls_total": 1056,
       "days_with_calls": 15,
       "published_days": 15,
       "minimum_calls_on_any_day": 66,
@@ -1246,14 +1240,14 @@
         "2026-12-05": 66,
         "2026-12-06": 66,
         "2026-12-07": 89,
-        "2026-12-08": 75
+        "2026-12-08": 73
       }
     },
     {
       "line": "R1",
       "station_id": "79500",
       "station": "Mataró",
-      "calls_total": 2773,
+      "calls_total": 2695,
       "days_with_calls": 15,
       "published_days": 15,
       "minimum_calls_on_any_day": 146,
@@ -1274,7 +1268,7 @@
         "2026-12-05": 146,
         "2026-12-06": 146,
         "2026-12-07": 250,
-        "2026-12-08": 229
+        "2026-12-08": 151
       }
     },
     {
@@ -1337,7 +1331,7 @@
       "line": "R1",
       "station_id": "79405",
       "station": "Montgat",
-      "calls_total": 2773,
+      "calls_total": 2695,
       "days_with_calls": 15,
       "published_days": 15,
       "minimum_calls_on_any_day": 146,
@@ -1358,14 +1352,14 @@
         "2026-12-05": 146,
         "2026-12-06": 146,
         "2026-12-07": 250,
-        "2026-12-08": 229
+        "2026-12-08": 151
       }
     },
     {
       "line": "R1",
       "station_id": "79406",
       "station": "Montgat-Nord",
-      "calls_total": 2773,
+      "calls_total": 2695,
       "days_with_calls": 15,
       "published_days": 15,
       "minimum_calls_on_any_day": 146,
@@ -1386,14 +1380,14 @@
         "2026-12-05": 146,
         "2026-12-06": 146,
         "2026-12-07": 250,
-        "2026-12-08": 229
+        "2026-12-08": 151
       }
     },
     {
       "line": "R1",
       "station_id": "79408",
       "station": "Ocata",
-      "calls_total": 2773,
+      "calls_total": 2695,
       "days_with_calls": 15,
       "published_days": 15,
       "minimum_calls_on_any_day": 146,
@@ -1414,14 +1408,14 @@
         "2026-12-05": 146,
         "2026-12-06": 146,
         "2026-12-07": 250,
-        "2026-12-08": 229
+        "2026-12-08": 151
       }
     },
     {
       "line": "R1",
       "station_id": "79604",
       "station": "Pineda de Mar",
-      "calls_total": 1058,
+      "calls_total": 1056,
       "days_with_calls": 15,
       "published_days": 15,
       "minimum_calls_on_any_day": 66,
@@ -1442,14 +1436,14 @@
         "2026-12-05": 66,
         "2026-12-06": 66,
         "2026-12-07": 89,
-        "2026-12-08": 75
+        "2026-12-08": 73
       }
     },
     {
       "line": "R1",
       "station_id": "79409",
       "station": "Premià de Mar",
-      "calls_total": 2773,
+      "calls_total": 2695,
       "days_with_calls": 15,
       "published_days": 15,
       "minimum_calls_on_any_day": 146,
@@ -1470,14 +1464,14 @@
         "2026-12-05": 146,
         "2026-12-06": 146,
         "2026-12-07": 250,
-        "2026-12-08": 229
+        "2026-12-08": 151
       }
     },
     {
       "line": "R1",
       "station_id": "79403",
       "station": "Sant Adrià de Besòs",
-      "calls_total": 2773,
+      "calls_total": 2695,
       "days_with_calls": 15,
       "published_days": 15,
       "minimum_calls_on_any_day": 146,
@@ -1498,14 +1492,14 @@
         "2026-12-05": 146,
         "2026-12-06": 146,
         "2026-12-07": 250,
-        "2026-12-08": 229
+        "2026-12-08": 151
       }
     },
     {
       "line": "R1",
       "station_id": "79501",
       "station": "Sant Andreu de Llavaneres",
-      "calls_total": 1759,
+      "calls_total": 1712,
       "days_with_calls": 15,
       "published_days": 15,
       "minimum_calls_on_any_day": 76,
@@ -1526,7 +1520,7 @@
         "2026-12-05": 76,
         "2026-12-06": 76,
         "2026-12-07": 177,
-        "2026-12-08": 129
+        "2026-12-08": 82
       }
     },
     {
@@ -1589,7 +1583,7 @@
       "line": "R1",
       "station_id": "79602",
       "station": "Sant Pol de Mar",
-      "calls_total": 1352,
+      "calls_total": 1336,
       "days_with_calls": 15,
       "published_days": 15,
       "minimum_calls_on_any_day": 74,
@@ -1610,14 +1604,14 @@
         "2026-12-05": 76,
         "2026-12-06": 76,
         "2026-12-07": 134,
-        "2026-12-08": 98
+        "2026-12-08": 82
       }
     },
     {
       "line": "R1",
       "station_id": "79608",
       "station": "Santa Susanna",
-      "calls_total": 1058,
+      "calls_total": 1056,
       "days_with_calls": 15,
       "published_days": 15,
       "minimum_calls_on_any_day": 66,
@@ -1638,7 +1632,7 @@
         "2026-12-05": 66,
         "2026-12-06": 66,
         "2026-12-07": 89,
-        "2026-12-08": 75
+        "2026-12-08": 73
       }
     },
     {
@@ -1673,7 +1667,7 @@
       "line": "R1",
       "station_id": "79410",
       "station": "Vilassar de Mar",
-      "calls_total": 2773,
+      "calls_total": 2695,
       "days_with_calls": 15,
       "published_days": 15,
       "minimum_calls_on_any_day": 146,
@@ -1694,7 +1688,7 @@
         "2026-12-05": 146,
         "2026-12-06": 146,
         "2026-12-07": 250,
-        "2026-12-08": 229
+        "2026-12-08": 151
       }
     },
     {
@@ -2289,7 +2283,7 @@
       "line": "R2N",
       "station_id": "79101",
       "station": "Cardedeu",
-      "calls_total": 916,
+      "calls_total": 890,
       "days_with_calls": 15,
       "published_days": 15,
       "minimum_calls_on_any_day": 42,
@@ -2310,7 +2304,7 @@
         "2026-12-05": 42,
         "2026-12-06": 42,
         "2026-12-07": 68,
-        "2026-12-08": 68
+        "2026-12-08": 42
       }
     },
     {
@@ -2373,7 +2367,7 @@
       "line": "R2N",
       "station_id": "79105",
       "station": "Gualba",
-      "calls_total": 79,
+      "calls_total": 80,
       "days_with_calls": 15,
       "published_days": 15,
       "minimum_calls_on_any_day": 5,
@@ -2394,14 +2388,14 @@
         "2026-12-05": 6,
         "2026-12-06": 6,
         "2026-12-07": 5,
-        "2026-12-08": 5
+        "2026-12-08": 6
       }
     },
     {
       "line": "R2N",
       "station_id": "79107",
       "station": "Hostalric",
-      "calls_total": 79,
+      "calls_total": 80,
       "days_with_calls": 15,
       "published_days": 15,
       "minimum_calls_on_any_day": 5,
@@ -2422,7 +2416,7 @@
         "2026-12-05": 6,
         "2026-12-06": 6,
         "2026-12-07": 5,
-        "2026-12-08": 5
+        "2026-12-08": 6
       }
     },
     {
@@ -2457,7 +2451,7 @@
       "line": "R2N",
       "station_id": "79109",
       "station": "Les Franqueses-Granollers Nord",
-      "calls_total": 916,
+      "calls_total": 890,
       "days_with_calls": 15,
       "published_days": 15,
       "minimum_calls_on_any_day": 42,
@@ -2478,14 +2472,14 @@
         "2026-12-05": 42,
         "2026-12-06": 42,
         "2026-12-07": 68,
-        "2026-12-08": 68
+        "2026-12-08": 42
       }
     },
     {
       "line": "R2N",
       "station_id": "79102",
       "station": "Llinars del Vallès",
-      "calls_total": 916,
+      "calls_total": 890,
       "days_with_calls": 15,
       "published_days": 15,
       "minimum_calls_on_any_day": 42,
@@ -2506,14 +2500,14 @@
         "2026-12-05": 42,
         "2026-12-06": 42,
         "2026-12-07": 68,
-        "2026-12-08": 68
+        "2026-12-08": 42
       }
     },
     {
       "line": "R2N",
       "station_id": "79200",
       "station": "Maçanet-Massanes",
-      "calls_total": 79,
+      "calls_total": 80,
       "days_with_calls": 15,
       "published_days": 15,
       "minimum_calls_on_any_day": 5,
@@ -2534,7 +2528,7 @@
         "2026-12-05": 6,
         "2026-12-06": 6,
         "2026-12-07": 5,
-        "2026-12-08": 5
+        "2026-12-08": 6
       }
     },
     {
@@ -2625,7 +2619,7 @@
       "line": "R2N",
       "station_id": "79103",
       "station": "Palautordera",
-      "calls_total": 916,
+      "calls_total": 890,
       "days_with_calls": 15,
       "published_days": 15,
       "minimum_calls_on_any_day": 42,
@@ -2646,14 +2640,14 @@
         "2026-12-05": 42,
         "2026-12-06": 42,
         "2026-12-07": 68,
-        "2026-12-08": 68
+        "2026-12-08": 42
       }
     },
     {
       "line": "R2N",
       "station_id": "79106",
       "station": "Riells i Viabrea-Breda",
-      "calls_total": 79,
+      "calls_total": 80,
       "days_with_calls": 15,
       "published_days": 15,
       "minimum_calls_on_any_day": 5,
@@ -2674,14 +2668,14 @@
         "2026-12-05": 6,
         "2026-12-06": 6,
         "2026-12-07": 5,
-        "2026-12-08": 5
+        "2026-12-08": 6
       }
     },
     {
       "line": "R2N",
       "station_id": "79104",
       "station": "Sant Celoni",
-      "calls_total": 916,
+      "calls_total": 890,
       "days_with_calls": 15,
       "published_days": 15,
       "minimum_calls_on_any_day": 42,
@@ -2702,14 +2696,14 @@
         "2026-12-05": 42,
         "2026-12-06": 42,
         "2026-12-07": 68,
-        "2026-12-08": 68
+        "2026-12-08": 42
       }
     },
     {
       "line": "R2S",
       "station_id": "79400",
       "station": "Barcelona-Estació de França",
-      "calls_total": 2087,
+      "calls_total": 2080,
       "days_with_calls": 15,
       "published_days": 15,
       "minimum_calls_on_any_day": 134,
@@ -2730,14 +2724,14 @@
         "2026-12-05": 134,
         "2026-12-06": 134,
         "2026-12-07": 141,
-        "2026-12-08": 141
+        "2026-12-08": 134
       }
     },
     {
       "line": "R2S",
       "station_id": "71802",
       "station": "Barcelona-Passeig de Gràcia",
-      "calls_total": 2087,
+      "calls_total": 2080,
       "days_with_calls": 15,
       "published_days": 15,
       "minimum_calls_on_any_day": 134,
@@ -2758,14 +2752,14 @@
         "2026-12-05": 134,
         "2026-12-06": 134,
         "2026-12-07": 141,
-        "2026-12-08": 141
+        "2026-12-08": 134
       }
     },
     {
       "line": "R2S",
       "station_id": "71801",
       "station": "Barcelona-Sants",
-      "calls_total": 2087,
+      "calls_total": 2080,
       "days_with_calls": 15,
       "published_days": 15,
       "minimum_calls_on_any_day": 134,
@@ -2786,14 +2780,14 @@
         "2026-12-05": 134,
         "2026-12-06": 134,
         "2026-12-07": 141,
-        "2026-12-08": 141
+        "2026-12-08": 134
       }
     },
     {
       "line": "R2S",
       "station_id": "71708",
       "station": "Bellvitge - Gornal",
-      "calls_total": 1127,
+      "calls_total": 1120,
       "days_with_calls": 15,
       "published_days": 15,
       "minimum_calls_on_any_day": 70,
@@ -2814,14 +2808,14 @@
         "2026-12-05": 70,
         "2026-12-06": 70,
         "2026-12-07": 77,
-        "2026-12-08": 77
+        "2026-12-08": 70
       }
     },
     {
       "line": "R2S",
       "station_id": "71601",
       "station": "Calafell",
-      "calls_total": 1016,
+      "calls_total": 1015,
       "days_with_calls": 15,
       "published_days": 15,
       "minimum_calls_on_any_day": 67,
@@ -2842,14 +2836,14 @@
         "2026-12-05": 67,
         "2026-12-06": 67,
         "2026-12-07": 68,
-        "2026-12-08": 68
+        "2026-12-08": 67
       }
     },
     {
       "line": "R2S",
       "station_id": "71705",
       "station": "Castelldefels",
-      "calls_total": 2087,
+      "calls_total": 2080,
       "days_with_calls": 15,
       "published_days": 15,
       "minimum_calls_on_any_day": 134,
@@ -2870,14 +2864,14 @@
         "2026-12-05": 134,
         "2026-12-06": 134,
         "2026-12-07": 141,
-        "2026-12-08": 141
+        "2026-12-08": 134
       }
     },
     {
       "line": "R2S",
       "station_id": "71604",
       "station": "Cubelles",
-      "calls_total": 1016,
+      "calls_total": 1015,
       "days_with_calls": 15,
       "published_days": 15,
       "minimum_calls_on_any_day": 67,
@@ -2898,14 +2892,14 @@
         "2026-12-05": 67,
         "2026-12-06": 67,
         "2026-12-07": 68,
-        "2026-12-08": 68
+        "2026-12-08": 67
       }
     },
     {
       "line": "R2S",
       "station_id": "71603",
       "station": "Cunit",
-      "calls_total": 1016,
+      "calls_total": 1015,
       "days_with_calls": 15,
       "published_days": 15,
       "minimum_calls_on_any_day": 67,
@@ -2926,14 +2920,14 @@
         "2026-12-05": 67,
         "2026-12-06": 67,
         "2026-12-07": 68,
-        "2026-12-08": 68
+        "2026-12-08": 67
       }
     },
     {
       "line": "R2S",
       "station_id": "71707",
       "station": "El Prat de Llobregat",
-      "calls_total": 1127,
+      "calls_total": 1120,
       "days_with_calls": 15,
       "published_days": 15,
       "minimum_calls_on_any_day": 70,
@@ -2954,14 +2948,14 @@
         "2026-12-05": 70,
         "2026-12-06": 70,
         "2026-12-07": 77,
-        "2026-12-08": 77
+        "2026-12-08": 70
       }
     },
     {
       "line": "R2S",
       "station_id": "71703",
       "station": "Garraf",
-      "calls_total": 1094,
+      "calls_total": 1090,
       "days_with_calls": 15,
       "published_days": 15,
       "minimum_calls_on_any_day": 70,
@@ -2982,14 +2976,14 @@
         "2026-12-05": 70,
         "2026-12-06": 70,
         "2026-12-07": 74,
-        "2026-12-08": 74
+        "2026-12-08": 70
       }
     },
     {
       "line": "R2S",
       "station_id": "71706",
       "station": "Gavà",
-      "calls_total": 2067,
+      "calls_total": 2055,
       "days_with_calls": 15,
       "published_days": 15,
       "minimum_calls_on_any_day": 129,
@@ -3010,14 +3004,14 @@
         "2026-12-05": 129,
         "2026-12-06": 129,
         "2026-12-07": 141,
-        "2026-12-08": 141
+        "2026-12-08": 129
       }
     },
     {
       "line": "R2S",
       "station_id": "71704",
       "station": "Platja de Castelldefels",
-      "calls_total": 1174,
+      "calls_total": 1190,
       "days_with_calls": 15,
       "published_days": 15,
       "minimum_calls_on_any_day": 74,
@@ -3038,14 +3032,14 @@
         "2026-12-05": 90,
         "2026-12-06": 90,
         "2026-12-07": 74,
-        "2026-12-08": 74
+        "2026-12-08": 90
       }
     },
     {
       "line": "R2S",
       "station_id": "71600",
       "station": "Sant Vicenç de Calders",
-      "calls_total": 1016,
+      "calls_total": 1015,
       "days_with_calls": 15,
       "published_days": 15,
       "minimum_calls_on_any_day": 67,
@@ -3066,14 +3060,14 @@
         "2026-12-05": 67,
         "2026-12-06": 67,
         "2026-12-07": 68,
-        "2026-12-08": 68
+        "2026-12-08": 67
       }
     },
     {
       "line": "R2S",
       "station_id": "71602",
       "station": "Segur de Calafell",
-      "calls_total": 1016,
+      "calls_total": 1015,
       "days_with_calls": 15,
       "published_days": 15,
       "minimum_calls_on_any_day": 67,
@@ -3094,14 +3088,14 @@
         "2026-12-05": 67,
         "2026-12-06": 67,
         "2026-12-07": 68,
-        "2026-12-08": 68
+        "2026-12-08": 67
       }
     },
     {
       "line": "R2S",
       "station_id": "71701",
       "station": "Sitges",
-      "calls_total": 2054,
+      "calls_total": 2050,
       "days_with_calls": 15,
       "published_days": 15,
       "minimum_calls_on_any_day": 134,
@@ -3122,14 +3116,14 @@
         "2026-12-05": 134,
         "2026-12-06": 134,
         "2026-12-07": 138,
-        "2026-12-08": 138
+        "2026-12-08": 134
       }
     },
     {
       "line": "R2S",
       "station_id": "71709",
       "station": "Viladecans",
-      "calls_total": 2067,
+      "calls_total": 2055,
       "days_with_calls": 15,
       "published_days": 15,
       "minimum_calls_on_any_day": 129,
@@ -3150,14 +3144,14 @@
         "2026-12-05": 129,
         "2026-12-06": 129,
         "2026-12-07": 141,
-        "2026-12-08": 141
+        "2026-12-08": 129
       }
     },
     {
       "line": "R2S",
       "station_id": "71700",
       "station": "Vilanova i la Geltrú",
-      "calls_total": 2054,
+      "calls_total": 2050,
       "days_with_calls": 15,
       "published_days": 15,
       "minimum_calls_on_any_day": 134,
@@ -3178,7 +3172,7 @@
         "2026-12-05": 134,
         "2026-12-06": 134,
         "2026-12-07": 138,
-        "2026-12-08": 138
+        "2026-12-08": 134
       }
     },
     {
@@ -5929,8 +5923,8 @@
       "line": "RG1",
       "station_id": "79302",
       "station": "Bordils-Juià",
-      "calls_total": 176,
-      "days_with_calls": 11,
+      "calls_total": 160,
+      "days_with_calls": 10,
       "published_days": 15,
       "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 16,
@@ -5950,7 +5944,7 @@
         "2026-12-05": 0,
         "2026-12-06": 0,
         "2026-12-07": 16,
-        "2026-12-08": 16
+        "2026-12-08": 0
       }
     },
     {
@@ -6013,8 +6007,8 @@
       "line": "RG1",
       "station_id": "79203",
       "station": "Caldes de Malavella",
-      "calls_total": 176,
-      "days_with_calls": 11,
+      "calls_total": 160,
+      "days_with_calls": 10,
       "published_days": 15,
       "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 16,
@@ -6034,7 +6028,7 @@
         "2026-12-05": 0,
         "2026-12-06": 0,
         "2026-12-07": 16,
-        "2026-12-08": 16
+        "2026-12-08": 0
       }
     },
     {
@@ -6069,8 +6063,8 @@
       "line": "RG1",
       "station_id": "79305",
       "station": "Camallera",
-      "calls_total": 176,
-      "days_with_calls": 11,
+      "calls_total": 160,
+      "days_with_calls": 10,
       "published_days": 15,
       "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 16,
@@ -6090,7 +6084,7 @@
         "2026-12-05": 0,
         "2026-12-06": 0,
         "2026-12-07": 16,
-        "2026-12-08": 16
+        "2026-12-08": 0
       }
     },
     {
@@ -6125,8 +6119,8 @@
       "line": "RG1",
       "station_id": "79301",
       "station": "Celrà",
-      "calls_total": 176,
-      "days_with_calls": 11,
+      "calls_total": 160,
+      "days_with_calls": 10,
       "published_days": 15,
       "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 16,
@@ -6146,15 +6140,15 @@
         "2026-12-05": 0,
         "2026-12-06": 0,
         "2026-12-07": 16,
-        "2026-12-08": 16
+        "2026-12-08": 0
       }
     },
     {
       "line": "RG1",
       "station_id": "79314",
       "station": "Colera",
-      "calls_total": 99,
-      "days_with_calls": 11,
+      "calls_total": 90,
+      "days_with_calls": 10,
       "published_days": 15,
       "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 9,
@@ -6174,7 +6168,7 @@
         "2026-12-05": 0,
         "2026-12-06": 0,
         "2026-12-07": 9,
-        "2026-12-08": 9
+        "2026-12-08": 0
       }
     },
     {
@@ -6209,8 +6203,8 @@
       "line": "RG1",
       "station_id": "79309",
       "station": "Figueres",
-      "calls_total": 187,
-      "days_with_calls": 11,
+      "calls_total": 170,
+      "days_with_calls": 10,
       "published_days": 15,
       "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 17,
@@ -6230,15 +6224,15 @@
         "2026-12-05": 0,
         "2026-12-06": 0,
         "2026-12-07": 17,
-        "2026-12-08": 17
+        "2026-12-08": 0
       }
     },
     {
       "line": "RG1",
       "station_id": "79303",
       "station": "Flaçà",
-      "calls_total": 176,
-      "days_with_calls": 11,
+      "calls_total": 160,
+      "days_with_calls": 10,
       "published_days": 15,
       "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 16,
@@ -6258,15 +6252,15 @@
         "2026-12-05": 0,
         "2026-12-06": 0,
         "2026-12-07": 16,
-        "2026-12-08": 16
+        "2026-12-08": 0
       }
     },
     {
       "line": "RG1",
       "station_id": "79205",
       "station": "Fornells de la Selva",
-      "calls_total": 176,
-      "days_with_calls": 11,
+      "calls_total": 160,
+      "days_with_calls": 10,
       "published_days": 15,
       "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 16,
@@ -6286,15 +6280,15 @@
         "2026-12-05": 0,
         "2026-12-06": 0,
         "2026-12-07": 16,
-        "2026-12-08": 16
+        "2026-12-08": 0
       }
     },
     {
       "line": "RG1",
       "station_id": "79300",
       "station": "Girona",
-      "calls_total": 176,
-      "days_with_calls": 11,
+      "calls_total": 160,
+      "days_with_calls": 10,
       "published_days": 15,
       "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 16,
@@ -6314,7 +6308,7 @@
         "2026-12-05": 0,
         "2026-12-06": 0,
         "2026-12-07": 16,
-        "2026-12-08": 16
+        "2026-12-08": 0
       }
     },
     {
@@ -6349,8 +6343,8 @@
       "line": "RG1",
       "station_id": "79312",
       "station": "Llançà",
-      "calls_total": 99,
-      "days_with_calls": 11,
+      "calls_total": 90,
+      "days_with_calls": 10,
       "published_days": 15,
       "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 9,
@@ -6370,7 +6364,7 @@
         "2026-12-05": 0,
         "2026-12-06": 0,
         "2026-12-07": 9,
-        "2026-12-08": 9
+        "2026-12-08": 0
       }
     },
     {
@@ -6433,8 +6427,8 @@
       "line": "RG1",
       "station_id": "79200",
       "station": "Maçanet-Massanes",
-      "calls_total": 176,
-      "days_with_calls": 11,
+      "calls_total": 160,
+      "days_with_calls": 10,
       "published_days": 15,
       "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 16,
@@ -6454,7 +6448,7 @@
         "2026-12-05": 0,
         "2026-12-06": 0,
         "2026-12-07": 16,
-        "2026-12-08": 16
+        "2026-12-08": 0
       }
     },
     {
@@ -6573,8 +6567,8 @@
       "line": "RG1",
       "station_id": "79315",
       "station": "Portbou",
-      "calls_total": 99,
-      "days_with_calls": 11,
+      "calls_total": 90,
+      "days_with_calls": 10,
       "published_days": 15,
       "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 9,
@@ -6594,7 +6588,7 @@
         "2026-12-05": 0,
         "2026-12-06": 0,
         "2026-12-07": 9,
-        "2026-12-08": 9
+        "2026-12-08": 0
       }
     },
     {
@@ -6629,8 +6623,8 @@
       "line": "RG1",
       "station_id": "79204",
       "station": "Riudellots",
-      "calls_total": 176,
-      "days_with_calls": 11,
+      "calls_total": 160,
+      "days_with_calls": 10,
       "published_days": 15,
       "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 16,
@@ -6650,7 +6644,7 @@
         "2026-12-05": 0,
         "2026-12-06": 0,
         "2026-12-07": 16,
-        "2026-12-08": 16
+        "2026-12-08": 0
       }
     },
     {
@@ -6713,8 +6707,8 @@
       "line": "RG1",
       "station_id": "79304",
       "station": "Sant Jordi Desvalls",
-      "calls_total": 176,
-      "days_with_calls": 11,
+      "calls_total": 160,
+      "days_with_calls": 10,
       "published_days": 15,
       "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 16,
@@ -6734,15 +6728,15 @@
         "2026-12-05": 0,
         "2026-12-06": 0,
         "2026-12-07": 16,
-        "2026-12-08": 16
+        "2026-12-08": 0
       }
     },
     {
       "line": "RG1",
       "station_id": "79306",
       "station": "Sant Miquel de Fluvià",
-      "calls_total": 176,
-      "days_with_calls": 11,
+      "calls_total": 160,
+      "days_with_calls": 10,
       "published_days": 15,
       "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 16,
@@ -6762,7 +6756,7 @@
         "2026-12-05": 0,
         "2026-12-06": 0,
         "2026-12-07": 16,
-        "2026-12-08": 16
+        "2026-12-08": 0
       }
     },
     {
@@ -6825,8 +6819,8 @@
       "line": "RG1",
       "station_id": "79202",
       "station": "Sils",
-      "calls_total": 176,
-      "days_with_calls": 11,
+      "calls_total": 160,
+      "days_with_calls": 10,
       "published_days": 15,
       "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 16,
@@ -6846,7 +6840,7 @@
         "2026-12-05": 0,
         "2026-12-06": 0,
         "2026-12-07": 16,
-        "2026-12-08": 16
+        "2026-12-08": 0
       }
     },
     {
@@ -6881,8 +6875,8 @@
       "line": "RG1",
       "station_id": "79311",
       "station": "Vilajuïga",
-      "calls_total": 99,
-      "days_with_calls": 11,
+      "calls_total": 90,
+      "days_with_calls": 10,
       "published_days": 15,
       "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 9,
@@ -6902,15 +6896,15 @@
         "2026-12-05": 0,
         "2026-12-06": 0,
         "2026-12-07": 9,
-        "2026-12-08": 9
+        "2026-12-08": 0
       }
     },
     {
       "line": "RG1",
       "station_id": "79308",
       "station": "Vilamalla",
-      "calls_total": 176,
-      "days_with_calls": 11,
+      "calls_total": 160,
+      "days_with_calls": 10,
       "published_days": 15,
       "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 16,
@@ -6930,7 +6924,7 @@
         "2026-12-05": 0,
         "2026-12-06": 0,
         "2026-12-07": 16,
-        "2026-12-08": 16
+        "2026-12-08": 0
       }
     },
     {
@@ -6965,7 +6959,7 @@
       "line": "RT1",
       "station_id": "73101",
       "station": "Alcover",
-      "calls_total": 146,
+      "calls_total": 145,
       "days_with_calls": 15,
       "published_days": 15,
       "minimum_calls_on_any_day": 9,
@@ -6986,14 +6980,14 @@
         "2026-12-05": 9,
         "2026-12-06": 9,
         "2026-12-07": 10,
-        "2026-12-08": 10
+        "2026-12-08": 9
       }
     },
     {
       "line": "RT1",
       "station_id": "73100",
       "station": "La Plana-Picamoixons",
-      "calls_total": 146,
+      "calls_total": 145,
       "days_with_calls": 15,
       "published_days": 15,
       "minimum_calls_on_any_day": 9,
@@ -7014,14 +7008,14 @@
         "2026-12-05": 9,
         "2026-12-06": 9,
         "2026-12-07": 10,
-        "2026-12-08": 10
+        "2026-12-08": 9
       }
     },
     {
       "line": "RT1",
       "station_id": "73102",
       "station": "La Selva del Camp",
-      "calls_total": 146,
+      "calls_total": 145,
       "days_with_calls": 15,
       "published_days": 15,
       "minimum_calls_on_any_day": 9,
@@ -7042,14 +7036,14 @@
         "2026-12-05": 9,
         "2026-12-06": 9,
         "2026-12-07": 10,
-        "2026-12-08": 10
+        "2026-12-08": 9
       }
     },
     {
       "line": "RT1",
       "station_id": "71400",
       "station": "Reus",
-      "calls_total": 146,
+      "calls_total": 145,
       "days_with_calls": 15,
       "published_days": 15,
       "minimum_calls_on_any_day": 9,
@@ -7070,14 +7064,14 @@
         "2026-12-05": 9,
         "2026-12-06": 9,
         "2026-12-07": 10,
-        "2026-12-08": 10
+        "2026-12-08": 9
       }
     },
     {
       "line": "RT1",
       "station_id": "71500",
       "station": "Tarragona",
-      "calls_total": 146,
+      "calls_total": 145,
       "days_with_calls": 15,
       "published_days": 15,
       "minimum_calls_on_any_day": 9,
@@ -7098,14 +7092,14 @@
         "2026-12-05": 9,
         "2026-12-06": 9,
         "2026-12-07": 10,
-        "2026-12-08": 10
+        "2026-12-08": 9
       }
     },
     {
       "line": "RT1",
       "station_id": "71401",
       "station": "Vila-seca",
-      "calls_total": 146,
+      "calls_total": 145,
       "days_with_calls": 15,
       "published_days": 15,
       "minimum_calls_on_any_day": 9,
@@ -7126,7 +7120,7 @@
         "2026-12-05": 9,
         "2026-12-06": 9,
         "2026-12-07": 10,
-        "2026-12-08": 10
+        "2026-12-08": 9
       }
     },
     {
@@ -7329,7 +7323,7 @@
       "line": "RL3",
       "station_id": "78407",
       "station": "Anglesola",
-      "calls_total": 148,
+      "calls_total": 140,
       "days_with_calls": 15,
       "published_days": 15,
       "minimum_calls_on_any_day": 4,
@@ -7350,14 +7344,14 @@
         "2026-12-05": 4,
         "2026-12-06": 4,
         "2026-12-07": 12,
-        "2026-12-08": 12
+        "2026-12-08": 4
       }
     },
     {
       "line": "RL3",
       "station_id": "78402",
       "station": "Bell-lloc d'Urgell",
-      "calls_total": 148,
+      "calls_total": 140,
       "days_with_calls": 15,
       "published_days": 15,
       "minimum_calls_on_any_day": 4,
@@ -7378,14 +7372,14 @@
         "2026-12-05": 4,
         "2026-12-06": 4,
         "2026-12-07": 12,
-        "2026-12-08": 12
+        "2026-12-08": 4
       }
     },
     {
       "line": "RL3",
       "station_id": "78406",
       "station": "Bellpuig",
-      "calls_total": 148,
+      "calls_total": 140,
       "days_with_calls": 15,
       "published_days": 15,
       "minimum_calls_on_any_day": 4,
@@ -7406,14 +7400,14 @@
         "2026-12-05": 4,
         "2026-12-06": 4,
         "2026-12-07": 12,
-        "2026-12-08": 12
+        "2026-12-08": 4
       }
     },
     {
       "line": "RL3",
       "station_id": "78405",
       "station": "Castellnou de Seana",
-      "calls_total": 148,
+      "calls_total": 140,
       "days_with_calls": 15,
       "published_days": 15,
       "minimum_calls_on_any_day": 4,
@@ -7434,14 +7428,14 @@
         "2026-12-05": 4,
         "2026-12-06": 4,
         "2026-12-07": 12,
-        "2026-12-08": 12
+        "2026-12-08": 4
       }
     },
     {
       "line": "RL3",
       "station_id": "78500",
       "station": "Cervera",
-      "calls_total": 148,
+      "calls_total": 140,
       "days_with_calls": 15,
       "published_days": 15,
       "minimum_calls_on_any_day": 4,
@@ -7462,14 +7456,14 @@
         "2026-12-05": 4,
         "2026-12-06": 4,
         "2026-12-07": 12,
-        "2026-12-08": 12
+        "2026-12-08": 4
       }
     },
     {
       "line": "RL3",
       "station_id": "78404",
       "station": "Golmés",
-      "calls_total": 148,
+      "calls_total": 140,
       "days_with_calls": 15,
       "published_days": 15,
       "minimum_calls_on_any_day": 4,
@@ -7490,14 +7484,14 @@
         "2026-12-05": 4,
         "2026-12-06": 4,
         "2026-12-07": 12,
-        "2026-12-08": 12
+        "2026-12-08": 4
       }
     },
     {
       "line": "RL3",
       "station_id": "78400",
       "station": "Lleida-Pirineus",
-      "calls_total": 148,
+      "calls_total": 140,
       "days_with_calls": 15,
       "published_days": 15,
       "minimum_calls_on_any_day": 4,
@@ -7518,14 +7512,14 @@
         "2026-12-05": 4,
         "2026-12-06": 4,
         "2026-12-07": 12,
-        "2026-12-08": 12
+        "2026-12-08": 4
       }
     },
     {
       "line": "RL3",
       "station_id": "78403",
       "station": "Mollerussa",
-      "calls_total": 148,
+      "calls_total": 140,
       "days_with_calls": 15,
       "published_days": 15,
       "minimum_calls_on_any_day": 4,
@@ -7546,14 +7540,14 @@
         "2026-12-05": 4,
         "2026-12-06": 4,
         "2026-12-07": 12,
-        "2026-12-08": 12
+        "2026-12-08": 4
       }
     },
     {
       "line": "RL3",
       "station_id": "78408",
       "station": "Tàrrega",
-      "calls_total": 148,
+      "calls_total": 140,
       "days_with_calls": 15,
       "published_days": 15,
       "minimum_calls_on_any_day": 4,
@@ -7574,14 +7568,14 @@
         "2026-12-05": 4,
         "2026-12-06": 4,
         "2026-12-07": 12,
-        "2026-12-08": 12
+        "2026-12-08": 4
       }
     },
     {
       "line": "RL4",
       "station_id": "78505",
       "station": "Aguilar de Segarra",
-      "calls_total": 127,
+      "calls_total": 125,
       "days_with_calls": 15,
       "published_days": 15,
       "minimum_calls_on_any_day": 7,
@@ -7602,14 +7596,14 @@
         "2026-12-05": 7,
         "2026-12-06": 7,
         "2026-12-07": 9,
-        "2026-12-08": 9
+        "2026-12-08": 7
       }
     },
     {
       "line": "RL4",
       "station_id": "78407",
       "station": "Anglesola",
-      "calls_total": 127,
+      "calls_total": 125,
       "days_with_calls": 15,
       "published_days": 15,
       "minimum_calls_on_any_day": 7,
@@ -7630,14 +7624,14 @@
         "2026-12-05": 7,
         "2026-12-06": 7,
         "2026-12-07": 9,
-        "2026-12-08": 9
+        "2026-12-08": 7
       }
     },
     {
       "line": "RL4",
       "station_id": "78402",
       "station": "Bell-lloc d'Urgell",
-      "calls_total": 127,
+      "calls_total": 125,
       "days_with_calls": 15,
       "published_days": 15,
       "minimum_calls_on_any_day": 7,
@@ -7658,14 +7652,14 @@
         "2026-12-05": 7,
         "2026-12-06": 7,
         "2026-12-07": 9,
-        "2026-12-08": 9
+        "2026-12-08": 7
       }
     },
     {
       "line": "RL4",
       "station_id": "78406",
       "station": "Bellpuig",
-      "calls_total": 127,
+      "calls_total": 125,
       "days_with_calls": 15,
       "published_days": 15,
       "minimum_calls_on_any_day": 7,
@@ -7686,14 +7680,14 @@
         "2026-12-05": 7,
         "2026-12-06": 7,
         "2026-12-07": 9,
-        "2026-12-08": 9
+        "2026-12-08": 7
       }
     },
     {
       "line": "RL4",
       "station_id": "78503",
       "station": "Calaf",
-      "calls_total": 127,
+      "calls_total": 125,
       "days_with_calls": 15,
       "published_days": 15,
       "minimum_calls_on_any_day": 7,
@@ -7714,14 +7708,14 @@
         "2026-12-05": 7,
         "2026-12-06": 7,
         "2026-12-07": 9,
-        "2026-12-08": 9
+        "2026-12-08": 7
       }
     },
     {
       "line": "RL4",
       "station_id": "78405",
       "station": "Castellnou de Seana",
-      "calls_total": 127,
+      "calls_total": 125,
       "days_with_calls": 15,
       "published_days": 15,
       "minimum_calls_on_any_day": 7,
@@ -7742,14 +7736,14 @@
         "2026-12-05": 7,
         "2026-12-06": 7,
         "2026-12-07": 9,
-        "2026-12-08": 9
+        "2026-12-08": 7
       }
     },
     {
       "line": "RL4",
       "station_id": "78500",
       "station": "Cervera",
-      "calls_total": 127,
+      "calls_total": 125,
       "days_with_calls": 15,
       "published_days": 15,
       "minimum_calls_on_any_day": 7,
@@ -7770,14 +7764,14 @@
         "2026-12-05": 7,
         "2026-12-06": 7,
         "2026-12-07": 9,
-        "2026-12-08": 9
+        "2026-12-08": 7
       }
     },
     {
       "line": "RL4",
       "station_id": "78404",
       "station": "Golmés",
-      "calls_total": 127,
+      "calls_total": 125,
       "days_with_calls": 15,
       "published_days": 15,
       "minimum_calls_on_any_day": 7,
@@ -7798,14 +7792,14 @@
         "2026-12-05": 7,
         "2026-12-06": 7,
         "2026-12-07": 9,
-        "2026-12-08": 9
+        "2026-12-08": 7
       }
     },
     {
       "line": "RL4",
       "station_id": "78400",
       "station": "Lleida-Pirineus",
-      "calls_total": 127,
+      "calls_total": 125,
       "days_with_calls": 15,
       "published_days": 15,
       "minimum_calls_on_any_day": 7,
@@ -7826,14 +7820,14 @@
         "2026-12-05": 7,
         "2026-12-06": 7,
         "2026-12-07": 9,
-        "2026-12-08": 9
+        "2026-12-08": 7
       }
     },
     {
       "line": "RL4",
       "station_id": "78600",
       "station": "Manresa",
-      "calls_total": 127,
+      "calls_total": 125,
       "days_with_calls": 15,
       "published_days": 15,
       "minimum_calls_on_any_day": 7,
@@ -7854,14 +7848,14 @@
         "2026-12-05": 7,
         "2026-12-06": 7,
         "2026-12-07": 9,
-        "2026-12-08": 9
+        "2026-12-08": 7
       }
     },
     {
       "line": "RL4",
       "station_id": "78403",
       "station": "Mollerussa",
-      "calls_total": 127,
+      "calls_total": 125,
       "days_with_calls": 15,
       "published_days": 15,
       "minimum_calls_on_any_day": 7,
@@ -7882,14 +7876,14 @@
         "2026-12-05": 7,
         "2026-12-06": 7,
         "2026-12-07": 9,
-        "2026-12-08": 9
+        "2026-12-08": 7
       }
     },
     {
       "line": "RL4",
       "station_id": "78506",
       "station": "Rajadell",
-      "calls_total": 127,
+      "calls_total": 125,
       "days_with_calls": 15,
       "published_days": 15,
       "minimum_calls_on_any_day": 7,
@@ -7910,14 +7904,14 @@
         "2026-12-05": 7,
         "2026-12-06": 7,
         "2026-12-07": 9,
-        "2026-12-08": 9
+        "2026-12-08": 7
       }
     },
     {
       "line": "RL4",
       "station_id": "78501",
       "station": "Sant Guim de Freixenet",
-      "calls_total": 127,
+      "calls_total": 125,
       "days_with_calls": 15,
       "published_days": 15,
       "minimum_calls_on_any_day": 7,
@@ -7938,14 +7932,14 @@
         "2026-12-05": 7,
         "2026-12-06": 7,
         "2026-12-07": 9,
-        "2026-12-08": 9
+        "2026-12-08": 7
       }
     },
     {
       "line": "RL4",
       "station_id": "78502",
       "station": "Sant Martí Sesgueioles",
-      "calls_total": 127,
+      "calls_total": 125,
       "days_with_calls": 15,
       "published_days": 15,
       "minimum_calls_on_any_day": 7,
@@ -7966,7 +7960,7 @@
         "2026-12-05": 7,
         "2026-12-06": 7,
         "2026-12-07": 9,
-        "2026-12-08": 9
+        "2026-12-08": 7
       }
     },
     {
@@ -8001,7 +7995,7 @@
       "line": "RL4",
       "station_id": "78504",
       "station": "Seguers-Sant Pere Sallavinera",
-      "calls_total": 127,
+      "calls_total": 125,
       "days_with_calls": 15,
       "published_days": 15,
       "minimum_calls_on_any_day": 7,
@@ -8022,7 +8016,7 @@
         "2026-12-05": 7,
         "2026-12-06": 7,
         "2026-12-07": 9,
-        "2026-12-08": 9
+        "2026-12-08": 7
       }
     },
     {
@@ -8057,7 +8051,7 @@
       "line": "RL4",
       "station_id": "78408",
       "station": "Tàrrega",
-      "calls_total": 127,
+      "calls_total": 125,
       "days_with_calls": 15,
       "published_days": 15,
       "minimum_calls_on_any_day": 7,
@@ -8078,17 +8072,17 @@
         "2026-12-05": 7,
         "2026-12-06": 7,
         "2026-12-07": 9,
-        "2026-12-08": 9
+        "2026-12-08": 7
       }
     },
     {
       "line": "R11",
       "station_id": "79009",
       "station": "Barcelona El Clot",
-      "calls_total": 97,
-      "days_with_calls": 15,
+      "calls_total": 90,
+      "days_with_calls": 14,
       "published_days": 15,
-      "minimum_calls_on_any_day": 5,
+      "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 7,
       "source_status": "timetable_calls",
       "per_day": {
@@ -8106,17 +8100,17 @@
         "2026-12-05": 5,
         "2026-12-06": 5,
         "2026-12-07": 7,
-        "2026-12-08": 7
+        "2026-12-08": 0
       }
     },
     {
       "line": "R11",
       "station_id": "79004",
       "station": "Barcelona Sant Andreu",
-      "calls_total": 97,
-      "days_with_calls": 15,
+      "calls_total": 90,
+      "days_with_calls": 14,
       "published_days": 15,
-      "minimum_calls_on_any_day": 5,
+      "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 7,
       "source_status": "timetable_calls",
       "per_day": {
@@ -8134,17 +8128,17 @@
         "2026-12-05": 5,
         "2026-12-06": 5,
         "2026-12-07": 7,
-        "2026-12-08": 7
+        "2026-12-08": 0
       }
     },
     {
       "line": "R11",
       "station_id": "71802",
       "station": "Barcelona-Passeig de Gràcia",
-      "calls_total": 97,
-      "days_with_calls": 15,
+      "calls_total": 90,
+      "days_with_calls": 14,
       "published_days": 15,
-      "minimum_calls_on_any_day": 5,
+      "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 7,
       "source_status": "timetable_calls",
       "per_day": {
@@ -8162,17 +8156,17 @@
         "2026-12-05": 5,
         "2026-12-06": 5,
         "2026-12-07": 7,
-        "2026-12-08": 7
+        "2026-12-08": 0
       }
     },
     {
       "line": "R11",
       "station_id": "71801",
       "station": "Barcelona-Sants",
-      "calls_total": 97,
-      "days_with_calls": 15,
+      "calls_total": 90,
+      "days_with_calls": 14,
       "published_days": 15,
-      "minimum_calls_on_any_day": 5,
+      "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 7,
       "source_status": "timetable_calls",
       "per_day": {
@@ -8190,17 +8184,17 @@
         "2026-12-05": 5,
         "2026-12-06": 5,
         "2026-12-07": 7,
-        "2026-12-08": 7
+        "2026-12-08": 0
       }
     },
     {
       "line": "R11",
       "station_id": "79302",
       "station": "Bordils-Juià",
-      "calls_total": 97,
-      "days_with_calls": 15,
+      "calls_total": 90,
+      "days_with_calls": 14,
       "published_days": 15,
-      "minimum_calls_on_any_day": 5,
+      "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 7,
       "source_status": "timetable_calls",
       "per_day": {
@@ -8218,17 +8212,17 @@
         "2026-12-05": 5,
         "2026-12-06": 5,
         "2026-12-07": 7,
-        "2026-12-08": 7
+        "2026-12-08": 0
       }
     },
     {
       "line": "R11",
       "station_id": "79203",
       "station": "Caldes de Malavella",
-      "calls_total": 97,
-      "days_with_calls": 15,
+      "calls_total": 90,
+      "days_with_calls": 14,
       "published_days": 15,
-      "minimum_calls_on_any_day": 5,
+      "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 7,
       "source_status": "timetable_calls",
       "per_day": {
@@ -8246,17 +8240,17 @@
         "2026-12-05": 5,
         "2026-12-06": 5,
         "2026-12-07": 7,
-        "2026-12-08": 7
+        "2026-12-08": 0
       }
     },
     {
       "line": "R11",
       "station_id": "79305",
       "station": "Camallera",
-      "calls_total": 97,
-      "days_with_calls": 15,
+      "calls_total": 90,
+      "days_with_calls": 14,
       "published_days": 15,
-      "minimum_calls_on_any_day": 5,
+      "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 7,
       "source_status": "timetable_calls",
       "per_day": {
@@ -8274,17 +8268,17 @@
         "2026-12-05": 5,
         "2026-12-06": 5,
         "2026-12-07": 7,
-        "2026-12-08": 7
+        "2026-12-08": 0
       }
     },
     {
       "line": "R11",
       "station_id": "79301",
       "station": "Celrà",
-      "calls_total": 97,
-      "days_with_calls": 15,
+      "calls_total": 90,
+      "days_with_calls": 14,
       "published_days": 15,
-      "minimum_calls_on_any_day": 5,
+      "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 7,
       "source_status": "timetable_calls",
       "per_day": {
@@ -8302,17 +8296,17 @@
         "2026-12-05": 5,
         "2026-12-06": 5,
         "2026-12-07": 7,
-        "2026-12-08": 7
+        "2026-12-08": 0
       }
     },
     {
       "line": "R11",
       "station_id": "ref:c15878e8005fc4f8",
       "station": "Cerbère",
-      "calls_total": 75,
-      "days_with_calls": 15,
+      "calls_total": 70,
+      "days_with_calls": 14,
       "published_days": 15,
-      "minimum_calls_on_any_day": 5,
+      "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 5,
       "source_status": "timetable_calls",
       "per_day": {
@@ -8330,17 +8324,17 @@
         "2026-12-05": 5,
         "2026-12-06": 5,
         "2026-12-07": 5,
-        "2026-12-08": 5
+        "2026-12-08": 0
       }
     },
     {
       "line": "R11",
       "station_id": "79314",
       "station": "Colera",
-      "calls_total": 97,
-      "days_with_calls": 15,
+      "calls_total": 90,
+      "days_with_calls": 14,
       "published_days": 15,
-      "minimum_calls_on_any_day": 5,
+      "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 7,
       "source_status": "timetable_calls",
       "per_day": {
@@ -8358,17 +8352,17 @@
         "2026-12-05": 5,
         "2026-12-06": 5,
         "2026-12-07": 7,
-        "2026-12-08": 7
+        "2026-12-08": 0
       }
     },
     {
       "line": "R11",
       "station_id": "79309",
       "station": "Figueres",
-      "calls_total": 97,
-      "days_with_calls": 15,
+      "calls_total": 90,
+      "days_with_calls": 14,
       "published_days": 15,
-      "minimum_calls_on_any_day": 5,
+      "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 7,
       "source_status": "timetable_calls",
       "per_day": {
@@ -8386,17 +8380,17 @@
         "2026-12-05": 5,
         "2026-12-06": 5,
         "2026-12-07": 7,
-        "2026-12-08": 7
+        "2026-12-08": 0
       }
     },
     {
       "line": "R11",
       "station_id": "79303",
       "station": "Flaçà",
-      "calls_total": 97,
-      "days_with_calls": 15,
+      "calls_total": 90,
+      "days_with_calls": 14,
       "published_days": 15,
-      "minimum_calls_on_any_day": 5,
+      "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 7,
       "source_status": "timetable_calls",
       "per_day": {
@@ -8414,17 +8408,17 @@
         "2026-12-05": 5,
         "2026-12-06": 5,
         "2026-12-07": 7,
-        "2026-12-08": 7
+        "2026-12-08": 0
       }
     },
     {
       "line": "R11",
       "station_id": "79205",
       "station": "Fornells de la Selva",
-      "calls_total": 97,
-      "days_with_calls": 15,
+      "calls_total": 90,
+      "days_with_calls": 14,
       "published_days": 15,
-      "minimum_calls_on_any_day": 5,
+      "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 7,
       "source_status": "timetable_calls",
       "per_day": {
@@ -8442,17 +8436,17 @@
         "2026-12-05": 5,
         "2026-12-06": 5,
         "2026-12-07": 7,
-        "2026-12-08": 7
+        "2026-12-08": 0
       }
     },
     {
       "line": "R11",
       "station_id": "79300",
       "station": "Girona",
-      "calls_total": 97,
-      "days_with_calls": 15,
+      "calls_total": 90,
+      "days_with_calls": 14,
       "published_days": 15,
-      "minimum_calls_on_any_day": 5,
+      "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 7,
       "source_status": "timetable_calls",
       "per_day": {
@@ -8470,17 +8464,17 @@
         "2026-12-05": 5,
         "2026-12-06": 5,
         "2026-12-07": 7,
-        "2026-12-08": 7
+        "2026-12-08": 0
       }
     },
     {
       "line": "R11",
       "station_id": "79100",
       "station": "Granollers Centre",
-      "calls_total": 97,
-      "days_with_calls": 15,
+      "calls_total": 90,
+      "days_with_calls": 14,
       "published_days": 15,
-      "minimum_calls_on_any_day": 5,
+      "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 7,
       "source_status": "timetable_calls",
       "per_day": {
@@ -8498,17 +8492,17 @@
         "2026-12-05": 5,
         "2026-12-06": 5,
         "2026-12-07": 7,
-        "2026-12-08": 7
+        "2026-12-08": 0
       }
     },
     {
       "line": "R11",
       "station_id": "79105",
       "station": "Gualba",
-      "calls_total": 97,
-      "days_with_calls": 15,
+      "calls_total": 90,
+      "days_with_calls": 14,
       "published_days": 15,
-      "minimum_calls_on_any_day": 5,
+      "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 7,
       "source_status": "timetable_calls",
       "per_day": {
@@ -8526,17 +8520,17 @@
         "2026-12-05": 5,
         "2026-12-06": 5,
         "2026-12-07": 7,
-        "2026-12-08": 7
+        "2026-12-08": 0
       }
     },
     {
       "line": "R11",
       "station_id": "79107",
       "station": "Hostalric",
-      "calls_total": 97,
-      "days_with_calls": 15,
+      "calls_total": 90,
+      "days_with_calls": 14,
       "published_days": 15,
-      "minimum_calls_on_any_day": 5,
+      "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 7,
       "source_status": "timetable_calls",
       "per_day": {
@@ -8554,17 +8548,17 @@
         "2026-12-05": 5,
         "2026-12-06": 5,
         "2026-12-07": 7,
-        "2026-12-08": 7
+        "2026-12-08": 0
       }
     },
     {
       "line": "R11",
       "station_id": "79312",
       "station": "Llançà",
-      "calls_total": 97,
-      "days_with_calls": 15,
+      "calls_total": 90,
+      "days_with_calls": 14,
       "published_days": 15,
-      "minimum_calls_on_any_day": 5,
+      "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 7,
       "source_status": "timetable_calls",
       "per_day": {
@@ -8582,17 +8576,17 @@
         "2026-12-05": 5,
         "2026-12-06": 5,
         "2026-12-07": 7,
-        "2026-12-08": 7
+        "2026-12-08": 0
       }
     },
     {
       "line": "R11",
       "station_id": "79200",
       "station": "Maçanet-Massanes",
-      "calls_total": 97,
-      "days_with_calls": 15,
+      "calls_total": 90,
+      "days_with_calls": 14,
       "published_days": 15,
-      "minimum_calls_on_any_day": 5,
+      "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 7,
       "source_status": "timetable_calls",
       "per_day": {
@@ -8610,17 +8604,17 @@
         "2026-12-05": 5,
         "2026-12-06": 5,
         "2026-12-07": 7,
-        "2026-12-08": 7
+        "2026-12-08": 0
       }
     },
     {
       "line": "R11",
       "station_id": "79315",
       "station": "Portbou",
-      "calls_total": 97,
-      "days_with_calls": 15,
+      "calls_total": 90,
+      "days_with_calls": 14,
       "published_days": 15,
-      "minimum_calls_on_any_day": 5,
+      "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 7,
       "source_status": "timetable_calls",
       "per_day": {
@@ -8638,17 +8632,17 @@
         "2026-12-05": 5,
         "2026-12-06": 5,
         "2026-12-07": 7,
-        "2026-12-08": 7
+        "2026-12-08": 0
       }
     },
     {
       "line": "R11",
       "station_id": "79106",
       "station": "Riells i Viabrea-Breda",
-      "calls_total": 97,
-      "days_with_calls": 15,
+      "calls_total": 90,
+      "days_with_calls": 14,
       "published_days": 15,
-      "minimum_calls_on_any_day": 5,
+      "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 7,
       "source_status": "timetable_calls",
       "per_day": {
@@ -8666,17 +8660,17 @@
         "2026-12-05": 5,
         "2026-12-06": 5,
         "2026-12-07": 7,
-        "2026-12-08": 7
+        "2026-12-08": 0
       }
     },
     {
       "line": "R11",
       "station_id": "79204",
       "station": "Riudellots",
-      "calls_total": 97,
-      "days_with_calls": 15,
+      "calls_total": 90,
+      "days_with_calls": 14,
       "published_days": 15,
-      "minimum_calls_on_any_day": 5,
+      "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 7,
       "source_status": "timetable_calls",
       "per_day": {
@@ -8694,17 +8688,17 @@
         "2026-12-05": 5,
         "2026-12-06": 5,
         "2026-12-07": 7,
-        "2026-12-08": 7
+        "2026-12-08": 0
       }
     },
     {
       "line": "R11",
       "station_id": "79104",
       "station": "Sant Celoni",
-      "calls_total": 97,
-      "days_with_calls": 15,
+      "calls_total": 90,
+      "days_with_calls": 14,
       "published_days": 15,
-      "minimum_calls_on_any_day": 5,
+      "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 7,
       "source_status": "timetable_calls",
       "per_day": {
@@ -8722,17 +8716,17 @@
         "2026-12-05": 5,
         "2026-12-06": 5,
         "2026-12-07": 7,
-        "2026-12-08": 7
+        "2026-12-08": 0
       }
     },
     {
       "line": "R11",
       "station_id": "79304",
       "station": "Sant Jordi Desvalls",
-      "calls_total": 97,
-      "days_with_calls": 15,
+      "calls_total": 90,
+      "days_with_calls": 14,
       "published_days": 15,
-      "minimum_calls_on_any_day": 5,
+      "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 7,
       "source_status": "timetable_calls",
       "per_day": {
@@ -8750,17 +8744,17 @@
         "2026-12-05": 5,
         "2026-12-06": 5,
         "2026-12-07": 7,
-        "2026-12-08": 7
+        "2026-12-08": 0
       }
     },
     {
       "line": "R11",
       "station_id": "79306",
       "station": "Sant Miquel de Fluvià",
-      "calls_total": 97,
-      "days_with_calls": 15,
+      "calls_total": 90,
+      "days_with_calls": 14,
       "published_days": 15,
-      "minimum_calls_on_any_day": 5,
+      "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 7,
       "source_status": "timetable_calls",
       "per_day": {
@@ -8778,17 +8772,17 @@
         "2026-12-05": 5,
         "2026-12-06": 5,
         "2026-12-07": 7,
-        "2026-12-08": 7
+        "2026-12-08": 0
       }
     },
     {
       "line": "R11",
       "station_id": "79202",
       "station": "Sils",
-      "calls_total": 97,
-      "days_with_calls": 15,
+      "calls_total": 90,
+      "days_with_calls": 14,
       "published_days": 15,
-      "minimum_calls_on_any_day": 5,
+      "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 7,
       "source_status": "timetable_calls",
       "per_day": {
@@ -8806,17 +8800,17 @@
         "2026-12-05": 5,
         "2026-12-06": 5,
         "2026-12-07": 7,
-        "2026-12-08": 7
+        "2026-12-08": 0
       }
     },
     {
       "line": "R11",
       "station_id": "79311",
       "station": "Vilajuïga",
-      "calls_total": 97,
-      "days_with_calls": 15,
+      "calls_total": 90,
+      "days_with_calls": 14,
       "published_days": 15,
-      "minimum_calls_on_any_day": 5,
+      "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 7,
       "source_status": "timetable_calls",
       "per_day": {
@@ -8834,17 +8828,17 @@
         "2026-12-05": 5,
         "2026-12-06": 5,
         "2026-12-07": 7,
-        "2026-12-08": 7
+        "2026-12-08": 0
       }
     },
     {
       "line": "R11",
       "station_id": "79308",
       "station": "Vilamalla",
-      "calls_total": 97,
-      "days_with_calls": 15,
+      "calls_total": 90,
+      "days_with_calls": 14,
       "published_days": 15,
-      "minimum_calls_on_any_day": 5,
+      "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 7,
       "source_status": "timetable_calls",
       "per_day": {
@@ -8862,7 +8856,7 @@
         "2026-12-05": 5,
         "2026-12-06": 5,
         "2026-12-07": 7,
-        "2026-12-08": 7
+        "2026-12-08": 0
       }
     },
     {
@@ -8953,10 +8947,10 @@
       "line": "R13",
       "station_id": "73002",
       "station": "Juneda",
-      "calls_total": 60,
-      "days_with_calls": 15,
+      "calls_total": 56,
+      "days_with_calls": 14,
       "published_days": 15,
-      "minimum_calls_on_any_day": 4,
+      "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 4,
       "source_status": "timetable_calls",
       "per_day": {
@@ -8974,7 +8968,7 @@
         "2026-12-05": 4,
         "2026-12-06": 4,
         "2026-12-07": 4,
-        "2026-12-08": 4
+        "2026-12-08": 0
       }
     },
     {
@@ -9093,10 +9087,10 @@
       "line": "R13",
       "station_id": "73003",
       "station": "Les Borges Blanques",
-      "calls_total": 60,
-      "days_with_calls": 15,
+      "calls_total": 56,
+      "days_with_calls": 14,
       "published_days": 15,
-      "minimum_calls_on_any_day": 4,
+      "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 4,
       "source_status": "timetable_calls",
       "per_day": {
@@ -9114,17 +9108,17 @@
         "2026-12-05": 4,
         "2026-12-06": 4,
         "2026-12-07": 4,
-        "2026-12-08": 4
+        "2026-12-08": 0
       }
     },
     {
       "line": "R13",
       "station_id": "78400",
       "station": "Lleida-Pirineus",
-      "calls_total": 60,
-      "days_with_calls": 15,
+      "calls_total": 56,
+      "days_with_calls": 14,
       "published_days": 15,
-      "minimum_calls_on_any_day": 4,
+      "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 4,
       "source_status": "timetable_calls",
       "per_day": {
@@ -9142,7 +9136,7 @@
         "2026-12-05": 4,
         "2026-12-06": 4,
         "2026-12-07": 4,
-        "2026-12-08": 4
+        "2026-12-08": 0
       }
     },
     {
@@ -9205,10 +9199,10 @@
       "line": "R13",
       "station_id": "73001",
       "station": "Puigverd de Lleida-Artesa de Lleida",
-      "calls_total": 30,
-      "days_with_calls": 15,
+      "calls_total": 28,
+      "days_with_calls": 14,
       "published_days": 15,
-      "minimum_calls_on_any_day": 2,
+      "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 2,
       "source_status": "timetable_calls",
       "per_day": {
@@ -9226,7 +9220,7 @@
         "2026-12-05": 2,
         "2026-12-06": 2,
         "2026-12-07": 2,
-        "2026-12-08": 2
+        "2026-12-08": 0
       }
     },
     {
@@ -9457,8 +9451,8 @@
       "line": "R14",
       "station_id": "73101",
       "station": "Alcover",
-      "calls_total": 11,
-      "days_with_calls": 11,
+      "calls_total": 10,
+      "days_with_calls": 10,
       "published_days": 15,
       "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 1,
@@ -9478,7 +9472,7 @@
         "2026-12-05": 0,
         "2026-12-06": 0,
         "2026-12-07": 1,
-        "2026-12-08": 1
+        "2026-12-08": 0
       }
     },
     {
@@ -9681,8 +9675,8 @@
       "line": "R14",
       "station_id": "73100",
       "station": "La Plana-Picamoixons",
-      "calls_total": 11,
-      "days_with_calls": 11,
+      "calls_total": 10,
+      "days_with_calls": 10,
       "published_days": 15,
       "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 1,
@@ -9702,7 +9696,7 @@
         "2026-12-05": 0,
         "2026-12-06": 0,
         "2026-12-07": 1,
-        "2026-12-08": 1
+        "2026-12-08": 0
       }
     },
     {
@@ -9737,8 +9731,8 @@
       "line": "R14",
       "station_id": "73102",
       "station": "La Selva del Camp",
-      "calls_total": 11,
-      "days_with_calls": 11,
+      "calls_total": 10,
+      "days_with_calls": 10,
       "published_days": 15,
       "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 1,
@@ -9758,7 +9752,7 @@
         "2026-12-05": 0,
         "2026-12-06": 0,
         "2026-12-07": 1,
-        "2026-12-08": 1
+        "2026-12-08": 0
       }
     },
     {
@@ -9877,8 +9871,8 @@
       "line": "R14",
       "station_id": "71400",
       "station": "Reus",
-      "calls_total": 11,
-      "days_with_calls": 11,
+      "calls_total": 10,
+      "days_with_calls": 10,
       "published_days": 15,
       "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 1,
@@ -9898,7 +9892,7 @@
         "2026-12-05": 0,
         "2026-12-06": 0,
         "2026-12-07": 1,
-        "2026-12-08": 1
+        "2026-12-08": 0
       }
     },
     {
@@ -9933,8 +9927,8 @@
       "line": "R14",
       "station_id": "71500",
       "station": "Tarragona",
-      "calls_total": 11,
-      "days_with_calls": 11,
+      "calls_total": 10,
+      "days_with_calls": 10,
       "published_days": 15,
       "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 1,
@@ -9954,7 +9948,7 @@
         "2026-12-05": 0,
         "2026-12-06": 0,
         "2026-12-07": 1,
-        "2026-12-08": 1
+        "2026-12-08": 0
       }
     },
     {
@@ -9989,8 +9983,8 @@
       "line": "R14",
       "station_id": "71401",
       "station": "Vila-seca",
-      "calls_total": 11,
-      "days_with_calls": 11,
+      "calls_total": 10,
+      "days_with_calls": 10,
       "published_days": 15,
       "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 1,
@@ -10010,7 +10004,7 @@
         "2026-12-05": 0,
         "2026-12-06": 0,
         "2026-12-07": 1,
-        "2026-12-08": 1
+        "2026-12-08": 0
       }
     },
     {
@@ -10101,10 +10095,10 @@
       "line": "R15",
       "station_id": "71502",
       "station": "Altafulla-Tamarit",
-      "calls_total": 210,
-      "days_with_calls": 15,
+      "calls_total": 196,
+      "days_with_calls": 14,
       "published_days": 15,
-      "minimum_calls_on_any_day": 14,
+      "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 14,
       "source_status": "timetable_calls",
       "per_day": {
@@ -10122,17 +10116,17 @@
         "2026-12-05": 14,
         "2026-12-06": 14,
         "2026-12-07": 14,
-        "2026-12-08": 14
+        "2026-12-08": 0
       }
     },
     {
       "line": "R15",
       "station_id": "71211",
       "station": "Ascó",
-      "calls_total": 15,
-      "days_with_calls": 15,
+      "calls_total": 14,
+      "days_with_calls": 14,
       "published_days": 15,
-      "minimum_calls_on_any_day": 1,
+      "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 1,
       "source_status": "timetable_calls",
       "per_day": {
@@ -10150,17 +10144,17 @@
         "2026-12-05": 1,
         "2026-12-06": 1,
         "2026-12-07": 1,
-        "2026-12-08": 1
+        "2026-12-08": 0
       }
     },
     {
       "line": "R15",
       "station_id": "79400",
       "station": "Barcelona-Estació de França",
-      "calls_total": 210,
-      "days_with_calls": 15,
+      "calls_total": 196,
+      "days_with_calls": 14,
       "published_days": 15,
-      "minimum_calls_on_any_day": 14,
+      "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 14,
       "source_status": "timetable_calls",
       "per_day": {
@@ -10178,17 +10172,17 @@
         "2026-12-05": 14,
         "2026-12-06": 14,
         "2026-12-07": 14,
-        "2026-12-08": 14
+        "2026-12-08": 0
       }
     },
     {
       "line": "R15",
       "station_id": "71802",
       "station": "Barcelona-Passeig de Gràcia",
-      "calls_total": 210,
-      "days_with_calls": 15,
+      "calls_total": 196,
+      "days_with_calls": 14,
       "published_days": 15,
-      "minimum_calls_on_any_day": 14,
+      "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 14,
       "source_status": "timetable_calls",
       "per_day": {
@@ -10206,17 +10200,17 @@
         "2026-12-05": 14,
         "2026-12-06": 14,
         "2026-12-07": 14,
-        "2026-12-08": 14
+        "2026-12-08": 0
       }
     },
     {
       "line": "R15",
       "station_id": "71801",
       "station": "Barcelona-Sants",
-      "calls_total": 210,
-      "days_with_calls": 15,
+      "calls_total": 196,
+      "days_with_calls": 14,
       "published_days": 15,
-      "minimum_calls_on_any_day": 14,
+      "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 14,
       "source_status": "timetable_calls",
       "per_day": {
@@ -10234,17 +10228,17 @@
         "2026-12-05": 14,
         "2026-12-06": 14,
         "2026-12-07": 14,
-        "2026-12-08": 14
+        "2026-12-08": 0
       }
     },
     {
       "line": "R15",
       "station_id": "71302",
       "station": "Capçanes",
-      "calls_total": 45,
-      "days_with_calls": 15,
+      "calls_total": 42,
+      "days_with_calls": 14,
       "published_days": 15,
-      "minimum_calls_on_any_day": 3,
+      "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 3,
       "source_status": "timetable_calls",
       "per_day": {
@@ -10262,17 +10256,17 @@
         "2026-12-05": 3,
         "2026-12-06": 3,
         "2026-12-07": 3,
-        "2026-12-08": 3
+        "2026-12-08": 0
       }
     },
     {
       "line": "R15",
       "station_id": "71305",
       "station": "Duesaigües-L'Argentera",
-      "calls_total": 45,
-      "days_with_calls": 15,
+      "calls_total": 42,
+      "days_with_calls": 14,
       "published_days": 15,
-      "minimum_calls_on_any_day": 3,
+      "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 3,
       "source_status": "timetable_calls",
       "per_day": {
@@ -10290,17 +10284,17 @@
         "2026-12-05": 3,
         "2026-12-06": 3,
         "2026-12-07": 3,
-        "2026-12-08": 3
+        "2026-12-08": 0
       }
     },
     {
       "line": "R15",
       "station_id": "71210",
       "station": "Flix",
-      "calls_total": 15,
-      "days_with_calls": 15,
+      "calls_total": 14,
+      "days_with_calls": 14,
       "published_days": 15,
-      "minimum_calls_on_any_day": 1,
+      "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 1,
       "source_status": "timetable_calls",
       "per_day": {
@@ -10318,17 +10312,17 @@
         "2026-12-05": 1,
         "2026-12-06": 1,
         "2026-12-07": 1,
-        "2026-12-08": 1
+        "2026-12-08": 0
       }
     },
     {
       "line": "R15",
       "station_id": "71307",
       "station": "Les Borges del Camp",
-      "calls_total": 45,
-      "days_with_calls": 15,
+      "calls_total": 42,
+      "days_with_calls": 14,
       "published_days": 15,
-      "minimum_calls_on_any_day": 3,
+      "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 3,
       "source_status": "timetable_calls",
       "per_day": {
@@ -10346,17 +10340,17 @@
         "2026-12-05": 3,
         "2026-12-06": 3,
         "2026-12-07": 3,
-        "2026-12-08": 3
+        "2026-12-08": 0
       }
     },
     {
       "line": "R15",
       "station_id": "71303",
       "station": "Marçà-Falset",
-      "calls_total": 45,
-      "days_with_calls": 15,
+      "calls_total": 42,
+      "days_with_calls": 14,
       "published_days": 15,
-      "minimum_calls_on_any_day": 3,
+      "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 3,
       "source_status": "timetable_calls",
       "per_day": {
@@ -10374,17 +10368,17 @@
         "2026-12-05": 3,
         "2026-12-06": 3,
         "2026-12-07": 3,
-        "2026-12-08": 3
+        "2026-12-08": 0
       }
     },
     {
       "line": "R15",
       "station_id": "71300",
       "station": "Móra la Nova",
-      "calls_total": 45,
-      "days_with_calls": 15,
+      "calls_total": 42,
+      "days_with_calls": 14,
       "published_days": 15,
-      "minimum_calls_on_any_day": 3,
+      "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 3,
       "source_status": "timetable_calls",
       "per_day": {
@@ -10402,17 +10396,17 @@
         "2026-12-05": 3,
         "2026-12-06": 3,
         "2026-12-07": 3,
-        "2026-12-08": 3
+        "2026-12-08": 0
       }
     },
     {
       "line": "R15",
       "station_id": "71304",
       "station": "Pradell",
-      "calls_total": 45,
-      "days_with_calls": 15,
+      "calls_total": 42,
+      "days_with_calls": 14,
       "published_days": 15,
-      "minimum_calls_on_any_day": 3,
+      "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 3,
       "source_status": "timetable_calls",
       "per_day": {
@@ -10430,17 +10424,17 @@
         "2026-12-05": 3,
         "2026-12-06": 3,
         "2026-12-07": 3,
-        "2026-12-08": 3
+        "2026-12-08": 0
       }
     },
     {
       "line": "R15",
       "station_id": "71400",
       "station": "Reus",
-      "calls_total": 210,
-      "days_with_calls": 15,
+      "calls_total": 196,
+      "days_with_calls": 14,
       "published_days": 15,
-      "minimum_calls_on_any_day": 14,
+      "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 14,
       "source_status": "timetable_calls",
       "per_day": {
@@ -10458,7 +10452,7 @@
         "2026-12-05": 14,
         "2026-12-06": 14,
         "2026-12-07": 14,
-        "2026-12-08": 14
+        "2026-12-08": 0
       }
     },
     {
@@ -10493,10 +10487,10 @@
       "line": "R15",
       "station_id": "71306",
       "station": "Riudecanyes-Botarell",
-      "calls_total": 45,
-      "days_with_calls": 15,
+      "calls_total": 42,
+      "days_with_calls": 14,
       "published_days": 15,
-      "minimum_calls_on_any_day": 3,
+      "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 3,
       "source_status": "timetable_calls",
       "per_day": {
@@ -10514,17 +10508,17 @@
         "2026-12-05": 3,
         "2026-12-06": 3,
         "2026-12-07": 3,
-        "2026-12-08": 3
+        "2026-12-08": 0
       }
     },
     {
       "line": "R15",
       "station_id": "71600",
       "station": "Sant Vicenç de Calders",
-      "calls_total": 210,
-      "days_with_calls": 15,
+      "calls_total": 196,
+      "days_with_calls": 14,
       "published_days": 15,
-      "minimum_calls_on_any_day": 14,
+      "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 14,
       "source_status": "timetable_calls",
       "per_day": {
@@ -10542,17 +10536,17 @@
         "2026-12-05": 14,
         "2026-12-06": 14,
         "2026-12-07": 14,
-        "2026-12-08": 14
+        "2026-12-08": 0
       }
     },
     {
       "line": "R15",
       "station_id": "71500",
       "station": "Tarragona",
-      "calls_total": 210,
-      "days_with_calls": 15,
+      "calls_total": 196,
+      "days_with_calls": 14,
       "published_days": 15,
-      "minimum_calls_on_any_day": 14,
+      "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 14,
       "source_status": "timetable_calls",
       "per_day": {
@@ -10570,17 +10564,17 @@
         "2026-12-05": 14,
         "2026-12-06": 14,
         "2026-12-07": 14,
-        "2026-12-08": 14
+        "2026-12-08": 0
       }
     },
     {
       "line": "R15",
       "station_id": "71503",
       "station": "Torredembarra",
-      "calls_total": 210,
-      "days_with_calls": 15,
+      "calls_total": 196,
+      "days_with_calls": 14,
       "published_days": 15,
-      "minimum_calls_on_any_day": 14,
+      "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 14,
       "source_status": "timetable_calls",
       "per_day": {
@@ -10598,17 +10592,17 @@
         "2026-12-05": 14,
         "2026-12-06": 14,
         "2026-12-07": 14,
-        "2026-12-08": 14
+        "2026-12-08": 0
       }
     },
     {
       "line": "R15",
       "station_id": "71401",
       "station": "Vila-seca",
-      "calls_total": 210,
-      "days_with_calls": 15,
+      "calls_total": 196,
+      "days_with_calls": 14,
       "published_days": 15,
-      "minimum_calls_on_any_day": 14,
+      "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 14,
       "source_status": "timetable_calls",
       "per_day": {
@@ -10626,17 +10620,17 @@
         "2026-12-05": 14,
         "2026-12-06": 14,
         "2026-12-07": 14,
-        "2026-12-08": 14
+        "2026-12-08": 0
       }
     },
     {
       "line": "R15",
       "station_id": "71700",
       "station": "Vilanova i la Geltrú",
-      "calls_total": 210,
-      "days_with_calls": 15,
+      "calls_total": 196,
+      "days_with_calls": 14,
       "published_days": 15,
-      "minimum_calls_on_any_day": 14,
+      "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 14,
       "source_status": "timetable_calls",
       "per_day": {
@@ -10654,17 +10648,17 @@
         "2026-12-05": 14,
         "2026-12-06": 14,
         "2026-12-07": 14,
-        "2026-12-08": 14
+        "2026-12-08": 0
       }
     },
     {
       "line": "R16",
       "station_id": "71502",
       "station": "Altafulla-Tamarit",
-      "calls_total": 120,
-      "days_with_calls": 15,
+      "calls_total": 112,
+      "days_with_calls": 14,
       "published_days": 15,
-      "minimum_calls_on_any_day": 8,
+      "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 8,
       "source_status": "timetable_calls",
       "per_day": {
@@ -10682,17 +10676,17 @@
         "2026-12-05": 8,
         "2026-12-06": 8,
         "2026-12-07": 8,
-        "2026-12-08": 8
+        "2026-12-08": 0
       }
     },
     {
       "line": "R16",
       "station_id": "79400",
       "station": "Barcelona-Estació de França",
-      "calls_total": 120,
-      "days_with_calls": 15,
+      "calls_total": 112,
+      "days_with_calls": 14,
       "published_days": 15,
-      "minimum_calls_on_any_day": 8,
+      "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 8,
       "source_status": "timetable_calls",
       "per_day": {
@@ -10710,17 +10704,17 @@
         "2026-12-05": 8,
         "2026-12-06": 8,
         "2026-12-07": 8,
-        "2026-12-08": 8
+        "2026-12-08": 0
       }
     },
     {
       "line": "R16",
       "station_id": "71802",
       "station": "Barcelona-Passeig de Gràcia",
-      "calls_total": 120,
-      "days_with_calls": 15,
+      "calls_total": 112,
+      "days_with_calls": 14,
       "published_days": 15,
-      "minimum_calls_on_any_day": 8,
+      "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 8,
       "source_status": "timetable_calls",
       "per_day": {
@@ -10738,17 +10732,17 @@
         "2026-12-05": 8,
         "2026-12-06": 8,
         "2026-12-07": 8,
-        "2026-12-08": 8
+        "2026-12-08": 0
       }
     },
     {
       "line": "R16",
       "station_id": "71801",
       "station": "Barcelona-Sants",
-      "calls_total": 120,
-      "days_with_calls": 15,
+      "calls_total": 112,
+      "days_with_calls": 14,
       "published_days": 15,
-      "minimum_calls_on_any_day": 8,
+      "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 8,
       "source_status": "timetable_calls",
       "per_day": {
@@ -10766,17 +10760,17 @@
         "2026-12-05": 8,
         "2026-12-06": 8,
         "2026-12-07": 8,
-        "2026-12-08": 8
+        "2026-12-08": 0
       }
     },
     {
       "line": "R16",
       "station_id": "65403",
       "station": "Camarles-Deltebre",
-      "calls_total": 45,
-      "days_with_calls": 15,
+      "calls_total": 42,
+      "days_with_calls": 14,
       "published_days": 15,
-      "minimum_calls_on_any_day": 3,
+      "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 3,
       "source_status": "timetable_calls",
       "per_day": {
@@ -10794,17 +10788,17 @@
         "2026-12-05": 3,
         "2026-12-06": 3,
         "2026-12-07": 3,
-        "2026-12-08": 3
+        "2026-12-08": 0
       }
     },
     {
       "line": "R16",
       "station_id": "65422",
       "station": "Cambrils",
-      "calls_total": 120,
-      "days_with_calls": 15,
+      "calls_total": 112,
+      "days_with_calls": 14,
       "published_days": 15,
-      "minimum_calls_on_any_day": 8,
+      "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 8,
       "source_status": "timetable_calls",
       "per_day": {
@@ -10822,17 +10816,17 @@
         "2026-12-05": 8,
         "2026-12-06": 8,
         "2026-12-07": 8,
-        "2026-12-08": 8
+        "2026-12-08": 0
       }
     },
     {
       "line": "R16",
       "station_id": "65401",
       "station": "Camp-redó",
-      "calls_total": 45,
-      "days_with_calls": 15,
+      "calls_total": 42,
+      "days_with_calls": 14,
       "published_days": 15,
-      "minimum_calls_on_any_day": 3,
+      "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 3,
       "source_status": "timetable_calls",
       "per_day": {
@@ -10850,17 +10844,17 @@
         "2026-12-05": 3,
         "2026-12-06": 3,
         "2026-12-07": 3,
-        "2026-12-08": 3
+        "2026-12-08": 0
       }
     },
     {
       "line": "R16",
       "station_id": "65402",
       "station": "L'Aldea-Amposta-Tortosa",
-      "calls_total": 120,
-      "days_with_calls": 15,
+      "calls_total": 112,
+      "days_with_calls": 14,
       "published_days": 15,
-      "minimum_calls_on_any_day": 8,
+      "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 8,
       "source_status": "timetable_calls",
       "per_day": {
@@ -10878,17 +10872,17 @@
         "2026-12-05": 8,
         "2026-12-06": 8,
         "2026-12-07": 8,
-        "2026-12-08": 8
+        "2026-12-08": 0
       }
     },
     {
       "line": "R16",
       "station_id": "65405",
       "station": "L'Ametlla de Mar",
-      "calls_total": 120,
-      "days_with_calls": 15,
+      "calls_total": 112,
+      "days_with_calls": 14,
       "published_days": 15,
-      "minimum_calls_on_any_day": 8,
+      "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 8,
       "source_status": "timetable_calls",
       "per_day": {
@@ -10906,17 +10900,17 @@
         "2026-12-05": 8,
         "2026-12-06": 8,
         "2026-12-07": 8,
-        "2026-12-08": 8
+        "2026-12-08": 0
       }
     },
     {
       "line": "R16",
       "station_id": "65404",
       "station": "L'Ampolla-El Perelló-Deltebre",
-      "calls_total": 120,
-      "days_with_calls": 15,
+      "calls_total": 112,
+      "days_with_calls": 14,
       "published_days": 15,
-      "minimum_calls_on_any_day": 8,
+      "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 8,
       "source_status": "timetable_calls",
       "per_day": {
@@ -10934,17 +10928,17 @@
         "2026-12-05": 8,
         "2026-12-06": 8,
         "2026-12-07": 8,
-        "2026-12-08": 8
+        "2026-12-08": 0
       }
     },
     {
       "line": "R16",
       "station_id": "65420",
       "station": "L'Hospitalet de l'Infant",
-      "calls_total": 120,
-      "days_with_calls": 15,
+      "calls_total": 112,
+      "days_with_calls": 14,
       "published_days": 15,
-      "minimum_calls_on_any_day": 8,
+      "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 8,
       "source_status": "timetable_calls",
       "per_day": {
@@ -10962,17 +10956,17 @@
         "2026-12-05": 8,
         "2026-12-06": 8,
         "2026-12-07": 8,
-        "2026-12-08": 8
+        "2026-12-08": 0
       }
     },
     {
       "line": "R16",
       "station_id": "71600",
       "station": "Sant Vicenç de Calders",
-      "calls_total": 120,
-      "days_with_calls": 15,
+      "calls_total": 112,
+      "days_with_calls": 14,
       "published_days": 15,
-      "minimum_calls_on_any_day": 8,
+      "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 8,
       "source_status": "timetable_calls",
       "per_day": {
@@ -10990,17 +10984,17 @@
         "2026-12-05": 8,
         "2026-12-06": 8,
         "2026-12-07": 8,
-        "2026-12-08": 8
+        "2026-12-08": 0
       }
     },
     {
       "line": "R16",
       "station_id": "71500",
       "station": "Tarragona",
-      "calls_total": 120,
-      "days_with_calls": 15,
+      "calls_total": 112,
+      "days_with_calls": 14,
       "published_days": 15,
-      "minimum_calls_on_any_day": 8,
+      "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 8,
       "source_status": "timetable_calls",
       "per_day": {
@@ -11018,17 +11012,17 @@
         "2026-12-05": 8,
         "2026-12-06": 8,
         "2026-12-07": 8,
-        "2026-12-08": 8
+        "2026-12-08": 0
       }
     },
     {
       "line": "R16",
       "station_id": "71503",
       "station": "Torredembarra",
-      "calls_total": 120,
-      "days_with_calls": 15,
+      "calls_total": 112,
+      "days_with_calls": 14,
       "published_days": 15,
-      "minimum_calls_on_any_day": 8,
+      "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 8,
       "source_status": "timetable_calls",
       "per_day": {
@@ -11046,17 +11040,17 @@
         "2026-12-05": 8,
         "2026-12-06": 8,
         "2026-12-07": 8,
-        "2026-12-08": 8
+        "2026-12-08": 0
       }
     },
     {
       "line": "R16",
       "station_id": "65400",
       "station": "Tortosa",
-      "calls_total": 120,
-      "days_with_calls": 15,
+      "calls_total": 112,
+      "days_with_calls": 14,
       "published_days": 15,
-      "minimum_calls_on_any_day": 8,
+      "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 8,
       "source_status": "timetable_calls",
       "per_day": {
@@ -11074,7 +11068,7 @@
         "2026-12-05": 8,
         "2026-12-06": 8,
         "2026-12-07": 8,
-        "2026-12-08": 8
+        "2026-12-08": 0
       }
     },
     {
@@ -11109,10 +11103,10 @@
       "line": "R16",
       "station_id": "71401",
       "station": "Vila-seca",
-      "calls_total": 120,
-      "days_with_calls": 15,
+      "calls_total": 112,
+      "days_with_calls": 14,
       "published_days": 15,
-      "minimum_calls_on_any_day": 8,
+      "minimum_calls_on_any_day": 0,
       "maximum_calls_on_any_day": 8,
       "source_status": "timetable_calls",
       "per_day": {
@@ -11130,7 +11124,7 @@
         "2026-12-05": 8,
         "2026-12-06": 8,
         "2026-12-07": 8,
-        "2026-12-08": 8
+        "2026-12-08": 0
       }
     },
     {
