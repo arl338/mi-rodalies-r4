@@ -42,7 +42,7 @@ def load_reference(path=REFERENCE):
     return doc
 
 def materialize_day(day,ref):
-    cal='weekend' if day.weekday()>=5 else 'weekday'
+    cal='weekend' if day.weekday()>=5 or day.isoformat() in {'2026-12-08','2026-12-25','2026-12-26'} else 'weekday'
     anchor=datetime.combine(day,time.min,tzinfo=TZ)
     result=[]
     for service in ref['services']:
