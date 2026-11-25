@@ -52,12 +52,16 @@ def materialize_day(day,reference):
 def duplicate_gtfs(source,existing):
     # Require two independent station/time witnesses (<= 2 minutes).
     # Opposite directions can't match two ordered stops of the same journey.
-    src={x[0]:x[2] for x in source["s"]}
+    src={x[0]:(i,x[2]) for i,x in enumerate(source["s"])}
     for train in existing:
         if train.get("l")!="R4":continue
-        match=sum(code in src and abs(src[code]-station[2])<=120 for station in train.get("s",[])
-                  for code in [station[0]])
-        if match>=2:return True
+        first_index=None
+        for code, _arrival, departure in train.get("s",[]):
+            if code not in src:continue
+            index, expected=src[code]
+            if abs(expected-departure)>120:continue
+            if first_index is not None and index>first_index:return True
+            first_index=index if first_index is None else min(first_index,index)
     return False
 
 def supplement_day(day,gtfs,reference):
