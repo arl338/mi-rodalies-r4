@@ -662,11 +662,10 @@ def build(cer,md,output,days,base=None):
     r2_reference = load_official_r2()
     r2_expiry = date.fromisoformat(r2_reference["valid_through"])
     if production_feed and base > r2_expiry:
-        raise ValueError(
+        errors.append(
             "El cuadro oficial R2 Nord/Sud ha caducado el "+str(r2_expiry)+
-            ". Actualizar fuente y vigencia en Rodalies antes de publicar nuevos horarios. "
-            "No se inferirán servicios a partir de calendarios antiguos.")
-    if production_feed and dates[-1] > r2_expiry:
+            ". Se excluyen los horarios PDF caducados; revisar nueva fuente oficial.")
+    elif production_feed and dates[-1] > r2_expiry:
         errors.append(
             "Horario oficial R2 Nord/Sud válido solo hasta "+str(r2_expiry)+
             "; días posteriores sin servicios PDF verificados, revisar nuevo cuadro.")
