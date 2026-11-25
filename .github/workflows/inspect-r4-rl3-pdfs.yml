@@ -167,6 +167,12 @@ jobs:
                               print('REGIONAL_STYLE',','.join(sorted(lines)),i+1,json.dumps({k:s[k] for k in ('text','bbox','color','font','flags')},ensure_ascii=False))
                       drawings=page.get_drawings()
                       for s in spans:
+                          if s['text'].strip() not in nums:continue
+                          box=fitz.Rect(s['bbox']); y=(box.y0+box.y1)/2
+                          fills=[{'rect':list(v['rect']),'fill':v['fill']} for v in drawings if v.get('fill') is not None and v['rect'].y0<=y<=v['rect'].y1 and v['rect'].height<35 and v['rect'].width>25]
+                          nearby=[t['text'] for t in spans if abs((t['bbox'][1]+t['bbox'][3])/2-y)<3 and ('*' in t['text'] or t['text'].strip()==s['text'].strip())]
+                          print('REGIONAL_ROW',','.join(sorted(lines)),i+1,s['text'],json.dumps({'fills':fills,'symbols':nearby}))
+                      for s in spans:
                           if s['text'].strip() not in nums and not re.search(r'festi|laborab|dissabte|diumenge|sábado|domingo',s['text'],re.I):continue
                           box=fitz.Rect(s['bbox'])
                           marks=[]
