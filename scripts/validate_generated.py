@@ -20,6 +20,10 @@ def validate(out,days=14,min_stations=10):
     assert c['schema']==2 and isinstance(c.get('batch_id'),str) and len(c['batch_id'])>=12
     assert c.get('source') and len(c['lines'])==19
     assert isinstance(c.get('source_quality'),dict) and c['source_quality'].get('source_sha256'), 'El catálogo no está contrastado con el mismo GTFS original que la auditoría; se bloquea la publicación'
+    source_audit = path/'source_audit.json'
+    if source_audit.exists():
+        source_doc = json.loads(source_audit.read_text(encoding='utf8'))
+        assert source_doc.get('gtfs_sha256') == c['source_quality']['source_sha256'], 'Auditoría de origen no corresponde al catálogo'
     assert len(set(x['id'] for x in c['lines']))==19
     assert all(isinstance(x['present'],bool) for x in c['lines'])
     stations={s['id']:s for s in c['stations']}
@@ -39,6 +43,8 @@ def validate(out,days=14,min_stations=10):
             assert train['l'] in {line['id'] for line in c['lines']}
             stops=train['s'];assert len(stops)>=2
             assert isinstance(train.get('id'),str) and train['id']
+            assert train.get('day',str(day)) == str(day), 'Fecha de servicio incoherente'
+            assert datetime.fromtimestamp(stops[0][2],TZ).date() in (day,day+timedelta(days=1)), 'Salida fuera del día de servicio GTFS'
             assert all(isinstance(s,list) and len(s)==3 and all(isinstance(x,int) for x in s[1:]) for s in stops)
             assert all(s[0] in stations and train['l'] in stations[s[0]]['lines'] for s in stops)
             assert all(train['l'] in stations[s[0]].get('schedule_lines', []) for s in stops), 'Horario existente sin cobertura de parada: '+train['l']
