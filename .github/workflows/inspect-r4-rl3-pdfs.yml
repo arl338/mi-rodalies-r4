@@ -121,6 +121,30 @@ jobs:
                   print('NORTH_ROW_WITNESS',t['id'],'stops',len(s),'matched',best,'cells',json.dumps(t['stops']))
           Path('/tmp/pdf-review/r4-north-candidate.json').write_text(json.dumps(candidates))
           PY
+      - name: Inspect source-specific holiday calendar wording
+        run: |
+          PYTHONPATH=scripts python - <<'PY'
+          import fitz,json,re,urllib.request
+          from pathlib import Path
+          root=Path('data/reference')
+          urls=set()
+          for p in root.glob('*timetable*.json'):
+              d=json.loads(p.read_text())
+              if isinstance(d.get('source'),str):urls.add(d['source'])
+              if isinstance(d.get('sources'),dict):
+                  urls.update(v for v in d['sources'].values() if isinstance(v,str))
+          for url in sorted(urls):
+              if not url.startswith('https://rodalies.gencat.cat/'):continue
+              try:
+                  with urllib.request.urlopen(url,timeout=30) as r:raw=r.read(15*1024*1024+1)
+                  if len(raw)>15*1024*1024:raise ValueError('PDF too large')
+                  doc=fitz.open(stream=raw,filetype='pdf')
+                  for i,page in enumerate(doc):
+                      lines=page.get_text().splitlines()
+                      hits=[(j,x) for j,x in enumerate(lines) if re.search(r'festi|laborab|dissabte|diumenge|sábado|domingo|holiday',x,re.I)]
+                      print('CALENDAR_SOURCE',url,'PAGE',i+1,json.dumps(hits,ensure_ascii=False))
+              except Exception as e:print('CALENDAR_UNAVAILABLE',url,str(e))
+          PY
       - uses: actions/upload-artifact@v4
         if: always()
         with:
