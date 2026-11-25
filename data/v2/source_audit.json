@@ -2,7 +2,7 @@
   "schema": 1,
   "source": "https://ssl.renfe.com/ftransit/Fichero_CER_FOMENTO/fomento_transit.zip",
   "gtfs_sha256": "0609cbf45a41dcc6a328bf82271d80f6675947b5a54168a453d5e98d407b8100",
-  "generated_at": "2026-11-25T15:28:45.252999+01:00",
+  "generated_at": "2026-11-25T18:09:27.453515+01:00",
   "date_start": "2026-11-24",
   "date_end": "2026-12-08",
   "discarded_stop_times": {
@@ -10,6 +10,113 @@
   },
   "by_line": {
     "R1": {
+      "by_date": {
+        "2026-11-24": {
+          "active_trip_ids": 190,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 190
+        },
+        "2026-11-25": {
+          "active_trip_ids": 190,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 190
+        },
+        "2026-11-26": {
+          "active_trip_ids": 190,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 190
+        },
+        "2026-11-27": {
+          "active_trip_ids": 190,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 190
+        },
+        "2026-11-28": {
+          "active_trip_ids": 130,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 130
+        },
+        "2026-11-29": {
+          "active_trip_ids": 130,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 130
+        },
+        "2026-11-30": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-01": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-02": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-03": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-04": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-05": {
+          "active_trip_ids": 130,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 130
+        },
+        "2026-12-06": {
+          "active_trip_ids": 130,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 130
+        },
+        "2026-12-07": {
+          "active_trip_ids": 191,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 191
+        },
+        "2026-12-08": {
+          "active_trip_ids": 130,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 130
+        }
+      },
       "active_trip_ids": 1601,
       "raw_two_stop_trips": 0,
       "usable_two_stop_trips": 0,
@@ -26,6 +133,113 @@
       "samples": []
     },
     "R2": {
+      "by_date": {
+        "2026-11-24": {
+          "active_trip_ids": 54,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 54
+        },
+        "2026-11-25": {
+          "active_trip_ids": 54,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 54
+        },
+        "2026-11-26": {
+          "active_trip_ids": 54,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 54
+        },
+        "2026-11-27": {
+          "active_trip_ids": 54,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 54
+        },
+        "2026-11-28": {
+          "active_trip_ids": 3,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 3
+        },
+        "2026-11-29": {
+          "active_trip_ids": 3,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 3
+        },
+        "2026-11-30": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-01": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-02": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-03": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-04": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-05": {
+          "active_trip_ids": 3,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 3
+        },
+        "2026-12-06": {
+          "active_trip_ids": 3,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 3
+        },
+        "2026-12-07": {
+          "active_trip_ids": 54,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 54
+        },
+        "2026-12-08": {
+          "active_trip_ids": 3,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 3
+        }
+      },
       "active_trip_ids": 285,
       "raw_two_stop_trips": 0,
       "usable_two_stop_trips": 0,
@@ -46,6 +260,113 @@
       "samples": []
     },
     "R2N": {
+      "by_date": {
+        "2026-11-24": {
+          "active_trip_ids": 72,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 72,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-11-25": {
+          "active_trip_ids": 72,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 72,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-11-26": {
+          "active_trip_ids": 72,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 72,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-11-27": {
+          "active_trip_ids": 72,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 72,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-11-28": {
+          "active_trip_ids": 72,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 72,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-11-29": {
+          "active_trip_ids": 72,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 72,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-11-30": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-01": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-02": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-03": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-04": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-05": {
+          "active_trip_ids": 72,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 72,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-06": {
+          "active_trip_ids": 72,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 72,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-07": {
+          "active_trip_ids": 72,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 72,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-08": {
+          "active_trip_ids": 72,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 72,
+          "at_least_two_usable_stops": 0
+        }
+      },
       "active_trip_ids": 720,
       "raw_two_stop_trips": 0,
       "usable_two_stop_trips": 0,
@@ -58,6 +379,113 @@
       "samples": []
     },
     "R2S": {
+      "by_date": {
+        "2026-11-24": {
+          "active_trip_ids": 143,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 143,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-11-25": {
+          "active_trip_ids": 143,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 143,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-11-26": {
+          "active_trip_ids": 143,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 143,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-11-27": {
+          "active_trip_ids": 143,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 143,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-11-28": {
+          "active_trip_ids": 136,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 136,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-11-29": {
+          "active_trip_ids": 136,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 136,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-11-30": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-01": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-02": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-03": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-04": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-05": {
+          "active_trip_ids": 136,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 136,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-06": {
+          "active_trip_ids": 136,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 136,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-07": {
+          "active_trip_ids": 143,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 143,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-08": {
+          "active_trip_ids": 136,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 136,
+          "at_least_two_usable_stops": 0
+        }
+      },
       "active_trip_ids": 1395,
       "raw_two_stop_trips": 0,
       "usable_two_stop_trips": 0,
@@ -70,6 +498,113 @@
       "samples": []
     },
     "R3": {
+      "by_date": {
+        "2026-11-24": {
+          "active_trip_ids": 477,
+          "raw_two_stop_trips": 216,
+          "usable_two_stop_trips": 217,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 477
+        },
+        "2026-11-25": {
+          "active_trip_ids": 477,
+          "raw_two_stop_trips": 216,
+          "usable_two_stop_trips": 217,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 477
+        },
+        "2026-11-26": {
+          "active_trip_ids": 477,
+          "raw_two_stop_trips": 216,
+          "usable_two_stop_trips": 217,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 477
+        },
+        "2026-11-27": {
+          "active_trip_ids": 537,
+          "raw_two_stop_trips": 216,
+          "usable_two_stop_trips": 216,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 537
+        },
+        "2026-11-28": {
+          "active_trip_ids": 536,
+          "raw_two_stop_trips": 216,
+          "usable_two_stop_trips": 216,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 536
+        },
+        "2026-11-29": {
+          "active_trip_ids": 536,
+          "raw_two_stop_trips": 216,
+          "usable_two_stop_trips": 216,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 536
+        },
+        "2026-11-30": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-01": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-02": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-03": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-04": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-05": {
+          "active_trip_ids": 536,
+          "raw_two_stop_trips": 216,
+          "usable_two_stop_trips": 216,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 536
+        },
+        "2026-12-06": {
+          "active_trip_ids": 536,
+          "raw_two_stop_trips": 216,
+          "usable_two_stop_trips": 216,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 536
+        },
+        "2026-12-07": {
+          "active_trip_ids": 541,
+          "raw_two_stop_trips": 216,
+          "usable_two_stop_trips": 216,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 541
+        },
+        "2026-12-08": {
+          "active_trip_ids": 540,
+          "raw_two_stop_trips": 216,
+          "usable_two_stop_trips": 216,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 540
+        }
+      },
       "active_trip_ids": 5193,
       "raw_two_stop_trips": 2160,
       "usable_two_stop_trips": 2163,
@@ -198,6 +733,113 @@
       ]
     },
     "R4": {
+      "by_date": {
+        "2026-11-24": {
+          "active_trip_ids": 161,
+          "raw_two_stop_trips": 5,
+          "usable_two_stop_trips": 5,
+          "fewer_than_two_usable_stops": 5,
+          "at_least_two_usable_stops": 156
+        },
+        "2026-11-25": {
+          "active_trip_ids": 161,
+          "raw_two_stop_trips": 5,
+          "usable_two_stop_trips": 5,
+          "fewer_than_two_usable_stops": 5,
+          "at_least_two_usable_stops": 156
+        },
+        "2026-11-26": {
+          "active_trip_ids": 161,
+          "raw_two_stop_trips": 5,
+          "usable_two_stop_trips": 5,
+          "fewer_than_two_usable_stops": 5,
+          "at_least_two_usable_stops": 156
+        },
+        "2026-11-27": {
+          "active_trip_ids": 163,
+          "raw_two_stop_trips": 5,
+          "usable_two_stop_trips": 5,
+          "fewer_than_two_usable_stops": 5,
+          "at_least_two_usable_stops": 158
+        },
+        "2026-11-28": {
+          "active_trip_ids": 131,
+          "raw_two_stop_trips": 4,
+          "usable_two_stop_trips": 4,
+          "fewer_than_two_usable_stops": 4,
+          "at_least_two_usable_stops": 127
+        },
+        "2026-11-29": {
+          "active_trip_ids": 129,
+          "raw_two_stop_trips": 4,
+          "usable_two_stop_trips": 4,
+          "fewer_than_two_usable_stops": 4,
+          "at_least_two_usable_stops": 125
+        },
+        "2026-11-30": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-01": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-02": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-03": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-04": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-05": {
+          "active_trip_ids": 131,
+          "raw_two_stop_trips": 4,
+          "usable_two_stop_trips": 4,
+          "fewer_than_two_usable_stops": 4,
+          "at_least_two_usable_stops": 127
+        },
+        "2026-12-06": {
+          "active_trip_ids": 129,
+          "raw_two_stop_trips": 4,
+          "usable_two_stop_trips": 4,
+          "fewer_than_two_usable_stops": 4,
+          "at_least_two_usable_stops": 125
+        },
+        "2026-12-07": {
+          "active_trip_ids": 168,
+          "raw_two_stop_trips": 5,
+          "usable_two_stop_trips": 5,
+          "fewer_than_two_usable_stops": 5,
+          "at_least_two_usable_stops": 163
+        },
+        "2026-12-08": {
+          "active_trip_ids": 143,
+          "raw_two_stop_trips": 4,
+          "usable_two_stop_trips": 4,
+          "fewer_than_two_usable_stops": 4,
+          "at_least_two_usable_stops": 139
+        }
+      },
       "active_trip_ids": 1477,
       "raw_two_stop_trips": 45,
       "usable_two_stop_trips": 45,
@@ -228,23 +870,163 @@
           "trip_id": "5127M33521R4",
           "raw_stop_times": 2,
           "usable_stop_times": 2,
-          "original_stops": []
+          "original_stops": [
+            [
+              "78600",
+              "Manresa",
+              "05:43:00"
+            ],
+            [
+              "78506",
+              "Rajadell",
+              "05:55:00"
+            ]
+          ]
         },
         {
           "trip_id": "5127M33523R4",
           "raw_stop_times": 2,
           "usable_stop_times": 2,
-          "original_stops": []
+          "original_stops": [
+            [
+              "78600",
+              "Manresa",
+              "09:21:00"
+            ],
+            [
+              "78506",
+              "Rajadell",
+              "09:33:00"
+            ]
+          ]
         },
         {
           "trip_id": "5127M33525R4",
           "raw_stop_times": 2,
           "usable_stop_times": 2,
-          "original_stops": []
+          "original_stops": [
+            [
+              "78600",
+              "Manresa",
+              "12:41:00"
+            ],
+            [
+              "78506",
+              "Rajadell",
+              "12:53:00"
+            ]
+          ]
         }
       ]
     },
     "R7": {
+      "by_date": {
+        "2026-11-24": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-11-25": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-11-26": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-11-27": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-11-28": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-11-29": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-11-30": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-01": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-02": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-03": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-04": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-05": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-06": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-07": {
+          "active_trip_ids": 65,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 65
+        },
+        "2026-12-08": {
+          "active_trip_ids": 33,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 33
+        }
+      },
       "active_trip_ids": 98,
       "raw_two_stop_trips": 0,
       "usable_two_stop_trips": 0,
@@ -257,6 +1039,113 @@
       "samples": []
     },
     "R8": {
+      "by_date": {
+        "2026-11-24": {
+          "active_trip_ids": 33,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 33
+        },
+        "2026-11-25": {
+          "active_trip_ids": 33,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 33
+        },
+        "2026-11-26": {
+          "active_trip_ids": 33,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 33
+        },
+        "2026-11-27": {
+          "active_trip_ids": 33,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 33
+        },
+        "2026-11-28": {
+          "active_trip_ids": 32,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 32
+        },
+        "2026-11-29": {
+          "active_trip_ids": 32,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 32
+        },
+        "2026-11-30": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-01": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-02": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-03": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-04": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-05": {
+          "active_trip_ids": 32,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 32
+        },
+        "2026-12-06": {
+          "active_trip_ids": 32,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 32
+        },
+        "2026-12-07": {
+          "active_trip_ids": 33,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 33
+        },
+        "2026-12-08": {
+          "active_trip_ids": 32,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 32
+        }
+      },
       "active_trip_ids": 325,
       "raw_two_stop_trips": 0,
       "usable_two_stop_trips": 0,
@@ -270,6 +1159,113 @@
       "samples": []
     },
     "RG1": {
+      "by_date": {
+        "2026-11-24": {
+          "active_trip_ids": 17,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 17,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-11-25": {
+          "active_trip_ids": 17,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 17,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-11-26": {
+          "active_trip_ids": 17,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 17,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-11-27": {
+          "active_trip_ids": 17,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 17,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-11-28": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-11-29": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-11-30": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-01": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-02": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-03": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-04": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-05": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-06": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-07": {
+          "active_trip_ids": 17,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 17,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-08": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        }
+      },
       "active_trip_ids": 85,
       "raw_two_stop_trips": 0,
       "usable_two_stop_trips": 0,
@@ -282,6 +1278,113 @@
       "samples": []
     },
     "RT1": {
+      "by_date": {
+        "2026-11-24": {
+          "active_trip_ids": 10,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 10,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-11-25": {
+          "active_trip_ids": 10,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 10,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-11-26": {
+          "active_trip_ids": 10,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 10,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-11-27": {
+          "active_trip_ids": 10,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 10,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-11-28": {
+          "active_trip_ids": 8,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 8,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-11-29": {
+          "active_trip_ids": 8,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 8,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-11-30": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-01": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-02": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-03": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-04": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-05": {
+          "active_trip_ids": 8,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 8,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-06": {
+          "active_trip_ids": 8,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 8,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-07": {
+          "active_trip_ids": 10,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 10,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-08": {
+          "active_trip_ids": 8,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 8,
+          "at_least_two_usable_stops": 0
+        }
+      },
       "active_trip_ids": 90,
       "raw_two_stop_trips": 0,
       "usable_two_stop_trips": 0,
@@ -294,6 +1397,113 @@
       "samples": []
     },
     "RT2": {
+      "by_date": {
+        "2026-11-24": {
+          "active_trip_ids": 16,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 16,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-11-25": {
+          "active_trip_ids": 16,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 16,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-11-26": {
+          "active_trip_ids": 16,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 16,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-11-27": {
+          "active_trip_ids": 16,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 16,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-11-28": {
+          "active_trip_ids": 16,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 16,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-11-29": {
+          "active_trip_ids": 16,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 16,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-11-30": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-01": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-02": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-03": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-04": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-05": {
+          "active_trip_ids": 16,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 16,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-06": {
+          "active_trip_ids": 16,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 16,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-07": {
+          "active_trip_ids": 16,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 16,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-08": {
+          "active_trip_ids": 16,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 16,
+          "at_least_two_usable_stops": 0
+        }
+      },
       "active_trip_ids": 160,
       "raw_two_stop_trips": 0,
       "usable_two_stop_trips": 0,
@@ -306,6 +1516,113 @@
       "samples": []
     },
     "RL3": {
+      "by_date": {
+        "2026-11-24": {
+          "active_trip_ids": 12,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 12,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-11-25": {
+          "active_trip_ids": 12,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 12,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-11-26": {
+          "active_trip_ids": 12,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 12,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-11-27": {
+          "active_trip_ids": 12,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 12,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-11-28": {
+          "active_trip_ids": 4,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 4,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-11-29": {
+          "active_trip_ids": 4,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 4,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-11-30": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-01": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-02": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-03": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-04": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-05": {
+          "active_trip_ids": 4,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 4,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-06": {
+          "active_trip_ids": 4,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 4,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-07": {
+          "active_trip_ids": 12,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 12,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-08": {
+          "active_trip_ids": 4,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 4,
+          "at_least_two_usable_stops": 0
+        }
+      },
       "active_trip_ids": 80,
       "raw_two_stop_trips": 0,
       "usable_two_stop_trips": 0,
@@ -318,6 +1635,113 @@
       "samples": []
     },
     "RL4": {
+      "by_date": {
+        "2026-11-24": {
+          "active_trip_ids": 10,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 10,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-11-25": {
+          "active_trip_ids": 10,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 10,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-11-26": {
+          "active_trip_ids": 10,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 10,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-11-27": {
+          "active_trip_ids": 10,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 10,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-11-28": {
+          "active_trip_ids": 8,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 8,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-11-29": {
+          "active_trip_ids": 8,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 8,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-11-30": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-01": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-02": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-03": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-04": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-05": {
+          "active_trip_ids": 8,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 8,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-06": {
+          "active_trip_ids": 8,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 8,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-07": {
+          "active_trip_ids": 10,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 10,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-08": {
+          "active_trip_ids": 8,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 8,
+          "at_least_two_usable_stops": 0
+        }
+      },
       "active_trip_ids": 90,
       "raw_two_stop_trips": 0,
       "usable_two_stop_trips": 0,
@@ -330,6 +1754,113 @@
       "samples": []
     },
     "R11": {
+      "by_date": {
+        "2026-11-24": {
+          "active_trip_ids": 48,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 48,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-11-25": {
+          "active_trip_ids": 48,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 48,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-11-26": {
+          "active_trip_ids": 48,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 48,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-11-27": {
+          "active_trip_ids": 50,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 50,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-11-28": {
+          "active_trip_ids": 34,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 34,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-11-29": {
+          "active_trip_ids": 37,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 37,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-11-30": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-01": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-02": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-03": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-04": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-05": {
+          "active_trip_ids": 34,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 34,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-06": {
+          "active_trip_ids": 37,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 37,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-07": {
+          "active_trip_ids": 50,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 50,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-08": {
+          "active_trip_ids": 37,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 37,
+          "at_least_two_usable_stops": 0
+        }
+      },
       "active_trip_ids": 423,
       "raw_two_stop_trips": 0,
       "usable_two_stop_trips": 0,
@@ -342,6 +1873,113 @@
       "samples": []
     },
     "R13": {
+      "by_date": {
+        "2026-11-24": {
+          "active_trip_ids": 42,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 42,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-11-25": {
+          "active_trip_ids": 42,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 42,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-11-26": {
+          "active_trip_ids": 42,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 42,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-11-27": {
+          "active_trip_ids": 42,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 42,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-11-28": {
+          "active_trip_ids": 42,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 42,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-11-29": {
+          "active_trip_ids": 42,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 42,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-11-30": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-01": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-02": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-03": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-04": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-05": {
+          "active_trip_ids": 42,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 42,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-06": {
+          "active_trip_ids": 42,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 42,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-07": {
+          "active_trip_ids": 42,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 42,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-08": {
+          "active_trip_ids": 42,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 42,
+          "at_least_two_usable_stops": 0
+        }
+      },
       "active_trip_ids": 420,
       "raw_two_stop_trips": 0,
       "usable_two_stop_trips": 0,
@@ -354,6 +1992,113 @@
       "samples": []
     },
     "R14": {
+      "by_date": {
+        "2026-11-24": {
+          "active_trip_ids": 6,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 6,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-11-25": {
+          "active_trip_ids": 6,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 6,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-11-26": {
+          "active_trip_ids": 6,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 6,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-11-27": {
+          "active_trip_ids": 6,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 6,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-11-28": {
+          "active_trip_ids": 4,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 4,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-11-29": {
+          "active_trip_ids": 4,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 4,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-11-30": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-01": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-02": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-03": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-04": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-05": {
+          "active_trip_ids": 4,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 4,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-06": {
+          "active_trip_ids": 4,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 4,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-07": {
+          "active_trip_ids": 6,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 6,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-08": {
+          "active_trip_ids": 4,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 4,
+          "at_least_two_usable_stops": 0
+        }
+      },
       "active_trip_ids": 50,
       "raw_two_stop_trips": 0,
       "usable_two_stop_trips": 0,
@@ -366,6 +2111,113 @@
       "samples": []
     },
     "R15": {
+      "by_date": {
+        "2026-11-24": {
+          "active_trip_ids": 36,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 36,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-11-25": {
+          "active_trip_ids": 36,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 36,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-11-26": {
+          "active_trip_ids": 36,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 36,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-11-27": {
+          "active_trip_ids": 36,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 36,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-11-28": {
+          "active_trip_ids": 31,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 31,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-11-29": {
+          "active_trip_ids": 31,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 31,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-11-30": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-01": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-02": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-03": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-04": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-05": {
+          "active_trip_ids": 31,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 31,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-06": {
+          "active_trip_ids": 31,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 31,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-07": {
+          "active_trip_ids": 37,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 37,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-08": {
+          "active_trip_ids": 31,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 31,
+          "at_least_two_usable_stops": 0
+        }
+      },
       "active_trip_ids": 336,
       "raw_two_stop_trips": 0,
       "usable_two_stop_trips": 0,
@@ -378,6 +2230,113 @@
       "samples": []
     },
     "R16": {
+      "by_date": {
+        "2026-11-24": {
+          "active_trip_ids": 26,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 26,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-11-25": {
+          "active_trip_ids": 26,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 26,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-11-26": {
+          "active_trip_ids": 26,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 26,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-11-27": {
+          "active_trip_ids": 26,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 26,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-11-28": {
+          "active_trip_ids": 26,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 26,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-11-29": {
+          "active_trip_ids": 26,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 26,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-11-30": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-01": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-02": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-03": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-04": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-05": {
+          "active_trip_ids": 26,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 26,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-06": {
+          "active_trip_ids": 26,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 26,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-07": {
+          "active_trip_ids": 26,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 26,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-08": {
+          "active_trip_ids": 26,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 26,
+          "at_least_two_usable_stops": 0
+        }
+      },
       "active_trip_ids": 260,
       "raw_two_stop_trips": 0,
       "usable_two_stop_trips": 0,
@@ -390,6 +2349,113 @@
       "samples": []
     },
     "R17": {
+      "by_date": {
+        "2026-11-24": {
+          "active_trip_ids": 6,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 6,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-11-25": {
+          "active_trip_ids": 6,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 6,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-11-26": {
+          "active_trip_ids": 6,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 6,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-11-27": {
+          "active_trip_ids": 6,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 6,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-11-28": {
+          "active_trip_ids": 6,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 6,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-11-29": {
+          "active_trip_ids": 6,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 6,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-11-30": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-01": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-02": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-03": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-04": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-05": {
+          "active_trip_ids": 6,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 6,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-06": {
+          "active_trip_ids": 6,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 6,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-07": {
+          "active_trip_ids": 6,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 6,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-12-08": {
+          "active_trip_ids": 6,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 6,
+          "at_least_two_usable_stops": 0
+        }
+      },
       "active_trip_ids": 60,
       "raw_two_stop_trips": 0,
       "usable_two_stop_trips": 0,
