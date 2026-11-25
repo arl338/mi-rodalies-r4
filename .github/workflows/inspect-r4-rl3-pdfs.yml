@@ -128,7 +128,7 @@ jobs:
           from pathlib import Path
           root=Path('data/reference')
           urls=set()
-          for p in root.glob('*timetable*.json'):
+          for p in list(root.glob('*timetable*.json'))+[root/'official_regional_verified.json']:
               d=json.loads(p.read_text())
               if isinstance(d.get('source'),str):urls.add(d['source'])
               if isinstance(d.get('sources'),dict):
