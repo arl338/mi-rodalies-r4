@@ -27,6 +27,9 @@ def audit(path: Path):
     source_counts = defaultdict(Counter)
     daily_counts = defaultdict(Counter)
     two_stops = Counter()
+    daily_sources = defaultdict(Counter)
+    endpoints = defaultdict(Counter)
+    daily_pairs = defaultdict(set)
     extras = defaultdict(set)
     errors = []
     total = 0
@@ -47,6 +50,12 @@ def audit(path: Path):
             total += 1
             daily_counts[line][day] += 1
             source_counts[line][train.get("src", "unspecified")] += 1
+            daily_sources[(line, day)][train.get("src", "unspecified")] += 1
+            endpoints[(line, day)][(calls[0][0], calls[-1][0])] += 1
+            for i, origin in enumerate(calls):
+                for destination in calls[i+1:]:
+                    if origin[0] != destination[0]:
+                        daily_pairs[(line, day)].add((origin[0], destination[0]))
             if len(calls) == 2:
                 two_stops[line] += 1
             for i, (sid, arr, dep) in enumerate(calls):
@@ -75,7 +84,15 @@ def audit(path: Path):
             "missing_station_names": [s["name"] for s in missing],
             "out_of_inventory_calls": [{"id": sid, "name": stations[sid]["name"]}
                                        for sid in sorted(extras[line])],
-            "services_by_day": dict(sorted(daily_counts[line].items())),
+            "services_by_day": {p.stem: daily_counts[line][p.stem] for p in days},
+            "daily_quality": {p.stem: {
+                "services": daily_counts[line][p.stem],
+                "sources": dict(daily_sources[(line, p.stem)]),
+                "stations_with_calls": sum(bool(counts[(line,s["id"])][p.stem]) for s in inventory),
+                "direct_ordered_station_pairs": len(daily_pairs[(line,p.stem)]),
+                "terminal_pairs": [{"from": a, "to": b, "services": n} for (a,b),n in sorted(endpoints[(line,p.stem)].items())],
+                "status": "no_published_services" if not daily_counts[line][p.stem] else "published_not_exhaustively_verified"
+            } for p in days},
             "services_by_source": dict(sorted(source_counts[line].items())),
             "two_stop_trips_in_period": two_stops[line],
             "coverage_complete": not missing and not extras[line],
