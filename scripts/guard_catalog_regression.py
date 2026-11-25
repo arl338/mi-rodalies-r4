@@ -46,6 +46,24 @@ def evaluate(previous: dict, current: dict) -> list[str]:
             problems.append(f"Major line {line} lost over half its programmed trips: {n} -> {m}")
     return problems
 
+def daily_source_warnings(previous: dict, current: dict) -> list[str]:
+    """Compare identical service dates; source anomalies are not cancellations."""
+    warnings = []
+    old = previous.get("source_quality", {}).get("by_line", {})
+    new = current.get("source_quality", {}).get("by_line", {})
+    for line, quality in sorted(new.items()):
+        prior = old.get(line, {}).get("by_date", {})
+        for day, counts in sorted(quality.get("by_date", {}).items()):
+            if not current["coverage_start"] <= day <= current["coverage_end"]:
+                continue
+            n = counts.get("active_trip_ids")
+            p = prior.get(day, {}).get("active_trip_ids")
+            if n == 0:
+                warnings.append(f"{line} {day}: no active GTFS trip IDs; verify official alternatives")
+            elif isinstance(p, int) and isinstance(n, int) and p >= 10 and n < p * 0.60:
+                warnings.append(f"{line} {day}: GTFS trip IDs fell over 40%: {p} -> {n}")
+    return warnings
+
 def main() -> None:
     ap=argparse.ArgumentParser()
     ap.add_argument("--previous",type=Path,required=True)
@@ -56,6 +74,8 @@ def main() -> None:
         return
     previous=json.loads(args.previous.read_text(encoding="utf-8"))
     current=json.loads(args.current.read_text(encoding="utf-8"))
+    for warning in daily_source_warnings(previous,current):
+        print('SOURCE COVERAGE WARNING: '+warning)
     problems=evaluate(previous,current)
     if problems:
         print("CRITICAL REGRESSION: refusing to publish a potentially incomplete timetable")
