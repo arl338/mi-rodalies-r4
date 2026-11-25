@@ -44,10 +44,15 @@ def load_reference(path=REFERENCE):
     return d
 
 def materialize_day(day, reference):
-    mode = 'weekend' if day.weekday() >= 5 else 'weekday'
+    holiday = day.isoformat() in {'2026-12-08','2026-12-25','2026-12-26'}
     anchor = datetime.combine(day, time.min, tzinfo=TZ)
     result = []
     for item in reference['services']:
+        # RL4 shares the explicitly labelled RL3/RL4 holiday table.
+        # RG1 and RT1/RT2 weekday-only rows must not run on holidays.
+        mode = 'weekend' if day.weekday() >= 5 or (holiday and item['line'] in ('RL4','RG1','RT1','RT2')) else 'weekday'
+        if holiday and item['line']=='R17' and item['calendar']!='daily':
+            continue
         if item['calendar'] not in (mode, 'daily'):
             continue
         stops = []
