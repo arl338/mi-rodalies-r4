@@ -305,6 +305,12 @@ function renderResultList(){const root=$('results');root.replaceChildren();for(c
  $('load-more').hidden=results.length<=visible;
  $('load-more').textContent=`Mostrar más (${Math.max(0,results.length-visible)} restantes)`;
 }
+function gtfsCoverageGaps(range){
+ const dates=[range.day,...(range.extra?[datePlus(range.day,1)]:[])];
+ const lines=selection.line==='ALL'?[...E.LINES]:[selection.line];
+ const quality=catalog?.source_quality?.by_line;
+ return dates.flatMap(day=>lines.filter(line=>quality?.[line]?.by_date?.[day]?.active_trip_ids===0).map(line=>({day,line})));
+}
 function updateSummary(range,scheduleCount,live){const direct=results.filter(x=>x.kind==='direct').length,transfer=results.filter(x=>x.kind==='transfer').length,cancel=results.filter(x=>x.cancelled).length,pos=results.filter(x=>x.live).length;
  $('results-title').textContent=(selection.line==='ALL'?'Red Rodalies':selection.line)+' · '+stationName(selection.from)+' → '+stationName(selection.to);
  $('results-subtitle').textContent=range.day+' · '+range.from+'–'+range.to+(range.extra?' (hasta mañana)':'');
@@ -319,6 +325,8 @@ function updateSummary(range,scheduleCount,live){const direct=results.filter(x=>
   const refPdf=catalog?.official_reference?.lines?.find(l=>l.id===selection.line)?.timetable_pdf;
   const a=el('a','','Consultar cuadro horario oficial de '+selection.line);a.href=refPdf||'https://rodalies.gencat.cat/es/horaris/tots-els-horaris/';a.target='_blank';a.rel='noopener noreferrer';st.append(document.createTextNode(' · '),a);}
  else{st.className='notice '+(cancel?'warn':pos?'good':'neutral');st.textContent=`${direct} directos · ${transfer} con un transbordo · ${etaCount} con hora estimada · ${pos} con posición reciente · ${cancel} cancelados. Sin observación válida se mantiene el horario programado.`;}
+ const gaps=gtfsCoverageGaps(range);
+ if(gaps.length){st.className='notice warn';st.append(document.createTextNode(' · COBERTURA GTFS INCOMPLETA: '+gaps.map(g=>g.line+' '+g.day).join(', ')+'. Los horarios alternativos pueden ser parciales. No implica suspensión ni cancelación. Consulta el horario oficial.'));}
  const age=Date.now()-Date.parse(catalog?.generated_at||'');
  $('updated').textContent=`Consulta ${fmtTime(Date.now()/1000)} · Datos operativos: ${live?'consultados en este momento':'solo horarios programados para fecha futura'}. ${Number.isFinite(age)&&age>48*3600000?'ATENCIÓN: GTFS sin regenerar desde hace más de 48 horas. ':''}Esta aplicación es orientativa.`;
 }
@@ -403,6 +411,7 @@ async function search(){if(!catalog){showToast('El catálogo todavía no está d
   const failedAllLive=live&&res.length>0&&res.every(x=>x.status==='rejected');
   setHealth(failedAllLive?'partial':operationalLinked?'good':fallback.length?'partial':!live?'good':failures?'partial':'partial',
     failedAllLive?'Sin datos actuales':operationalLinked?'Estimación disponible':fallback.length?'Horario orientativo':!live?'Horario programado':failures?'Datos parciales':'Sin ETA vinculada');
+  if(gtfsCoverageGaps(range).length)setHealth('partial','Cobertura GTFS incompleta');
   $('search-feedback').textContent='';
  }catch(err){if(!signal.aborted&&id===requestId){const st=$('status');st.className='notice bad';st.textContent='No se ha podido consultar el horario: '+err.message;setHealth('bad','Sin horario');}}
  finally{if(id===requestId)markBusy(false);}
