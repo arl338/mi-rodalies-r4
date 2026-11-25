@@ -37,7 +37,19 @@ class OfficialR4Tests(unittest.TestCase):
         weekend=sum(s['calendar']=='weekend' for s in self.reference['services'])
         self.assertGreaterEqual(weekday,45)
         self.assertGreaterEqual(weekend,35)
-        self.assertTrue(all(s['direction']=='south' for s in self.reference['services']))
+        self.assertEqual({s['direction'] for s in self.reference['services']},{'south','north'})
+        for direction,calendar,minimum in [('south','weekday',46),('south','weekend',35),('north','weekday',43),('north','weekend',26)]:
+            self.assertGreaterEqual(sum(s['direction']==direction and s['calendar']==calendar for s in self.reference['services']),minimum)
+
+    def test_northbound_fallback_and_holiday(self):
+        from official_r4 import materialize_day
+        for day in (date(2026,12,1),date(2026,12,8)):
+            trains=materialize_day(day,self.reference)
+            north=[t for t in trains if 'north' in t['id']]
+            direct=[t for t in north if '71801' in [s[0] for s in t['s']] and '78710' in [s[0] for s in t['s']] and [s[0] for s in t['s']].index('71801')<[s[0] for s in t['s']].index('78710')]
+            self.assertGreater(len(direct),0)
+            self.assertEqual(len(north),43 if day.day==1 else 26)
+            self.assertTrue(all(t['src']=='official-r4-pdf' for t in direct))
 
     def test_missing_departures_added_without_removing_gtfs(self):
         original=[t for t in self.gtfs['trains'] if t.get('src')!='official-r4-pdf']
