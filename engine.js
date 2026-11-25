@@ -99,7 +99,7 @@ function normalizePositions(obj,source,now){const out=[],overallAge=sourceAge(ob
   }
  }return out;
 }
-function normalizeCancels(obj){return rows(obj).flatMap(x=>{const r=x?.properties||x;if(!r||typeof r!=='object')return [];const nucleus=r.nucleo??r.core??'';if(foreignNucleus(nucleus))return [];const item={trip:String(r.trip_id??r.tripId??r.trip?.tripId??''),number:number(r.train_number??r.trainNumber??r.trainCode??r.number),line:scopedLine(r.line,nucleus)||scopedLine(r.product,nucleus),day:String(r.service_day??r.day??''),cancelled:true};return item.trip||item.number?[item]:[];});}
+function normalizeCancels(obj){return rows(obj).flatMap(x=>{const r=x?.properties||x;if(!r||typeof r!=='object')return [];const nucleus=r.nucleo??r.core??'';if(foreignNucleus(nucleus))return [];const item={trip:String(r.trip_id??r.tripId??r.trip?.tripId??''),number:number(r.train_number??r.trainNumber??r.trainCode??r.number),line:scopedLine(r.line,nucleus)||scopedLine(r.product,nucleus),day:String(r.service_day??r.day??''),updated:ts(r.updated_at??r.updatedAt??r.timestamp),cancelled:true};return item.trip||item.number?[item]:[];});}
 function direct(trains,from,to,start,end){const found=[];
  for(const t of trains){if(!LINES.has(t.l)||!Array.isArray(t.s))continue;
   for(let i=0;i<t.s.length-1;i++){
@@ -354,7 +354,7 @@ function enrichLeg(leg,board,positions,cancels,now){
    }
   }
  }
- const officialCancelled=cancels.some(x=>x.trip&&serviceIds(leg.t).includes(String(x.trip))&&(!x.day||x.day===leg.t.day)&&(!x.line||x.line===leg.t.l));
+ const officialCancelled=cancels.some(x=>x.trip&&serviceIds(leg.t).includes(String(x.trip))&&(x.day===leg.t.day||( !x.day&&Number.isFinite(x.updated)&&now-x.updated>=0&&now-x.updated<=180))&&(!x.line||x.line===leg.t.l));
  const boardCancelled=freshBoard.some(x=>x.cancelled);
  if(officialCancelled||boardCancelled){current.cancelled=true;current.conflict=!!current.position||current.conflict;current.proof.push('Cancelación atribuida al servicio');}
  if(current.conflict)current.state='conflict';else if(current.cancelled)current.state='cancelled';
