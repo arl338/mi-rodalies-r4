@@ -8,16 +8,16 @@ permissions:
   contents: read
 jobs:
   discover:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 8
     steps:
-      - uses: actions/setup-python@v6
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1
         with:
           python-version: '3.12'
       - name: Inspect public browser requests
         run: |
           pip install 'playwright==1.51.0'
-          python -m playwright install chromium
+          python -m playwright install --with-deps chromium
           python - <<'PY'
           from playwright.sync_api import sync_playwright
           from urllib.parse import urlsplit
