@@ -53,6 +53,59 @@ jobs:
               from collections import Counter
               print('CLOCK X CLUSTERS',Counter(round(w[0]/2)*2 for w in clocks).most_common(65))
           PY
+      - name: Validate candidate northbound station grid against GTFS
+        run: |
+          PYTHONPATH=scripts python - <<'PY'
+          import json,fitz
+          from pathlib import Path
+          from datetime import datetime
+          from zoneinfo import ZoneInfo
+          from extract_official_r4 import station_order,parse_grid
+          root=Path('data/v2')
+          catalog=json.loads((root/'catalog.json').read_text())
+          day=root/(catalog['coverage_start']+'.json')
+          north,south=station_order(day)
+          pdf=fitz.open('/tmp/pdf-review/R4.pdf')
+          # Existing parser excludes x<32; test explicit page-specific anchors
+          # without modifying production extraction.
+          import extract_official_r4 as ex
+          original=ex.cell_words
+          def north_cells(page):
+              out=[]
+              for w in page.get_text('words'):
+                  m=ex.TIME.fullmatch(w[4])
+                  if m and 18<=w[0]<=940 and 530<=w[1]<=2240:
+                      h,mn=map(int,m.groups())
+                      if h<24 and mn<60:out.append((w[0],w[1],h*60+mn))
+              return out
+          ex.cell_words=north_cells
+          candidates=[]
+          for i,calendar in enumerate(('weekday','weekend')):
+              rows,quality=parse_grid(pdf[i],north,calendar,'north')
+              print('NORTH_GRID',calendar,json.dumps(quality))
+              candidates.extend(rows)
+          tz=ZoneInfo('Europe/Madrid')
+          def minute(t):
+              d=datetime.fromtimestamp(t,tz)
+              return d.hour*60+d.minute
+          for p in sorted(root.glob('2026-*.json')):
+              d=datetime.fromisoformat(p.stem)
+              calendar='weekend' if d.weekday()>=5 else 'weekday'
+              observed=[t for t in json.loads(p.read_text())['trains'] if t.get('l')=='R4' and t.get('src')=='cer']
+              witnesses=[]
+              for t in observed:
+                  s={x[0]:minute(x[2]) for x in t['s']}
+                  if '71801' in s and '78710' in s and s['71801']<s['78710']:witnesses.append(s)
+              if not witnesses:continue
+              rows=[t for t in candidates if t['calendar']==calendar]
+              matched=0
+              for t in rows:
+                  s=dict(t['stops'])
+                  if '71801' not in s or '78710' not in s:continue
+                  if any(abs(s['71801']-w['71801'])<=2 and abs(s['78710']-w['78710'])<=2 for w in witnesses):matched+=1
+              print('NORTH_GTFS_CHECK',p.stem,'witnesses',len(witnesses),'matched_candidates',matched)
+          Path('/tmp/pdf-review/r4-north-candidate.json').write_text(json.dumps(candidates))
+          PY
       - uses: actions/upload-artifact@v4
         if: always()
         with:
