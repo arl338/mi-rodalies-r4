@@ -1,9 +1,9 @@
 'use strict';
-const CACHE='mi-rodalies-v2.3.2-20261125-coverage';
+const CACHE='mi-rodalies-v2.3.2-20261125-resilience';
 const STATIC=['./','./index.html','./styles.css?v=232','./engine.js?v=232','./app.js?v=232','./manifest.webmanifest','./icon-192.png','./icon-512.png'];
 self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(STATIC)).then(()=>self.skipWaiting())));
 self.addEventListener('activate',e=>e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(x=>x.startsWith('mi-rodalies-')&&x!==CACHE).map(x=>caches.delete(x)))).then(()=>self.clients.claim())));
 self.addEventListener('fetch',e=>{const r=e.request,u=new URL(r.url);if(r.method!=='GET'||u.origin!==self.location.origin)return;
  const isData=/\/data\//.test(u.pathname)||u.pathname.endsWith('.json');
- if(isData){e.respondWith(fetch(r,{cache:'no-store'}).catch(()=>caches.match(r)));return;}
- e.respondWith(fetch(r,{cache:'no-cache'}).then(res=>{if(res.ok){const copy=res.clone();caches.open(CACHE).then(c=>c.put(r,copy)).catch(()=>{});}return res;}).catch(()=>caches.match(r)));});
+ if(isData){e.respondWith(fetch(r,{cache:'no-store'}));return;}
+ e.respondWith(fetch(r,{cache:'no-cache'}).then(res=>{if(res.ok){const copy=res.clone();caches.open(CACHE).then(c=>c.put(r,copy)).catch(()=>{});}return res;}).catch(()=>caches.match(r).then(hit=>hit||(r.mode==='navigate'?caches.match('./index.html'):undefined)).then(hit=>hit||Response.error())));});
