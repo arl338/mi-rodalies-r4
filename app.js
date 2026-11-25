@@ -339,7 +339,7 @@ async function search(){if(!catalog){showToast('El catálogo todavía no está d
   const days=[datePlus(range.day,-1),range.day];
   if(range.extra)days.push(datePlus(range.day,1));
   // A valid first service day has no preceding publication file.
-  const availableDays=days.filter(d=>d>=catalog.coverage_start&&d<=catalog.coverage_end);
+  const availableDays=days.filter(d=>d>=datePlus(catalog.coverage_start,-1)&&d<=catalog.coverage_end);
   // Start independent sources in parallel: a slow optional timetable endpoint
   // must not add its timeout on top of the GTFS and operational requests.
   // The Trenalia timetable endpoint also supports multi-line corridors.
