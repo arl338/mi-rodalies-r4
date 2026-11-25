@@ -145,6 +145,28 @@ jobs:
                       print('CALENDAR_SOURCE',url,'PAGE',i+1,json.dumps(hits,ensure_ascii=False))
               except Exception as e:print('CALENDAR_UNAVAILABLE',url,str(e))
           PY
+      - name: Inspect regional train-number styles and calendar legends
+        run: |
+          python - <<'PY'
+          import fitz,json,urllib.request,re
+          from pathlib import Path
+          root=Path('data/reference')
+          docs=[json.loads((root/n).read_text()) for n in ('official_regional_verified.json','additional_official_timetables.json')]
+          for d in docs:
+              for url in sorted(set(d['sources'].values())):
+                  lines={k for k,v in d['sources'].items() if v==url}&{'R11','R13','R14','R15','R16','R17'}
+                  if not lines:continue
+                  nums={s['train_number'] for s in d['services'] if s['line'] in lines}
+                  with urllib.request.urlopen(url,timeout=30) as response:raw=response.read(15*1024*1024+1)
+                  if len(raw)>15*1024*1024:raise ValueError('PDF too large')
+                  pdf=fitz.open(stream=raw,filetype='pdf')
+                  for i,page in enumerate(pdf):
+                      spans=[s for b in page.get_text('dict')['blocks'] if 'lines' in b for l in b['lines'] for s in l['spans']]
+                      for s in spans:
+                          if any(re.search(r'(?<!\d)'+re.escape(n)+r'(?!\d)',s['text']) for n in nums) or re.search(r'festi|laborab|dissabte|diumenge|sábado|domingo',s['text'],re.I):
+                              print('REGIONAL_STYLE',','.join(sorted(lines)),i+1,json.dumps({k:s[k] for k in ('text','bbox','color','font','flags')},ensure_ascii=False))
+                      Path('/tmp/pdf-review/'+url.rsplit('/',1)[-1]+f'-page-{i+1}-drawings.json').write_text(json.dumps(page.get_drawings(),default=str))
+          PY
       - uses: actions/upload-artifact@v4
         if: always()
         with:
