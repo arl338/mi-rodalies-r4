@@ -65,7 +65,7 @@ def load_reference(path=REFERENCE):
 def materialize_day(day, ref):
     if not date.fromisoformat(ref["valid_from"])<=day<=date.fromisoformat(ref["valid_through"]):
         return []
-    cal="weekend" if day.weekday()>=5 else "weekday"
+    cal="weekend" if day.weekday()>=5 or day.isoformat() in {'2026-12-08','2026-12-25','2026-12-26'} else "weekday"
     midnight=datetime.combine(day,time.min,tzinfo=TZ)
     output=[]
     for row in ref["services"]:
