@@ -104,6 +104,21 @@ jobs:
                   if '71801' not in s or '78710' not in s:continue
                   if any(abs(s['71801']-w['71801'])<=2 and abs(s['78710']-w['78710'])<=2 for w in witnesses):matched+=1
               print('NORTH_GTFS_CHECK',p.stem,'witnesses',len(witnesses),'matched_candidates',matched)
+          # Compare complete candidate stop sequences, not just two endpoints.
+          from collections import Counter
+          for calendar in ('weekday','weekend'):
+              pool=[]
+              for p in sorted(root.glob('2026-*.json')):
+                  d=datetime.fromisoformat(p.stem)
+                  if ('weekend' if d.weekday()>=5 else 'weekday')!=calendar:continue
+                  for t in json.loads(p.read_text())['trains']:
+                      if t.get('l')=='R4' and t.get('src')=='cer':
+                          pool.append({x[0]:minute(x[2]) for x in t['s']})
+              for t in candidates:
+                  if t['calendar']!=calendar:continue
+                  s=dict(t['stops'])
+                  best=max((sum(k in w and abs(v-w[k])<=2 for k,v in s.items()) for w in pool),default=0)
+                  print('NORTH_ROW_WITNESS',t['id'],'stops',len(s),'matched',best,'cells',json.dumps(t['stops']))
           Path('/tmp/pdf-review/r4-north-candidate.json').write_text(json.dumps(candidates))
           PY
       - uses: actions/upload-artifact@v4
