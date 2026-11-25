@@ -31,7 +31,7 @@ def analyze(raw,days=14):
                 try:int(row.get('stop_sequence') or 0)
                 except (ValueError,TypeError):discarded['invalid_sequence']+=1;continue
                 kept_counts[tid]+=1
-                if selected[tid][0]=='R3' and len(sample[tid])<12:
+                if len(sample[tid])<12:
                     sample[tid].append([sid,stop.get('stop_name'),row.get('arrival_time')])
         lines={}
         for line in B.LINES:
@@ -40,7 +40,18 @@ def analyze(raw,days=14):
             two=[tid for tid in ids if kept_counts[tid]==2]
             snippets=([tid for tid in two if raw_counts[tid]>2][:3]+
                       [tid for tid in two if raw_counts[tid]==2][:3])
+            daily = {}
+            for day in requested:
+                active = [tid for tid in ids if day in valid[selected[tid][1]['service_id']]]
+                daily[str(day)] = {
+                    'active_trip_ids': len(active),
+                    'raw_two_stop_trips': sum(raw_counts[tid] == 2 for tid in active),
+                    'usable_two_stop_trips': sum(kept_counts[tid] == 2 for tid in active),
+                    'fewer_than_two_usable_stops': sum(kept_counts[tid] < 2 for tid in active),
+                    'at_least_two_usable_stops': sum(kept_counts[tid] >= 2 for tid in active),
+                }
             lines[line]={
+                'by_date': daily,
                 'active_trip_ids':len(ids),
                 'raw_two_stop_trips':sum(raw_counts[tid]==2 for tid in ids),
                 'usable_two_stop_trips':len(two),
