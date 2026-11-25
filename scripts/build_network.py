@@ -474,7 +474,13 @@ def build(cer,md,output,days,base=None):
     # Include the previous service day for GTFS trips with 24:xx–29:xx times.
     dates=[base-timedelta(days=1)]+[base+timedelta(days=i) for i in range(days)]
     results=[]; errors=[]; static_catalog={}; all_stop_candidates={}
-    batch_id=hashlib.sha256(cer+(md or b'')+str(base).encode()).hexdigest()[:20]
+    # Bind batch identity to every local reference and generator implementation.
+    provenance = {}
+    for folder in (REFERENCE_FILE.parent, Path(__file__).resolve().parent):
+        for item in sorted(folder.glob('*.json' if folder == REFERENCE_FILE.parent else '*.py')):
+            provenance[folder.name + '/' + item.name] = hashlib.sha256(item.read_bytes()).hexdigest()
+    provenance_digest = hashlib.sha256(json.dumps(provenance, sort_keys=True).encode()).digest()
+    batch_id=hashlib.sha256(cer+(md or b'')+str(base).encode()+provenance_digest).hexdigest()[:20]
     for source,raw in [('cer',cer),('md',md)]:
         if raw is None:errors.append(f'{source}: fuente no disponible');continue
         try:
@@ -763,7 +769,7 @@ def build(cer,md,output,days,base=None):
             errors.append(f"Referencia PDF {label}: {age} días desde revisión; vigencia pendiente de contraste.")
     catalog={
        'document_review':document_review,
-       'schema':2,'batch_id':batch_id,'generated_at':datetime.now(TZ).isoformat(),
+       'input_provenance':provenance,'schema':2,'batch_id':batch_id,'generated_at':datetime.now(TZ).isoformat(),
        'coverage_start':base.isoformat(),'coverage_end':dates[-1].isoformat(),
        'source':'Renfe Data GTFS + PDF oficials R1/R2N/R2S/R4/RL3/RT1/RT2/RL4/RG1/R17/R11/R13/R14/R15/R16; horaris programats, no circulació confirmada',
        'station_names':'ADIF/BOE exact code > GTFS stop ID > isolated reference placeholder; no inferred timetable',
