@@ -309,7 +309,7 @@ function gtfsCoverageGaps(range){
  const dates=[range.day,...(range.extra?[datePlus(range.day,1)]:[])];
  const lines=selection.line==='ALL'?[...E.LINES]:[selection.line];
  const quality=catalog?.source_quality?.by_line;
- return dates.flatMap(day=>lines.filter(line=>quality?.[line]?.by_date?.[day]?.active_trip_ids===0).map(line=>({day,line})));
+ return dates.flatMap(day=>lines.filter(line=>{const q=quality?.[line]?.by_date?.[day];return q?.active_trip_ids===0||q?.at_least_two_usable_stops===0;}).map(line=>({day,line})));
 }
 function updateSummary(range,scheduleCount,live){const direct=results.filter(x=>x.kind==='direct').length,transfer=results.filter(x=>x.kind==='transfer').length,cancel=results.filter(x=>x.cancelled).length,pos=results.filter(x=>x.live).length;
  $('results-title').textContent=(selection.line==='ALL'?'Red Rodalies':selection.line)+' · '+stationName(selection.from)+' → '+stationName(selection.to);
