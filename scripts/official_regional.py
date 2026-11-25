@@ -39,10 +39,14 @@ def load_reference(path=REFERENCE):
     return doc
 
 def materialize_day(day,document):
+    holiday=day.isoformat() in {'2026-12-08','2026-12-25','2026-12-26'}
     mode='weekend' if day.weekday()>=5 else 'weekday'
     anchor=datetime.combine(day,time.min,tzinfo=TZ)
     out=[]
     for item in document['services']:
+        # No regional holiday calendar has yet been verified at row level.
+        # Retain GTFS as primary; do not assert ambiguous PDF operation on holidays.
+        if holiday:continue
         if item['calendar'] not in (mode,'daily'):continue
         calls=[]
         for code,minute in item['stops']:
