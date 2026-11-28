@@ -1,230 +1,71 @@
 {
   "schema": 1,
   "source": "https://ssl.renfe.com/ftransit/Fichero_CER_FOMENTO/fomento_transit.zip",
-  "gtfs_sha256": "0609cbf45a41dcc6a328bf82271d80f6675947b5a54168a453d5e98d407b8100",
-  "generated_at": "2026-11-27T14:56:09.849090+01:00",
-  "date_start": "2026-11-26",
-  "date_end": "2026-12-10",
+  "gtfs_sha256": "2887588b6659a8d1f5518fa0d78f99603f62e769e19c88e89e2920f22b9d031c",
+  "generated_at": "2026-11-28T14:06:20.089418+01:00",
+  "date_start": "2026-11-27",
+  "date_end": "2026-12-11",
   "discarded_stop_times": {
     "outside_catalonia": 147
   },
   "calendar_audit": {
-    "2026-11-26": {
-      "by_line": {
-        "R1": {
-          "within_date_range": 190,
-          "weekly_enabled": 190,
-          "exception_added": 0,
-          "exception_removed": 0,
-          "independent_active": 190,
-          "generator_active": 190
-        },
-        "R2N": {
-          "within_date_range": 72,
-          "weekly_enabled": 72,
-          "exception_added": 0,
-          "exception_removed": 0,
-          "independent_active": 72,
-          "generator_active": 72
-        },
-        "R2S": {
-          "within_date_range": 143,
-          "weekly_enabled": 143,
-          "exception_added": 0,
-          "exception_removed": 0,
-          "independent_active": 143,
-          "generator_active": 143
-        },
-        "R2": {
-          "within_date_range": 54,
-          "weekly_enabled": 54,
-          "exception_added": 0,
-          "exception_removed": 0,
-          "independent_active": 54,
-          "generator_active": 54
-        },
-        "R3": {
-          "within_date_range": 477,
-          "weekly_enabled": 477,
-          "exception_added": 0,
-          "exception_removed": 0,
-          "independent_active": 477,
-          "generator_active": 477
-        },
-        "R4": {
-          "within_date_range": 161,
-          "weekly_enabled": 161,
-          "exception_added": 0,
-          "exception_removed": 0,
-          "independent_active": 161,
-          "generator_active": 161
-        },
-        "R8": {
-          "within_date_range": 33,
-          "weekly_enabled": 33,
-          "exception_added": 0,
-          "exception_removed": 0,
-          "independent_active": 33,
-          "generator_active": 33
-        },
-        "R7": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
-          "exception_added": 0,
-          "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
-        },
-        "RL4": {
-          "within_date_range": 10,
-          "weekly_enabled": 10,
-          "exception_added": 0,
-          "exception_removed": 0,
-          "independent_active": 10,
-          "generator_active": 10
-        },
-        "R11": {
-          "within_date_range": 48,
-          "weekly_enabled": 48,
-          "exception_added": 0,
-          "exception_removed": 0,
-          "independent_active": 48,
-          "generator_active": 48
-        },
-        "R15": {
-          "within_date_range": 36,
-          "weekly_enabled": 36,
-          "exception_added": 0,
-          "exception_removed": 0,
-          "independent_active": 36,
-          "generator_active": 36
-        },
-        "RL3": {
-          "within_date_range": 12,
-          "weekly_enabled": 12,
-          "exception_added": 0,
-          "exception_removed": 0,
-          "independent_active": 12,
-          "generator_active": 12
-        },
-        "R14": {
-          "within_date_range": 6,
-          "weekly_enabled": 6,
-          "exception_added": 0,
-          "exception_removed": 0,
-          "independent_active": 6,
-          "generator_active": 6
-        },
-        "R16": {
-          "within_date_range": 26,
-          "weekly_enabled": 26,
-          "exception_added": 0,
-          "exception_removed": 0,
-          "independent_active": 26,
-          "generator_active": 26
-        },
-        "R17": {
-          "within_date_range": 6,
-          "weekly_enabled": 6,
-          "exception_added": 0,
-          "exception_removed": 0,
-          "independent_active": 6,
-          "generator_active": 6
-        },
-        "RT2": {
-          "within_date_range": 16,
-          "weekly_enabled": 16,
-          "exception_added": 0,
-          "exception_removed": 0,
-          "independent_active": 16,
-          "generator_active": 16
-        },
-        "RG1": {
-          "within_date_range": 17,
-          "weekly_enabled": 17,
-          "exception_added": 0,
-          "exception_removed": 0,
-          "independent_active": 17,
-          "generator_active": 17
-        },
-        "RT1": {
-          "within_date_range": 10,
-          "weekly_enabled": 10,
-          "exception_added": 0,
-          "exception_removed": 0,
-          "independent_active": 10,
-          "generator_active": 10
-        },
-        "R13": {
-          "within_date_range": 42,
-          "weekly_enabled": 42,
-          "exception_added": 0,
-          "exception_removed": 0,
-          "independent_active": 42,
-          "generator_active": 42
-        }
-      },
-      "independent_only_service_ids": [],
-      "generator_only_service_ids": [],
-      "conflicting_exception_service_ids": []
-    },
     "2026-11-27": {
       "by_line": {
         "R1": {
-          "within_date_range": 190,
-          "weekly_enabled": 190,
+          "within_date_range": 0,
+          "weekly_enabled": 0,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 190,
-          "generator_active": 190
+          "independent_active": 0,
+          "generator_active": 0
         },
         "R2N": {
-          "within_date_range": 72,
-          "weekly_enabled": 72,
+          "within_date_range": 0,
+          "weekly_enabled": 0,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 72,
-          "generator_active": 72
+          "independent_active": 0,
+          "generator_active": 0
         },
         "R2S": {
-          "within_date_range": 143,
-          "weekly_enabled": 143,
+          "within_date_range": 0,
+          "weekly_enabled": 0,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 143,
-          "generator_active": 143
+          "independent_active": 0,
+          "generator_active": 0
         },
         "R2": {
-          "within_date_range": 54,
-          "weekly_enabled": 54,
+          "within_date_range": 0,
+          "weekly_enabled": 0,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 54,
-          "generator_active": 54
+          "independent_active": 0,
+          "generator_active": 0
         },
         "R3": {
-          "within_date_range": 537,
-          "weekly_enabled": 537,
+          "within_date_range": 0,
+          "weekly_enabled": 0,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 537,
-          "generator_active": 537
+          "independent_active": 0,
+          "generator_active": 0
         },
         "R4": {
-          "within_date_range": 163,
-          "weekly_enabled": 163,
+          "within_date_range": 0,
+          "weekly_enabled": 0,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 163,
-          "generator_active": 163
+          "independent_active": 0,
+          "generator_active": 0
         },
         "R8": {
-          "within_date_range": 33,
-          "weekly_enabled": 33,
+          "within_date_range": 0,
+          "weekly_enabled": 0,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 33,
-          "generator_active": 33
+          "independent_active": 0,
+          "generator_active": 0
         },
         "R7": {
           "within_date_range": 0,
@@ -235,92 +76,92 @@
           "generator_active": 0
         },
         "RL4": {
-          "within_date_range": 10,
-          "weekly_enabled": 10,
+          "within_date_range": 0,
+          "weekly_enabled": 0,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 10,
-          "generator_active": 10
+          "independent_active": 0,
+          "generator_active": 0
         },
         "R11": {
-          "within_date_range": 50,
-          "weekly_enabled": 50,
+          "within_date_range": 0,
+          "weekly_enabled": 0,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 50,
-          "generator_active": 50
+          "independent_active": 0,
+          "generator_active": 0
         },
         "R15": {
-          "within_date_range": 36,
-          "weekly_enabled": 36,
+          "within_date_range": 0,
+          "weekly_enabled": 0,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 36,
-          "generator_active": 36
+          "independent_active": 0,
+          "generator_active": 0
         },
         "RL3": {
-          "within_date_range": 12,
-          "weekly_enabled": 12,
+          "within_date_range": 0,
+          "weekly_enabled": 0,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 12,
-          "generator_active": 12
+          "independent_active": 0,
+          "generator_active": 0
         },
         "R14": {
-          "within_date_range": 6,
-          "weekly_enabled": 6,
+          "within_date_range": 0,
+          "weekly_enabled": 0,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 6,
-          "generator_active": 6
+          "independent_active": 0,
+          "generator_active": 0
         },
         "R16": {
-          "within_date_range": 26,
-          "weekly_enabled": 26,
+          "within_date_range": 0,
+          "weekly_enabled": 0,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 26,
-          "generator_active": 26
+          "independent_active": 0,
+          "generator_active": 0
         },
         "R17": {
-          "within_date_range": 6,
-          "weekly_enabled": 6,
+          "within_date_range": 0,
+          "weekly_enabled": 0,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 6,
-          "generator_active": 6
+          "independent_active": 0,
+          "generator_active": 0
         },
         "RT2": {
-          "within_date_range": 16,
-          "weekly_enabled": 16,
+          "within_date_range": 0,
+          "weekly_enabled": 0,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 16,
-          "generator_active": 16
+          "independent_active": 0,
+          "generator_active": 0
         },
         "RG1": {
-          "within_date_range": 17,
-          "weekly_enabled": 17,
+          "within_date_range": 0,
+          "weekly_enabled": 0,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 17,
-          "generator_active": 17
+          "independent_active": 0,
+          "generator_active": 0
         },
         "RT1": {
-          "within_date_range": 10,
-          "weekly_enabled": 10,
+          "within_date_range": 0,
+          "weekly_enabled": 0,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 10,
-          "generator_active": 10
+          "independent_active": 0,
+          "generator_active": 0
         },
         "R13": {
-          "within_date_range": 42,
-          "weekly_enabled": 42,
+          "within_date_range": 0,
+          "weekly_enabled": 0,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 42,
-          "generator_active": 42
+          "independent_active": 0,
+          "generator_active": 0
         }
       },
       "independent_only_service_ids": [],
@@ -362,20 +203,20 @@
           "generator_active": 3
         },
         "R3": {
-          "within_date_range": 536,
-          "weekly_enabled": 536,
+          "within_date_range": 477,
+          "weekly_enabled": 477,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 536,
-          "generator_active": 536
+          "independent_active": 477,
+          "generator_active": 477
         },
         "R4": {
-          "within_date_range": 131,
-          "weekly_enabled": 131,
+          "within_date_range": 132,
+          "weekly_enabled": 132,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 131,
-          "generator_active": 131
+          "independent_active": 132,
+          "generator_active": 132
         },
         "R8": {
           "within_date_range": 32,
@@ -521,20 +362,20 @@
           "generator_active": 3
         },
         "R3": {
-          "within_date_range": 536,
-          "weekly_enabled": 536,
+          "within_date_range": 477,
+          "weekly_enabled": 477,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 536,
-          "generator_active": 536
+          "independent_active": 477,
+          "generator_active": 477
         },
         "R4": {
-          "within_date_range": 129,
-          "weekly_enabled": 129,
+          "within_date_range": 131,
+          "weekly_enabled": 131,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 129,
-          "generator_active": 129
+          "independent_active": 131,
+          "generator_active": 131
         },
         "R8": {
           "within_date_range": 32,
@@ -648,60 +489,60 @@
     "2026-11-30": {
       "by_line": {
         "R1": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 190,
+          "weekly_enabled": 190,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 190,
+          "generator_active": 190
         },
         "R2N": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 72,
+          "weekly_enabled": 72,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 72,
+          "generator_active": 72
         },
         "R2S": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 143,
+          "weekly_enabled": 143,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 143,
+          "generator_active": 143
         },
         "R2": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 54,
+          "weekly_enabled": 54,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 54,
+          "generator_active": 54
         },
         "R3": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 477,
+          "weekly_enabled": 477,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 477,
+          "generator_active": 477
         },
         "R4": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 162,
+          "weekly_enabled": 162,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 162,
+          "generator_active": 162
         },
         "R8": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 33,
+          "weekly_enabled": 33,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 33,
+          "generator_active": 33
         },
         "R7": {
           "within_date_range": 0,
@@ -712,92 +553,92 @@
           "generator_active": 0
         },
         "RL4": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 10,
+          "weekly_enabled": 10,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 10,
+          "generator_active": 10
         },
         "R11": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 48,
+          "weekly_enabled": 48,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 48,
+          "generator_active": 48
         },
         "R15": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 36,
+          "weekly_enabled": 36,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 36,
+          "generator_active": 36
         },
         "RL3": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 12,
+          "weekly_enabled": 12,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 12,
+          "generator_active": 12
         },
         "R14": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 6,
+          "weekly_enabled": 6,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 6,
+          "generator_active": 6
         },
         "R16": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 26,
+          "weekly_enabled": 26,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 26,
+          "generator_active": 26
         },
         "R17": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 6,
+          "weekly_enabled": 6,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 6,
+          "generator_active": 6
         },
         "RT2": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 16,
+          "weekly_enabled": 16,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 16,
+          "generator_active": 16
         },
         "RG1": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 17,
+          "weekly_enabled": 17,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 17,
+          "generator_active": 17
         },
         "RT1": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 10,
+          "weekly_enabled": 10,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 10,
+          "generator_active": 10
         },
         "R13": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 42,
+          "weekly_enabled": 42,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 42,
+          "generator_active": 42
         }
       },
       "independent_only_service_ids": [],
@@ -807,60 +648,60 @@
     "2026-12-01": {
       "by_line": {
         "R1": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 190,
+          "weekly_enabled": 190,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 190,
+          "generator_active": 190
         },
         "R2N": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 72,
+          "weekly_enabled": 72,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 72,
+          "generator_active": 72
         },
         "R2S": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 143,
+          "weekly_enabled": 143,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 143,
+          "generator_active": 143
         },
         "R2": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 54,
+          "weekly_enabled": 54,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 54,
+          "generator_active": 54
         },
         "R3": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 477,
+          "weekly_enabled": 477,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 477,
+          "generator_active": 477
         },
         "R4": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 162,
+          "weekly_enabled": 162,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 162,
+          "generator_active": 162
         },
         "R8": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 33,
+          "weekly_enabled": 33,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 33,
+          "generator_active": 33
         },
         "R7": {
           "within_date_range": 0,
@@ -871,92 +712,92 @@
           "generator_active": 0
         },
         "RL4": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 10,
+          "weekly_enabled": 10,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 10,
+          "generator_active": 10
         },
         "R11": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 48,
+          "weekly_enabled": 48,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 48,
+          "generator_active": 48
         },
         "R15": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 36,
+          "weekly_enabled": 36,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 36,
+          "generator_active": 36
         },
         "RL3": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 12,
+          "weekly_enabled": 12,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 12,
+          "generator_active": 12
         },
         "R14": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 6,
+          "weekly_enabled": 6,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 6,
+          "generator_active": 6
         },
         "R16": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 26,
+          "weekly_enabled": 26,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 26,
+          "generator_active": 26
         },
         "R17": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 6,
+          "weekly_enabled": 6,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 6,
+          "generator_active": 6
         },
         "RT2": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 16,
+          "weekly_enabled": 16,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 16,
+          "generator_active": 16
         },
         "RG1": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 17,
+          "weekly_enabled": 17,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 17,
+          "generator_active": 17
         },
         "RT1": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 10,
+          "weekly_enabled": 10,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 10,
+          "generator_active": 10
         },
         "R13": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 42,
+          "weekly_enabled": 42,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 42,
+          "generator_active": 42
         }
       },
       "independent_only_service_ids": [],
@@ -966,60 +807,60 @@
     "2026-12-02": {
       "by_line": {
         "R1": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 190,
+          "weekly_enabled": 190,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 190,
+          "generator_active": 190
         },
         "R2N": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 72,
+          "weekly_enabled": 72,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 72,
+          "generator_active": 72
         },
         "R2S": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 143,
+          "weekly_enabled": 143,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 143,
+          "generator_active": 143
         },
         "R2": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 54,
+          "weekly_enabled": 54,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 54,
+          "generator_active": 54
         },
         "R3": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 477,
+          "weekly_enabled": 477,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 477,
+          "generator_active": 477
         },
         "R4": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 162,
+          "weekly_enabled": 162,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 162,
+          "generator_active": 162
         },
         "R8": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 33,
+          "weekly_enabled": 33,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 33,
+          "generator_active": 33
         },
         "R7": {
           "within_date_range": 0,
@@ -1030,92 +871,92 @@
           "generator_active": 0
         },
         "RL4": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 10,
+          "weekly_enabled": 10,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 10,
+          "generator_active": 10
         },
         "R11": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 48,
+          "weekly_enabled": 48,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 48,
+          "generator_active": 48
         },
         "R15": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 36,
+          "weekly_enabled": 36,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 36,
+          "generator_active": 36
         },
         "RL3": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 12,
+          "weekly_enabled": 12,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 12,
+          "generator_active": 12
         },
         "R14": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 6,
+          "weekly_enabled": 6,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 6,
+          "generator_active": 6
         },
         "R16": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 26,
+          "weekly_enabled": 26,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 26,
+          "generator_active": 26
         },
         "R17": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 6,
+          "weekly_enabled": 6,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 6,
+          "generator_active": 6
         },
         "RT2": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 16,
+          "weekly_enabled": 16,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 16,
+          "generator_active": 16
         },
         "RG1": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 17,
+          "weekly_enabled": 17,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 17,
+          "generator_active": 17
         },
         "RT1": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 10,
+          "weekly_enabled": 10,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 10,
+          "generator_active": 10
         },
         "R13": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 42,
+          "weekly_enabled": 42,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 42,
+          "generator_active": 42
         }
       },
       "independent_only_service_ids": [],
@@ -1125,60 +966,60 @@
     "2026-12-03": {
       "by_line": {
         "R1": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 190,
+          "weekly_enabled": 190,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 190,
+          "generator_active": 190
         },
         "R2N": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 72,
+          "weekly_enabled": 72,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 72,
+          "generator_active": 72
         },
         "R2S": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 143,
+          "weekly_enabled": 143,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 143,
+          "generator_active": 143
         },
         "R2": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 54,
+          "weekly_enabled": 54,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 54,
+          "generator_active": 54
         },
         "R3": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 477,
+          "weekly_enabled": 477,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 477,
+          "generator_active": 477
         },
         "R4": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 162,
+          "weekly_enabled": 162,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 162,
+          "generator_active": 162
         },
         "R8": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 33,
+          "weekly_enabled": 33,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 33,
+          "generator_active": 33
         },
         "R7": {
           "within_date_range": 0,
@@ -1189,92 +1030,92 @@
           "generator_active": 0
         },
         "RL4": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 10,
+          "weekly_enabled": 10,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 10,
+          "generator_active": 10
         },
         "R11": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 48,
+          "weekly_enabled": 48,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 48,
+          "generator_active": 48
         },
         "R15": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 36,
+          "weekly_enabled": 36,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 36,
+          "generator_active": 36
         },
         "RL3": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 12,
+          "weekly_enabled": 12,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 12,
+          "generator_active": 12
         },
         "R14": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 6,
+          "weekly_enabled": 6,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 6,
+          "generator_active": 6
         },
         "R16": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 26,
+          "weekly_enabled": 26,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 26,
+          "generator_active": 26
         },
         "R17": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 6,
+          "weekly_enabled": 6,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 6,
+          "generator_active": 6
         },
         "RT2": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 16,
+          "weekly_enabled": 16,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 16,
+          "generator_active": 16
         },
         "RG1": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 17,
+          "weekly_enabled": 17,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 17,
+          "generator_active": 17
         },
         "RT1": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 10,
+          "weekly_enabled": 10,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 10,
+          "generator_active": 10
         },
         "R13": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 42,
+          "weekly_enabled": 42,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 42,
+          "generator_active": 42
         }
       },
       "independent_only_service_ids": [],
@@ -1284,60 +1125,60 @@
     "2026-12-04": {
       "by_line": {
         "R1": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 190,
+          "weekly_enabled": 190,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 190,
+          "generator_active": 190
         },
         "R2N": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 72,
+          "weekly_enabled": 72,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 72,
+          "generator_active": 72
         },
         "R2S": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 143,
+          "weekly_enabled": 143,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 143,
+          "generator_active": 143
         },
         "R2": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 54,
+          "weekly_enabled": 54,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 54,
+          "generator_active": 54
         },
         "R3": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 477,
+          "weekly_enabled": 477,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 477,
+          "generator_active": 477
         },
         "R4": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 165,
+          "weekly_enabled": 165,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 165,
+          "generator_active": 165
         },
         "R8": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 33,
+          "weekly_enabled": 33,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 33,
+          "generator_active": 33
         },
         "R7": {
           "within_date_range": 0,
@@ -1348,92 +1189,92 @@
           "generator_active": 0
         },
         "RL4": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 10,
+          "weekly_enabled": 10,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 10,
+          "generator_active": 10
         },
         "R11": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 50,
+          "weekly_enabled": 50,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 50,
+          "generator_active": 50
         },
         "R15": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 36,
+          "weekly_enabled": 36,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 36,
+          "generator_active": 36
         },
         "RL3": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 12,
+          "weekly_enabled": 12,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 12,
+          "generator_active": 12
         },
         "R14": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 6,
+          "weekly_enabled": 6,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 6,
+          "generator_active": 6
         },
         "R16": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 26,
+          "weekly_enabled": 26,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 26,
+          "generator_active": 26
         },
         "R17": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 6,
+          "weekly_enabled": 6,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 6,
+          "generator_active": 6
         },
         "RT2": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 16,
+          "weekly_enabled": 16,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 16,
+          "generator_active": 16
         },
         "RG1": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 17,
+          "weekly_enabled": 17,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 17,
+          "generator_active": 17
         },
         "RT1": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 10,
+          "weekly_enabled": 10,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 10,
+          "generator_active": 10
         },
         "R13": {
-          "within_date_range": 0,
-          "weekly_enabled": 0,
+          "within_date_range": 42,
+          "weekly_enabled": 42,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 0,
-          "generator_active": 0
+          "independent_active": 42,
+          "generator_active": 42
         }
       },
       "independent_only_service_ids": [],
@@ -1451,12 +1292,12 @@
           "generator_active": 130
         },
         "R2N": {
-          "within_date_range": 72,
-          "weekly_enabled": 72,
+          "within_date_range": 27,
+          "weekly_enabled": 27,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 72,
-          "generator_active": 72
+          "independent_active": 27,
+          "generator_active": 27
         },
         "R2S": {
           "within_date_range": 136,
@@ -1467,28 +1308,28 @@
           "generator_active": 136
         },
         "R2": {
-          "within_date_range": 3,
-          "weekly_enabled": 3,
+          "within_date_range": 76,
+          "weekly_enabled": 76,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 3,
-          "generator_active": 3
+          "independent_active": 76,
+          "generator_active": 76
         },
         "R3": {
-          "within_date_range": 536,
-          "weekly_enabled": 536,
+          "within_date_range": 477,
+          "weekly_enabled": 477,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 536,
-          "generator_active": 536
+          "independent_active": 477,
+          "generator_active": 477
         },
         "R4": {
-          "within_date_range": 131,
-          "weekly_enabled": 131,
+          "within_date_range": 132,
+          "weekly_enabled": 132,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 131,
-          "generator_active": 131
+          "independent_active": 132,
+          "generator_active": 132
         },
         "R8": {
           "within_date_range": 32,
@@ -1515,12 +1356,12 @@
           "generator_active": 8
         },
         "R11": {
-          "within_date_range": 34,
-          "weekly_enabled": 34,
+          "within_date_range": 78,
+          "weekly_enabled": 78,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 34,
-          "generator_active": 34
+          "independent_active": 78,
+          "generator_active": 78
         },
         "R15": {
           "within_date_range": 31,
@@ -1610,12 +1451,12 @@
           "generator_active": 130
         },
         "R2N": {
-          "within_date_range": 72,
-          "weekly_enabled": 72,
+          "within_date_range": 26,
+          "weekly_enabled": 26,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 72,
-          "generator_active": 72
+          "independent_active": 26,
+          "generator_active": 26
         },
         "R2S": {
           "within_date_range": 136,
@@ -1626,28 +1467,28 @@
           "generator_active": 136
         },
         "R2": {
-          "within_date_range": 3,
-          "weekly_enabled": 3,
+          "within_date_range": 76,
+          "weekly_enabled": 76,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 3,
-          "generator_active": 3
+          "independent_active": 76,
+          "generator_active": 76
         },
         "R3": {
-          "within_date_range": 536,
-          "weekly_enabled": 536,
+          "within_date_range": 477,
+          "weekly_enabled": 477,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 536,
-          "generator_active": 536
+          "independent_active": 477,
+          "generator_active": 477
         },
         "R4": {
-          "within_date_range": 129,
-          "weekly_enabled": 129,
+          "within_date_range": 131,
+          "weekly_enabled": 131,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 129,
-          "generator_active": 129
+          "independent_active": 131,
+          "generator_active": 131
         },
         "R8": {
           "within_date_range": 32,
@@ -1674,12 +1515,12 @@
           "generator_active": 8
         },
         "R11": {
-          "within_date_range": 37,
-          "weekly_enabled": 37,
+          "within_date_range": 83,
+          "weekly_enabled": 83,
           "exception_added": 0,
           "exception_removed": 0,
-          "independent_active": 37,
-          "generator_active": 37
+          "independent_active": 83,
+          "generator_active": 83
         },
         "R15": {
           "within_date_range": 31,
@@ -2393,24 +2234,176 @@
       "independent_only_service_ids": [],
       "generator_only_service_ids": [],
       "conflicting_exception_service_ids": []
+    },
+    "2026-12-11": {
+      "by_line": {
+        "R1": {
+          "within_date_range": 191,
+          "weekly_enabled": 191,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 191,
+          "generator_active": 191
+        },
+        "R2N": {
+          "within_date_range": 72,
+          "weekly_enabled": 72,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 72,
+          "generator_active": 72
+        },
+        "R2S": {
+          "within_date_range": 143,
+          "weekly_enabled": 143,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 143,
+          "generator_active": 143
+        },
+        "R2": {
+          "within_date_range": 54,
+          "weekly_enabled": 54,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 54,
+          "generator_active": 54
+        },
+        "R3": {
+          "within_date_range": 541,
+          "weekly_enabled": 541,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 541,
+          "generator_active": 541
+        },
+        "R4": {
+          "within_date_range": 168,
+          "weekly_enabled": 168,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 168,
+          "generator_active": 168
+        },
+        "R8": {
+          "within_date_range": 33,
+          "weekly_enabled": 33,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 33,
+          "generator_active": 33
+        },
+        "R7": {
+          "within_date_range": 65,
+          "weekly_enabled": 65,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 65,
+          "generator_active": 65
+        },
+        "RL4": {
+          "within_date_range": 10,
+          "weekly_enabled": 10,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 10,
+          "generator_active": 10
+        },
+        "R11": {
+          "within_date_range": 50,
+          "weekly_enabled": 50,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 50,
+          "generator_active": 50
+        },
+        "R15": {
+          "within_date_range": 36,
+          "weekly_enabled": 36,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 36,
+          "generator_active": 36
+        },
+        "RL3": {
+          "within_date_range": 12,
+          "weekly_enabled": 12,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 12,
+          "generator_active": 12
+        },
+        "R14": {
+          "within_date_range": 6,
+          "weekly_enabled": 6,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 6,
+          "generator_active": 6
+        },
+        "R16": {
+          "within_date_range": 26,
+          "weekly_enabled": 26,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 26,
+          "generator_active": 26
+        },
+        "R17": {
+          "within_date_range": 6,
+          "weekly_enabled": 6,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 6,
+          "generator_active": 6
+        },
+        "RT2": {
+          "within_date_range": 16,
+          "weekly_enabled": 16,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 16,
+          "generator_active": 16
+        },
+        "RG1": {
+          "within_date_range": 17,
+          "weekly_enabled": 17,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 17,
+          "generator_active": 17
+        },
+        "RT1": {
+          "within_date_range": 10,
+          "weekly_enabled": 10,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 10,
+          "generator_active": 10
+        },
+        "R13": {
+          "within_date_range": 42,
+          "weekly_enabled": 42,
+          "exception_added": 0,
+          "exception_removed": 0,
+          "independent_active": 42,
+          "generator_active": 42
+        }
+      },
+      "independent_only_service_ids": [],
+      "generator_only_service_ids": [],
+      "conflicting_exception_service_ids": []
     }
   },
   "by_line": {
     "R1": {
       "by_date": {
-        "2026-11-26": {
-          "active_trip_ids": 190,
-          "raw_two_stop_trips": 0,
-          "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 0,
-          "at_least_two_usable_stops": 190
-        },
         "2026-11-27": {
-          "active_trip_ids": 190,
+          "active_trip_ids": 0,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
           "fewer_than_two_usable_stops": 0,
-          "at_least_two_usable_stops": 190
+          "at_least_two_usable_stops": 0
         },
         "2026-11-28": {
           "active_trip_ids": 130,
@@ -2427,39 +2420,39 @@
           "at_least_two_usable_stops": 130
         },
         "2026-11-30": {
-          "active_trip_ids": 0,
+          "active_trip_ids": 190,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
           "fewer_than_two_usable_stops": 0,
-          "at_least_two_usable_stops": 0
+          "at_least_two_usable_stops": 190
         },
         "2026-12-01": {
-          "active_trip_ids": 0,
+          "active_trip_ids": 190,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
           "fewer_than_two_usable_stops": 0,
-          "at_least_two_usable_stops": 0
+          "at_least_two_usable_stops": 190
         },
         "2026-12-02": {
-          "active_trip_ids": 0,
+          "active_trip_ids": 190,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
           "fewer_than_two_usable_stops": 0,
-          "at_least_two_usable_stops": 0
+          "at_least_two_usable_stops": 190
         },
         "2026-12-03": {
-          "active_trip_ids": 0,
+          "active_trip_ids": 190,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
           "fewer_than_two_usable_stops": 0,
-          "at_least_two_usable_stops": 0
+          "at_least_two_usable_stops": 190
         },
         "2026-12-04": {
-          "active_trip_ids": 0,
+          "active_trip_ids": 190,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
           "fewer_than_two_usable_stops": 0,
-          "at_least_two_usable_stops": 0
+          "at_least_two_usable_stops": 190
         },
         "2026-12-05": {
           "active_trip_ids": 130,
@@ -2502,38 +2495,38 @@
           "usable_two_stop_trips": 0,
           "fewer_than_two_usable_stops": 0,
           "at_least_two_usable_stops": 191
+        },
+        "2026-12-11": {
+          "active_trip_ids": 191,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 191
         }
       },
-      "active_trip_ids": 1603,
+      "active_trip_ids": 2364,
       "raw_two_stop_trips": 0,
       "usable_two_stop_trips": 0,
       "trips_with_removed_stops": 0,
       "trips_without_raw_stops": 0,
       "trips_with_fewer_than_two_usable_stops": 0,
       "distribution": {
-        "27": 340,
-        "25": 342,
-        "15": 610,
-        "18": 167,
-        "21": 144
+        "27": 476,
+        "25": 486,
+        "15": 928,
+        "18": 309,
+        "21": 165
       },
       "samples": []
     },
     "R2": {
       "by_date": {
-        "2026-11-26": {
-          "active_trip_ids": 54,
-          "raw_two_stop_trips": 0,
-          "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 0,
-          "at_least_two_usable_stops": 54
-        },
         "2026-11-27": {
-          "active_trip_ids": 54,
+          "active_trip_ids": 0,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
           "fewer_than_two_usable_stops": 0,
-          "at_least_two_usable_stops": 54
+          "at_least_two_usable_stops": 0
         },
         "2026-11-28": {
           "active_trip_ids": 3,
@@ -2550,53 +2543,53 @@
           "at_least_two_usable_stops": 3
         },
         "2026-11-30": {
-          "active_trip_ids": 0,
+          "active_trip_ids": 54,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
           "fewer_than_two_usable_stops": 0,
-          "at_least_two_usable_stops": 0
+          "at_least_two_usable_stops": 54
         },
         "2026-12-01": {
-          "active_trip_ids": 0,
+          "active_trip_ids": 54,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
           "fewer_than_two_usable_stops": 0,
-          "at_least_two_usable_stops": 0
+          "at_least_two_usable_stops": 54
         },
         "2026-12-02": {
-          "active_trip_ids": 0,
+          "active_trip_ids": 54,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
           "fewer_than_two_usable_stops": 0,
-          "at_least_two_usable_stops": 0
+          "at_least_two_usable_stops": 54
         },
         "2026-12-03": {
-          "active_trip_ids": 0,
+          "active_trip_ids": 54,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
           "fewer_than_two_usable_stops": 0,
-          "at_least_two_usable_stops": 0
+          "at_least_two_usable_stops": 54
         },
         "2026-12-04": {
-          "active_trip_ids": 0,
+          "active_trip_ids": 54,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
           "fewer_than_two_usable_stops": 0,
-          "at_least_two_usable_stops": 0
+          "at_least_two_usable_stops": 54
         },
         "2026-12-05": {
-          "active_trip_ids": 3,
+          "active_trip_ids": 76,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
           "fewer_than_two_usable_stops": 0,
-          "at_least_two_usable_stops": 3
+          "at_least_two_usable_stops": 76
         },
         "2026-12-06": {
-          "active_trip_ids": 3,
+          "active_trip_ids": 76,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
           "fewer_than_two_usable_stops": 0,
-          "at_least_two_usable_stops": 3
+          "at_least_two_usable_stops": 76
         },
         "2026-12-07": {
           "active_trip_ids": 54,
@@ -2625,41 +2618,41 @@
           "usable_two_stop_trips": 0,
           "fewer_than_two_usable_stops": 0,
           "at_least_two_usable_stops": 54
+        },
+        "2026-12-11": {
+          "active_trip_ids": 54,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 54
         }
       },
-      "active_trip_ids": 285,
+      "active_trip_ids": 647,
       "raw_two_stop_trips": 0,
       "usable_two_stop_trips": 0,
       "trips_with_removed_stops": 0,
       "trips_without_raw_stops": 0,
       "trips_with_fewer_than_two_usable_stops": 0,
       "distribution": {
-        "27": 5,
-        "13": 154,
-        "23": 27,
-        "22": 8,
-        "14": 51,
-        "19": 5,
-        "9": 1,
-        "18": 20,
-        "8": 14
+        "23": 33,
+        "27": 9,
+        "13": 353,
+        "22": 17,
+        "3": 56,
+        "12": 12,
+        "14": 20,
+        "18": 46,
+        "8": 101
       },
       "samples": []
     },
     "R2N": {
       "by_date": {
-        "2026-11-26": {
-          "active_trip_ids": 72,
-          "raw_two_stop_trips": 0,
-          "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 72,
-          "at_least_two_usable_stops": 0
-        },
         "2026-11-27": {
-          "active_trip_ids": 72,
+          "active_trip_ids": 0,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 72,
+          "fewer_than_two_usable_stops": 0,
           "at_least_two_usable_stops": 0
         },
         "2026-11-28": {
@@ -2677,52 +2670,52 @@
           "at_least_two_usable_stops": 0
         },
         "2026-11-30": {
-          "active_trip_ids": 0,
+          "active_trip_ids": 72,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 0,
+          "fewer_than_two_usable_stops": 72,
           "at_least_two_usable_stops": 0
         },
         "2026-12-01": {
-          "active_trip_ids": 0,
+          "active_trip_ids": 72,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 0,
+          "fewer_than_two_usable_stops": 72,
           "at_least_two_usable_stops": 0
         },
         "2026-12-02": {
-          "active_trip_ids": 0,
+          "active_trip_ids": 72,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 0,
+          "fewer_than_two_usable_stops": 72,
           "at_least_two_usable_stops": 0
         },
         "2026-12-03": {
-          "active_trip_ids": 0,
+          "active_trip_ids": 72,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 0,
+          "fewer_than_two_usable_stops": 72,
           "at_least_two_usable_stops": 0
         },
         "2026-12-04": {
-          "active_trip_ids": 0,
+          "active_trip_ids": 72,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 0,
+          "fewer_than_two_usable_stops": 72,
           "at_least_two_usable_stops": 0
         },
         "2026-12-05": {
-          "active_trip_ids": 72,
+          "active_trip_ids": 27,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 72,
+          "fewer_than_two_usable_stops": 27,
           "at_least_two_usable_stops": 0
         },
         "2026-12-06": {
-          "active_trip_ids": 72,
+          "active_trip_ids": 26,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 72,
+          "fewer_than_two_usable_stops": 26,
           "at_least_two_usable_stops": 0
         },
         "2026-12-07": {
@@ -2752,33 +2745,33 @@
           "usable_two_stop_trips": 0,
           "fewer_than_two_usable_stops": 72,
           "at_least_two_usable_stops": 0
+        },
+        "2026-12-11": {
+          "active_trip_ids": 72,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 72,
+          "at_least_two_usable_stops": 0
         }
       },
-      "active_trip_ids": 720,
+      "active_trip_ids": 917,
       "raw_two_stop_trips": 0,
       "usable_two_stop_trips": 0,
       "trips_with_removed_stops": 0,
-      "trips_without_raw_stops": 720,
-      "trips_with_fewer_than_two_usable_stops": 720,
+      "trips_without_raw_stops": 917,
+      "trips_with_fewer_than_two_usable_stops": 917,
       "distribution": {
-        "0": 720
+        "0": 917
       },
       "samples": []
     },
     "R2S": {
       "by_date": {
-        "2026-11-26": {
-          "active_trip_ids": 143,
-          "raw_two_stop_trips": 0,
-          "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 143,
-          "at_least_two_usable_stops": 0
-        },
         "2026-11-27": {
-          "active_trip_ids": 143,
+          "active_trip_ids": 0,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 143,
+          "fewer_than_two_usable_stops": 0,
           "at_least_two_usable_stops": 0
         },
         "2026-11-28": {
@@ -2796,38 +2789,38 @@
           "at_least_two_usable_stops": 0
         },
         "2026-11-30": {
-          "active_trip_ids": 0,
+          "active_trip_ids": 143,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 0,
+          "fewer_than_two_usable_stops": 143,
           "at_least_two_usable_stops": 0
         },
         "2026-12-01": {
-          "active_trip_ids": 0,
+          "active_trip_ids": 143,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 0,
+          "fewer_than_two_usable_stops": 143,
           "at_least_two_usable_stops": 0
         },
         "2026-12-02": {
-          "active_trip_ids": 0,
+          "active_trip_ids": 143,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 0,
+          "fewer_than_two_usable_stops": 143,
           "at_least_two_usable_stops": 0
         },
         "2026-12-03": {
-          "active_trip_ids": 0,
+          "active_trip_ids": 143,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 0,
+          "fewer_than_two_usable_stops": 143,
           "at_least_two_usable_stops": 0
         },
         "2026-12-04": {
-          "active_trip_ids": 0,
+          "active_trip_ids": 143,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 0,
+          "fewer_than_two_usable_stops": 143,
           "at_least_two_usable_stops": 0
         },
         "2026-12-05": {
@@ -2871,97 +2864,97 @@
           "usable_two_stop_trips": 0,
           "fewer_than_two_usable_stops": 143,
           "at_least_two_usable_stops": 0
+        },
+        "2026-12-11": {
+          "active_trip_ids": 143,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 143,
+          "at_least_two_usable_stops": 0
         }
       },
-      "active_trip_ids": 1395,
+      "active_trip_ids": 1967,
       "raw_two_stop_trips": 0,
       "usable_two_stop_trips": 0,
       "trips_with_removed_stops": 0,
-      "trips_without_raw_stops": 1395,
-      "trips_with_fewer_than_two_usable_stops": 1395,
+      "trips_without_raw_stops": 1967,
+      "trips_with_fewer_than_two_usable_stops": 1967,
       "distribution": {
-        "0": 1395
+        "0": 1967
       },
       "samples": []
     },
     "R3": {
       "by_date": {
-        "2026-11-26": {
+        "2026-11-27": {
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
+        },
+        "2026-11-28": {
           "active_trip_ids": 477,
           "raw_two_stop_trips": 216,
           "usable_two_stop_trips": 217,
           "fewer_than_two_usable_stops": 0,
           "at_least_two_usable_stops": 477
         },
-        "2026-11-27": {
-          "active_trip_ids": 537,
-          "raw_two_stop_trips": 216,
-          "usable_two_stop_trips": 216,
-          "fewer_than_two_usable_stops": 0,
-          "at_least_two_usable_stops": 537
-        },
-        "2026-11-28": {
-          "active_trip_ids": 536,
-          "raw_two_stop_trips": 216,
-          "usable_two_stop_trips": 216,
-          "fewer_than_two_usable_stops": 0,
-          "at_least_two_usable_stops": 536
-        },
         "2026-11-29": {
-          "active_trip_ids": 536,
+          "active_trip_ids": 477,
           "raw_two_stop_trips": 216,
-          "usable_two_stop_trips": 216,
+          "usable_two_stop_trips": 217,
           "fewer_than_two_usable_stops": 0,
-          "at_least_two_usable_stops": 536
+          "at_least_two_usable_stops": 477
         },
         "2026-11-30": {
-          "active_trip_ids": 0,
-          "raw_two_stop_trips": 0,
-          "usable_two_stop_trips": 0,
+          "active_trip_ids": 477,
+          "raw_two_stop_trips": 216,
+          "usable_two_stop_trips": 217,
           "fewer_than_two_usable_stops": 0,
-          "at_least_two_usable_stops": 0
+          "at_least_two_usable_stops": 477
         },
         "2026-12-01": {
-          "active_trip_ids": 0,
-          "raw_two_stop_trips": 0,
-          "usable_two_stop_trips": 0,
+          "active_trip_ids": 477,
+          "raw_two_stop_trips": 216,
+          "usable_two_stop_trips": 217,
           "fewer_than_two_usable_stops": 0,
-          "at_least_two_usable_stops": 0
+          "at_least_two_usable_stops": 477
         },
         "2026-12-02": {
-          "active_trip_ids": 0,
-          "raw_two_stop_trips": 0,
-          "usable_two_stop_trips": 0,
+          "active_trip_ids": 477,
+          "raw_two_stop_trips": 216,
+          "usable_two_stop_trips": 217,
           "fewer_than_two_usable_stops": 0,
-          "at_least_two_usable_stops": 0
+          "at_least_two_usable_stops": 477
         },
         "2026-12-03": {
-          "active_trip_ids": 0,
-          "raw_two_stop_trips": 0,
-          "usable_two_stop_trips": 0,
+          "active_trip_ids": 477,
+          "raw_two_stop_trips": 216,
+          "usable_two_stop_trips": 217,
           "fewer_than_two_usable_stops": 0,
-          "at_least_two_usable_stops": 0
+          "at_least_two_usable_stops": 477
         },
         "2026-12-04": {
-          "active_trip_ids": 0,
-          "raw_two_stop_trips": 0,
-          "usable_two_stop_trips": 0,
+          "active_trip_ids": 477,
+          "raw_two_stop_trips": 216,
+          "usable_two_stop_trips": 217,
           "fewer_than_two_usable_stops": 0,
-          "at_least_two_usable_stops": 0
+          "at_least_two_usable_stops": 477
         },
         "2026-12-05": {
-          "active_trip_ids": 536,
+          "active_trip_ids": 477,
           "raw_two_stop_trips": 216,
-          "usable_two_stop_trips": 216,
+          "usable_two_stop_trips": 217,
           "fewer_than_two_usable_stops": 0,
-          "at_least_two_usable_stops": 536
+          "at_least_two_usable_stops": 477
         },
         "2026-12-06": {
-          "active_trip_ids": 536,
+          "active_trip_ids": 477,
           "raw_two_stop_trips": 216,
-          "usable_two_stop_trips": 216,
+          "usable_two_stop_trips": 217,
           "fewer_than_two_usable_stops": 0,
-          "at_least_two_usable_stops": 536
+          "at_least_two_usable_stops": 477
         },
         "2026-12-07": {
           "active_trip_ids": 541,
@@ -2990,33 +2983,40 @@
           "usable_two_stop_trips": 216,
           "fewer_than_two_usable_stops": 0,
           "at_least_two_usable_stops": 541
+        },
+        "2026-12-11": {
+          "active_trip_ids": 541,
+          "raw_two_stop_trips": 216,
+          "usable_two_stop_trips": 216,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 541
         }
       },
-      "active_trip_ids": 5321,
-      "raw_two_stop_trips": 2160,
-      "usable_two_stop_trips": 2161,
+      "active_trip_ids": 6997,
+      "raw_two_stop_trips": 3024,
+      "usable_two_stop_trips": 3033,
       "trips_with_removed_stops": 147,
       "trips_without_raw_stops": 0,
       "trips_with_fewer_than_two_usable_stops": 0,
       "distribution": {
-        "18": 34,
-        "20": 70,
-        "5": 43,
-        "7": 583,
-        "13": 136,
-        "15": 28,
-        "11": 210,
-        "2": 2161,
-        "4": 319,
-        "9": 730,
-        "8": 146,
-        "10": 163,
-        "6": 552,
-        "3": 146
+        "18": 90,
+        "20": 50,
+        "5": 315,
+        "7": 804,
+        "13": 131,
+        "15": 20,
+        "11": 270,
+        "2": 3033,
+        "4": 179,
+        "9": 1022,
+        "8": 98,
+        "10": 99,
+        "6": 788,
+        "3": 98
       },
       "samples": [
         {
-          "trip_id": "5129J86357R3",
+          "trip_id": "5131S86357R3",
           "raw_stop_times": 3,
           "usable_stop_times": 2,
           "original_stops": [
@@ -3033,7 +3033,41 @@
           ]
         },
         {
-          "trip_id": "5129J87316R3",
+          "trip_id": "5132D86357R3",
+          "raw_stop_times": 3,
+          "usable_stop_times": 2,
+          "original_stops": [
+            [
+              "77304",
+              "Planoles",
+              "23:13:00"
+            ],
+            [
+              "77305",
+              "Toses",
+              "23:29:00"
+            ]
+          ]
+        },
+        {
+          "trip_id": "5133L86357R3",
+          "raw_stop_times": 3,
+          "usable_stop_times": 2,
+          "original_stops": [
+            [
+              "77304",
+              "Planoles",
+              "23:13:00"
+            ],
+            [
+              "77305",
+              "Toses",
+              "23:29:00"
+            ]
+          ]
+        },
+        {
+          "trip_id": "5131S87316R3",
           "raw_stop_times": 2,
           "usable_stop_times": 2,
           "original_stops": [
@@ -3050,7 +3084,7 @@
           ]
         },
         {
-          "trip_id": "5129J87317R3",
+          "trip_id": "5131S87317R3",
           "raw_stop_times": 2,
           "usable_stop_times": 2,
           "original_stops": [
@@ -3067,7 +3101,7 @@
           ]
         },
         {
-          "trip_id": "5129J87318R3",
+          "trip_id": "5131S87318R3",
           "raw_stop_times": 2,
           "usable_stop_times": 2,
           "original_stops": [
@@ -3087,82 +3121,75 @@
     },
     "R4": {
       "by_date": {
-        "2026-11-26": {
-          "active_trip_ids": 161,
-          "raw_two_stop_trips": 5,
-          "usable_two_stop_trips": 5,
-          "fewer_than_two_usable_stops": 5,
-          "at_least_two_usable_stops": 156
-        },
         "2026-11-27": {
-          "active_trip_ids": 163,
-          "raw_two_stop_trips": 5,
-          "usable_two_stop_trips": 5,
-          "fewer_than_two_usable_stops": 5,
-          "at_least_two_usable_stops": 158
+          "active_trip_ids": 0,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 0
         },
         "2026-11-28": {
-          "active_trip_ids": 131,
+          "active_trip_ids": 132,
           "raw_two_stop_trips": 4,
           "usable_two_stop_trips": 4,
           "fewer_than_two_usable_stops": 4,
-          "at_least_two_usable_stops": 127
+          "at_least_two_usable_stops": 128
         },
         "2026-11-29": {
-          "active_trip_ids": 129,
-          "raw_two_stop_trips": 4,
-          "usable_two_stop_trips": 4,
-          "fewer_than_two_usable_stops": 4,
-          "at_least_two_usable_stops": 125
-        },
-        "2026-11-30": {
-          "active_trip_ids": 0,
-          "raw_two_stop_trips": 0,
-          "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 0,
-          "at_least_two_usable_stops": 0
-        },
-        "2026-12-01": {
-          "active_trip_ids": 0,
-          "raw_two_stop_trips": 0,
-          "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 0,
-          "at_least_two_usable_stops": 0
-        },
-        "2026-12-02": {
-          "active_trip_ids": 0,
-          "raw_two_stop_trips": 0,
-          "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 0,
-          "at_least_two_usable_stops": 0
-        },
-        "2026-12-03": {
-          "active_trip_ids": 0,
-          "raw_two_stop_trips": 0,
-          "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 0,
-          "at_least_two_usable_stops": 0
-        },
-        "2026-12-04": {
-          "active_trip_ids": 0,
-          "raw_two_stop_trips": 0,
-          "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 0,
-          "at_least_two_usable_stops": 0
-        },
-        "2026-12-05": {
           "active_trip_ids": 131,
           "raw_two_stop_trips": 4,
           "usable_two_stop_trips": 4,
           "fewer_than_two_usable_stops": 4,
           "at_least_two_usable_stops": 127
         },
-        "2026-12-06": {
-          "active_trip_ids": 129,
+        "2026-11-30": {
+          "active_trip_ids": 162,
+          "raw_two_stop_trips": 5,
+          "usable_two_stop_trips": 5,
+          "fewer_than_two_usable_stops": 5,
+          "at_least_two_usable_stops": 157
+        },
+        "2026-12-01": {
+          "active_trip_ids": 162,
+          "raw_two_stop_trips": 5,
+          "usable_two_stop_trips": 5,
+          "fewer_than_two_usable_stops": 5,
+          "at_least_two_usable_stops": 157
+        },
+        "2026-12-02": {
+          "active_trip_ids": 162,
+          "raw_two_stop_trips": 5,
+          "usable_two_stop_trips": 5,
+          "fewer_than_two_usable_stops": 5,
+          "at_least_two_usable_stops": 157
+        },
+        "2026-12-03": {
+          "active_trip_ids": 162,
+          "raw_two_stop_trips": 5,
+          "usable_two_stop_trips": 5,
+          "fewer_than_two_usable_stops": 5,
+          "at_least_two_usable_stops": 157
+        },
+        "2026-12-04": {
+          "active_trip_ids": 165,
+          "raw_two_stop_trips": 5,
+          "usable_two_stop_trips": 5,
+          "fewer_than_two_usable_stops": 5,
+          "at_least_two_usable_stops": 160
+        },
+        "2026-12-05": {
+          "active_trip_ids": 132,
           "raw_two_stop_trips": 4,
           "usable_two_stop_trips": 4,
           "fewer_than_two_usable_stops": 4,
-          "at_least_two_usable_stops": 125
+          "at_least_two_usable_stops": 128
+        },
+        "2026-12-06": {
+          "active_trip_ids": 131,
+          "raw_two_stop_trips": 4,
+          "usable_two_stop_trips": 4,
+          "fewer_than_two_usable_stops": 4,
+          "at_least_two_usable_stops": 127
         },
         "2026-12-07": {
           "active_trip_ids": 168,
@@ -3191,82 +3218,91 @@
           "usable_two_stop_trips": 5,
           "fewer_than_two_usable_stops": 5,
           "at_least_two_usable_stops": 163
+        },
+        "2026-12-11": {
+          "active_trip_ids": 168,
+          "raw_two_stop_trips": 5,
+          "usable_two_stop_trips": 5,
+          "fewer_than_two_usable_stops": 5,
+          "at_least_two_usable_stops": 163
         }
       },
-      "active_trip_ids": 1491,
-      "raw_two_stop_trips": 45,
-      "usable_two_stop_trips": 45,
+      "active_trip_ids": 2154,
+      "raw_two_stop_trips": 65,
+      "usable_two_stop_trips": 65,
       "trips_with_removed_stops": 0,
       "trips_without_raw_stops": 0,
-      "trips_with_fewer_than_two_usable_stops": 45,
+      "trips_with_fewer_than_two_usable_stops": 65,
       "distribution": {
-        "1": 45,
-        "40": 185,
-        "35": 10,
-        "31": 189,
-        "29": 212,
-        "33": 195,
-        "26": 102,
-        "24": 267,
-        "15": 26,
-        "17": 172,
+        "1": 65,
+        "24": 446,
+        "31": 306,
+        "33": 247,
+        "40": 279,
+        "29": 240,
         "18": 3,
-        "20": 5,
-        "19": 12,
-        "2": 45,
-        "36": 11,
-        "22": 4,
-        "7": 8
+        "22": 7,
+        "17": 221,
+        "15": 41,
+        "35": 25,
+        "26": 143,
+        "20": 6,
+        "19": 15,
+        "2": 65,
+        "13": 5,
+        "36": 18,
+        "7": 17,
+        "3": 5
       },
       "samples": [
         {
-          "trip_id": "5129J33521R4",
+          "trip_id": "5131S33527R4",
           "raw_stop_times": 2,
           "usable_stop_times": 2,
           "original_stops": [
             [
               "78600",
               "Manresa",
-              "05:43:00"
+              "16:34:00"
             ],
             [
               "78506",
               "Rajadell",
-              "05:55:00"
+              "16:46:00"
             ]
           ]
         },
         {
-          "trip_id": "5129J33523R4",
+          "trip_id": "5131S33529R4",
           "raw_stop_times": 2,
           "usable_stop_times": 2,
           "original_stops": [
             [
               "78600",
               "Manresa",
-              "09:21:00"
+              "20:07:00"
             ],
             [
               "78506",
               "Rajadell",
-              "09:33:00"
+              "20:19:00"
             ]
           ]
         },
         {
-          "trip_id": "5129J33525R4",
+          "trip_id": "5131S33533R4",
           "raw_stop_times": 2,
           "usable_stop_times": 2,
           "original_stops": [
             [
               "78600",
               "Manresa",
-              "12:41:00"
+              "08:19:00"
             ],
             [
               "78506",
               "Rajadell",
-              "12:53:00"
+              "08:31:00"
             ]
           ]
         }
@@ -3274,13 +3310,6 @@
     },
     "R7": {
       "by_date": {
-        "2026-11-26": {
-          "active_trip_ids": 0,
-          "raw_two_stop_trips": 0,
-          "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 0,
-          "at_least_two_usable_stops": 0
-        },
         "2026-11-27": {
           "active_trip_ids": 0,
           "raw_two_stop_trips": 0,
@@ -3378,34 +3407,34 @@
           "usable_two_stop_trips": 0,
           "fewer_than_two_usable_stops": 0,
           "at_least_two_usable_stops": 65
+        },
+        "2026-12-11": {
+          "active_trip_ids": 65,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 65
         }
       },
-      "active_trip_ids": 228,
+      "active_trip_ids": 293,
       "raw_two_stop_trips": 0,
       "usable_two_stop_trips": 0,
       "trips_with_removed_stops": 0,
       "trips_without_raw_stops": 0,
       "trips_with_fewer_than_two_usable_stops": 0,
       "distribution": {
-        "5": 228
+        "5": 293
       },
       "samples": []
     },
     "R8": {
       "by_date": {
-        "2026-11-26": {
-          "active_trip_ids": 33,
-          "raw_two_stop_trips": 0,
-          "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 0,
-          "at_least_two_usable_stops": 33
-        },
         "2026-11-27": {
-          "active_trip_ids": 33,
+          "active_trip_ids": 0,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
           "fewer_than_two_usable_stops": 0,
-          "at_least_two_usable_stops": 33
+          "at_least_two_usable_stops": 0
         },
         "2026-11-28": {
           "active_trip_ids": 32,
@@ -3422,39 +3451,39 @@
           "at_least_two_usable_stops": 32
         },
         "2026-11-30": {
-          "active_trip_ids": 0,
+          "active_trip_ids": 33,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
           "fewer_than_two_usable_stops": 0,
-          "at_least_two_usable_stops": 0
+          "at_least_two_usable_stops": 33
         },
         "2026-12-01": {
-          "active_trip_ids": 0,
+          "active_trip_ids": 33,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
           "fewer_than_two_usable_stops": 0,
-          "at_least_two_usable_stops": 0
+          "at_least_two_usable_stops": 33
         },
         "2026-12-02": {
-          "active_trip_ids": 0,
+          "active_trip_ids": 33,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
           "fewer_than_two_usable_stops": 0,
-          "at_least_two_usable_stops": 0
+          "at_least_two_usable_stops": 33
         },
         "2026-12-03": {
-          "active_trip_ids": 0,
+          "active_trip_ids": 33,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
           "fewer_than_two_usable_stops": 0,
-          "at_least_two_usable_stops": 0
+          "at_least_two_usable_stops": 33
         },
         "2026-12-04": {
-          "active_trip_ids": 0,
+          "active_trip_ids": 33,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
           "fewer_than_two_usable_stops": 0,
-          "at_least_two_usable_stops": 0
+          "at_least_two_usable_stops": 33
         },
         "2026-12-05": {
           "active_trip_ids": 32,
@@ -3497,34 +3526,34 @@
           "usable_two_stop_trips": 0,
           "fewer_than_two_usable_stops": 0,
           "at_least_two_usable_stops": 33
+        },
+        "2026-12-11": {
+          "active_trip_ids": 33,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 0,
+          "at_least_two_usable_stops": 33
         }
       },
-      "active_trip_ids": 325,
+      "active_trip_ids": 457,
       "raw_two_stop_trips": 0,
       "usable_two_stop_trips": 0,
       "trips_with_removed_stops": 0,
       "trips_without_raw_stops": 0,
       "trips_with_fewer_than_two_usable_stops": 0,
       "distribution": {
-        "9": 320,
-        "5": 5
+        "9": 448,
+        "5": 9
       },
       "samples": []
     },
     "RG1": {
       "by_date": {
-        "2026-11-26": {
-          "active_trip_ids": 17,
-          "raw_two_stop_trips": 0,
-          "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 17,
-          "at_least_two_usable_stops": 0
-        },
         "2026-11-27": {
-          "active_trip_ids": 17,
+          "active_trip_ids": 0,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 17,
+          "fewer_than_two_usable_stops": 0,
           "at_least_two_usable_stops": 0
         },
         "2026-11-28": {
@@ -3542,38 +3571,38 @@
           "at_least_two_usable_stops": 0
         },
         "2026-11-30": {
-          "active_trip_ids": 0,
+          "active_trip_ids": 17,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 0,
+          "fewer_than_two_usable_stops": 17,
           "at_least_two_usable_stops": 0
         },
         "2026-12-01": {
-          "active_trip_ids": 0,
+          "active_trip_ids": 17,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 0,
+          "fewer_than_two_usable_stops": 17,
           "at_least_two_usable_stops": 0
         },
         "2026-12-02": {
-          "active_trip_ids": 0,
+          "active_trip_ids": 17,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 0,
+          "fewer_than_two_usable_stops": 17,
           "at_least_two_usable_stops": 0
         },
         "2026-12-03": {
-          "active_trip_ids": 0,
+          "active_trip_ids": 17,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 0,
+          "fewer_than_two_usable_stops": 17,
           "at_least_two_usable_stops": 0
         },
         "2026-12-04": {
-          "active_trip_ids": 0,
+          "active_trip_ids": 17,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 0,
+          "fewer_than_two_usable_stops": 17,
           "at_least_two_usable_stops": 0
         },
         "2026-12-05": {
@@ -3617,33 +3646,33 @@
           "usable_two_stop_trips": 0,
           "fewer_than_two_usable_stops": 17,
           "at_least_two_usable_stops": 0
+        },
+        "2026-12-11": {
+          "active_trip_ids": 17,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 17,
+          "at_least_two_usable_stops": 0
         }
       },
-      "active_trip_ids": 85,
+      "active_trip_ids": 153,
       "raw_two_stop_trips": 0,
       "usable_two_stop_trips": 0,
       "trips_with_removed_stops": 0,
-      "trips_without_raw_stops": 85,
-      "trips_with_fewer_than_two_usable_stops": 85,
+      "trips_without_raw_stops": 153,
+      "trips_with_fewer_than_two_usable_stops": 153,
       "distribution": {
-        "0": 85
+        "0": 153
       },
       "samples": []
     },
     "RT1": {
       "by_date": {
-        "2026-11-26": {
-          "active_trip_ids": 10,
-          "raw_two_stop_trips": 0,
-          "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 10,
-          "at_least_two_usable_stops": 0
-        },
         "2026-11-27": {
-          "active_trip_ids": 10,
+          "active_trip_ids": 0,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 10,
+          "fewer_than_two_usable_stops": 0,
           "at_least_two_usable_stops": 0
         },
         "2026-11-28": {
@@ -3661,38 +3690,38 @@
           "at_least_two_usable_stops": 0
         },
         "2026-11-30": {
-          "active_trip_ids": 0,
+          "active_trip_ids": 10,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 0,
+          "fewer_than_two_usable_stops": 10,
           "at_least_two_usable_stops": 0
         },
         "2026-12-01": {
-          "active_trip_ids": 0,
+          "active_trip_ids": 10,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 0,
+          "fewer_than_two_usable_stops": 10,
           "at_least_two_usable_stops": 0
         },
         "2026-12-02": {
-          "active_trip_ids": 0,
+          "active_trip_ids": 10,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 0,
+          "fewer_than_two_usable_stops": 10,
           "at_least_two_usable_stops": 0
         },
         "2026-12-03": {
-          "active_trip_ids": 0,
+          "active_trip_ids": 10,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 0,
+          "fewer_than_two_usable_stops": 10,
           "at_least_two_usable_stops": 0
         },
         "2026-12-04": {
-          "active_trip_ids": 0,
+          "active_trip_ids": 10,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 0,
+          "fewer_than_two_usable_stops": 10,
           "at_least_two_usable_stops": 0
         },
         "2026-12-05": {
@@ -3736,33 +3765,33 @@
           "usable_two_stop_trips": 0,
           "fewer_than_two_usable_stops": 10,
           "at_least_two_usable_stops": 0
+        },
+        "2026-12-11": {
+          "active_trip_ids": 10,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 10,
+          "at_least_two_usable_stops": 0
         }
       },
-      "active_trip_ids": 90,
+      "active_trip_ids": 130,
       "raw_two_stop_trips": 0,
       "usable_two_stop_trips": 0,
       "trips_with_removed_stops": 0,
-      "trips_without_raw_stops": 90,
-      "trips_with_fewer_than_two_usable_stops": 90,
+      "trips_without_raw_stops": 130,
+      "trips_with_fewer_than_two_usable_stops": 130,
       "distribution": {
-        "0": 90
+        "0": 130
       },
       "samples": []
     },
     "RT2": {
       "by_date": {
-        "2026-11-26": {
-          "active_trip_ids": 16,
-          "raw_two_stop_trips": 0,
-          "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 16,
-          "at_least_two_usable_stops": 0
-        },
         "2026-11-27": {
-          "active_trip_ids": 16,
+          "active_trip_ids": 0,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 16,
+          "fewer_than_two_usable_stops": 0,
           "at_least_two_usable_stops": 0
         },
         "2026-11-28": {
@@ -3780,38 +3809,38 @@
           "at_least_two_usable_stops": 0
         },
         "2026-11-30": {
-          "active_trip_ids": 0,
+          "active_trip_ids": 16,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 0,
+          "fewer_than_two_usable_stops": 16,
           "at_least_two_usable_stops": 0
         },
         "2026-12-01": {
-          "active_trip_ids": 0,
+          "active_trip_ids": 16,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 0,
+          "fewer_than_two_usable_stops": 16,
           "at_least_two_usable_stops": 0
         },
         "2026-12-02": {
-          "active_trip_ids": 0,
+          "active_trip_ids": 16,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 0,
+          "fewer_than_two_usable_stops": 16,
           "at_least_two_usable_stops": 0
         },
         "2026-12-03": {
-          "active_trip_ids": 0,
+          "active_trip_ids": 16,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 0,
+          "fewer_than_two_usable_stops": 16,
           "at_least_two_usable_stops": 0
         },
         "2026-12-04": {
-          "active_trip_ids": 0,
+          "active_trip_ids": 16,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 0,
+          "fewer_than_two_usable_stops": 16,
           "at_least_two_usable_stops": 0
         },
         "2026-12-05": {
@@ -3855,33 +3884,33 @@
           "usable_two_stop_trips": 0,
           "fewer_than_two_usable_stops": 16,
           "at_least_two_usable_stops": 0
+        },
+        "2026-12-11": {
+          "active_trip_ids": 16,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 16,
+          "at_least_two_usable_stops": 0
         }
       },
-      "active_trip_ids": 160,
+      "active_trip_ids": 224,
       "raw_two_stop_trips": 0,
       "usable_two_stop_trips": 0,
       "trips_with_removed_stops": 0,
-      "trips_without_raw_stops": 160,
-      "trips_with_fewer_than_two_usable_stops": 160,
+      "trips_without_raw_stops": 224,
+      "trips_with_fewer_than_two_usable_stops": 224,
       "distribution": {
-        "0": 160
+        "0": 224
       },
       "samples": []
     },
     "RL3": {
       "by_date": {
-        "2026-11-26": {
-          "active_trip_ids": 12,
-          "raw_two_stop_trips": 0,
-          "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 12,
-          "at_least_two_usable_stops": 0
-        },
         "2026-11-27": {
-          "active_trip_ids": 12,
+          "active_trip_ids": 0,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 12,
+          "fewer_than_two_usable_stops": 0,
           "at_least_two_usable_stops": 0
         },
         "2026-11-28": {
@@ -3899,38 +3928,38 @@
           "at_least_two_usable_stops": 0
         },
         "2026-11-30": {
-          "active_trip_ids": 0,
+          "active_trip_ids": 12,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 0,
+          "fewer_than_two_usable_stops": 12,
           "at_least_two_usable_stops": 0
         },
         "2026-12-01": {
-          "active_trip_ids": 0,
+          "active_trip_ids": 12,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 0,
+          "fewer_than_two_usable_stops": 12,
           "at_least_two_usable_stops": 0
         },
         "2026-12-02": {
-          "active_trip_ids": 0,
+          "active_trip_ids": 12,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 0,
+          "fewer_than_two_usable_stops": 12,
           "at_least_two_usable_stops": 0
         },
         "2026-12-03": {
-          "active_trip_ids": 0,
+          "active_trip_ids": 12,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 0,
+          "fewer_than_two_usable_stops": 12,
           "at_least_two_usable_stops": 0
         },
         "2026-12-04": {
-          "active_trip_ids": 0,
+          "active_trip_ids": 12,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 0,
+          "fewer_than_two_usable_stops": 12,
           "at_least_two_usable_stops": 0
         },
         "2026-12-05": {
@@ -3974,33 +4003,33 @@
           "usable_two_stop_trips": 0,
           "fewer_than_two_usable_stops": 12,
           "at_least_two_usable_stops": 0
+        },
+        "2026-12-11": {
+          "active_trip_ids": 12,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 12,
+          "at_least_two_usable_stops": 0
         }
       },
-      "active_trip_ids": 80,
+      "active_trip_ids": 128,
       "raw_two_stop_trips": 0,
       "usable_two_stop_trips": 0,
       "trips_with_removed_stops": 0,
-      "trips_without_raw_stops": 80,
-      "trips_with_fewer_than_two_usable_stops": 80,
+      "trips_without_raw_stops": 128,
+      "trips_with_fewer_than_two_usable_stops": 128,
       "distribution": {
-        "0": 80
+        "0": 128
       },
       "samples": []
     },
     "RL4": {
       "by_date": {
-        "2026-11-26": {
-          "active_trip_ids": 10,
-          "raw_two_stop_trips": 0,
-          "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 10,
-          "at_least_two_usable_stops": 0
-        },
         "2026-11-27": {
-          "active_trip_ids": 10,
+          "active_trip_ids": 0,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 10,
+          "fewer_than_two_usable_stops": 0,
           "at_least_two_usable_stops": 0
         },
         "2026-11-28": {
@@ -4018,38 +4047,38 @@
           "at_least_two_usable_stops": 0
         },
         "2026-11-30": {
-          "active_trip_ids": 0,
+          "active_trip_ids": 10,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 0,
+          "fewer_than_two_usable_stops": 10,
           "at_least_two_usable_stops": 0
         },
         "2026-12-01": {
-          "active_trip_ids": 0,
+          "active_trip_ids": 10,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 0,
+          "fewer_than_two_usable_stops": 10,
           "at_least_two_usable_stops": 0
         },
         "2026-12-02": {
-          "active_trip_ids": 0,
+          "active_trip_ids": 10,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 0,
+          "fewer_than_two_usable_stops": 10,
           "at_least_two_usable_stops": 0
         },
         "2026-12-03": {
-          "active_trip_ids": 0,
+          "active_trip_ids": 10,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 0,
+          "fewer_than_two_usable_stops": 10,
           "at_least_two_usable_stops": 0
         },
         "2026-12-04": {
-          "active_trip_ids": 0,
+          "active_trip_ids": 10,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 0,
+          "fewer_than_two_usable_stops": 10,
           "at_least_two_usable_stops": 0
         },
         "2026-12-05": {
@@ -4093,33 +4122,33 @@
           "usable_two_stop_trips": 0,
           "fewer_than_two_usable_stops": 10,
           "at_least_two_usable_stops": 0
+        },
+        "2026-12-11": {
+          "active_trip_ids": 10,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 10,
+          "at_least_two_usable_stops": 0
         }
       },
-      "active_trip_ids": 90,
+      "active_trip_ids": 130,
       "raw_two_stop_trips": 0,
       "usable_two_stop_trips": 0,
       "trips_with_removed_stops": 0,
-      "trips_without_raw_stops": 90,
-      "trips_with_fewer_than_two_usable_stops": 90,
+      "trips_without_raw_stops": 130,
+      "trips_with_fewer_than_two_usable_stops": 130,
       "distribution": {
-        "0": 90
+        "0": 130
       },
       "samples": []
     },
     "R11": {
       "by_date": {
-        "2026-11-26": {
-          "active_trip_ids": 48,
-          "raw_two_stop_trips": 0,
-          "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 48,
-          "at_least_two_usable_stops": 0
-        },
         "2026-11-27": {
-          "active_trip_ids": 50,
+          "active_trip_ids": 0,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 50,
+          "fewer_than_two_usable_stops": 0,
           "at_least_two_usable_stops": 0
         },
         "2026-11-28": {
@@ -4137,52 +4166,52 @@
           "at_least_two_usable_stops": 0
         },
         "2026-11-30": {
-          "active_trip_ids": 0,
+          "active_trip_ids": 48,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 0,
+          "fewer_than_two_usable_stops": 48,
           "at_least_two_usable_stops": 0
         },
         "2026-12-01": {
-          "active_trip_ids": 0,
+          "active_trip_ids": 48,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 0,
+          "fewer_than_two_usable_stops": 48,
           "at_least_two_usable_stops": 0
         },
         "2026-12-02": {
-          "active_trip_ids": 0,
+          "active_trip_ids": 48,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 0,
+          "fewer_than_two_usable_stops": 48,
           "at_least_two_usable_stops": 0
         },
         "2026-12-03": {
-          "active_trip_ids": 0,
+          "active_trip_ids": 48,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 0,
+          "fewer_than_two_usable_stops": 48,
           "at_least_two_usable_stops": 0
         },
         "2026-12-04": {
-          "active_trip_ids": 0,
+          "active_trip_ids": 50,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 0,
+          "fewer_than_two_usable_stops": 50,
           "at_least_two_usable_stops": 0
         },
         "2026-12-05": {
-          "active_trip_ids": 34,
+          "active_trip_ids": 78,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 34,
+          "fewer_than_two_usable_stops": 78,
           "at_least_two_usable_stops": 0
         },
         "2026-12-06": {
-          "active_trip_ids": 37,
+          "active_trip_ids": 83,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 37,
+          "fewer_than_two_usable_stops": 83,
           "at_least_two_usable_stops": 0
         },
         "2026-12-07": {
@@ -4212,33 +4241,33 @@
           "usable_two_stop_trips": 0,
           "fewer_than_two_usable_stops": 48,
           "at_least_two_usable_stops": 0
+        },
+        "2026-12-11": {
+          "active_trip_ids": 50,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 50,
+          "at_least_two_usable_stops": 0
         }
       },
-      "active_trip_ids": 423,
+      "active_trip_ids": 707,
       "raw_two_stop_trips": 0,
       "usable_two_stop_trips": 0,
       "trips_with_removed_stops": 0,
-      "trips_without_raw_stops": 423,
-      "trips_with_fewer_than_two_usable_stops": 423,
+      "trips_without_raw_stops": 707,
+      "trips_with_fewer_than_two_usable_stops": 707,
       "distribution": {
-        "0": 423
+        "0": 707
       },
       "samples": []
     },
     "R13": {
       "by_date": {
-        "2026-11-26": {
-          "active_trip_ids": 42,
-          "raw_two_stop_trips": 0,
-          "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 42,
-          "at_least_two_usable_stops": 0
-        },
         "2026-11-27": {
-          "active_trip_ids": 42,
+          "active_trip_ids": 0,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 42,
+          "fewer_than_two_usable_stops": 0,
           "at_least_two_usable_stops": 0
         },
         "2026-11-28": {
@@ -4256,38 +4285,38 @@
           "at_least_two_usable_stops": 0
         },
         "2026-11-30": {
-          "active_trip_ids": 0,
+          "active_trip_ids": 42,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 0,
+          "fewer_than_two_usable_stops": 42,
           "at_least_two_usable_stops": 0
         },
         "2026-12-01": {
-          "active_trip_ids": 0,
+          "active_trip_ids": 42,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 0,
+          "fewer_than_two_usable_stops": 42,
           "at_least_two_usable_stops": 0
         },
         "2026-12-02": {
-          "active_trip_ids": 0,
+          "active_trip_ids": 42,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 0,
+          "fewer_than_two_usable_stops": 42,
           "at_least_two_usable_stops": 0
         },
         "2026-12-03": {
-          "active_trip_ids": 0,
+          "active_trip_ids": 42,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 0,
+          "fewer_than_two_usable_stops": 42,
           "at_least_two_usable_stops": 0
         },
         "2026-12-04": {
-          "active_trip_ids": 0,
+          "active_trip_ids": 42,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 0,
+          "fewer_than_two_usable_stops": 42,
           "at_least_two_usable_stops": 0
         },
         "2026-12-05": {
@@ -4331,33 +4360,33 @@
           "usable_two_stop_trips": 0,
           "fewer_than_two_usable_stops": 42,
           "at_least_two_usable_stops": 0
+        },
+        "2026-12-11": {
+          "active_trip_ids": 42,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 42,
+          "at_least_two_usable_stops": 0
         }
       },
-      "active_trip_ids": 420,
+      "active_trip_ids": 588,
       "raw_two_stop_trips": 0,
       "usable_two_stop_trips": 0,
       "trips_with_removed_stops": 0,
-      "trips_without_raw_stops": 420,
-      "trips_with_fewer_than_two_usable_stops": 420,
+      "trips_without_raw_stops": 588,
+      "trips_with_fewer_than_two_usable_stops": 588,
       "distribution": {
-        "0": 420
+        "0": 588
       },
       "samples": []
     },
     "R14": {
       "by_date": {
-        "2026-11-26": {
-          "active_trip_ids": 6,
-          "raw_two_stop_trips": 0,
-          "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 6,
-          "at_least_two_usable_stops": 0
-        },
         "2026-11-27": {
-          "active_trip_ids": 6,
+          "active_trip_ids": 0,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 6,
+          "fewer_than_two_usable_stops": 0,
           "at_least_two_usable_stops": 0
         },
         "2026-11-28": {
@@ -4375,38 +4404,38 @@
           "at_least_two_usable_stops": 0
         },
         "2026-11-30": {
-          "active_trip_ids": 0,
+          "active_trip_ids": 6,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 0,
+          "fewer_than_two_usable_stops": 6,
           "at_least_two_usable_stops": 0
         },
         "2026-12-01": {
-          "active_trip_ids": 0,
+          "active_trip_ids": 6,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 0,
+          "fewer_than_two_usable_stops": 6,
           "at_least_two_usable_stops": 0
         },
         "2026-12-02": {
-          "active_trip_ids": 0,
+          "active_trip_ids": 6,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 0,
+          "fewer_than_two_usable_stops": 6,
           "at_least_two_usable_stops": 0
         },
         "2026-12-03": {
-          "active_trip_ids": 0,
+          "active_trip_ids": 6,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 0,
+          "fewer_than_two_usable_stops": 6,
           "at_least_two_usable_stops": 0
         },
         "2026-12-04": {
-          "active_trip_ids": 0,
+          "active_trip_ids": 6,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 0,
+          "fewer_than_two_usable_stops": 6,
           "at_least_two_usable_stops": 0
         },
         "2026-12-05": {
@@ -4450,33 +4479,33 @@
           "usable_two_stop_trips": 0,
           "fewer_than_two_usable_stops": 6,
           "at_least_two_usable_stops": 0
+        },
+        "2026-12-11": {
+          "active_trip_ids": 6,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 6,
+          "at_least_two_usable_stops": 0
         }
       },
-      "active_trip_ids": 50,
+      "active_trip_ids": 74,
       "raw_two_stop_trips": 0,
       "usable_two_stop_trips": 0,
       "trips_with_removed_stops": 0,
-      "trips_without_raw_stops": 50,
-      "trips_with_fewer_than_two_usable_stops": 50,
+      "trips_without_raw_stops": 74,
+      "trips_with_fewer_than_two_usable_stops": 74,
       "distribution": {
-        "0": 50
+        "0": 74
       },
       "samples": []
     },
     "R15": {
       "by_date": {
-        "2026-11-26": {
-          "active_trip_ids": 36,
-          "raw_two_stop_trips": 0,
-          "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 36,
-          "at_least_two_usable_stops": 0
-        },
         "2026-11-27": {
-          "active_trip_ids": 36,
+          "active_trip_ids": 0,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 36,
+          "fewer_than_two_usable_stops": 0,
           "at_least_two_usable_stops": 0
         },
         "2026-11-28": {
@@ -4494,38 +4523,38 @@
           "at_least_two_usable_stops": 0
         },
         "2026-11-30": {
-          "active_trip_ids": 0,
+          "active_trip_ids": 36,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 0,
+          "fewer_than_two_usable_stops": 36,
           "at_least_two_usable_stops": 0
         },
         "2026-12-01": {
-          "active_trip_ids": 0,
+          "active_trip_ids": 36,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 0,
+          "fewer_than_two_usable_stops": 36,
           "at_least_two_usable_stops": 0
         },
         "2026-12-02": {
-          "active_trip_ids": 0,
+          "active_trip_ids": 36,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 0,
+          "fewer_than_two_usable_stops": 36,
           "at_least_two_usable_stops": 0
         },
         "2026-12-03": {
-          "active_trip_ids": 0,
+          "active_trip_ids": 36,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 0,
+          "fewer_than_two_usable_stops": 36,
           "at_least_two_usable_stops": 0
         },
         "2026-12-04": {
-          "active_trip_ids": 0,
+          "active_trip_ids": 36,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 0,
+          "fewer_than_two_usable_stops": 36,
           "at_least_two_usable_stops": 0
         },
         "2026-12-05": {
@@ -4569,33 +4598,33 @@
           "usable_two_stop_trips": 0,
           "fewer_than_two_usable_stops": 36,
           "at_least_two_usable_stops": 0
+        },
+        "2026-12-11": {
+          "active_trip_ids": 36,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 36,
+          "at_least_two_usable_stops": 0
         }
       },
-      "active_trip_ids": 336,
+      "active_trip_ids": 480,
       "raw_two_stop_trips": 0,
       "usable_two_stop_trips": 0,
       "trips_with_removed_stops": 0,
-      "trips_without_raw_stops": 336,
-      "trips_with_fewer_than_two_usable_stops": 336,
+      "trips_without_raw_stops": 480,
+      "trips_with_fewer_than_two_usable_stops": 480,
       "distribution": {
-        "0": 336
+        "0": 480
       },
       "samples": []
     },
     "R16": {
       "by_date": {
-        "2026-11-26": {
-          "active_trip_ids": 26,
-          "raw_two_stop_trips": 0,
-          "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 26,
-          "at_least_two_usable_stops": 0
-        },
         "2026-11-27": {
-          "active_trip_ids": 26,
+          "active_trip_ids": 0,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 26,
+          "fewer_than_two_usable_stops": 0,
           "at_least_two_usable_stops": 0
         },
         "2026-11-28": {
@@ -4613,38 +4642,38 @@
           "at_least_two_usable_stops": 0
         },
         "2026-11-30": {
-          "active_trip_ids": 0,
+          "active_trip_ids": 26,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 0,
+          "fewer_than_two_usable_stops": 26,
           "at_least_two_usable_stops": 0
         },
         "2026-12-01": {
-          "active_trip_ids": 0,
+          "active_trip_ids": 26,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 0,
+          "fewer_than_two_usable_stops": 26,
           "at_least_two_usable_stops": 0
         },
         "2026-12-02": {
-          "active_trip_ids": 0,
+          "active_trip_ids": 26,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 0,
+          "fewer_than_two_usable_stops": 26,
           "at_least_two_usable_stops": 0
         },
         "2026-12-03": {
-          "active_trip_ids": 0,
+          "active_trip_ids": 26,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 0,
+          "fewer_than_two_usable_stops": 26,
           "at_least_two_usable_stops": 0
         },
         "2026-12-04": {
-          "active_trip_ids": 0,
+          "active_trip_ids": 26,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 0,
+          "fewer_than_two_usable_stops": 26,
           "at_least_two_usable_stops": 0
         },
         "2026-12-05": {
@@ -4688,33 +4717,33 @@
           "usable_two_stop_trips": 0,
           "fewer_than_two_usable_stops": 26,
           "at_least_two_usable_stops": 0
+        },
+        "2026-12-11": {
+          "active_trip_ids": 26,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 26,
+          "at_least_two_usable_stops": 0
         }
       },
-      "active_trip_ids": 260,
+      "active_trip_ids": 364,
       "raw_two_stop_trips": 0,
       "usable_two_stop_trips": 0,
       "trips_with_removed_stops": 0,
-      "trips_without_raw_stops": 260,
-      "trips_with_fewer_than_two_usable_stops": 260,
+      "trips_without_raw_stops": 364,
+      "trips_with_fewer_than_two_usable_stops": 364,
       "distribution": {
-        "0": 260
+        "0": 364
       },
       "samples": []
     },
     "R17": {
       "by_date": {
-        "2026-11-26": {
-          "active_trip_ids": 6,
-          "raw_two_stop_trips": 0,
-          "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 6,
-          "at_least_two_usable_stops": 0
-        },
         "2026-11-27": {
-          "active_trip_ids": 6,
+          "active_trip_ids": 0,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 6,
+          "fewer_than_two_usable_stops": 0,
           "at_least_two_usable_stops": 0
         },
         "2026-11-28": {
@@ -4732,38 +4761,38 @@
           "at_least_two_usable_stops": 0
         },
         "2026-11-30": {
-          "active_trip_ids": 0,
+          "active_trip_ids": 6,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 0,
+          "fewer_than_two_usable_stops": 6,
           "at_least_two_usable_stops": 0
         },
         "2026-12-01": {
-          "active_trip_ids": 0,
+          "active_trip_ids": 6,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 0,
+          "fewer_than_two_usable_stops": 6,
           "at_least_two_usable_stops": 0
         },
         "2026-12-02": {
-          "active_trip_ids": 0,
+          "active_trip_ids": 6,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 0,
+          "fewer_than_two_usable_stops": 6,
           "at_least_two_usable_stops": 0
         },
         "2026-12-03": {
-          "active_trip_ids": 0,
+          "active_trip_ids": 6,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 0,
+          "fewer_than_two_usable_stops": 6,
           "at_least_two_usable_stops": 0
         },
         "2026-12-04": {
-          "active_trip_ids": 0,
+          "active_trip_ids": 6,
           "raw_two_stop_trips": 0,
           "usable_two_stop_trips": 0,
-          "fewer_than_two_usable_stops": 0,
+          "fewer_than_two_usable_stops": 6,
           "at_least_two_usable_stops": 0
         },
         "2026-12-05": {
@@ -4807,16 +4836,23 @@
           "usable_two_stop_trips": 0,
           "fewer_than_two_usable_stops": 6,
           "at_least_two_usable_stops": 0
+        },
+        "2026-12-11": {
+          "active_trip_ids": 6,
+          "raw_two_stop_trips": 0,
+          "usable_two_stop_trips": 0,
+          "fewer_than_two_usable_stops": 6,
+          "at_least_two_usable_stops": 0
         }
       },
-      "active_trip_ids": 60,
+      "active_trip_ids": 84,
       "raw_two_stop_trips": 0,
       "usable_two_stop_trips": 0,
       "trips_with_removed_stops": 0,
-      "trips_without_raw_stops": 60,
-      "trips_with_fewer_than_two_usable_stops": 60,
+      "trips_without_raw_stops": 84,
+      "trips_with_fewer_than_two_usable_stops": 84,
       "distribution": {
-        "0": 60
+        "0": 84
       },
       "samples": []
     }
